@@ -1,57 +1,17 @@
 @import "../libs/bourbon/bourbon";
 @import "../libs/base/base";
 @import "../modules/text";
-@import "../modules/responsive";
-@import "../modules/colors";
+@import "../modules/variables";
 
 body {
   @include text_sizing();
 }
 
-// Base styles
-.page-wrapper {
-  .page-header-wrapper {
-    background-color: $color-main;
-    color: white;
-    .page-header {
-      text-align: center;
-      .subtitle {
-        font-weight: 300;
-        color: $color-accent;
-      }
-    }
-    .page-nav-wrapper {
-      padding: 1em 0;
-      .page-nav-list {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-        li {
-          flex-grow: 0;
-          flex-shrink: 0;
-          font-size: 1em;
-          font-weight: 700;
-          text-align: center;
-          margin: .3em .3em;
-          a, a:link, a:visited, a:hover, a:active {
-            display: block;
-            padding: .2em .5em;
-            color: white;
-            border: 2px solid $color-accent;
-            border-radius: .3em;
-          }
-          a:hover {
-            border-color: $color-highlight;
-          }
-        }
-      }
-    }
-  }
-  .page-content-wrapper {
-    padding: 0 .5em;
-  }
-}
+// Apply header styling
+@import "../modules/header";
+
+// Apply content styling
+@import "../modules/content";
 
 .skills {
   ul {
@@ -60,56 +20,6 @@ body {
   .proficiency-level {
     color: gray;
     font-size: .8em;
-  }
-}
-
-@media (min-width: $breakpoint-small) {
-  .page-wrapper {
-    .page-header-wrapper {
-      .page-nav-wrapper {
-        .page-nav-list li {
-          font-size: 1.2em;
-          flex-basis: 20%;
-        }
-      }
-    }
-  }
-}
-
-@media (min-width: $breakpoint-medium) {
-  .page-wrapper {
-    .page-header-wrapper {
-      width: 15em;
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      .page-nav-wrapper {
-        .page-nav-list {
-          li {
-            flex-basis: 40%;
-          }
-        }
-      }
-    }
-    .page-content-wrapper {
-      margin-left: 15em;
-      height: 100%;
-      overflow-y: scroll;
-    }
-  }
-}
-
-@media (min-width: $breakpoint-large) {
-  .page-wrapper {
-    .page-content-wrapper {
-      column-width: 20em;
-      column-gap: 2em;
-      max-width: none;
-      height: 100vh;
-    }
   }
 }
 
