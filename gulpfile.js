@@ -7,7 +7,7 @@ var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
 
 gulp.task('default', function(callback) {
-  runSequence('clean', 'compile', 'watch', callback);
+  runSequence('clean', 'compile', 'watch', 'sync', callback);
 });
 
 gulp.task('clean', function (callback) {
@@ -18,12 +18,12 @@ gulp.task('compile', function(callback) {
   runSequence(['sass', 'move_js', 'move_images', 'move_fonts'], 'html', callback);
 });
 
-gulp.task('watch', ['browser-sync'], function(callback) {
+gulp.task('watch', function(callback) {
   runSequence(['watch_sass', 'watch_html', 'watch_js'], callback);
 });
 
 // Browser Sync --------------------------------------------------
-gulp.task('browser-sync', function() {
+gulp.task('sync', function() {
   browserSync({
     server: {
       baseDir: "./dist/"
