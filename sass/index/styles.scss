@@ -112,3 +112,12 @@ body {
     }
   }
 }
+
+button.confirm {
+  background-color: rgb(31, 179, 246) !important;
+  font-weight: bold !important;
+
+  &:hover {
+    background-color: #1686B9 !important;
+  }
+}
