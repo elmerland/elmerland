@@ -1,11 +1,4 @@
-@import "../libs/bourbon/bourbon";
-@import "../libs/base/base";
-@import "../modules/text";
-@import "../modules/variables";
-
-body {
-  @include text_sizing();
-}
+@import "../modules/base_imports";
 
 // Apply header styling
 @import "../modules/header";
