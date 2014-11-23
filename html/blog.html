@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/libs/sweet-alert.css"/>
 
   <!-- Include custom stylesheets-->
-  <link rel="stylesheet" href="css/index/styles.css"/>
+  <link rel="stylesheet" href="css/blog/styles.css"/>
 
   <!-- Include third party scripts -->
   <script src="js/libs/jquery-2.1.1.min.js"></script>
@@ -21,11 +21,11 @@
   <script src="js/index/script.js"></script>
 </head>
 <body>
-  @@include('./index/_header.html');
-  <div class="content-wrapper">
-    <article class="content container">
-      @@include('./index/_content.html')
-    </article>
-  </div>
+@@include('./index/_header.html');
+<div class="content-wrapper">
+  <article class="content container">
+    @@include('./blog/_article_list.html')
+  </article>
+</div>
 </body>
 </html>

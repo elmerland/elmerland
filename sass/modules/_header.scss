@@ -1,75 +1,17 @@
-@import "variables";
-
-.page-header-wrapper {
-  background-color: $color-main;
-  color: white;
-  .page-header {
-    text-align: center;
-    .subtitle {
-      font-weight: 300;
-      color: $color-accent;
-    }
-  }
-  .page-nav-wrapper {
-    padding: 1em 0;
-    .page-nav-list {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      flex-wrap: wrap;
-      li {
-        flex-grow: 0;
-        flex-shrink: 0;
-        font-size: 1em;
-        font-weight: 700;
-        text-align: center;
-        margin: .3em .3em;
-        a, a:link, a:visited, a:hover, a:active {
-          display: block;
-          padding: .2em .5em;
-          color: white;
-          border: 2px solid $color-accent;
-          border-radius: .3em;
-        }
-        a:hover {
-          border-color: $color-highlight;
-        }
-      }
-    }
+.header {
+  text-align: center;
+  h1 {
+    font-weight: 300;
   }
 }
 
-@media (min-width: $breakpoint-small) {
-  .page-header-wrapper {
-    .page-nav-wrapper {
-      .page-nav-list li {
-        font-size: 1.2em;
-        flex-basis: 20%;
-      }
-    }
-  }
-}
-
-@media (min-width: $breakpoint-medium) {
-  .page-header-wrapper {
-    width: $header-width;
-    position: fixed;
-    top: 0;
-    bottom: 0;
+.nav {
+  ul {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    .page-nav-wrapper {
-      .page-nav-list {
-        li {
-          flex-basis: 40%;
-        }
-      }
+    li {
+      font-size: 1.5em;
+      margin: 0 .4em;
     }
-  }
-  .page-content-wrapper {
-    margin-left: 15em;
-    height: 100%;
-    overflow-y: scroll;
   }
 }

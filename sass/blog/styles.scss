@@ -1,0 +1,18 @@
+@import "../modules/base_imports";
+@import "../modules/header";
+
+.container {
+  @include container();
+}
+
+.content {
+  @include center_column();
+}
+
+.article-item {
+  .article-title {
+    font-weight: 400;
+    font-size: .8em;
+  }
+}
+

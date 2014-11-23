@@ -10,12 +10,16 @@ gulp.task('default', function(callback) {
   runSequence('clean', 'compile', 'watch', 'sync', callback);
 });
 
+gulp.task('no-server', function(callback) {
+  runSequence('clean', 'compile', 'watch', callback);
+});
+
 gulp.task('clean', function (callback) {
   del('./dist/**', callback);
 });
 
 gulp.task('compile', function(callback) {
-  runSequence(['sass', 'move_js', 'move_images', 'move_fonts'], 'html', callback);
+  runSequence(['sass', 'move_js', 'move_images', 'move_fonts', 'move_polymer'], 'html', callback);
 });
 
 gulp.task('watch', function(callback) {
@@ -88,4 +92,10 @@ gulp.task('move_images', function() {
 gulp.task('move_fonts', function() {
   return gulp.src('./fonts/**')
     .pipe(gulp.dest('./dist/fonts'));
+});
+
+// Move image files into build directory
+gulp.task('move_polymer', function() {
+  return gulp.src('./bower_components/**')
+    .pipe(gulp.dest('./dist/bower_components'));
 });

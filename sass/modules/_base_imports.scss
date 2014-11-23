@@ -1,8 +1,18 @@
 @import "../libs/bourbon/bourbon";
 @import "../libs/base/base";
-@import "../modules/text";
-@import "../modules/variables";
+@import "layout";
+@import "text";
+@import "variables";
 
 body {
   @include text_sizing();
+}
+
+button.confirm {
+  background-color: rgb(31, 179, 246) !important;
+  font-weight: bold !important;
+
+  &:hover {
+    background-color: #1686B9 !important;
+  }
 }
