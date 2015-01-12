@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+    
+      Processes and Pipes
+    
+  </title>
+
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+
+  
+  
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script type="text/javascript" src="js/jquery.fittext.js"></script>
+  <script src="//use.typekit.net/fee4ufc.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
+
+  
+</head>
+
+<!-- <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Processes and Pipes</title>
+  <meta name="description" content="An explanation of file descriptors and pipes followed by a practical example. This article explains what a file descriptor is in the context of a CPU process...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://yourdomain.com/systems/c/pipes/io-redirection/2014/02/04/process-pipes.html">
+  <link rel="alternate" type="application/rss+xml" title="Elmer Landaverde" href="http://yourdomain.com/feed.xml" />
+</head>
+ -->
+
+  <body>
+
+    <header class="site-header">
+  <h1 class="site-title">Elmer Landaverde</h1>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="#">About</a></li>
+      <li class="nav-middot">·</li>
+      <li><a href="#">Blog</a></li>
+      <li class="nav-middot">·</li>
+      <li><a href="#">Gallery</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Elmer Landaverde</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+ -->
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Processes and Pipes</h1>
+    <p class="post-meta">Feb 4, 2014 • Elmer Landaverde • elmer@vt.edu</p>
+  </header>
+
+  <article class="post-content">
+    <h1>File descriptors</h1>
+<p class="note">This articles assumes a basic understanding of pointers, processes and forking.</p>
+<p>In the most basic terms a file descriptor is a way to represent an input/output device. The same way that a pointer is a number that represents an address in memory, a file descriptor is a number that represents an input/output device. How it works is that every process has a ‘File Descriptor Table’, this table stores an array of input/output devices. A file descriptor represents an index for an entry in the file descriptor table. By convention the first three entries in the file descriptor table for a new process correspond to standard in, standard out, and standard error. With indices zero, one, and two respectively.</p>
+<p>The concept of file descriptors serves as an abstraction for a IO device making it easy to interact with different types of devices. For example, standard out (with index 1) can be a screen, a file, or a printer; the type of device does not matter.</p>
+<p><img src="/assets/svg/process-pipes/process-file-descriptor-table.svg" alt="" /></p>
+<p class="caption">A process with four file descriptors. The first three refer to standard in, standard out, and standard error. The fourth is linked to a normal text file. The process also has a list of variables, some referring to file descriptors.</p>
+<p>It is important to keep in mind that a process does not have direct access to its file descriptor table. Instead it must go through the kernel to make changes to it. Some of the allowed changes include creating new file descriptors that point to new or existing devices. Redirecting existing indices of the file descriptor table to point to different devices. And removing indices, loosing access to that device.</p>
+<h1>Pipes</h1>
+<p>A pipe is a special type of file descriptor that allows a process to communicate with another process. For the most part a pipe is identical to a file descriptor. Pipes are also stored in the file descriptor table, can be manipulated in the same way as file descriptors and have the same properties. A pipe differs from a file descriptor in that a pipe is always unidirectional.</p>
+<p><img src="/assets/svg/process-pipes/process-with-pipe.svg" alt="" /></p>
+<p class="caption">A process with a pipe. Notice how one file descriptor is used for the read end and another for the write end.</p>
+<p>Since a pipe is unidirectional, two file descriptors are needed to represent it. One points to the read end of the pipe and the other points to the write end.</p>
+<p>Having only one process with a pipe is not awfully useful. For a process to be able to communicate with another process the pipe needs to be connected across them. A pipe can be connected across two process by exploiting the fact that a forked process inherits the state of the parent. Therefore if the parent process creates a new pipe and then forks a child process, the child process will inherit the state of the parent. In this case the inherited state includes the connection to the pipe. So the child process is automatically connected to the pipe. For a two way communication among processes two pipes, instead of one, are created in the parent process before forking.</p>
+<p><img src="/assets/svg/process-pipes/two-processes-with-pipes.svg" alt="" /></p>
+<p class="caption">Two processes connected with two pipes for two way communication.</p>
+<p>As a rule of thumb the child and parent process should close any file descriptor that is not being used. The kernel will only kill a pipe once all connections to it are closed. If a process leaves a pipe file descriptor open, it might cause the process on the other end of the pipe to think that there is more to be read from the pipe. When the write end of a pipe is closed by all processes, an <code>EOF</code> character is sent. Indicating that there is nothing more to be read, and thus a process reading from that pipe knows to stop waiting for more input.</p>
+<p><img src="/assets/svg/process-pipes/close-unnecessary-pipe-ends.svg" alt="" /></p>
+<p class="caption">Unnecessary pipe ends have been closed.</p>
+<p>The parent and child process have to agree on the direction of the two pipes. Since each pipe is unidirectional one will be written to by parent and read by the child; and the other pipe will be read by the parent and written to by the child.</p>
+<p>To create a new pipe in C the <code>pipe(int pipefd[2])</code> function is used. It takes as a parameter an integer array of size two. As mentioned earlier a pipe needs two file descriptors, one for the read end and another for the write end. This is why the <code>pipe()</code> function takes an integer array of size two. The entry at index zero will contain the file descriptor for the read end of the pipe, and the entry at index one will contain the file descriptor for the write end of the pipe. The below example creates a new pipe:</p>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">pipefd</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">pipe</span><span class="p">(</span><span class="n">pipefd</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;Couldn&#39;t create the pipe&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="kt">int</span> <span class="n">fd_read</span>  <span class="o">=</span> <span class="n">pipefd</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kt">int</span> <span class="n">fd_write</span> <span class="o">=</span> <span class="n">pipefd</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Pipe File Descriptors</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;  Read end:  %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fd_read</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;  Write end: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fd_write</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div><p>This is the output of running the above code:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Pipe File Descriptors
+  Read end:  3
+  Write end: 4</code></pre></div><p>Notice how the pipe uses the file descriptors at index three and four. This is because the first three file descriptors (zero, one and two) are being used for the standard in, out and error streams.</p>
+<p>Now lets fork a child process and test wether the processes can talk to each other.</p>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;string.h&gt;</span>
+<span class="cp">#define IN 0</span>
+<span class="cp">#define OUT 1</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">pipefd</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">pipe</span><span class="p">(</span><span class="n">pipefd</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;Couldn&#39;t create the pipe&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">f</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;Couldn&#39;t fork child process&quot;</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">f</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Inside child process</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="n">IN</span><span class="p">]);</span>
+    <span class="kt">char</span> <span class="n">str</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;Hello, this is world!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Sending message to parent...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="n">write</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="n">OUT</span><span class="p">],</span> <span class="n">str</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// Inside parent process</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="n">OUT</span><span class="p">]);</span>
+    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">80</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">str_buff</span><span class="p">[</span><span class="n">len</span><span class="p">];</span>
+    <span class="n">bzero</span><span class="p">(</span><span class="n">str_buff</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span> <span class="c1">// Zero out buffer</span>
+    <span class="n">read</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="n">IN</span><span class="p">],</span> <span class="n">str_buff</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Receiving message from child...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Message: %s&quot;</span><span class="p">,</span> <span class="n">str_buff</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div><p>Running this code outputs the following:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Sending message to parent...
+Receiving message from child...
+Message: Hello, this is world!</code></pre></div><p>There are several things going on in this code example. First, notice how there are two macros defined at the start of the program: <code>IN</code> and <code>OUT</code>. These two macros are useful abstractions for the indices of the pipe ends. Index zero of the <code>pipefd</code> variable is always the read side and index one is always the write side; these two macros help make the indices more readable.</p>
+<p>Next, a new pipe is created similar to the previous example. Then a child process is forked.</p>
+<p>Once inside the child process, the read end of the pipe is closed using the <code>close(int fd)</code> function. This function takes in any file descriptor and removes it from the file descriptor table, closing the connection. The child process is only interested in writing to the parent, thus the read end of the pipe can be closed. Then a string is constructed and is sent to the parent.</p>
+<p>On the parent side, the write end of the pipe is closed using the <code>close()</code> function. The parent process is only interested in reading from the pipe, therefore the write end is not needed. Then a string buffer is constructed to hold the message from the child process. The parent then reads from the pipe and outputs the message to the terminal.</p>
+<p class="note">The two macros <code>IN</code> and <code>OUT</code> can also be used to refer to the standard in and standard out file descriptors. Remember that by convention standard in and out occupy index zero and one respectively in the file descriptor table.</p>
+<p>Another handy function is <code>dup2(int oldfd, int newfd)</code>. This function allows you to duplicate a file descriptor. If successful, the <code>newfd</code> file descriptor will point to the same device as <code>oldfd</code>. If <code>newfd</code> pointed to an open file descriptor it will be closed before being reassigned to <code>oldfd</code>. Lets run through an example to better understand how <code>dup2()</code> works:</p>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;strings.h&gt;</span>
+<span class="cp">#define IN 0</span>
+<span class="cp">#define OUT 1</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">pipefd</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">pipe</span><span class="p">(</span><span class="n">pipefd</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;Couldn&#39;t create the pipe&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">f</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;Couldn&#39;t fork a child process&quot;</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">f</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Inside child process</span>
+    <span class="n">dup2</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="n">OUT</span><span class="p">],</span> <span class="n">STDOUT_FILENO</span><span class="p">);</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="n">OUT</span><span class="p">]);</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="n">IN</span><span class="p">]);</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">cmd</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;ls&quot;</span><span class="p">,</span> <span class="s">&quot;-l&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="mi">0</span><span class="p">};</span>
+    <span class="n">execvp</span><span class="p">(</span><span class="s">&quot;ls&quot;</span><span class="p">,</span> <span class="n">cmd</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// Inside parent process</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="n">OUT</span><span class="p">]);</span>
+    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">5024</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">str_buff</span><span class="p">[</span><span class="n">len</span><span class="p">];</span>
+    <span class="n">bzero</span><span class="p">(</span><span class="n">str_buff</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span> <span class="c1">// Zero out buffer</span>
+    <span class="n">read</span><span class="p">(</span><span class="n">pipefd</span><span class="p">[</span><span class="n">IN</span><span class="p">],</span> <span class="n">str_buff</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Receiving message from child...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Message:</span><span class="se">\n</span><span class="s">%s&quot;</span><span class="p">,</span> <span class="n">str_buff</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div><p>This is the output of running the above code:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Receiving message from child...
+Message:
+total 48
+-rw-r--r--  <span class="m">1</span> elmer  staff  <span class="m">1067</span> Aug <span class="m">20</span> 18:54 Makefile
+drwxr-xr-x  <span class="m">5</span> elmer  staff   <span class="m">170</span> Aug <span class="m">20</span> 18:54 bin
+-rw-------  <span class="m">1</span> elmer  staff   <span class="m">321</span> Aug <span class="m">19</span> 18:08 code_1.c
+-rw-------  <span class="m">1</span> elmer  staff   <span class="m">780</span> Aug <span class="m">20</span> 18:40 code_2.c
+-rw-------  <span class="m">1</span> elmer  staff   <span class="m">760</span> Aug <span class="m">20</span> 18:54 code_3.c
+-rw-r--r--  <span class="m">1</span> elmer  staff    <span class="m">52</span> Aug <span class="m">20</span> 18:55 output_1.txt
+-rw-r--r--  <span class="m">1</span> elmer  staff    <span class="m">92</span> Aug <span class="m">20</span> 18:55 output_2.txt
+-rw-r--r--  <span class="m">1</span> elmer  staff     <span class="m">0</span> Aug <span class="m">20</span> 18:55 output_3.txt</code></pre></div><p>This example is very similar for the previous one. The difference is that the child process executes another program instead of sending a string through the pipe. Inside of the child process there is a call to <code>dup2()</code>. This call copies the file descriptor of the write end of the pipe to the standard out. The effect of this is that any function that writes to standard out is now writing to the pipe. Thus, when a new program is launched (in this case <code>ls</code>) it writes to the pipe and not to the console. On the other end the parent process reads from the pipe the same as the previous example.</p>
+<p class="note">After the call to <code>dup2()</code> the child process closes both ends of the pipe. This can be done because the write end of the pipe is now associated with standard out and there is no need for the pipe file descriptors.</p>
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+</footer>
+
+<!-- <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Elmer Landaverde</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>Elmer Landaverde</li>
+          <li><a href="mailto:elmerlandaverde@domain.com">elmerlandaverde@domain.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/elmerland">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">elmerland</span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/elmerlandaverde">
+              <span class="icon  icon--twitter">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
+                  c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
+                </svg>
+              </span>
+
+              <span class="username">elmerlandaverde</span>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+ -->
+
+  </body>
+
+</html>

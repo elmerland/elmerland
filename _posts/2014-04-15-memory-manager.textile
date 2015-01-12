@@ -1,0 +1,73 @@
+---
+title: "Memory Manager"
+date: 2014-04-15
+categories: systems c memory
+svg_path: "/assets/svg/memory-manager"
+excerpt: "Overview of block alignment strategies for a memory manager. Specifically, how does a memory manager deal with the overhead imposed by headers and footers; and the need for block payload to be byte aligned."
+---
+
+h1. Background
+
+For the purposes of this article lets consider a memory manager that stores payloads with an 8-byte alignment. In simple terms, our memory manager needs to store each payload such, that its starting and ending address is a multiple of eight. For example addresses 0x00 (0), 0x08 (8), and 0x10 (16) are valid; but addresses 0x01 (1), 0x05 (5), and 0x16 (22) are not. This type of alignment is also known as a double word alignment. Where one word consist of 4 bytes or 32 bits.
+
+Such alignment is desirable because of many reasons. One of them being that computers are more efficient at grabbing chunks of memory at a time instead of single bytes. For more information on why addresses are aligned you can read this "stack overflow":1 question, or this "article by Jonathan Rentzsch":2.
+
+In addition to the block alignment, the memory manager will make use of a header and a footer. They will serve as means to traverse the heap. Both the header and the footer will occupy 4 bytes (32 bits) of memory each. This is enough to store information about the size of the payload and the availability of the block (is the block being used? and is it available?).
+
+h1. Block Layout
+
+To start our discussion on block alignment lets assume that the memory manager receives a request to store an 8 byte payload by the user. The memory manager then, dutifully, creates a header and a footer for said payload. Combining the payload, header and footer results in a 16 byte block. Because this is the first request obtained by the memory manager the block is placed at stating address zero.
+
+!{{ page.svg_path }}/simple-block.svg(Simple block layout)!
+
+At first glance this memory block looks fine. The start and end addresses are both multiples of 8 and therefore are 8-byte aligned. The problem is that the block alignment policy applies to the payload only, not the entire block. Remember that the memory manager added the header and footer after the user request. The user has no knowledge of any overhead used by the memory manager. When the user retrieves the block from memory, the memory manager will return a pointer to the start of the payload, not the block. Now the problem is evident. The payload starts at address 4, that is not a multiple of 8 and therefore not 8-byte aligned.
+
+How to solve this? Easy, just add a 4 byte offset at the start of the heap. This will push the block to the right by 4 bytes resulting in the payload starting at address 8 which is 8-byte aligned.
+
+!{{ page.svg_path }}/simple-block-with-offset.svg!
+
+What happens when another block is stored in the heap? The second block will be stored right after the first. Since the header and footer are each 4 bytes, the payload will be offset by 8 bytes, which makes it 8-byte aligned.
+
+!{{ page.svg_path }}/two-simple-blocks.svg!
+
+This model is sufficient to guarantee payload alignment. One way to improve this model is to add another offset at after the footer of the last element.
+
+!{{ page.svg_path }}/two-simple-blocks-with-offset.svg!
+
+This makes the total size of the heap be 8-byte align. However, other than symmetry and an even heap size there is little benefit to having an extra offset.
+
+Going further, it is possible to improve upon this design. Akin to using sentinel nodes in linked lists, it is often useful to have an empty block at the start and end of the heap. Empty blocks are blocks consisting of only a header and a footer, without a payload.
+
+!{{ page.svg_path }}/empty-sentinel-blocks.svg!
+
+This design reduces the number of edge cases that have to be considered. For more information on why sentinel nodes are useful, please refer to this "stack overflow":3 question and this "wikipedia article":4 on the matter.
+
+Next, consider this. The header and footer hold the size of the payload and the availability of the block; and the only blocks in the heap with an empty payload are the two sentinel blocks. This is useful because it implies that when traversing the heap it is only necessary to look at the footer of the previous block or the header of the next block to determine if a sentinel block has been reached.
+
+For example, consider three adjacent blocks X, Y, and Z (in that order). Assume that the memory manager has a pointer to the start of block Y. By moving that pointer back 4 bytes, it will point to the footer of block X (the previous block). If the footer of X indicates that it has size zero, then the memory manager knows it reached the start of the heap.
+
+!{{ page.svg_path }}/pointer-jump-to-footer.svg!
+
+On the other hand, if the memory manager advanced its pointer by 8 bytes plus the length of the current block Y it will point to the header of block Z (the next block). If the header of this block indicates a payload of size zero, then the memory manager knows it reached the end of the heap.
+
+!{{ page.svg_path }}/pointer-jump-to-header.svg!
+
+All leading to the verdict that sentinel nodes do not need to be complete blocks. In fact, the prologue (the sentinel block at the start of the heap) only needs a footer and the epilogue (the sentinel block at the end of the heap) only needs a header. Since both sentinel blocks can now consist of only a 4 byte header/footer it is easy to just replace the empty offsets placed at the ends of the heap with the prologue and epilogue blocks.
+
+!{{ page.svg_path }}/partial-epilogue-prologue.svg!
+
+Lets re-iterate the improvements made to the block layout model. At the start, the block was just placed at address zero. This meant that the payload wasn’t 8-byte aligned. To solve this, a 4 byte offset was added to the start of the heap and another at the end (for symmetry). Then two empty sentinel blocks were added to the ends of the heap as well. Since each sentinel block is 8 bytes wide it doesn’t affect the payload alignment. Finally after concluding that sentinel blocks only have to be 4 bytes wide the initial offsets where replaced by the shortened sentinel blocks.  Arriving at the concluding model for this article.
+
+h1. Sentinel Bit layout
+
+The background section mentioned that header/footer blocks store both the size of the payload and the availability of the block in a 32-bit space. This section will describe how these two pieces of information are stored. 
+
+First lets assume that header/footer blocks only need to store the size of the payload. This is super easy, just take the entire 32-bit block and place the size of the payload in it. Now, consider the restriction for the payload. It has to be 8-byte aligned always, implying that the size of the payload is always a multiple of 8. In binary, all multiples of eight have the two lower bits set to zero. This means that we can effectively use the lower two bits of the header/footer block for anything. When reading the size of block at a later time, the entire header/footer is read but the lower two bits are masked to zero. Vice versa, when reading the block availability the entire header/footer is read but the higher 28 bits are thrown out.
+In the block model for this article the availability of a block can be expressed with only one bit because a block is either available or not. Leaving one bit unused. Feel free to leave this bit unused or do with it what you will.
+
+p(note). The size of the header/footer blocks is 32-bits because this article assumes a 32-bit architecture.
+
+[1]http://stackoverflow.com/questions/381244/purpose-of-memory-alignment
+[2]http://www.ibm.com/developerworks/library/pa-dalign/
+[3]http://stackoverflow.com/questions/5384358/how-does-a-sentinel-node-offer-benefits-over-null
+[4]http://en.wikipedia.org/wiki/Sentinel_node
