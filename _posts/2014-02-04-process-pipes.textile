@@ -15,7 +15,7 @@ In the most basic terms a file descriptor is a way to represent an input/output 
 
 The concept of file descriptors serves as an abstraction for a IO device making it easy to interact with different types of devices. For example, standard out (with index 1) can be a screen, a file, or a printer; the type of device does not matter.
 
-!{{ page.svg_path }}/process-file-descriptor-table.svg!
+!{width: 25em;}{{ page.svg_path }}/process-file-descriptor-table.svg!
 
 p(caption). A process with four file descriptors. The first three refer to standard in, standard out, and standard error. The fourth is linked to a normal text file. The process also has a list of variables, some referring to file descriptors.
 
@@ -25,7 +25,7 @@ h1. Pipes
 
 A pipe is a special type of file descriptor that allows a process to communicate with another process. For the most part a pipe is identical to a file descriptor. Pipes are also stored in the file descriptor table, can be manipulated in the same way as file descriptors and have the same properties. A pipe differs from a file descriptor in that a pipe is always unidirectional.
 
-!{{ page.svg_path }}/process-with-pipe.svg!
+!{width: 25em;}{{ page.svg_path }}/process-with-pipe.svg!
 
 p(caption). A process with a pipe. Notice how one file descriptor is used for the read end and another for the write end.
 
@@ -33,17 +33,19 @@ Since a pipe is unidirectional, two file descriptors are needed to represent it.
 
 Having only one process with a pipe is not awfully useful. For a process to be able to communicate with another process the pipe needs to be connected across them. A pipe can be connected across two process by exploiting the fact that a forked process inherits the state of the parent. Therefore if the parent process creates a new pipe and then forks a child process, the child process will inherit the state of the parent. In this case the inherited state includes the connection to the pipe. So the child process is automatically connected to the pipe. For a two way communication among processes two pipes, instead of one, are created in the parent process before forking.
 
-!{{ page.svg_path }}/two-processes-with-pipes.svg!
+!{width: 25em;}{{ page.svg_path }}/two-processes-with-pipes.svg!
 
 p(caption). Two processes connected with two pipes for two way communication.
 
 As a rule of thumb the child and parent process should close any file descriptor that is not being used. The kernel will only kill a pipe once all connections to it are closed. If a process leaves a pipe file descriptor open, it might cause the process on the other end of the pipe to think that there is more to be read from the pipe. When the write end of a pipe is closed by all processes, an @EOF@ character is sent. Indicating that there is nothing more to be read, and thus a process reading from that pipe knows to stop waiting for more input.
 
-!{{ page.svg_path }}/close-unnecessary-pipe-ends.svg!
+!{width: 25em;}{{ page.svg_path }}/close-unnecessary-pipe-ends.svg!
 
 p(caption). Unnecessary pipe ends have been closed.
 
 The parent and child process have to agree on the direction of the two pipes. Since each pipe is unidirectional one will be written to by parent and read by the child; and the other pipe will be read by the parent and written to by the child.
+
+<hr>
 
 To create a new pipe in C the @pipe(int pipefd[2])@ function is used. It takes as a parameter an integer array of size two. As mentioned earlier a pipe needs two file descriptors, one for the read end and another for the write end. This is why the @pipe()@ function takes an integer array of size two. The entry at index zero will contain the file descriptor for the read end of the pipe, and the entry at index one will contain the file descriptor for the write end of the pipe. The below example creates a new pipe:
 
@@ -126,6 +128,8 @@ Once inside the child process, the read end of the pipe is closed using the @clo
 On the parent side, the write end of the pipe is closed using the @close()@ function. The parent process is only interested in reading from the pipe, therefore the write end is not needed. Then a string buffer is constructed to hold the message from the child process. The parent then reads from the pipe and outputs the message to the terminal.
 
 p(note). The two macros @IN@ and @OUT@ can also be used to refer to the standard in and standard out file descriptors. Remember that by convention standard in and out occupy index zero and one respectively in the file descriptor table.
+
+<hr>
 
 Another handy function is @dup2(int oldfd, int newfd)@. This function allows you to duplicate a file descriptor. If successful, the @newfd@ file descriptor will point to the same device as @oldfd@. If @newfd@ pointed to an open file descriptor it will be closed before being reassigned to @oldfd@. Lets run through an example to better understand how @dup2()@ works:
 

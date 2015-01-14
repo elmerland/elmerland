@@ -50,3 +50,9 @@ layout: default
   <section class="post-comments">{% include disqus.html %}</section>
 
 </div>
+<script src="/js/bookmarkit/jquery.bookmarkit.js"></script>
+<script>
+  $(document).ready(function() {
+    $('.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6').bookmarkit();
+  });
+</script>

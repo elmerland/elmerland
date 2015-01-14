@@ -1,8 +1,6 @@
 ---
 ---
 
-@import "bourbon/bourbon";
-@import "base/base";
 @import "layout";
 
 .post {
@@ -17,11 +15,13 @@
       font-family: "nimbus-sans",sans-serif;
       font-size: 3em;
       padding-bottom: .2em;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .post-nav {
       display: flex;
       justify-content: space-between;
-      border-top: .1em solid lighten(black, 80%);
+      border-top: .05em solid lighten(black, 80%);
       background-color: lighten(black, 95%);
       padding: .2em 0;
       a, a:link, a:visited, a:hover, a:active {
@@ -55,6 +55,16 @@
     h4 { font-size: 1.25em; }
     h5 { font-size: 1em; }
     h6 { font-size: 1em; }
+    .note {
+      font-size: .9em;
+      background-color: darken(white, 5%);
+      padding: .5em;
+      color: lighten(black, 30%);
+      &::before {
+        content: "Note: ";
+        font-weight: bold;
+      }
+    }
   }
   .post-footer {
     @include card-layout();

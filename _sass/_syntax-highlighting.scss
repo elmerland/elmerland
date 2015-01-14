@@ -2,9 +2,10 @@
  * Syntax highlighting styles
  */
 .highlight {
-    background: #fff;
-    // @extend %vertical-rhythm;
-    margin-bottom: 30px / 2;
+    overflow-x: scroll;
+    background-color: darken(white, 5%);
+    padding: 0 .5em;
+    margin-bottom: 1em;
 
     .c     { color: #998; font-style: italic } // Comment
     .err   { color: #a61717; background-color: #e3d2d2 } // Error

@@ -36,8 +36,26 @@ body {
   // }
 }
 
+code {
+  // font-family: "source-code-pro",sans-serif;
+  font-family: "courier-prime",monospace;
+  font-size: .8em;
+  p > &, td > & {
+    background-color: darken(white, 5%);
+    border-radius: .2em;
+    padding: .2em .2em 0 .2em;
+    border: .1em solid darken(white, 10%);
+  }
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+}
+
 .wrapper {
   background-color: #EDEDED;
+  background-color: darken(white, 7%);
   padding: 1em 0;
 }
 

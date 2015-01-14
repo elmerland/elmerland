@@ -19,13 +19,13 @@ h1. Block Layout
 
 To start our discussion on block alignment lets assume that the memory manager receives a request to store an 8 byte payload by the user. The memory manager then, dutifully, creates a header and a footer for said payload. Combining the payload, header and footer results in a 16 byte block. Because this is the first request obtained by the memory manager the block is placed at stating address zero.
 
-!{{ page.svg_path }}/simple-block.svg(Simple block layout)!
+!{max-height: 10em;}{{ page.svg_path }}/simple-block.svg(Simple block layout)!
 
 At first glance this memory block looks fine. The start and end addresses are both multiples of 8 and therefore are 8-byte aligned. The problem is that the block alignment policy applies to the payload only, not the entire block. Remember that the memory manager added the header and footer after the user request. The user has no knowledge of any overhead used by the memory manager. When the user retrieves the block from memory, the memory manager will return a pointer to the start of the payload, not the block. Now the problem is evident. The payload starts at address 4, that is not a multiple of 8 and therefore not 8-byte aligned.
 
 How to solve this? Easy, just add a 4 byte offset at the start of the heap. This will push the block to the right by 4 bytes resulting in the payload starting at address 8 which is 8-byte aligned.
 
-!{{ page.svg_path }}/simple-block-with-offset.svg!
+!{max-height: 10em;}{{ page.svg_path }}/simple-block-with-offset.svg!
 
 What happens when another block is stored in the heap? The second block will be stored right after the first. Since the header and footer are each 4 bytes, the payload will be offset by 8 bytes, which makes it 8-byte aligned.
 
@@ -37,6 +37,8 @@ This model is sufficient to guarantee payload alignment. One way to improve this
 
 This makes the total size of the heap be 8-byte align. However, other than symmetry and an even heap size there is little benefit to having an extra offset.
 
+<hr>
+
 Going further, it is possible to improve upon this design. Akin to using sentinel nodes in linked lists, it is often useful to have an empty block at the start and end of the heap. Empty blocks are blocks consisting of only a header and a footer, without a payload.
 
 !{{ page.svg_path }}/empty-sentinel-blocks.svg!
@@ -47,15 +49,15 @@ Next, consider this. The header and footer hold the size of the payload and the 
 
 For example, consider three adjacent blocks X, Y, and Z (in that order). Assume that the memory manager has a pointer to the start of block Y. By moving that pointer back 4 bytes, it will point to the footer of block X (the previous block). If the footer of X indicates that it has size zero, then the memory manager knows it reached the start of the heap.
 
-!{{ page.svg_path }}/pointer-jump-to-footer.svg!
+!{max-height: 10em;}{{ page.svg_path }}/pointer-jump-to-footer.svg!
 
 On the other hand, if the memory manager advanced its pointer by 8 bytes plus the length of the current block Y it will point to the header of block Z (the next block). If the header of this block indicates a payload of size zero, then the memory manager knows it reached the end of the heap.
 
-!{{ page.svg_path }}/pointer-jump-to-header.svg!
+!{max-height: 12em;}{{ page.svg_path }}/pointer-jump-to-header.svg!
 
 All leading to the verdict that sentinel nodes do not need to be complete blocks. In fact, the prologue (the sentinel block at the start of the heap) only needs a footer and the epilogue (the sentinel block at the end of the heap) only needs a header. Since both sentinel blocks can now consist of only a 4 byte header/footer it is easy to just replace the empty offsets placed at the ends of the heap with the prologue and epilogue blocks.
 
-!{{ page.svg_path }}/partial-epilogue-prologue.svg!
+!{max-height: 10em;}{{ page.svg_path }}/partial-epilogue-prologue.svg!
 
 Lets re-iterate the improvements made to the block layout model. At the start, the block was just placed at address zero. This meant that the payload wasn’t 8-byte aligned. To solve this, a 4 byte offset was added to the start of the heap and another at the end (for symmetry). Then two empty sentinel blocks were added to the ends of the heap as well. Since each sentinel block is 8 bytes wide it doesn’t affect the payload alignment. Finally after concluding that sentinel blocks only have to be 4 bytes wide the initial offsets where replaced by the shortened sentinel blocks.  Arriving at the concluding model for this article.
 
