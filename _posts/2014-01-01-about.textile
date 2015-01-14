@@ -1,0 +1,54 @@
+---
+title: "About"
+date: 2014-01-01
+categories: about
+bg_color: "#FF0012"
+excerpt: "A little about me and this blog."
+---
+
+bq. The sum total of the habits of a man is his nature. It has come about as a result of his giving himself over to the bent of his mind.
+--The Bhagavad Gita
+
+h1. Biography
+
+Originally born in El Salvador, I am a senior in Computer Science at Virginia Tech. My passion for learning drives me to constantly innovate and embrace change. The best way to learn, however, is by doing. The application of theoretical knowledge to the wonderfully complex and imperfect world we live in is what keeps me motivated. I strive to strike a balance between pragmatism, theory and research. Whenever possible I also try to incorporate other disciplines and areas of study into my work. It is by this mixture of different areas of expertise and working with other highly motivated individuals that I believe the best type of work can be achieved. I love working in groups. In my experience a group of well balanced individuals can out perform any lone ranger (however brilliant he/she might be) any day of the week. After all, we human beings are social creatures.
+
+h1. Skills
+
+These are the programming languages that I have experience in:
+
+* Java Proficient
+* C Proficient
+* JavaScript Proficient
+* HTML Proficient
+* CSS Proficient
+* SQL Knowledge of
+* PHP Knowledge of
+* Ruby Knowledge of
+* Python Knowledge of
+* Bash script Knowledge of
+
+These are some platforms/technologies I have experience with:
+
+* Git (github: elmerland)
+* MySQL
+* Sqlite
+* PostgresQL
+* Bash/Zsh/CMD
+* Windows/Mac/Linux
+
+Additionally, I have experience with design work and photography:
+
+* Photoshop
+* Illustrator
+* Lightroom
+
+h1. Interests & Work
+
+These are some projects I have worked on in school, during my undergraduate research and my internship.
+
+- Web Server := Developed a simple HTTP server that followed the HTTP/1.0 and 1.1 standard. I implemented this in C and gained expereince in dealing with network connections, sockets, pipes, and thread pools.
+
+- Memory Allocator := This memory allocator supported the same functionality as malloc, free, and realloc. On top of having the same functionality as these functions it also had comparable performance (92%). This memory allocator was also design to work on 32 and 64-bit architectures.
+
+- B-Tree visualization infrastructure := While working with OpenDSA, I extended a JavaScript visualization library to support the creation of B-Tree. This involved the modification and adaptation of existing data structures to allow for the needs of a B-Tree. Currently, I'm in the process of implementing the B-Tree algorithm in JavaScript that will drive the visualization.

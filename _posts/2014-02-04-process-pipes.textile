@@ -2,6 +2,7 @@
 title: "Processes and Pipes"
 date: 2014-02-04
 categories: systems c pipes io-redirection
+bg_color: "#FF0012"
 svg_path: "/assets/svg/process-pipes"
 excerpt: "An explanation of file descriptors and pipes followed by a practical example. This article explains what a file descriptor is in the context of a CPU process. Then pipes are introduced into the picture and communication between processes is explored. Finally arriving at a coding example that uses the two previous concepts to demonstrate how file descriptors and pipes can be used and manipulated."
 ---

@@ -30,11 +30,14 @@ $background-accent: #0D79BC;
     width: 100%;
     text-align: center;
     @include site-title-font();
+    a, a:link, a:visited, a:hover, a:active {
+      color: white;
+    }
   }
 
   .site-nav {
-    width: 90%;
-    margin: 0 auto;
+    width: 100%;
+    // margin: 0 auto;
     margin-top: .5em;
     @include site-nav-font();
     ul {
@@ -45,6 +48,9 @@ $background-accent: #0D79BC;
         display: block;
         a, a:link, a:visited, a:hover, a:active {
           color: white;
+        }
+        a:hover {
+          text-decoration: underline;
         }
         a {
           display: block;

@@ -1,0 +1,77 @@
+---
+---
+
+@import "bourbon/bourbon";
+@import "base/base";
+@import "layout";
+
+.post {
+  
+  .post-header {
+    @include card-layout();
+    text-align: center;
+    padding-top: 1em;
+    // padding-top: 1.4em;
+    color: darken(#0F8FDE, 5%);
+    .post-title {
+      font-family: "nimbus-sans",sans-serif;
+      font-size: 3em;
+      padding-bottom: .2em;
+    }
+    .post-nav {
+      display: flex;
+      justify-content: space-between;
+      border-top: .1em solid lighten(black, 80%);
+      background-color: lighten(black, 95%);
+      padding: .2em 0;
+      a, a:link, a:visited, a:hover, a:active {
+        color: lighten(black, 60%);
+      }
+      a:hover {
+        color: lighten(black, 20%);
+      }
+      .post-previous {
+        padding-left: 1em;
+        text-align: left;
+        a::before {
+          content: "← ";
+        }
+      }
+      .post-next {
+        padding-right: 1em;
+        text-align: right;
+        a::after {
+          content: " →";
+        }
+      }
+    }
+  }
+  .post-content {
+    @include card-layout();
+    padding: 1em;
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.75em; }
+    h3 { font-size: 1.5em; }
+    h4 { font-size: 1.25em; }
+    h5 { font-size: 1em; }
+    h6 { font-size: 1em; }
+  }
+  .post-footer {
+    @include card-layout();
+    padding: 1em;
+    font-weight: 300;
+    text-align: center;
+    .date-created {
+      &::after {
+        content: " | ";
+      }
+    }
+    .description {
+      color: lighten(black, 40%);
+    }
+  }
+  .post-comments {
+    @include card-layout();
+    padding: 1em;
+  }
+}

@@ -3,6 +3,7 @@
 ---
 @import "bourbon/bourbon";
 @import "base/base";
+@import "layout";
 @import "syntax-highlighting";
 @charset "utf-8";
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900|Open+Sans:400,700,300,800);
@@ -14,52 +15,60 @@
 body {
   margin: 0;
   padding: 0;
+  // font-family: "proxima-nova",sans-serif;
+  font-size: 100%;
+
+  @media (min-width: 37.5em) {
+    font-size: 112.5%;
+  }
+
+  @media (min-width: 50em) {
+    font-size: 125%;
+  }
+
+  @media (min-width: 64.375em) {
+    // font-size: 137.5%;
+    font-size: 130%;
+  }
+
+  // @media (min-height: 31.25em) and (min-width: 75em) {
+  //   font-size: 140%;
+  // }
 }
 
-/**
-// Our variables
-$base-font-family: Helvetica, Arial, sans-serif;
-$base-font-size:   16px;
-$small-font-size:  $base-font-size * 0.875;
-$base-line-height: 1.5;
+.wrapper {
+  background-color: #EDEDED;
+  padding: 1em 0;
+}
 
-$spacing-unit:     30px;
-
-$text-color:       #111;
-$background-color: #fdfdfd;
-$brand-color:      #2a7ae2;
-
-$grey-color:       #828282;
-$grey-color-light: lighten($grey-color, 40%);
-$grey-color-dark:  darken($grey-color, 25%);
-
-// Width of the content area
-$content-width:    800px;
-
-$on-palm:          600px;
-$on-laptop:        800px;
-
-
-
-// Using media queries with like this:
-// @include media-query($on-palm) {
-//     .wrapper {
-//         padding-right: $spacing-unit / 2;
-//         padding-left: $spacing-unit / 2;
-//     }
-// }
-@mixin media-query($device) {
-    @media screen and (max-width: $device) {
-        @content;
+.posts-list {
+  .post-link {
+    color: $dark-gray;
+    display: block;
+    @include card-layout();
+    .post-info {
+      padding: 1em;
+      .post-header {
+        .post-title {
+          color: $blue;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .post-metadata {
+          color: lighten(black, 40%);
+          font-weight: 300;
+          .post-date {
+            &::after {
+              content: ' | ';
+            }
+          }
+        }
+      }
     }
+    &:hover {
+      .post-title {
+        text-decoration: underline;
+      }
+    }
+  }
 }
-
-
-
-// Import partials from `sass_dir` (defaults to `_sass`)
-@import
-        "base",
-        "layout",
-        "syntax-highlighting"
-;
-**/

@@ -1,8 +1,10 @@
 // Typography
 $sans-serif: $helvetica;
-$serif: $georgia;
+// $serif: $georgia;
+$serif: "bookmania",sans-serif;
 $base-font-family: $sans-serif;
-$header-font-family: $base-font-family;
+// $header-font-family: $base-font-family;
+$header-font-family: $serif;
 
 // Font Sizes
 $base-font-size: 1em;

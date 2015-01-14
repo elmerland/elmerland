@@ -1,22 +1,29 @@
 ---
-layout: default
 ---
 
-<div class="home">
-
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-        <p>{{ post.excerpt }}</p>
-      </li>
-    {% endfor %}
-  </ul>
-
-</div>
+<!DOCTYPE html>
+<html>
+  {% include head.html %}
+  <body>
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <script>
+      $(document).ready(function(e) {
+        $('.site-header .site-title').fitText(1.0, { minFontSize: '20px',maxFontSize: '100px' });
+        $('.site-header .site-nav').fitText(1.5, { minFontSize: '20px', maxFontSize: '50px' });
+      });
+    </script>
+    <header class="site-header">
+      <!-- <h1 class="site-title"><a href="/index.html">Elmer Landaverde</a></h1>
+      <nav class="site-nav">
+        <ul>
+          <li><a href="/about.html">About</a></li>
+          <li class="nav-middot">·</li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li class="nav-middot">·</li>
+          <li><a href="/gallery.html">Gallery</a></li>
+        </ul>
+      </nav> -->
+      {% include header-content.html %}
+    </header>
+  </body>
+</html>

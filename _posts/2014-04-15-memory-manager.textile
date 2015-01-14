@@ -2,6 +2,7 @@
 title: "Memory Manager"
 date: 2014-04-15
 categories: systems c memory
+bg_color: "#FFD900"
 svg_path: "/assets/svg/memory-manager"
 excerpt: "Overview of block alignment strategies for a memory manager. Specifically, how does a memory manager deal with the overhead imposed by headers and footers; and the need for block payload to be byte aligned."
 ---
