@@ -9,7 +9,17 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://elmerland.com" # the base hostname & protocol for your site
 twitter_username: elmerlandaverde
 github_username:  elmerland
-exclude: ['assets/source']
+
+exclude: 
+  - assets/source
+  - Guardfile
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - "*.git"
+  - "*.o"
+  - "**/bin/**"
 
 defaults:
   -
