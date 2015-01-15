@@ -1,0 +1,11 @@
+---
+---
+
+@import "layout";
+
+.gallery {
+  @include card-layout();
+  padding: 2em;
+  font-size: 3em;
+  text-align: center;
+}
