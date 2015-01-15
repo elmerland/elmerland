@@ -15,29 +15,40 @@ Originally born in El Salvador, I am a senior in Computer Science at Virginia Te
 
 h1. Skills
 
-These are the programming languages that I have experience in:
+h4. Programming languages
 
-* Java Proficient
-* C Proficient
-* JavaScript Proficient
-* HTML Proficient
-* CSS Proficient
-* SQL Knowledge of
-* PHP Knowledge of
-* Ruby Knowledge of
-* Python Knowledge of
-* Bash script Knowledge of
+* Java        <span class="proficiency-level">Proficient  </span>
+* C           <span class="proficiency-level">Proficient  </span>
+* JavaScript  <span class="proficiency-level">Proficient  </span>
+* HTML        <span class="proficiency-level">Proficient  </span>
+* CSS         <span class="proficiency-level">Proficient  </span>
+* SQL         <span class="proficiency-level">Knowledge of</span>
+* PHP         <span class="proficiency-level">Knowledge of</span>
+* Ruby        <span class="proficiency-level">Knowledge of</span>
+* Python      <span class="proficiency-level">Knowledge of</span>
+* Bash script <span class="proficiency-level">Knowledge of</span>
 
-These are some platforms/technologies I have experience with:
+<style type="text/css">
+  .proficiency-level {
+    color: gray;
+    font-size: .7em;
+  }
+</style>
 
-* Git (github: elmerland)
+h4. Platforms/technologies
+
+* Git (github: "elmerland":4)
+* Rails
+* Django
+* Jekyll
+* Wordpress
 * MySQL
 * Sqlite
 * PostgresQL
 * Bash/Zsh/CMD
 * Windows/Mac/Linux
 
-Additionally, I have experience with design work and photography:
+h4. Design and Photography
 
 * Photoshop
 * Illustrator
@@ -45,10 +56,19 @@ Additionally, I have experience with design work and photography:
 
 h1. Interests & Work
 
-These are some projects I have worked on in school, during my undergraduate research and my internship.
+- Ephemeral Hadoop := As my "senior capstone project":1, me and four other members created an ephemeral implementation of Hadoop. The ephemeral part of the title refers to the ability to use idle computational power of any computer in a network and put it to work. This program works by creating as many Virtual Machines as desired in each computer on a network. These VMs will then automatically find each other through the use of a gossip protocol, and finally start running Hadoop. When the Map/Reduce job is done the VM will shut down and the whole processes can be repeated again.
 
-- Web Server := Developed a simple HTTP server that followed the HTTP/1.0 and 1.1 standard. I implemented this in C and gained expereince in dealing with network connections, sockets, pipes, and thread pools.
+- B-Tree visualization infrastructure := While working with "OpenDSA":3, I extended a JavaScript visualization library to support the creation of B-Tree. This involved the modification and adaptation of existing data structures to allow for the needs of a B-Tree. Currently, I'm in the process of implementing the B-Tree algorithm in JavaScript that will drive the visualization.
+
+- Web Development Club := I serve as advisor to the "Web Development Club @ Virginia Tech":2. This is a new club at Virginia Tech and we aim to educate people in the different areas of web development. Web technologies are unique in their variety and number. This area of software development is specially challenging because of the numerous technologies that are used in even the simplest of web pages.
+
+- This Blog! := Learning is fun, but doing is even better. There are so many new things coming out all the time and I love reading about them. When reading is not enough I like to do. This blog often serves as a guinea pig of sorts and allows me to get hands on experience with new technologies and tech stacks.
+
+- Web Server := Developed a simple HTTP server that followed the HTTP/1.0 and 1.1 standard. I implemented this in C and gained experience in dealing with network connections, sockets, pipes, and thread pools.
 
 - Memory Allocator := This memory allocator supported the same functionality as malloc, free, and realloc. On top of having the same functionality as these functions it also had comparable performance (92%). This memory allocator was also design to work on 32 and 64-bit architectures.
 
-- B-Tree visualization infrastructure := While working with OpenDSA, I extended a JavaScript visualization library to support the creation of B-Tree. This involved the modification and adaptation of existing data structures to allow for the needs of a B-Tree. Currently, I'm in the process of implementing the B-Tree algorithm in JavaScript that will drive the visualization.
+[1]https://github.com/rich4756/hforhadoop
+[2]http://www.webdev.org.vt.edu/
+[3]http://algoviz.org/OpenDSA/
+[4]https://github.com/elmerland

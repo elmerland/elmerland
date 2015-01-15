@@ -76,6 +76,9 @@
         opacity: 1;
       }
     }
+    & > ul {
+      margin-bottom: .75em;
+    }
   }
   .post-footer {
     @include card-layout();

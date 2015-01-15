@@ -1,0 +1,69 @@
+---
+title: "Bookmarkit Plugin"
+date: 2015-01-14
+categories: ["JavaScript", "Plugin", "HTML"]
+excerpt: "I made a small JavaScript plugin to facilitate the creation of deep links on blog posts!"
+---
+
+In his article "Open Sourcing: The Ultimate Isolation":1, Vincent Driessen makes an argument for isolating libraries (or modules) from the program they were initially intended to work with by pretending they are separate open source projects. This novel idea of black boxing has been drilled on every software developer, ever, since the first tutorial she ever read. It's what we are supposed to do. Take a problem, split it into smaller chunks. Start working on the first chunck, rinse, repeat. It all works fine in theory. The reality however, is somwhat different. When working on a big project its common to run into problems that are not directly related to the end goal of the project but are hurdles that need to be overcome.
+
+The easy way out of these _side-problems_ is the quick and dirty solution of just writing the solution for the problem alongside the code of the project. The problem with this is that now you have a highly coupled _module_ in your project that is not directly related to the read goal of the project. This is where Vincent comes to the rescue. He argues that by developing these _side-problems_ like they are separate open-source projects it forces the developer to create a well designed, decoupled module. Just to clarify, that the modules doesn't actually have to be open-source. Instead, it should be design as if at some point it will be open-source. It's kinda like when your parents come to visit you and you clean up your room. You want to put up a pretty face for other people.
+
+That "long ass":2 introduction was just to say that in the process of updating my blog I ran into a quick problem and decided to spin it off into its own open-source repo.
+
+h1. A Plugin for Deep Linking
+
+I call it "*Bookmarkit*":3. It is a simple jQuery plugin that takes in a selection of elements and appends (or prepends) an link to that same element. It does this by generating an ID for the each element and then creating a link to that ID.
+
+The code for it is simple enought. As of the time of this writing this is the implemtation of the plugin.
+
+{% highlight javascript %}
+(function ($) {
+  $.fn.bookmarkit = function(options) {
+    var opts = $.extend(true, {}, $.fn.bookmarkit.defaults, options );
+    var $link_icon;
+    if (opts.useFontAwesome) { // Use Font Awesome title
+      $link_icon = $('<i></i>').addClass('fa')
+                               .addClass(opts.fontAwesomeIcon);
+    } else { // Use custom element
+      $link_icon = $(opts.anchorIcon);
+    }
+    var $anchor = $('<a></a>').attr(opts.anchorAttrs)
+                              .css(opts.anchorCSS)
+                              .append($link_icon);
+    this.each(function() {
+      var $el = $(this);
+      var id = $.fn.bookmarkit.getID.call(this)
+      $el.attr('id', id);
+      var $my_anchor = $anchor.clone().attr('href', '#' + id);
+      if (opts.appendAnchor) {
+        $el.append($my_anchor);
+      } else {
+        $el.prepend($my_anchor);
+      }
+    });
+    return this;
+  }
+  $.fn.bookmarkit.defaults = {
+    useFontAwesome: true,
+    fontAwesomeIcon: 'fa-link',
+    anchorIcon: null,
+    appendAnchor: true,
+    anchorAttrs: {},
+    anchorCSS: {}
+  };
+  $.fn.bookmarkit.getID = function() {
+    var $el = $(this);
+    return $el.html().split(' ').join('_').toLowerCase();
+  };
+}(jQuery));
+{% endhighlight %}
+
+In the name of brevity I removed most of the comments. You can see those on the repo anyway. This plugin offers a few configuration options and it exposes the @getID()@ function to the user. This way the user can custumize how the ID is genegerated (For example, if it already exists).
+
+I decided to create this plugin because I couldn't find a simple enough solution online. I ran across a jQuery plugin called "Address":4 but it's 678 kB big, so no. On top of that, this is a problem that I have encountered a few times before. Every time I ran into the problem of dynamically creating deep linking for section titles, or something of the sort, I ended up taking the easy way out and implementing a highly coupled solution. As expected I can never use that implementation again because its to highly integrated. This time, howerver, inspired by Vincent's wise words I took the time to create a completely independent solution, made it open-source and even got a blog entry out of it! Following Vincent's advice is alredy paying off.
+
+[1]http://nvie.com/posts/open-sourcing-is-the-ultimate-isolation/
+[2]https://pbs.twimg.com/media/BhS1C-OCEAIpbMl.jpg
+[3]https://github.com/elmerland/bookmarkit
+[4]http://www.asual.com/jquery/address/

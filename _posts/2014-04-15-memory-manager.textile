@@ -1,13 +1,10 @@
 ---
 title: "Memory Manager"
 date: 2014-04-15
-categories: systems c memory
-bg_color: "#FFD900"
+categories: Systems C Memory
 svg_path: "/assets/svg/memory-manager"
 excerpt: "Overview of block alignment strategies for a memory manager. Specifically, how does a memory manager deal with the overhead imposed by headers and footers; and the need for block payload to be byte aligned."
 ---
-
-h1. Background
 
 For the purposes of this article lets consider a memory manager that stores payloads with an 8-byte alignment. In simple terms, our memory manager needs to store each payload such, that its starting and ending address is a multiple of eight. For example addresses 0x00 (0), 0x08 (8), and 0x10 (16) are valid; but addresses 0x01 (1), 0x05 (5), and 0x16 (22) are not. This type of alignment is also known as a double word alignment. Where one word consist of 4 bytes or 32 bits.
 

@@ -1,12 +1,12 @@
 ---
 title: "Thread Synchronization"
 date: 2014-02-27
-categories: systems c threads synchronization
-bg_color: "#FF7D00"
+categories: Systems C Threads Synchronization
 svg_path: "/assets/svg/thread-synchronization"
 code_path: "/assets/code/thread-synchronization"
-excerpt: "An exploration of threads"
+excerpt: "An exploration of threads and an introduction to basic concepts. Working with threads can seem foreign to most programmers because of the intrinsic unpredictability of multi-threaded programs. This post is a type of \"getting your feet wet\" exercise."
 ---
+
 The most challenging part of working with threads is spotting and fixing bugs. It is so because the situations and scenarios that have to be considered can seem far-fetched and one in a million. Unfortunately if a thread is running millions of times every few seconds that one in a million scenario will happen often. As it is often the case the best way to master something is to practice it. The aim of this article is to expose the common concerns and sources of bugs that arise from working with threads. This article will develop an implementation for a thread safe pipe. In doing this several unsafe or non-deterministic behaviors will have to be identified and fixed that will serve as practice for debugging threads. I hope this article proves to be a good tool for getting started with threads.
 
 h1. Problem
