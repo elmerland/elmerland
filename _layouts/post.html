@@ -4,16 +4,16 @@ layout: default
 <div class="post">
   <link rel="stylesheet" type="text/css" href="/css/post.css">
   <header class="post-header">
-    <h1 class="post-title">{{ page.title }}</h1>
+    <h1 class="post-title"><a href="{{ page.url }}">{{ page.title }}</a></h1>
     <nav class="post-nav">
       <span class="post-previous">
         {% if page.previous.url %}
-          <a href="{{page.previous.url}}">Previous</a>
+          <a href="{{page.previous.url}}">Older</a>
         {% endif %}
       </span>
       <span class="post-next">
         {% if page.next.url %}
-          <a href="{{page.next.url}}">Next</a>
+          <a href="{{page.next.url}}">Newer</a>
         {% endif %} 
       </span>
     </nav>
@@ -53,6 +53,6 @@ layout: default
 <script src="/js/bookmarkit/jquery.bookmarkit.js"></script>
 <script>
   $(document).ready(function() {
-    $('.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6').bookmarkit();
+    $('.post-content').find('h1, h2, h3, h4, h5, h6').bookmarkit({anchorAttrs: {class: 'post-deep-link'}});
   });
 </script>

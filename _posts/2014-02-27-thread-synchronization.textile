@@ -14,7 +14,7 @@ h1. Problem
 The producer consumer problem is often used to illustrate the challenges of thread synchronization. It also offers an introduction on the issues that need to be considered when dealing with threads. The problem itself is described as follows:
 
 bq. The problem describes two processes, the producer and the consumer, who share a common, fixed-size buffer used as a queue. The producer's job is to generate a piece of data, put it into the buffer and start again. At the same time, the consumer is consuming the data (i.e., removing it from the buffer) one piece at a time. The problem is to make sure that the producer won't try to add data into the buffer if it's full and that the consumer won't try to remove data from an empty buffer.
-"Producer-consumer Problem. Wikipedia. Wikimedia Foundation, 06 Oct. 2014. Web. 09 July 2014.":1
+-- "Producer-consumer Problem. Wikipedia. Wikimedia Foundation, 06 Oct. 2014. Web. 09 July 2014.":1
 
 In addition to worrying about threads writing to a full buffer or reading from an empty buffer; the problem of two threads trying to modifying the buffer at the same time must also be considered. There are therefore, two synchronization issues in the producer-consumer problem.
 
