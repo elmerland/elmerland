@@ -48,75 +48,21 @@ The parent and child process have to agree on the direction of the two pipes. Si
 
 To create a new pipe in C the @pipe(int pipefd[2])@ function is used. It takes as a parameter an integer array of size two. As mentioned earlier a pipe needs two file descriptors, one for the read end and another for the write end. This is why the @pipe()@ function takes an integer array of size two. The entry at index zero will contain the file descriptor for the read end of the pipe, and the entry at index one will contain the file descriptor for the write end of the pipe. The below example creates a new pipe:
 
-{% highlight c %}
-#include <stdio.h>
-#include <unistd.h>
-int main(void) {
-  int pipefd[2];
-  if (pipe(pipefd) == -1) {
-    perror("Couldn't create the pipe");
-  }
-  int fd_read  = pipefd[0];
-  int fd_write = pipefd[1];
-  printf("Pipe File Descriptors\n");
-  printf("  Read end:  %d\n", fd_read);
-  printf("  Write end: %d\n", fd_write);
-}
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/process-pipes/src/code_1.c?footer=minimal"></script>
 
 This is the output of running the above code:
 
-{% highlight bash %}
-Pipe File Descriptors
-  Read end:  3
-  Write end: 4
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/process-pipes/output_1.txt?footer=minimal"></script>
 
 Notice how the pipe uses the file descriptors at index three and four. This is because the first three file descriptors (zero, one and two) are being used for the standard in, out and error streams.
 
 Now lets fork a child process and test wether the processes can talk to each other.
 
-{% highlight c %}
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#define IN 0
-#define OUT 1
-int main(void) {
-  int pipefd[2];
-  if (pipe(pipefd) == -1) {
-    perror("Couldn't create the pipe");
-  }
-  int f = fork();
-  if (f == -1) {
-    perror("Couldn't fork child process");
-  } else if (f == 0) {
-    // Inside child process
-    close(pipefd[IN]);
-    char str[] = "Hello, this is world!\n";
-    int len = strlen(str) + 1;
-    printf("Sending message to parent...\n");
-    write(pipefd[OUT], str, len);
-  } else {
-    // Inside parent process
-    close(pipefd[OUT]);
-    int len = 80;
-    char str_buff[len];
-    bzero(str_buff, len); // Zero out buffer
-    read(pipefd[IN], str_buff, len);
-    printf("Receiving message from child...\n");
-    printf("Message: %s", str_buff);
-  }
-}
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/process-pipes/src/code_2.c?footer=minimal"></script>
 
 Running this code outputs the following:
 
-{% highlight bash %}
-Sending message to parent...
-Receiving message from child...
-Message: Hello, this is world!
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/process-pipes/output_2.txt?footer=minimal"></script>
 
 There are several things going on in this code example. First, notice how there are two macros defined at the start of the program: @IN@ and @OUT@. These two macros are useful abstractions for the indices of the pipe ends. Index zero of the @pipefd@ variable is always the read side and index one is always the write side; these two macros help make the indices more readable.
 
@@ -132,55 +78,11 @@ p(note). The two macros @IN@ and @OUT@ can also be used to refer to the standard
 
 Another handy function is @dup2(int oldfd, int newfd)@. This function allows you to duplicate a file descriptor. If successful, the @newfd@ file descriptor will point to the same device as @oldfd@. If @newfd@ pointed to an open file descriptor it will be closed before being reassigned to @oldfd@. Lets run through an example to better understand how @dup2()@ works:
 
-{% highlight c %}
-#include <stdio.h>
-#include <unistd.h>
-#include <strings.h>
-#define IN 0
-#define OUT 1
-int main(void) {
-  int pipefd[2];
-  if (pipe(pipefd) == -1) {
-    perror("Couldn't create the pipe");
-  }
-  int f = fork();
-  if (f == -1) {
-    perror("Couldn't fork a child process");
-  } else if (f == 0) {
-    // Inside child process
-    dup2(pipefd[OUT], STDOUT_FILENO);
-    close(pipefd[OUT]);
-    close(pipefd[IN]);
-    char *cmd[] = {"ls", "-l", (char *) 0};
-    execvp("ls", cmd);
-  } else {
-    // Inside parent process
-    close(pipefd[OUT]);
-    int len = 5024;
-    char str_buff[len];
-    bzero(str_buff, len); // Zero out buffer
-    read(pipefd[IN], str_buff, len);
-    printf("Receiving message from child...\n");
-    printf("Message:\n%s", str_buff);
-  }
-}
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/process-pipes/src/code_3.c?footer=minimal"></script>
 
 This is the output of running the above code:
 
-{% highlight bash %}
-Receiving message from child...
-Message:
-total 48
--rw-r--r--  1 elmer  staff  1067 Aug 20 18:54 Makefile
-drwxr-xr-x  5 elmer  staff   170 Aug 20 18:54 bin
--rw-------  1 elmer  staff   321 Aug 19 18:08 code_1.c
--rw-------  1 elmer  staff   780 Aug 20 18:40 code_2.c
--rw-------  1 elmer  staff   760 Aug 20 18:54 code_3.c
--rw-r--r--  1 elmer  staff    52 Aug 20 18:55 output_1.txt
--rw-r--r--  1 elmer  staff    92 Aug 20 18:55 output_2.txt
--rw-r--r--  1 elmer  staff     0 Aug 20 18:55 output_3.txt
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/process-pipes/output_3.txt?footer=minimal"></script>
 
 This example is very similar for the previous one. The difference is that the child process executes another program instead of sending a string through the pipe. Inside of the child process there is a call to @dup2()@. This call copies the file descriptor of the write end of the pipe to the standard out. The effect of this is that any function that writes to standard out is now writing to the pipe. Thus, when a new program is launched (in this case @ls@) it writes to the pipe and not to the console. On the other end the parent process reads from the pipe the same as the previous example.
 

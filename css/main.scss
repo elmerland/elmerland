@@ -48,9 +48,17 @@ code {
   }
 }
 
+pre {
+  font-size: .8em;
+}
+
 img {
   display: block;
   margin: 0 auto;
+}
+
+.gist-meta {
+  padding: 0 .5em !important;
 }
 
 .wrapper {

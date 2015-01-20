@@ -24,53 +24,11 @@ h1. Setters and Getters
 
 The solution for this problem will be implemented using C. The first step is therefore to create a header file to declare the functions that will need to be implemented. This header file will also include the declaration of a pipe structure that will store information related to the buffer, pipe status, and all the necessary locks and conditional variables.
 
-{% highlight c %}
-#include <stdbool.h>
-#include "bounded-buf.h"
-struct int_pipe {
-  bounded_buffer_t buf;
-  bool closed;
-};
-typedef struct int_pipe int_pipe_t;
-bool int_pipe_emtpy(int_pipe_t *intp);
-bool int_pipe_full(int_pipe_t *intp);
-bool int_pipe_closed(int_pipe_t *intp);
-void int_pipe_init(int_pipe_t *intp);
-int  int_pipe_size(int_pipe_t *intp);
-int  int_pipe_write(int_pipe_t *intp, int n);
-int  int_pipe_read(int_pipe_t *intp);
-void int_pipe_close(int_pipe_t *intp);
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/thread-synchronization/code_1.c?footer=minimal"></script>
 
 The only two functions that pose real difficulties are the write and read functions. The implementation for these will be filled in later in the article. Meanwhile, the simpler functions have being already filled out below to offer some context for how everything is initialized and closed.
 
-{% highlight c %}
-#include <stdbool.h>
-#include <assert.h>
-#include <pthread.h>
-#include "int-pipe.h"
-bool int_pipe_empty(int_pipe_t *intp) {
-  return bounded_buffer_empty(&intp->buf);
-}
-bool int_pipe_full(int_pipe_t *intp) {
-  return bounded_buffer_full(&intp->buf);
-}
-void int_pipe_init(int_pipe_t *intp) {
-  bounded_buffer_init(&intp->buf);
-  intp->closed=false;
-}
-int int_pipe_size(int_pipe_t *intp) {
-  return bounded_buffer_size(&intp->buf);
-}
-void int_pipe_close(int_pipe_t *intp) {
-  intp->closed = true;
-}
-bool int_pipe_closed(int_pipe_t *intp) {
-  return intp->closed;
-}
-int int_pipe_write(int_pipe_t *intp, int n) { ... }
-int int_pipe_read(int_pipe_t *intp) { ... }
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/thread-synchronization/code_2.c?footer=minimal"></script>
 
 With the basic functionality out of the way lets start implementing the @int_pipe_write@ and @int_pipe_read@ functions.
 
@@ -78,24 +36,7 @@ h1. Locks
 
 A naïve programmer might come up with the following solution to the implementation of the @int_pipe_write@ and @int_pipe_read@ functions:
 
-{% highlight c %}
-int int_pipe_write(int_pipe_t *intp, int n) {
-  while(int_pipe_full(intp) && !int_pipe_closed(intp)) {
-    /* Busy wait... */}
-  if(int_pipe_closed(intp)) {return 0;}
-  assert(!int_pipe_full(intp) && !int_pipe_closed(intp));
-  bounded_buffer_add(&intp->buf, n);
-  return 1;
-}
-int int_pipe_read(int_pipe_t *intp) {
-  while(int_pipe_empty(intp) && !int_pipe_closed(intp)) {
-    /* Busy wait... */}
-  if(int_pipe_closed(intp)) {return 0;}
-  assert(!int_pipe_empty(intp) && !int_pipe_closed(intp));
-  int n = bounded_buffer_remove(&intp->buf);
-  return n;
-}
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/thread-synchronization/code_3.c?footer=minimal"></script>
 
 The above implementation first goes into a @while@ loop that checks if the buffer is empty/full and if the pipe is closed, when the conditions are satisfied the loop will exit. Upon exiting the status of the pipe is checked again. This is necessary because otherwise it would not be possible to determine if the @while@ loop exited due to the pipe closing or because the buffer was not empty/full. Next a sanity check is performed again on the buffer and pipe status. Finally reading or writing to the pipe and returning the appropriate result.
 
@@ -138,38 +79,11 @@ Consider now the possibility of two threads trying to read/write from the buffer
 
 This will result in the two threads reading the same value from the buffer and removing two elements from the end of the buffer. This area is then considered a **critical section**. The best way to prevent two or more threads from accessing a critical section is to use a lock. An inspection of the header file will reveal that tThis will result in the two threads reading the same value from the buffer and removing two elements from the end of the buffer. This area is then considered a **critical section**. The best way to prevent two or more threads from accessing a critical section is to use a lock. To accomplish this a lock variable needs to be added to the @int_pipe@ structure as illustrated bellow:
 
-{% highlight c %}
-struct int_pipe {
-  bounded_buffer_t buf;
-  bool closed;
-  pthread_mutex_t mutex;
-};
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/thread-synchronization/code_4.c?footer=minimal"></script>
 
 Lets use this @mutex@ lock to make sure that no threads are concurrently accessing the buffer at the same time by adding the following lines to the read and write functions:
 
-{% highlight c %}
-int int_pipe_write(int_pipe_t *intp, int n) {
-  while(int_pipe_full(intp) && !int_pipe_closed(intp)) {
-    /* Busy wait... */}
-  if(int_pipe_closed(intp)) {return 0;}
-  pthread_mutex_lock(&intp->mutex);
-  assert(!int_pipe_full(intp) && !int_pipe_closed(intp));
-  bounded_buffer_add(&intp->buf, n);
-  pthread_mutex_unlock(&intp->mutex);
-  return 1;
-}
-int int_pipe_read(int_pipe_t *intp) {
-  while(int_pipe_empty(intp) && !int_pipe_closed(intp)) {
-    /* Busy wait... */}
-  if(int_pipe_closed(intp)) {return 0;}
-  pthread_mutex_lock(&intp->mutex);
-  assert(!int_pipe_empty(intp) && !int_pipe_closed(intp));
-  int n = bounded_buffer_remove(&intp->buf);
-  pthread_mutex_unlock(&intp->mutex);
-  return n;
-}
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/thread-synchronization/code_5.c?footer=minimal"></script>
 
 This solves the problem of concurrent threads trying to modify the buffer. If we were to run the pipe as it is it would still behave non-deterministically. Consider the following scenario where two threads call the @int_pipe_read@ function at the same time and there is only one element remaining in the buffer:
 
@@ -236,50 +150,11 @@ If this where to happen the first thread would remove the only element in the bu
 
 To solve this problem another lock will need to be added to the @int_pipe@ structure and the @while@ loop inside of the @int_pipe_read@ function will need to be modified. Lets first look at the solution before explaining why this solution works. First the new lock needs to be added to the structure declaration:
 
-{% highlight c %}
-struct int_pipe {
-  bounded_buffer_t buf;
-  bool closed;
-  pthread_mutex_t mutex;
-  pthread_mutex_t avail_data;
-};
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/thread-synchronization/code_6.c?footer=minimal"></script>
 
 Next, lets use the newly created @avail_data@ and the @mutex@ locks to get the desired behavior from the pipe program:
 
-{% highlight c %}
-void int_pipe_init(int_pipe_t *intp) {
-  bounded_buffer_init(&intp->buf);
-  intp->closed=false;
-  pthread_mutex_init(&intp->mutex, NULL);
-  pthread_mutex_init(&intp->avail_data, NULL);
-  pthread_mutex_lock(&intp->avail_data);
-}
-int int_pipe_write(int_pipe_t *intp, int n) {
-  while(int_pipe_full(intp) && !int_pipe_closed(intp)) {
-    /* Busy wait... */}
-  if(int_pipe_closed(intp)) {return 0;}
-  pthread_mutex_lock(&intp->mutex);
-  assert(!int_pipe_full(intp) && !int_pipe_closed(intp));
-  bounded_buffer_add(&intp->buf, n);
-  pthread_mutex_unlock(&intp->avail_data);
-  pthread_mutex_unlock(&intp->mutex);
-  return 1;
-}
-int int_pipe_read(int_pipe_t *intp) {
-  pthread_mutex_lock(&intp->mutex);
-  while(int_pipe_empty(intp) && !int_pipe_closed(intp)) {
-    pthread_mutex_unlock(&intp->mutex);
-    pthread_mutex_lock(&intp->avail_data);
-    pthread_mutex_lock(&intp->mutex);
-  }
-  if(int_pipe_closed(intp)) {return 0;}
-  assert(!int_pipe_empty(intp) && !int_pipe_closed(intp));
-  int n = bounded_buffer_remove(&intp->buf);
-  pthread_mutex_unlock(&intp->mutex);
-  return n;
-}
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/thread-synchronization/code_7.c?footer=minimal"></script>
 
 This might seem confusing to many and you would be right to be confused (I know I certainly was). Lets first run through all the changes that were made. First a new lock is initialized in the @int_pipe_init@ function and it is then locked. Next an unlock statement inside of the @int_pipe_write@ was added for the @avail_data@ lock. Inside of the @int_pipe_read@ function several changes where made. First the @mutex@ lock was moved to top of the function before the @while@ loop. Inside the @while@ loop three statements were added. The first statement unlocks the @mutex@ lock, the second tries to get a lock on the @avail_date@ lock, and finally the third statement tries to get a lock on the @mutex@ lock again.
 
@@ -374,139 +249,27 @@ h1. Conditionals
 
 The code shown in the previous section will work just fine for our purposes. However we can improve on it using a feature of C called **conditional variables**. These conditionals variables will serve to the replace the three statements inside of the @while@ loop in the @int_pipe_read@ function with one statement. The reason for doing this is to simplify the code and make it a little easier to understand. Below the modifications to the code are shown. First the header file has to be modified to change the variable type for the @avail_data@ lock:
 
-{% highlight c %}
-struct int_pipe {
-  bounded_buffer_t buf;
-  bool closed;
-  pthread_mutex_t mutex;
-  pthread_cond_t  avail_data;
-};
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/thread-synchronization/code_8.c?footer=minimal"></script>
 
 Here we show how the main C file will change as a consequence of introducing the **conditional variable**:
 
-{% highlight c %}
-void int_pipe_init(int_pipe_t *intp) {
-  bounded_buffer_init(&intp->buf);
-  intp->closed=false;
-  pthread_mutex_init(&intp->mutex, NULL);
-  pthread_cond_init (&intp->avail_data, NULL);
-}
-int int_pipe_write(int_pipe_t *intp, int n) {
-  while(int_pipe_full(intp) && !int_pipe_closed(intp)) {
-    /* Busy wait... */}
-  if(int_pipe_closed(intp)) {return 0;}
-  pthread_mutex_lock(&intp->mutex);
-  assert(!int_pipe_full(intp) && !int_pipe_closed(intp));
-  bounded_buffer_add(&intp->buf, n);
-  pthread_cond_signal(&intp->avail_data);
-  pthread_mutex_unlock(&intp->mutex);
-  return 1;
-}
-int int_pipe_read(int_pipe_t *intp) {
-  pthread_mutex_lock(&intp->mutex);
-  while(int_pipe_empty(intp) && !int_pipe_closed(intp)) {
-    pthread_cond_wait(&intp->avail_data,&intp->mutex);
-  }
-  if(int_pipe_closed(intp)) {return 0;}
-  assert(!int_pipe_empty(intp) && !int_pipe_closed(intp));
-  int n = bounded_buffer_remove(&intp->buf);
-  pthread_mutex_unlock(&intp->mutex);
-  return n;
-}
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/thread-synchronization/code_9.c?footer=minimal"></script>
 
 A fair question to ask at this point is “Do we still need the @while@ loop? Why not make it an @if@ statement?” The answer to this is yes we still need the @while@ loop. Why? Because threads a tricky. If there is more than one thread reading from the buffer it is entirely possible that right after the wait function receives a signal that something was written to the buffer but before it is able to regain a lock on the @mutex@ another thread will start executing. When this thread tries to read from the buffer it will find that the @mutex@ is unlock and the buffer is not empty, so it will proceed to read and pop the only element in the buffer. Therefore when the original thread resumes the buffer will now be empty. By leaving the @while@ loop in place the thread is guaranteed not to try to read from the buffer without first having a lock on the @mutex@ and checking that the buffer is not empty.
 
 At this point the pipe will work as intended for one or more readers and only one writer. What if we want to expand the pipe to handle multiple writers as well as readers? Then we must duplicate the reader functionality to the writer side. This is best done by creating a new **conditional variable** that we will name @avail_space@. This conditional variable will act as the opposite of the @avail_data@ conditional, and will notify the write function that another thread removed an element from the buffer and there is space available to write to the it. Below are the changes that are needed for the expanded functionality. First in the header file:
 
-{% highlight c %}
-struct int_pipe {
-  bounded_buffer_t buf;
-  bool closed;
-  pthread_mutex_t mutex;
-  pthread_cond_t  avail_data;
-  pthread_cond_t  avail_space;
-};
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/thread-synchronization/code_10.c?footer=minimal"></script>
 
 And next in the main C file:
 
-{% highlight c %}
-void int_pipe_init(int_pipe_t *intp) {
-  bounded_buffer_init(&intp->buf);
-  intp->closed=false;
-  pthread_mutex_init(&intp->mutex, NULL);
-  pthread_cond_init (&intp->avail_data, NULL);
-  pthread_cond_init (&intp->avail_space, NULL);
-}
-int int_pipe_write(int_pipe_t *intp, int n) {
-  pthread_mutex_lock(&intp->mutex);
-  while(int_pipe_full(intp) && !int_pipe_closed(intp)) {
-    pthread_cond_wait(&intp->avail_space,&intp->mutex);
-  }
-  if(int_pipe_closed(intp)) {return 0;}
-  assert(!int_pipe_full(intp) && !int_pipe_closed(intp));
-  bounded_buffer_add(&intp->buf, n);
-  pthread_cond_signal(&intp->avail_data);
-  pthread_mutex_unlock(&intp->mutex);
-  return 1;
-}
-int int_pipe_read(int_pipe_t *intp) {
-  pthread_mutex_lock(&intp->mutex);
-  while(int_pipe_empty(intp) && !int_pipe_closed(intp)) {
-    pthread_cond_wait(&intp->avail_data,&intp->mutex);
-  }
-  if(int_pipe_closed(intp)) {return 0;}
-  assert(!int_pipe_empty(intp) && !int_pipe_closed(intp));
-  int n = bounded_buffer_remove(&intp->buf);
-  pthread_cond_signal(&intp->avail_space);
-  pthread_mutex_unlock(&intp->mutex);
-  return n;
-}
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/thread-synchronization/code_11.c?footer=minimal"></script>
 
 h1. Final Result
 
 The pipe program can now successfully execute as many writer and reader threads as desired and there will be no deadlocks or non-deterministic behavior. However there are a few things missing that have to be considered because the pipe will eventually be closed. When the pipe is closed the thread that is currently being executed will simply return. This creates a problem if there are other threads waiting for the current thread to signal changes to either of the **conditional variables**. Furthermore if the current thread just ends the @mutex@ lock will never be released and so any other threads waiting on the lock might be left hanging. Because of these reasons we have to add the following statements to the code:
 
-{% highlight c %}
-void int_pipe_close(int_pipe_t *intp) {
-  intp->closed = true;
-  pthread_cond_broadcast(&intp->avail_space);
-  pthread_cond_broadcast(&intp->avail_data);
-}
-int int_pipe_write(int_pipe_t *intp, int n) {
-  pthread_mutex_lock(&intp->mutex);
-  while(int_pipe_full(intp) && !int_pipe_closed(intp)) {
-    pthread_cond_wait(&intp->avail_space,&intp->mutex);
-  }
-  if(int_pipe_closed(intp)) {
-    pthread_mutex_unlock(&intp->mutex);
-    return 0;
-  }
-  assert(!int_pipe_full(intp) && !int_pipe_closed(intp));
-  bounded_buffer_add(&intp->buf, n);
-  pthread_cond_signal(&intp->avail_data);
-  pthread_mutex_unlock(&intp->mutex);
-  return 1;
-}
-int int_pipe_read(int_pipe_t *intp) {
-  pthread_mutex_lock(&intp->mutex);
-  while(int_pipe_empty(intp) && !int_pipe_closed(intp)) {
-    pthread_cond_wait(&intp->avail_data,&intp->mutex);
-  }
-  if(int_pipe_closed(intp)) {
-    pthread_mutex_unlock(&intp->mutex);
-    return 0;
-  }
-  assert(!int_pipe_empty(intp) && !int_pipe_closed(intp));
-  int n = bounded_buffer_remove(&intp->buf);
-  pthread_cond_signal(&intp->avail_space);
-  pthread_mutex_unlock(&intp->mutex);
-  return n;
-}
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/github/elmerland/elmerland/tree/master/assets/code/thread-synchronization/code_12.c?footer=minimal"></script>
 
 To facilitate the perusal of the code above a copies of the complete code is located at here for the "header file":2 and here for the "main C file":3. It has more comments and better formatting that could not be include in this article because of space concerns.
 
@@ -515,5 +278,5 @@ h1. Notes
 This article is by no ways meant to be a complete or comprehensive coverage of threads. It is instead meant to give a starting point in understanding the new issues that have to be considered when working with threads. Because of the complex nature of threads and the length of this article, mistakes are bound to happen. Please let me know of any mistakes in the comments below and I will endeavor to correct and enhance this article so that it provides a great tool for people interested in getting started with threads.
 
 [1]http://en.wikipedia.org/wiki/Producer-consumer_problem
-[2]{{ page.code_path }}/pipe.h
-[3]{{ page.code_path }}/pipe.c
+[2]https://github.com/elmerland/elmerland/blob/master/assets/code/thread-synchronization/pipe.h
+[3]https://github.com/elmerland/elmerland/blob/master/assets/code/thread-synchronization/pipe.c

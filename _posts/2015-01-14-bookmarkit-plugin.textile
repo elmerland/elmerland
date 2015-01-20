@@ -17,47 +17,8 @@ I call it "*Bookmarkit*":3. It is a simple jQuery plugin that takes in a selecti
 
 The code for it is simple enought. As of the time of this writing this is the implemtation of the plugin.
 
-{% highlight javascript %}
-(function ($) {
-  $.fn.bookmarkit = function(options) {
-    var opts = $.extend(true, {}, $.fn.bookmarkit.defaults, options );
-    var $link_icon;
-    if (opts.useFontAwesome) { // Use Font Awesome title
-      $link_icon = $('<i></i>').addClass('fa')
-                               .addClass(opts.fontAwesomeIcon);
-    } else { // Use custom element
-      $link_icon = $(opts.anchorIcon);
-    }
-    var $anchor = $('<a></a>').attr(opts.anchorAttrs)
-                              .css(opts.anchorCSS)
-                              .append($link_icon);
-    this.each(function() {
-      var $el = $(this);
-      var id = $.fn.bookmarkit.getID.call(this)
-      $el.attr('id', id);
-      var $my_anchor = $anchor.clone().attr('href', '#' + id);
-      if (opts.appendAnchor) {
-        $el.append($my_anchor);
-      } else {
-        $el.prepend($my_anchor);
-      }
-    });
-    return this;
-  }
-  $.fn.bookmarkit.defaults = {
-    useFontAwesome: true,
-    fontAwesomeIcon: 'fa-link',
-    anchorIcon: null,
-    appendAnchor: true,
-    anchorAttrs: {},
-    anchorCSS: {}
-  };
-  $.fn.bookmarkit.getID = function() {
-    var $el = $(this);
-    return $el.html().split(' ').join('_').toLowerCase();
-  };
-}(jQuery));
-{% endhighlight %}
+
+<script src="http://gist-it.appspot.com/github/elmerland/bookmarkit/blob/master/jquery.bookmarkit.js"></script>
 
 In the name of brevity I removed most of the comments. You can see those on the repo anyway. This plugin offers a few configuration options and it exposes the @getID()@ function to the user. This way the user can custumize how the ID is genegerated (For example, if it already exists).
 
