@@ -1,0 +1,94 @@
+---
+title: "The Hitchhiker's Guide to an Efficient Workflow"
+date: 2015-01-21
+categories: guide workflow
+gif_path: "/assets/gif/guide"
+excerpt: "Ever feel like your workflow is slooooooow? This is a comprehensive list of all the tools and software I use to make my life easier. Laziness is a great motivator"
+---
+
+First comes learning, then comes coding, and then comes being super frustrated at a slow workflow! We code monkeys usually focus on learning stuff, all day, every day. So much so that we forget about the tools we use to code and how we can improve them. Having an inefficient workflow can seriously slow you down and make iterating on code a pain. This usually means taking a "long ass":1 time to do anything. Over the years I have tried to make my workflow as efficient as possible so that I can focus on doing my thing (the thinking part), and have the computer to do its thing (the repetitive part).
+
+Ever heard of the saying ""if the only tool you have is a hammer, you treat everything as if it were a nail."":2. In the spirit of having more than a hammer in my toolbox I try to use different tools for different purposes. Below is a list of some of the tools/software/configurations/frameworks/stuff that I use. The following is based on my experience so far, if you have something better/awesomer then put it in the comments and I will try it out!
+
+h1. Terminal
+
+p(note). I have a mac, so this one is mac only. If you have an awesome linux/windows terminal setup put it in the comments and I'll add it to this guide :)
+
+h2. iTerm
+
+First off, get rid of the terminal that comes with macs. Instead use "iTerm2":3. It's way better, has a ton of features and its free. One of the features that I love the most is the system-wide hotkey. What it means is that iTerm creates a shortcut that will make a terminal pop-up out of nowhere. Regardless of the space you are in. I have it set with "@CTRL-SPACE@" (Look at the keyboard section for the @CTRL@ key setup). Its awesome, because it means you no longer have to have a space in your _precious_ desktop for the terminal only.
+
+!{{ page.gif_path }}/iterm_demo.gif!
+
+If you have to log into a server using SSH then creating a new profile for that particular server will save you a lot of repetitive typing. First go to *Profiles -> Open profiles...*. Then click on *Edit Profiles*. Create a new profile and give it a name. In the *Command* section, select the *Command* radio button and give it the SSH command that you use (e.g. <code>user@rlogin.cs.vt.edu</code>). Don't forget to give it a shortcut key! Now every time you want to access that particular server just press the shortcut key and a new tab to the server will open. If you previously setup SSH keys, then it won't even ask for a password! How is that for a time saver.
+
+h2. SSH
+
+Typing password is no fun. The good news is that you don't have to. If you have to SSH into a server often, then make sure to "set up your SSH keys":4. This will allow you to login into the server without the hassle of typing (or remembering) a password.
+
+h2. Zsh
+
+Zsh is an "awesome alternative to bash":5 and it will make your life so much easier. To make zsh even better there is this awesome, community created, framework called *oh-my-zsh*. Basically oh-my-zsh is a bunch of themes, shortcuts, configurations and plugins that come in a neat little package. Go to the "oh-my-zsh github repo":6 for one liner that will install both zsh and oh-my-zsh!
+
+p(note). Once you have zsh install be sure to checkout the shortcuts for using git. Just run @alias | grep \'git@ and behold the beauty. PS: if you just type @alias@ you get _all_ the shortcuts!
+
+!http://www.reactiongifs.us/wp-content/uploads/2013/04/puking_rainbows_gravity_falls_looped.gif!
+
+h1. Keyboard
+
+Lets get serious for a second here. How often do you use the caps-lock key? Be honest. Don't be afraid to admit it, it's not that useful. It's one of those things that coding monkeys can use for another, much more deserving, purpose. In my case I love replacing my caps-lock key with the control key. It might seem crazy but this will open up a whole new world for you. You see, the caps-lock key is conveniently located right next to your pinky. Try it pressing it right now. It's right there, so close, so easy. All of a sudden shortcuts are supper easy to type. No more finger yoga for you!
+
+On a mac changing the behavior of the caps-lock is super easy. *System Preferences -> Keyboard -> Modifier Keys...*. Then click on the drop-down box next to *Caps lock* and change the behavior. If are _super_ attached to the caps-lock key you can re-assign the old control key to be the new caps-lock.
+
+
+Try it for 30 days, and if you don't love it you get your money back!
+
+h1. Sublime
+
+"Sublime":7 is like the swiss army knife of coding. Seriously, it will work just fine for most things and its awesome for most anything. Keep in mind however that if you are working with some specific framework (i.e. java, ruby, python) a "dedicated IDE":8 might be better suited. Otherwise sublime is amazing!
+
+Version 2 is the stable one, but for the adventurers out there you might want to install version 3 which is still in beta. 
+
+!http://cdn.meme.li/instances/250x250/54465977.jpg!
+
+Once you have sublime installed there are a few plugins you might want/need!
+
+h2. Package Control
+
+This plugin is for installing other plugins. "Package control":10 lets you install all plugins with a few keystrokes, and it's super easy to update/delete them.
+
+!http://cdn.meme.am/instances/500x/58330260.jpg!
+
+h2. SFTP
+
+If you have to run your code on a remote server you are probably familiar with the pain of synchronizing local and remote files. That is why the "SFTP plugin":11 exists. Once installed the plugin basically establishes an FTP connection to the server and lets you upload files straight from sublime. One nifty feature is the @upload_on_save@. This can be set to true (false by default) in the @sftp-config.json@ configuration file. As the name implies, every time you save a file it will automatically upload it to the server. Providing for fast context switching between your local computer and the remote server.
+
+Some additional features include being able to ignore certain files through regexes, keeping the FTP connection alive so as to avoid constantly reconnecting and other niceties.
+
+h2. AlignTab
+
+p(note). This plugin will make you want to brag to your friends about how pretty your code looks, so be warned.
+
+"AlignTab":9 is an amazing plugin that lets you organize your code in a way that is very visually appealing. It will let you align whatever type of code into whatever type of pattern and it will be so pretty! The most powerful feature of this plugin is that it lets you create custom regexes for aligning and assign them to a shortcut. Making you a mean aligning machine!
+
+!https://github.com/randy3k/AlignTab/raw/fig/aligntab.gif!
+
+h1. Group Work
+
+For working with a partner I have found that "Floobits":12 is an incredible productivity booster. What this plugin/webapp does is that it allows two or more people to see changes being made to a project live. Even when you are working with only one other person, it is incredible helpful. For one, the team member that is not doing the typing doesn't have to hover over the shoulder of the other person (that neck pain bro). More importantly however, everyone can work on the same files without having to worry about version control merge conflicts. Another nice side effect is that all team members have the latest (and greatest) version of the code and can therefore run the program without having to constantly pull from the repo.
+
+One thing I will say about working with "Floobits":12 and a version control system, is to make sure that only *one* team member commits the changes made in a coding session. Otherwise there will be several commits with the exact same changes.
+
+
+[1]https://pbs.twimg.com/media/BhS1C-OCEAIpbMl.jpg
+[2]http://en.wikipedia.org/wiki/Law_of_the_instrument
+[3]http://iterm2.com/
+[4]https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2
+[5]http://www.slideshare.net/jaguardesignstudio/why-zsh-is-cooler-than-your-shell-16194692
+[6]https://github.com/robbyrussell/oh-my-zsh
+[7]http://www.sublimetext.com/
+[8]https://www.jetbrains.com/
+[9]https://github.com/randy3k/AlignTab
+[10]https://packagecontrol.io/
+[11]http://wbond.net/sublime_packages/sftp
+[12]https://floobits.com/

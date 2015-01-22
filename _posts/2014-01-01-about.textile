@@ -2,7 +2,6 @@
 title: "About"
 date: 2014-01-01
 categories: about
-bg_color: "#FF0012"
 excerpt: "A little about me and this blog."
 ---
 

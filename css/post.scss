@@ -1,6 +1,7 @@
 ---
 ---
 
+@import "bourbon/bourbon";
 @import "layout";
 
 .post {
@@ -49,12 +50,12 @@
   .post-content {
     @include card-layout();
     padding: 1em;
-    h1 { font-size: 2em; }
-    h2 { font-size: 1.75em; }
-    h3 { font-size: 1.5em; }
-    h4 { font-size: 1.25em; }
-    h5 { font-size: 1em; }
-    h6 { font-size: 1em; }
+    // h1 { font-size: 2.25em;}
+    h2 { font-size: 1.75em;}
+    h3 { font-size: 1.5em;}
+    h4 { font-size: 1.25em;}
+    h5 { font-size: 1em;}
+    h6 { font-size: 1em;}
     .note {
       font-size: .9em;
       background-color: darken(white, 5%);
