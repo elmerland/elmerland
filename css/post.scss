@@ -8,12 +8,13 @@
   
   .post-header {
     @include card-layout();
+    border-bottom: 0;
+    margin-bottom: 0;
     text-align: center;
     padding-top: 1em;
     // padding-top: 1.4em;
     color: darken(#0F8FDE, 5%);
     .post-title {
-      font-family: "nimbus-sans",sans-serif;
       font-size: 3em;
       padding-bottom: .2em;
       overflow: hidden;
@@ -23,6 +24,7 @@
       display: flex;
       justify-content: space-between;
       border-top: .05em solid lighten(black, 80%);
+      border-bottom: .05em solid lighten(black, 80%);
       background-color: lighten(black, 95%);
       padding: .2em 0;
       a, a:link, a:visited, a:hover, a:active {
@@ -49,6 +51,7 @@
   }
   .post-content {
     @include card-layout();
+    margin-top: 0;
     padding: 1em;
     // h1 { font-size: 2.25em;}
     h2 { font-size: 1.75em;}
