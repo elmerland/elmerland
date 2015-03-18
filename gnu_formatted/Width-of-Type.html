@@ -1,0 +1,45 @@
+<a name="Width-of-Type"></a>
+<div class="header">
+<p>
+Next: <a href="Range-of-Type.html#Range-of-Type" accesskey="n" rel="next">Range of Type</a>, Up: <a href="Data-Type-Measurements.html#Data-Type-Measurements" accesskey="u" rel="up">Data Type Measurements</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Computing-the-Width-of-an-Integer-Data-Type"></a>
+<h4 class="subsection">A.5.1 Computing the Width of an Integer Data Type</h4>
+<a name="index-integer-type-width"></a>
+<a name="index-width-of-integer-type"></a>
+<a name="index-type-measurements_002c-integer"></a>
+
+<p>The most common reason that a program needs to know how many bits are in
+an integer type is for using an array of <code>long int</code> as a bit vector.
+You can access the bit at index <var>n</var> with
+</p>
+<div class="smallexample">
+<pre class="smallexample">vector[<var>n</var> / LONGBITS] &amp; (1 &lt;&lt; (<var>n</var> % LONGBITS))
+</pre></div>
+
+<p>provided you define <code>LONGBITS</code> as the number of bits in a
+<code>long int</code>.
+</p>
+<a name="index-limits_002eh-4"></a>
+<p>There is no operator in the C language that can give you the number of
+bits in an integer data type.  But you can compute it from the macro
+<code>CHAR_BIT</code>, defined in the header file <samp>limits.h</samp>.
+</p>
+<dl compact="compact">
+<dt><code>CHAR_BIT</code></dt>
+<dd><p>This is the number of bits in a <code>char</code>&mdash;eight, on most systems.
+The value has type <code>int</code>.
+</p>
+<p>You can compute the number of bits in any data type <var>type</var> like
+this:
+</p>
+<div class="smallexample">
+<pre class="smallexample">sizeof (<var>type</var>) * CHAR_BIT
+</pre></div>
+</dd>
+</dl>
+
+
+
+

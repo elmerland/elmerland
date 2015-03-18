@@ -1,0 +1,32 @@
+<a name="Syslog-Example"></a>
+<div class="header">
+<p>
+Previous: <a href="setlogmask.html#setlogmask" accesskey="p" rel="prev">setlogmask</a>, Up: <a href="Submitting-Syslog-Messages.html#Submitting-Syslog-Messages" accesskey="u" rel="up">Submitting Syslog Messages</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Syslog-Example-1"></a>
+<h4 class="subsection">18.2.5 Syslog Example</h4>
+
+<p>Here is an example of <code>openlog</code>, <code>syslog</code>, and <code>closelog</code>:
+</p>
+<p>This example sets the logmask so that debug and informational messages
+get discarded without ever reaching Syslog.  So the second <code>syslog</code>
+in the example does nothing.
+</p>
+<div class="smallexample">
+<pre class="smallexample">#include &lt;syslog.h&gt;
+
+setlogmask (LOG_UPTO (LOG_NOTICE));
+
+openlog (&quot;exampleprog&quot;, LOG_CONS | LOG_PID | LOG_NDELAY, LOG_LOCAL1);
+
+syslog (LOG_NOTICE, &quot;Program started by User %d&quot;, getuid ());
+syslog (LOG_INFO, &quot;A tree falls in a forest&quot;);
+
+closelog ();
+
+</pre></div>
+
+
+
+

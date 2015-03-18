@@ -1,0 +1,56 @@
+<a name="File-Name-Errors"></a>
+<div class="header">
+<p>
+Next: <a href="File-Name-Portability.html#File-Name-Portability" accesskey="n" rel="next">File Name Portability</a>, Previous: <a href="File-Name-Resolution.html#File-Name-Resolution" accesskey="p" rel="prev">File Name Resolution</a>, Up: <a href="File-Names.html#File-Names" accesskey="u" rel="up">File Names</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="File-Name-Errors-1"></a>
+<h4 class="subsection">11.2.3 File Name Errors</h4>
+
+<a name="index-file-name-errors"></a>
+<a name="index-usual-file-name-errors"></a>
+
+<p>Functions that accept file name arguments usually detect these
+<code>errno</code> error conditions relating to the file name syntax or
+trouble finding the named file.  These errors are referred to throughout
+this manual as the <em>usual file name errors</em>.
+</p>
+<dl compact="compact">
+<dt><code>EACCES</code></dt>
+<dd><p>The process does not have search permission for a directory component
+of the file name.
+</p>
+</dd>
+<dt><code>ENAMETOOLONG</code></dt>
+<dd><p>This error is used when either the total length of a file name is
+greater than <code>PATH_MAX</code>, or when an individual file name component
+has a length greater than <code>NAME_MAX</code>.  See <a href="Limits-for-Files.html#Limits-for-Files">Limits for Files</a>.
+</p>
+<p>On GNU/Hurd systems, there is no imposed limit on overall file name
+length, but some file systems may place limits on the length of a
+component.
+</p>
+</dd>
+<dt><code>ENOENT</code></dt>
+<dd><p>This error is reported when a file referenced as a directory component
+in the file name doesn&rsquo;t exist, or when a component is a symbolic link
+whose target file does not exist.  See <a href="Symbolic-Links.html#Symbolic-Links">Symbolic Links</a>.
+</p>
+</dd>
+<dt><code>ENOTDIR</code></dt>
+<dd><p>A file that is referenced as a directory component in the file name
+exists, but it isn&rsquo;t a directory.
+</p>
+</dd>
+<dt><code>ELOOP</code></dt>
+<dd><p>Too many symbolic links were resolved while trying to look up the file
+name.  The system has an arbitrary limit on the number of symbolic links
+that may be resolved in looking up a single file name, as a primitive
+way to detect loops.  See <a href="Symbolic-Links.html#Symbolic-Links">Symbolic Links</a>.
+</p></dd>
+</dl>
+
+
+
+
+

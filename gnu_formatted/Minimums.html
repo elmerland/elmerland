@@ -1,0 +1,87 @@
+<a name="Minimums"></a>
+<div class="header">
+<p>
+Next: <a href="Limits-for-Files.html#Limits-for-Files" accesskey="n" rel="next">Limits for Files</a>, Previous: <a href="Sysconf.html#Sysconf" accesskey="p" rel="prev">Sysconf</a>, Up: <a href="System-Configuration.html#System-Configuration" accesskey="u" rel="up">System Configuration</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Minimum-Values-for-General-Capacity-Limits"></a>
+<h3 class="section">32.5 Minimum Values for General Capacity Limits</h3>
+
+<p>Here are the names for the POSIX minimum upper bounds for the system
+limit parameters.  The significance of these values is that you can
+safely push to these limits without checking whether the particular
+system you are using can go that far.
+</p>
+<dl compact="compact">
+<dt><code>_POSIX_AIO_LISTIO_MAX</code></dt>
+<dd><p>The most restrictive limit permitted by POSIX for the maximum number of
+I/O operations that can be specified in a list I/O call.  The value of
+this constant is <code>2</code>; thus you can add up to two new entries
+of the list of outstanding operations.
+</p>
+</dd>
+<dt><code>_POSIX_AIO_MAX</code></dt>
+<dd><p>The most restrictive limit permitted by POSIX for the maximum number of
+outstanding asynchronous I/O operations.  The value of this constant is
+<code>1</code>.  So you cannot expect that you can issue more than one
+operation and immediately continue with the normal work, receiving the
+notifications asynchronously.
+</p>
+</dd>
+<dt><code>_POSIX_ARG_MAX</code></dt>
+<dd><p>The value of this macro is the most restrictive limit permitted by POSIX
+for the maximum combined length of the <var>argv</var> and <var>environ</var>
+arguments that can be passed to the <code>exec</code> functions.
+Its value is <code>4096</code>.
+</p>
+</dd>
+<dt><code>_POSIX_CHILD_MAX</code></dt>
+<dd><p>The value of this macro is the most restrictive limit permitted by POSIX
+for the maximum number of simultaneous processes per real user ID.  Its
+value is <code>6</code>.
+</p>
+</dd>
+<dt><code>_POSIX_NGROUPS_MAX</code></dt>
+<dd><p>The value of this macro is the most restrictive limit permitted by POSIX
+for the maximum number of supplementary group IDs per process.  Its
+value is <code>0</code>.
+</p>
+</dd>
+<dt><code>_POSIX_OPEN_MAX</code></dt>
+<dd><p>The value of this macro is the most restrictive limit permitted by POSIX
+for the maximum number of files that a single process can have open
+simultaneously.  Its value is <code>16</code>.
+</p>
+</dd>
+<dt><code>_POSIX_SSIZE_MAX</code></dt>
+<dd><p>The value of this macro is the most restrictive limit permitted by POSIX
+for the maximum value that can be stored in an object of type
+<code>ssize_t</code>.  Its value is <code>32767</code>.
+</p>
+</dd>
+<dt><code>_POSIX_STREAM_MAX</code></dt>
+<dd><p>The value of this macro is the most restrictive limit permitted by POSIX
+for the maximum number of streams that a single process can have open
+simultaneously.  Its value is <code>8</code>.
+</p>
+</dd>
+<dt><code>_POSIX_TZNAME_MAX</code></dt>
+<dd><p>The value of this macro is the most restrictive limit permitted by POSIX
+for the maximum length of a time zone name.  Its value is <code>3</code>.
+</p>
+</dd>
+<dt><code>_POSIX2_RE_DUP_MAX</code></dt>
+<dd><p>The value of this macro is the most restrictive limit permitted by POSIX
+for the numbers used in the &lsquo;<samp>\{<var>min</var>,<var>max</var>\}</samp>&rsquo; construct
+in a regular expression.  Its value is <code>255</code>.
+</p></dd>
+</dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Limits-for-Files.html#Limits-for-Files" accesskey="n" rel="next">Limits for Files</a>, Previous: <a href="Sysconf.html#Sysconf" accesskey="p" rel="prev">Sysconf</a>, Up: <a href="System-Configuration.html#System-Configuration" accesskey="u" rel="up">System Configuration</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

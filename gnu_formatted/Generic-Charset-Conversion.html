@@ -1,0 +1,82 @@
+<a name="Generic-Charset-Conversion"></a>
+<div class="header">
+<p>
+Previous: <a href="Non_002dreentrant-Conversion.html#Non_002dreentrant-Conversion" accesskey="p" rel="prev">Non-reentrant Conversion</a>, Up: <a href="Character-Set-Handling.html#Character-Set-Handling" accesskey="u" rel="up">Character Set Handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Generic-Charset-Conversion-1"></a>
+<h3 class="section">6.5 Generic Charset Conversion</h3>
+
+<p>The conversion functions mentioned so far in this chapter all had in
+common that they operate on character sets that are not directly
+specified by the functions.  The multibyte encoding used is specified by
+the currently selected locale for the <code>LC_CTYPE</code> category.  The
+wide character set is fixed by the implementation (in the case of the GNU C Library
+it is always UCS-4 encoded ISO&nbsp;10646<!-- /@w -->.
+</p>
+<p>This has of course several problems when it comes to general character
+conversion:
+</p>
+<ul>
+<li> For every conversion where neither the source nor the destination
+character set is the character set of the locale for the <code>LC_CTYPE</code>
+category, one has to change the <code>LC_CTYPE</code> locale using
+<code>setlocale</code>.
+
+<p>Changing the <code>LC_CTYPE</code> locale introduces major problems for the rest
+of the programs since several more functions (e.g., the character
+classification functions, see <a href="Classification-of-Characters.html#Classification-of-Characters">Classification of Characters</a>) use the
+<code>LC_CTYPE</code> category.
+</p>
+</li><li> Parallel conversions to and from different character sets are not
+possible since the <code>LC_CTYPE</code> selection is global and shared by all
+threads.
+
+</li><li> If neither the source nor the destination character set is the character
+set used for <code>wchar_t</code> representation, there is at least a two-step
+process necessary to convert a text using the functions above.  One would
+have to select the source character set as the multibyte encoding,
+convert the text into a <code>wchar_t</code> text, select the destination
+character set as the multibyte encoding, and convert the wide character
+text to the multibyte (<em>=</em> destination) character set.
+
+<p>Even if this is possible (which is not guaranteed) it is a very tiring
+work.  Plus it suffers from the other two raised points even more due to
+the steady changing of the locale.
+</p></li></ul>
+
+<p>The XPG2 standard defines a completely new set of functions, which has
+none of these limitations.  They are not at all coupled to the selected
+locales, and they have no constraints on the character sets selected for
+source and destination.  Only the set of available conversions limits
+them.  The standard does not specify that any conversion at all must be
+available.  Such availability is a measure of the quality of the
+implementation.
+</p>
+<p>In the following text first the interface to <code>iconv</code> and then the
+conversion function, will be described.  Comparisons with other
+implementations will show what obstacles stand in the way of portable
+applications.  Finally, the implementation is described in so far as might
+interest the advanced user who wants to extend conversion capabilities.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Generic-Conversion-Interface.html#Generic-Conversion-Interface" accesskey="1">Generic Conversion Interface</a>:</td><td align="left" valign="top">Generic Character Set Conversion Interface.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="iconv-Examples.html#iconv-Examples" accesskey="2">iconv Examples</a>:</td><td align="left" valign="top">A complete <code>iconv</code> example.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Other-iconv-Implementations.html#Other-iconv-Implementations" accesskey="3">Other iconv Implementations</a>:</td><td align="left" valign="top">Some Details about other <code>iconv</code>
+                                     Implementations.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="glibc-iconv-Implementation.html#glibc-iconv-Implementation" accesskey="4">glibc iconv Implementation</a>:</td><td align="left" valign="top">The <code>iconv</code> Implementation in the GNU C
+                                     library.
+</td></tr>
+</table>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Non_002dreentrant-Conversion.html#Non_002dreentrant-Conversion" accesskey="p" rel="prev">Non-reentrant Conversion</a>, Up: <a href="Character-Set-Handling.html#Character-Set-Handling" accesskey="u" rel="up">Character Set Handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

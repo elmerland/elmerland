@@ -1,0 +1,38 @@
+<a name="Transferring-Data"></a>
+<div class="header">
+<p>
+Next: <a href="Byte-Stream-Example.html#Byte-Stream-Example" accesskey="n" rel="next">Byte Stream Example</a>, Previous: <a href="Who-is-Connected.html#Who-is-Connected" accesskey="p" rel="prev">Who is Connected</a>, Up: <a href="Connections.html#Connections" accesskey="u" rel="up">Connections</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Transferring-Data-1"></a>
+<h4 class="subsection">16.9.5 Transferring Data</h4>
+<a name="index-reading-from-a-socket"></a>
+<a name="index-writing-to-a-socket"></a>
+
+<p>Once a socket has been connected to a peer, you can use the ordinary
+<code>read</code> and <code>write</code> operations (see <a href="I_002fO-Primitives.html#I_002fO-Primitives">I/O Primitives</a>) to
+transfer data.  A socket is a two-way communications channel, so read
+and write operations can be performed at either end.
+</p>
+<p>There are also some I/O modes that are specific to socket operations.
+In order to specify these modes, you must use the <code>recv</code> and
+<code>send</code> functions instead of the more generic <code>read</code> and
+<code>write</code> functions.  The <code>recv</code> and <code>send</code> functions take
+an additional argument which you can use to specify various flags to
+control special I/O modes.  For example, you can specify the
+<code>MSG_OOB</code> flag to read or write out-of-band data, the
+<code>MSG_PEEK</code> flag to peek at input, or the <code>MSG_DONTROUTE</code> flag
+to control inclusion of routing information on output.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Sending-Data.html#Sending-Data" accesskey="1">Sending Data</a>:</td><td align="left" valign="top">Sending data with <code>send</code>.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Receiving-Data.html#Receiving-Data" accesskey="2">Receiving Data</a>:</td><td align="left" valign="top">Reading data with <code>recv</code>.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Socket-Data-Options.html#Socket-Data-Options" accesskey="3">Socket Data Options</a>:</td><td align="left" valign="top">Using <code>send</code> and <code>recv</code>.
+</td></tr>
+</table>
+
+
+
+

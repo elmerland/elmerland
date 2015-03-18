@@ -1,0 +1,121 @@
+<a name="Descriptors-and-Streams"></a>
+<div class="header">
+<p>
+Next: <a href="Stream_002fDescriptor-Precautions.html#Stream_002fDescriptor-Precautions" accesskey="n" rel="next">Stream/Descriptor Precautions</a>, Previous: <a href="File-Position-Primitive.html#File-Position-Primitive" accesskey="p" rel="prev">File Position Primitive</a>, Up: <a href="Low_002dLevel-I_002fO.html#Low_002dLevel-I_002fO" accesskey="u" rel="up">Low-Level I/O</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Descriptors-and-Streams-1"></a>
+<h3 class="section">13.4 Descriptors and Streams</h3>
+<a name="index-streams_002c-and-file-descriptors"></a>
+<a name="index-converting-file-descriptor-to-stream"></a>
+<a name="index-extracting-file-descriptor-from-stream"></a>
+
+<p>Given an open file descriptor, you can create a stream for it with the
+<code>fdopen</code> function.  You can get the underlying file descriptor for
+an existing stream with the <code>fileno</code> function.  These functions are
+declared in the header file <samp>stdio.h</samp>.
+<a name="index-stdio_002eh-15"></a>
+</p>
+<dl>
+<dt><a name="index-fdopen"></a>Function: <em>FILE *</em> <strong>fdopen</strong> <em>(int <var>filedes</var>, const char *<var>opentype</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe heap lock
+| AC-Unsafe mem lock
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>fdopen</code> function returns a new stream for the file descriptor
+<var>filedes</var>.
+</p>
+<p>The <var>opentype</var> argument is interpreted in the same way as for the
+<code>fopen</code> function (see <a href="Opening-Streams.html#Opening-Streams">Opening Streams</a>), except that
+the &lsquo;<samp>b</samp>&rsquo; option is not permitted; this is because GNU systems make no
+distinction between text and binary files.  Also, <code>&quot;w&quot;</code> and
+<code>&quot;w+&quot;</code> do not cause truncation of the file; these have an effect only
+when opening a file, and in this case the file has already been opened.
+You must make sure that the <var>opentype</var> argument matches the actual
+mode of the open file descriptor.
+</p>
+<p>The return value is the new stream.  If the stream cannot be created
+(for example, if the modes for the file indicated by the file descriptor
+do not permit the access specified by the <var>opentype</var> argument), a
+null pointer is returned instead.
+</p>
+<p>In some other systems, <code>fdopen</code> may fail to detect that the modes
+for file descriptor do not permit the access specified by
+<code>opentype</code>.  The GNU C Library always checks for this.
+</p></dd></dl>
+
+<p>For an example showing the use of the <code>fdopen</code> function,
+see <a href="Creating-a-Pipe.html#Creating-a-Pipe">Creating a Pipe</a>.
+</p>
+<dl>
+<dt><a name="index-fileno"></a>Function: <em>int</em> <strong>fileno</strong> <em>(FILE *<var>stream</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function returns the file descriptor associated with the stream
+<var>stream</var>.  If an error is detected (for example, if the <var>stream</var>
+is not valid) or if <var>stream</var> does not do I/O to a file,
+<code>fileno</code> returns <em>-1</em>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-fileno_005funlocked"></a>Function: <em>int</em> <strong>fileno_unlocked</strong> <em>(FILE *<var>stream</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>fileno_unlocked</code> function is equivalent to the <code>fileno</code>
+function except that it does not implicitly lock the stream if the state
+is <code>FSETLOCKING_INTERNAL</code>.
+</p>
+<p>This function is a GNU extension.
+</p></dd></dl>
+
+<a name="index-standard-file-descriptors"></a>
+<a name="index-file-descriptors_002c-standard"></a>
+<p>There are also symbolic constants defined in <samp>unistd.h</samp> for the
+file descriptors belonging to the standard streams <code>stdin</code>,
+<code>stdout</code>, and <code>stderr</code>; see <a href="Standard-Streams.html#Standard-Streams">Standard Streams</a>.
+<a name="index-unistd_002eh-2"></a>
+</p>
+<dl compact="compact">
+<dt><code>STDIN_FILENO</code></dt>
+<dd><a name="index-STDIN_005fFILENO"></a>
+<p>This macro has value <code>0</code>, which is the file descriptor for
+standard input.
+<a name="index-standard-input-file-descriptor"></a>
+</p>
+</dd>
+<dt><code>STDOUT_FILENO</code></dt>
+<dd><a name="index-STDOUT_005fFILENO"></a>
+<p>This macro has value <code>1</code>, which is the file descriptor for
+standard output.
+<a name="index-standard-output-file-descriptor"></a>
+</p>
+</dd>
+<dt><code>STDERR_FILENO</code></dt>
+<dd><a name="index-STDERR_005fFILENO"></a>
+<p>This macro has value <code>2</code>, which is the file descriptor for
+standard error output.
+</p></dd>
+</dl>
+<a name="index-standard-error-file-descriptor"></a>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Stream_002fDescriptor-Precautions.html#Stream_002fDescriptor-Precautions" accesskey="n" rel="next">Stream/Descriptor Precautions</a>, Previous: <a href="File-Position-Primitive.html#File-Position-Primitive" accesskey="p" rel="prev">File Position Primitive</a>, Up: <a href="Low_002dLevel-I_002fO.html#Low_002dLevel-I_002fO" accesskey="u" rel="up">Low-Level I/O</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

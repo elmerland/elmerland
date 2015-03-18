@@ -1,0 +1,52 @@
+<a name="Missing-Pieces"></a>
+<div class="header">
+<p>
+Previous: <a href="Continuing-Stopped-Jobs.html#Continuing-Stopped-Jobs" accesskey="p" rel="prev">Continuing Stopped Jobs</a>, Up: <a href="Implementing-a-Shell.html#Implementing-a-Shell" accesskey="u" rel="up">Implementing a Shell</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="The-Missing-Pieces"></a>
+<h4 class="subsection">28.6.7 The Missing Pieces</h4>
+
+<p>The code extracts for the sample shell included in this chapter are only
+a part of the entire shell program.  In particular, nothing at all has
+been said about how <code>job</code> and <code>program</code> data structures are
+allocated and initialized.
+</p>
+<p>Most real shells provide a complex user interface that has support for
+a command language; variables; abbreviations, substitutions, and pattern
+matching on file names; and the like.  All of this is far too complicated
+to explain here!  Instead, we have concentrated on showing how to
+implement the core process creation and job control functions that can
+be called from such a shell.
+</p>
+<p>Here is a table summarizing the major entry points we have presented:
+</p>
+<dl compact="compact">
+<dt><code>void init_shell (void)</code></dt>
+<dd><p>Initialize the shell&rsquo;s internal state.  See <a href="Initializing-the-Shell.html#Initializing-the-Shell">Initializing the Shell</a>.
+</p>
+</dd>
+<dt><code>void launch_job (job *<var>j</var>, int <var>foreground</var>)</code></dt>
+<dd><p>Launch the job <var>j</var> as either a foreground or background job.
+See <a href="Launching-Jobs.html#Launching-Jobs">Launching Jobs</a>.
+</p>
+</dd>
+<dt><code>void do_job_notification (void)</code></dt>
+<dd><p>Check for and report any jobs that have terminated or stopped.  Can be
+called synchronously or within a handler for <code>SIGCHLD</code> signals.
+See <a href="Stopped-and-Terminated-Jobs.html#Stopped-and-Terminated-Jobs">Stopped and Terminated Jobs</a>.
+</p>
+</dd>
+<dt><code>void continue_job (job *<var>j</var>, int <var>foreground</var>)</code></dt>
+<dd><p>Continue the job <var>j</var>.  See <a href="Continuing-Stopped-Jobs.html#Continuing-Stopped-Jobs">Continuing Stopped Jobs</a>.
+</p></dd>
+</dl>
+
+<p>Of course, a real shell would also want to provide other functions for
+managing jobs.  For example, it would be useful to have commands to list
+all active jobs or to send a signal (such as <code>SIGKILL</code>) to a job.
+</p>
+
+
+
+

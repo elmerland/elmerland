@@ -1,0 +1,82 @@
+<a name="Internet-Address-Formats"></a>
+<div class="header">
+<p>
+Next: <a href="Host-Addresses.html#Host-Addresses" accesskey="n" rel="next">Host Addresses</a>, Up: <a href="Internet-Namespace.html#Internet-Namespace" accesskey="u" rel="up">Internet Namespace</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Internet-Socket-Address-Formats"></a>
+<h4 class="subsection">16.6.1 Internet Socket Address Formats</h4>
+
+<p>In the Internet namespace, for both IPv4 (<code>AF_INET</code>) and IPv6
+(<code>AF_INET6</code>), a socket address consists of a host address
+and a port on that host.  In addition, the protocol you choose serves
+effectively as a part of the address because local port numbers are
+meaningful only within a particular protocol.
+</p>
+<p>The data types for representing socket addresses in the Internet namespace
+are defined in the header file <samp>netinet/in.h</samp>.
+<a name="index-netinet_002fin_002eh"></a>
+</p>
+<dl>
+<dt><a name="index-struct-sockaddr_005fin"></a>Data Type: <strong>struct sockaddr_in</strong></dt>
+<dd><p>This is the data type used to represent socket addresses in the
+Internet namespace.  It has the following members:
+</p>
+<dl compact="compact">
+<dt><code>sa_family_t sin_family</code></dt>
+<dd><p>This identifies the address family or format of the socket address.
+You should store the value <code>AF_INET</code> in this member.
+See <a href="Socket-Addresses.html#Socket-Addresses">Socket Addresses</a>.
+</p>
+</dd>
+<dt><code>struct in_addr sin_addr</code></dt>
+<dd><p>This is the Internet address of the host machine.  See <a href="Host-Addresses.html#Host-Addresses">Host Addresses</a>, and <a href="Host-Names.html#Host-Names">Host Names</a>, for how to get a value to store
+here.
+</p>
+</dd>
+<dt><code>unsigned short int sin_port</code></dt>
+<dd><p>This is the port number.  See <a href="Ports.html#Ports">Ports</a>.
+</p></dd>
+</dl>
+</dd></dl>
+
+<p>When you call <code>bind</code> or <code>getsockname</code>, you should specify
+<code>sizeof (struct sockaddr_in)</code> as the <var>length</var> parameter if
+you are using an IPv4 Internet namespace socket address.
+</p>
+<dl>
+<dt><a name="index-struct-sockaddr_005fin6"></a>Data Type: <strong>struct sockaddr_in6</strong></dt>
+<dd><p>This is the data type used to represent socket addresses in the IPv6
+namespace.  It has the following members:
+</p>
+<dl compact="compact">
+<dt><code>sa_family_t sin6_family</code></dt>
+<dd><p>This identifies the address family or format of the socket address.
+You should store the value of <code>AF_INET6</code> in this member.
+See <a href="Socket-Addresses.html#Socket-Addresses">Socket Addresses</a>.
+</p>
+</dd>
+<dt><code>struct in6_addr sin6_addr</code></dt>
+<dd><p>This is the IPv6 address of the host machine.  See <a href="Host-Addresses.html#Host-Addresses">Host Addresses</a>, and <a href="Host-Names.html#Host-Names">Host Names</a>, for how to get a value to store
+here.
+</p>
+</dd>
+<dt><code>uint32_t sin6_flowinfo</code></dt>
+<dd><p>This is a currently unimplemented field.
+</p>
+</dd>
+<dt><code>uint16_t sin6_port</code></dt>
+<dd><p>This is the port number.  See <a href="Ports.html#Ports">Ports</a>.
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Host-Addresses.html#Host-Addresses" accesskey="n" rel="next">Host Addresses</a>, Up: <a href="Internet-Namespace.html#Internet-Namespace" accesskey="u" rel="up">Internet Namespace</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

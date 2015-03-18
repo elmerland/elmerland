@@ -1,0 +1,40 @@
+<a name="Streams"></a>
+<div class="header">
+<p>
+Next: <a href="Standard-Streams.html#Standard-Streams" accesskey="n" rel="next">Standard Streams</a>, Up: <a href="I_002fO-on-Streams.html#I_002fO-on-Streams" accesskey="u" rel="up">I/O on Streams</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Streams-1"></a>
+<h3 class="section">12.1 Streams</h3>
+
+<p>For historical reasons, the type of the C data structure that represents
+a stream is called <code>FILE</code> rather than &ldquo;stream&rdquo;.  Since most of
+the library functions deal with objects of type <code>FILE *</code>, sometimes
+the term <em>file pointer</em> is also used to mean &ldquo;stream&rdquo;.  This leads
+to unfortunate confusion over terminology in many books on C.  This
+manual, however, is careful to use the terms &ldquo;file&rdquo; and &ldquo;stream&rdquo;
+only in the technical sense.
+<a name="index-file-pointer"></a>
+</p>
+<a name="index-stdio_002eh"></a>
+<p>The <code>FILE</code> type is declared in the header file <samp>stdio.h</samp>.
+</p>
+<dl>
+<dt><a name="index-FILE"></a>Data Type: <strong>FILE</strong></dt>
+<dd><p>This is the data type used to represent stream objects.  A <code>FILE</code>
+object holds all of the internal state information about the connection
+to the associated file, including such things as the file position
+indicator and buffering information.  Each stream also has error and
+end-of-file status indicators that can be tested with the <code>ferror</code>
+and <code>feof</code> functions; see <a href="EOF-and-Errors.html#EOF-and-Errors">EOF and Errors</a>.
+</p></dd></dl>
+
+<p><code>FILE</code> objects are allocated and managed internally by the
+input/output library functions.  Don&rsquo;t try to create your own objects of
+type <code>FILE</code>; let the library do it.  Your programs should
+deal only with pointers to these objects (that is, <code>FILE *</code> values)
+rather than the objects themselves.
+</p>
+
+
+

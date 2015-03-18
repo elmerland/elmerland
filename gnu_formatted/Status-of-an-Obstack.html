@@ -1,0 +1,69 @@
+<a name="Status-of-an-Obstack"></a>
+<div class="header">
+<p>
+Next: <a href="Obstacks-Data-Alignment.html#Obstacks-Data-Alignment" accesskey="n" rel="next">Obstacks Data Alignment</a>, Previous: <a href="Extra-Fast-Growing.html#Extra-Fast-Growing" accesskey="p" rel="prev">Extra Fast Growing</a>, Up: <a href="Obstacks.html#Obstacks" accesskey="u" rel="up">Obstacks</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Status-of-an-Obstack-1"></a>
+<h4 class="subsubsection">3.2.4.8 Status of an Obstack</h4>
+<a name="index-obstack-status"></a>
+<a name="index-status-of-obstack"></a>
+
+<p>Here are functions that provide information on the current status of
+allocation in an obstack.  You can use them to learn about an object while
+still growing it.
+</p>
+<dl>
+<dt><a name="index-obstack_005fbase"></a>Function: <em>void *</em> <strong>obstack_base</strong> <em>(struct obstack *<var>obstack-ptr</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe corrupt
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function returns the tentative address of the beginning of the
+currently growing object in <var>obstack-ptr</var>.  If you finish the object
+immediately, it will have that address.  If you make it larger first, it
+may outgrow the current chunk&mdash;then its address will change!
+</p>
+<p>If no object is growing, this value says where the next object you
+allocate will start (once again assuming it fits in the current
+chunk).
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-obstack_005fnext_005ffree"></a>Function: <em>void *</em> <strong>obstack_next_free</strong> <em>(struct obstack *<var>obstack-ptr</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe corrupt
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function returns the address of the first free byte in the current
+chunk of obstack <var>obstack-ptr</var>.  This is the end of the currently
+growing object.  If no object is growing, <code>obstack_next_free</code>
+returns the same value as <code>obstack_base</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-obstack_005fobject_005fsize-1"></a>Function: <em>int</em> <strong>obstack_object_size</strong> <em>(struct obstack *<var>obstack-ptr</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe race:obstack-ptr
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function returns the size in bytes of the currently growing object.
+This is equivalent to
+</p>
+<div class="smallexample">
+<pre class="smallexample">obstack_next_free (<var>obstack-ptr</var>) - obstack_base (<var>obstack-ptr</var>)
+</pre></div>
+</dd></dl>
+
+
+
+

@@ -1,0 +1,33 @@
+<a name="Efficiency-and-Malloc"></a>
+<div class="header">
+<p>
+Next: <a href="Aligned-Memory-Blocks.html#Aligned-Memory-Blocks" accesskey="n" rel="next">Aligned Memory Blocks</a>, Previous: <a href="Allocating-Cleared-Space.html#Allocating-Cleared-Space" accesskey="p" rel="prev">Allocating Cleared Space</a>, Up: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="u" rel="up">Unconstrained Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Efficiency-Considerations-for-malloc"></a>
+<h4 class="subsubsection">3.2.2.6 Efficiency Considerations for <code>malloc</code></h4>
+<a name="index-efficiency-and-malloc"></a>
+
+
+
+
+
+<p>As opposed to other versions, the <code>malloc</code> in the GNU C Library
+does not round up block sizes to powers of two, neither for large nor
+for small sizes.  Neighboring chunks can be coalesced on a <code>free</code>
+no matter what their size is.  This makes the implementation suitable
+for all kinds of allocation patterns without generally incurring high
+memory waste through fragmentation.
+</p>
+<p>Very large blocks (much larger than a page) are allocated with
+<code>mmap</code> (anonymous or via <code>/dev/zero</code>) by this implementation.
+This has the great advantage that these chunks are returned to the
+system immediately when they are freed.  Therefore, it cannot happen
+that a large chunk becomes &ldquo;locked&rdquo; in between smaller ones and even
+after calling <code>free</code> wastes memory.  The size threshold for
+<code>mmap</code> to be used can be adjusted with <code>mallopt</code>.  The use of
+<code>mmap</code> can also be disabled completely.
+</p>
+
+
+

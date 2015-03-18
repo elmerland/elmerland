@@ -1,0 +1,49 @@
+<a name="Terminal-Modes"></a>
+<div class="header">
+<p>
+Next: <a href="BSD-Terminal-Modes.html#BSD-Terminal-Modes" accesskey="n" rel="next">BSD Terminal Modes</a>, Previous: <a href="Canonical-or-Not.html#Canonical-or-Not" accesskey="p" rel="prev">Canonical or Not</a>, Up: <a href="Low_002dLevel-Terminal-Interface.html#Low_002dLevel-Terminal-Interface" accesskey="u" rel="up">Low-Level Terminal Interface</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Terminal-Modes-1"></a>
+<h3 class="section">17.4 Terminal Modes</h3>
+
+<a name="index-termios_002eh-1"></a>
+<p>This section describes the various terminal attributes that control how
+input and output are done.  The functions, data structures, and symbolic
+constants are all declared in the header file <samp>termios.h</samp>.
+</p>
+<p>Don&rsquo;t confuse terminal attributes with file attributes.  A device special
+file which is associated with a terminal has file attributes as described
+in <a href="File-Attributes.html#File-Attributes">File Attributes</a>.  These are unrelated to the attributes of the
+terminal device itself, which are discussed in this section.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Mode-Data-Types.html#Mode-Data-Types" accesskey="1">Mode Data Types</a>:</td><td align="left" valign="top">The data type <code>struct termios</code> and
+                                 related types.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Mode-Functions.html#Mode-Functions" accesskey="2">Mode Functions</a>:</td><td align="left" valign="top">Functions to read and set the terminal
+                                 attributes.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Setting-Modes.html#Setting-Modes" accesskey="3">Setting Modes</a>:</td><td align="left" valign="top">The right way to set terminal attributes
+                                 reliably.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Input-Modes.html#Input-Modes" accesskey="4">Input Modes</a>:</td><td align="left" valign="top">Flags controlling low-level input handling.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Output-Modes.html#Output-Modes" accesskey="5">Output Modes</a>:</td><td align="left" valign="top">Flags controlling low-level output handling.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Control-Modes.html#Control-Modes" accesskey="6">Control Modes</a>:</td><td align="left" valign="top">Flags controlling serial port behavior.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Local-Modes.html#Local-Modes" accesskey="7">Local Modes</a>:</td><td align="left" valign="top">Flags controlling high-level input handling.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Line-Speed.html#Line-Speed" accesskey="8">Line Speed</a>:</td><td align="left" valign="top">How to read and set the terminal line speed.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Special-Characters.html#Special-Characters" accesskey="9">Special Characters</a>:</td><td align="left" valign="top">Characters that have special effects,
+			         and how to change them.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Noncanonical-Input.html#Noncanonical-Input">Noncanonical Input</a>:</td><td align="left" valign="top">Controlling how long to wait for input.
+</td></tr>
+</table>
+
+
+
+

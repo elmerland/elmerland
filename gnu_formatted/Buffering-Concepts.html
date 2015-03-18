@@ -1,0 +1,42 @@
+<a name="Buffering-Concepts"></a>
+<div class="header">
+<p>
+Next: <a href="Flushing-Buffers.html#Flushing-Buffers" accesskey="n" rel="next">Flushing Buffers</a>, Up: <a href="Stream-Buffering.html#Stream-Buffering" accesskey="u" rel="up">Stream Buffering</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Buffering-Concepts-1"></a>
+<h4 class="subsection">12.20.1 Buffering Concepts</h4>
+
+<p>There are three different kinds of buffering strategies:
+</p>
+<ul>
+<li> Characters written to or read from an <em>unbuffered</em> stream are
+transmitted individually to or from the file as soon as possible.
+<a name="index-unbuffered-stream"></a>
+
+</li><li> Characters written to a <em>line buffered</em> stream are transmitted to
+the file in blocks when a newline character is encountered.
+<a name="index-line-buffered-stream"></a>
+
+</li><li> Characters written to or read from a <em>fully buffered</em> stream are
+transmitted to or from the file in blocks of arbitrary size.
+<a name="index-fully-buffered-stream"></a>
+</li></ul>
+
+<p>Newly opened streams are normally fully buffered, with one exception: a
+stream connected to an interactive device such as a terminal is
+initially line buffered.  See <a href="Controlling-Buffering.html#Controlling-Buffering">Controlling Buffering</a>, for information
+on how to select a different kind of buffering.  Usually the automatic
+selection gives you the most convenient kind of buffering for the file
+or device you open.
+</p>
+<p>The use of line buffering for interactive devices implies that output
+messages ending in a newline will appear immediately&mdash;which is usually
+what you want.  Output that doesn&rsquo;t end in a newline might or might not
+show up immediately, so if you want them to appear immediately, you
+should flush buffered output explicitly with <code>fflush</code>, as described
+in <a href="Flushing-Buffers.html#Flushing-Buffers">Flushing Buffers</a>.
+</p>
+
+
+

@@ -1,0 +1,89 @@
+<a name="Getting-File-Status-Flags"></a>
+<div class="header">
+<p>
+Previous: <a href="Operating-Modes.html#Operating-Modes" accesskey="p" rel="prev">Operating Modes</a>, Up: <a href="File-Status-Flags.html#File-Status-Flags" accesskey="u" rel="up">File Status Flags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Getting-and-Setting-File-Status-Flags"></a>
+<h4 class="subsection">13.14.4 Getting and Setting File Status Flags</h4>
+
+<p>The <code>fcntl</code> function can fetch or change file status flags.
+</p>
+<dl>
+<dt><a name="index-F_005fGETFL"></a>Macro: <em>int</em> <strong>F_GETFL</strong></dt>
+<dd><p>This macro is used as the <var>command</var> argument to <code>fcntl</code>, to
+read the file status flags for the open file with descriptor
+<var>filedes</var>.
+</p>
+<p>The normal return value from <code>fcntl</code> with this command is a
+nonnegative number which can be interpreted as the bitwise OR of the
+individual flags.  Since the file access modes are not single-bit values,
+you can mask off other bits in the returned flags with <code>O_ACCMODE</code>
+to compare them.
+</p>
+<p>In case of an error, <code>fcntl</code> returns <em>-1</em>.  The following
+<code>errno</code> error conditions are defined for this command:
+</p>
+<dl compact="compact">
+<dt><code>EBADF</code></dt>
+<dd><p>The <var>filedes</var> argument is invalid.
+</p></dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><a name="index-F_005fSETFL"></a>Macro: <em>int</em> <strong>F_SETFL</strong></dt>
+<dd><p>This macro is used as the <var>command</var> argument to <code>fcntl</code>, to set
+the file status flags for the open file corresponding to the
+<var>filedes</var> argument.  This command requires a third <code>int</code>
+argument to specify the new flags, so the call looks like this:
+</p>
+<div class="smallexample">
+<pre class="smallexample">fcntl (<var>filedes</var>, F_SETFL, <var>new-flags</var>)
+</pre></div>
+
+<p>You can&rsquo;t change the access mode for the file in this way; that is,
+whether the file descriptor was opened for reading or writing.
+</p>
+<p>The normal return value from <code>fcntl</code> with this command is an
+unspecified value other than <em>-1</em>, which indicates an error.  The
+error conditions are the same as for the <code>F_GETFL</code> command.
+</p></dd></dl>
+
+<p>If you want to modify the file status flags, you should get the current
+flags with <code>F_GETFL</code> and modify the value.  Don&rsquo;t assume that the
+flags listed here are the only ones that are implemented; your program
+may be run years from now and more flags may exist then.  For example,
+here is a function to set or clear the flag <code>O_NONBLOCK</code> without
+altering any other flags:
+</p>
+<div class="smallexample">
+<pre class="smallexample">/* <span class="roman">Set the <code>O_NONBLOCK</code> flag of <var>desc</var> if <var>value</var> is nonzero,</span>
+   <span class="roman">or clear the flag if <var>value</var> is 0.</span>
+   <span class="roman">Return 0 on success, or -1 on error with <code>errno</code> set.</span> */
+
+int
+set_nonblock_flag (int desc, int value)
+{
+  int oldflags = fcntl (desc, F_GETFL, 0);
+  /* <span class="roman">If reading the flags failed, return error indication now.</span> */
+  if (oldflags == -1)
+    return -1;
+  /* <span class="roman">Set just the flag we want to set.</span> */
+  if (value != 0)
+    oldflags |= O_NONBLOCK;
+  else
+    oldflags &amp;= ~O_NONBLOCK;
+  /* <span class="roman">Store modified flag word in the descriptor.</span> */
+  return fcntl (desc, F_SETFL, oldflags);
+}
+</pre></div>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Operating-Modes.html#Operating-Modes" accesskey="p" rel="prev">Operating Modes</a>, Up: <a href="File-Status-Flags.html#File-Status-Flags" accesskey="u" rel="up">File Status Flags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

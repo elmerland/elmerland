@@ -1,0 +1,38 @@
+<a name="Group-Data-Structure"></a>
+<div class="header">
+<p>
+Next: <a href="Lookup-Group.html#Lookup-Group" accesskey="n" rel="next">Lookup Group</a>, Up: <a href="Group-Database.html#Group-Database" accesskey="u" rel="up">Group Database</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="The-Data-Structure-for-a-Group"></a>
+<h4 class="subsection">30.14.1 The Data Structure for a Group</h4>
+
+<p>The functions and data structures for accessing the system group
+database are declared in the header file <samp>grp.h</samp>.
+<a name="index-grp_002eh-3"></a>
+</p>
+<dl>
+<dt><a name="index-struct-group"></a>Data Type: <strong>struct group</strong></dt>
+<dd><p>The <code>group</code> structure is used to hold information about an entry in
+the system group database.  It has at least the following members:
+</p>
+<dl compact="compact">
+<dt><code>char *gr_name</code></dt>
+<dd><p>The name of the group.
+</p>
+</dd>
+<dt><code>gid_t gr_gid</code></dt>
+<dd><p>The group ID of the group.
+</p>
+</dd>
+<dt><code>char **gr_mem</code></dt>
+<dd><p>A vector of pointers to the names of users in the group.  Each user name
+is a null-terminated string, and the vector itself is terminated by a
+null pointer.
+</p></dd>
+</dl>
+</dd></dl>
+
+
+
+

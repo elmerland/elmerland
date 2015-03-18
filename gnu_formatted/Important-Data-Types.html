@@ -1,0 +1,54 @@
+<a name="Important-Data-Types"></a>
+<div class="header">
+<p>
+Next: <a href="Data-Type-Measurements.html#Data-Type-Measurements" accesskey="n" rel="next">Data Type Measurements</a>, Previous: <a href="Null-Pointer-Constant.html#Null-Pointer-Constant" accesskey="p" rel="prev">Null Pointer Constant</a>, Up: <a href="Language-Features.html#Language-Features" accesskey="u" rel="up">Language Features</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Important-Data-Types-1"></a>
+<h3 class="section">A.4 Important Data Types</h3>
+
+<p>The result of subtracting two pointers in C is always an integer, but the
+precise data type varies from C compiler to C compiler.  Likewise, the
+data type of the result of <code>sizeof</code> also varies between compilers.
+ISO defines standard aliases for these two types, so you can refer to
+them in a portable fashion.  They are defined in the header file
+<samp>stddef.h</samp>.
+<a name="index-stddef_002eh"></a>
+</p>
+<dl>
+<dt><a name="index-ptrdiff_005ft"></a>Data Type: <strong>ptrdiff_t</strong></dt>
+<dd><p>This is the signed integer type of the result of subtracting two
+pointers.  For example, with the declaration <code>char *p1, *p2;</code>, the
+expression <code>p2 - p1</code> is of type <code>ptrdiff_t</code>.  This will
+probably be one of the standard signed integer types (<code>short&nbsp;int</code><!-- /@w -->, <code>int</code> or <code>long&nbsp;int</code><!-- /@w -->), but might be a nonstandard
+type that exists only for this purpose.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-size_005ft"></a>Data Type: <strong>size_t</strong></dt>
+<dd><p>This is an unsigned integer type used to represent the sizes of objects.
+The result of the <code>sizeof</code> operator is of this type, and functions
+such as <code>malloc</code> (see <a href="Unconstrained-Allocation.html#Unconstrained-Allocation">Unconstrained Allocation</a>) and
+<code>memcpy</code> (see <a href="Copying-and-Concatenation.html#Copying-and-Concatenation">Copying and Concatenation</a>) accept arguments of
+this type to specify object sizes.  On systems using the GNU C Library, this
+will be <code>unsigned&nbsp;int</code><!-- /@w --> or <code>unsigned&nbsp;long&nbsp;int</code><!-- /@w -->.
+</p>
+<p><strong>Usage Note:</strong> <code>size_t</code> is the preferred way to declare any
+arguments or variables that hold the size of an object.
+</p></dd></dl>
+
+<p><strong>Compatibility Note:</strong> Implementations of C before the advent of
+ISO&nbsp;C<!-- /@w --> generally used <code>unsigned int</code> for representing object sizes
+and <code>int</code> for pointer subtraction results.  They did not
+necessarily define either <code>size_t</code> or <code>ptrdiff_t</code>.  Unix
+systems did define <code>size_t</code>, in <samp>sys/types.h</samp>, but the
+definition was usually a signed type.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Data-Type-Measurements.html#Data-Type-Measurements" accesskey="n" rel="next">Data Type Measurements</a>, Previous: <a href="Null-Pointer-Constant.html#Null-Pointer-Constant" accesskey="p" rel="prev">Null Pointer Constant</a>, Up: <a href="Language-Features.html#Language-Features" accesskey="u" rel="up">Language Features</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

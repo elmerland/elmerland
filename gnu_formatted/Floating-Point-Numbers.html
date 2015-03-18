@@ -1,0 +1,49 @@
+<a name="Floating-Point-Numbers"></a>
+<div class="header">
+<p>
+Next: <a href="Floating-Point-Classes.html#Floating-Point-Classes" accesskey="n" rel="next">Floating Point Classes</a>, Previous: <a href="Integer-Division.html#Integer-Division" accesskey="p" rel="prev">Integer Division</a>, Up: <a href="Arithmetic.html#Arithmetic" accesskey="u" rel="up">Arithmetic</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Floating-Point-Numbers-1"></a>
+<h3 class="section">20.3 Floating Point Numbers</h3>
+<a name="index-floating-point"></a>
+<a name="index-IEEE-754"></a>
+<a name="index-IEEE-floating-point"></a>
+
+<p>Most computer hardware has support for two different kinds of numbers:
+integers (<em>&hellip;-3, -2, -1, 0, 1, 2, 3&hellip;</em>) and
+floating-point numbers.  Floating-point numbers have three parts: the
+<em>mantissa</em>, the <em>exponent</em>, and the <em>sign bit</em>.  The real
+number represented by a floating-point value is given by
+<em>(s ? -1 : 1) &amp;middot; 2^e &amp;middot; M</em>
+where <em>s</em> is the sign bit, <em>e</em> the exponent, and <em>M</em>
+the mantissa.  See <a href="Floating-Point-Concepts.html#Floating-Point-Concepts">Floating Point Concepts</a>, for details.  (It is
+possible to have a different <em>base</em> for the exponent, but all modern
+hardware uses <em>2</em>.)
+</p>
+<p>Floating-point numbers can represent a finite subset of the real
+numbers.  While this subset is large enough for most purposes, it is
+important to remember that the only reals that can be represented
+exactly are rational numbers that have a terminating binary expansion
+shorter than the width of the mantissa.  Even simple fractions such as
+<em>1/5</em> can only be approximated by floating point.
+</p>
+<p>Mathematical operations and functions frequently need to produce values
+that are not representable.  Often these values can be approximated
+closely enough for practical purposes, but sometimes they can&rsquo;t.
+Historically there was no way to tell when the results of a calculation
+were inaccurate.  Modern computers implement the IEEE&nbsp;754<!-- /@w --> standard
+for numerical computations, which defines a framework for indicating to
+the program when the results of calculation are not trustworthy.  This
+framework consists of a set of <em>exceptions</em> that indicate why a
+result could not be represented, and the special values <em>infinity</em>
+and <em>not a number</em> (NaN).
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Floating-Point-Classes.html#Floating-Point-Classes" accesskey="n" rel="next">Floating Point Classes</a>, Previous: <a href="Integer-Division.html#Integer-Division" accesskey="p" rel="prev">Integer Division</a>, Up: <a href="Arithmetic.html#Arithmetic" accesskey="u" rel="up">Arithmetic</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

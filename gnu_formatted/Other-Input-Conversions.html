@@ -1,0 +1,41 @@
+<a name="Other-Input-Conversions"></a>
+<div class="header">
+<p>
+Next: <a href="Formatted-Input-Functions.html#Formatted-Input-Functions" accesskey="n" rel="next">Formatted Input Functions</a>, Previous: <a href="Dynamic-String-Input.html#Dynamic-String-Input" accesskey="p" rel="prev">Dynamic String Input</a>, Up: <a href="Formatted-Input.html#Formatted-Input" accesskey="u" rel="up">Formatted Input</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Other-Input-Conversions-1"></a>
+<h4 class="subsection">12.14.7 Other Input Conversions</h4>
+
+<p>This section describes the miscellaneous input conversions.
+</p>
+<p>The &lsquo;<samp>%p</samp>&rsquo; conversion is used to read a pointer value.  It recognizes
+the same syntax used by the &lsquo;<samp>%p</samp>&rsquo; output conversion for
+<code>printf</code> (see <a href="Other-Output-Conversions.html#Other-Output-Conversions">Other Output Conversions</a>); that is, a hexadecimal
+number just as the &lsquo;<samp>%x</samp>&rsquo; conversion accepts.  The corresponding
+argument should be of type <code>void **</code>; that is, the address of a
+place to store a pointer.
+</p>
+<p>The resulting pointer value is not guaranteed to be valid if it was not
+originally written during the same program execution that reads it in.
+</p>
+<p>The &lsquo;<samp>%n</samp>&rsquo; conversion produces the number of characters read so far
+by this call.  The corresponding argument should be of type <code>int *</code>.
+This conversion works in the same way as the &lsquo;<samp>%n</samp>&rsquo; conversion for
+<code>printf</code>; see <a href="Other-Output-Conversions.html#Other-Output-Conversions">Other Output Conversions</a>, for an example.
+</p>
+<p>The &lsquo;<samp>%n</samp>&rsquo; conversion is the only mechanism for determining the
+success of literal matches or conversions with suppressed assignments.
+If the &lsquo;<samp>%n</samp>&rsquo; follows the locus of a matching failure, then no value
+is stored for it since <code>scanf</code> returns before processing the
+&lsquo;<samp>%n</samp>&rsquo;.  If you store <code>-1</code> in that argument slot before calling
+<code>scanf</code>, the presence of <code>-1</code> after <code>scanf</code> indicates an
+error occurred before the &lsquo;<samp>%n</samp>&rsquo; was reached.
+</p>
+<p>Finally, the &lsquo;<samp>%%</samp>&rsquo; conversion matches a literal &lsquo;<samp>%</samp>&rsquo; character
+in the input stream, without using an argument.  This conversion does
+not permit any flags, field width, or type modifier to be specified.
+</p>
+
+
+

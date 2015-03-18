@@ -1,0 +1,61 @@
+<a name="Pause-Problems"></a>
+<div class="header">
+<p>
+Next: <a href="Sigsuspend.html#Sigsuspend" accesskey="n" rel="next">Sigsuspend</a>, Previous: <a href="Using-Pause.html#Using-Pause" accesskey="p" rel="prev">Using Pause</a>, Up: <a href="Waiting-for-a-Signal.html#Waiting-for-a-Signal" accesskey="u" rel="up">Waiting for a Signal</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Problems-with-pause"></a>
+<h4 class="subsection">24.8.2 Problems with <code>pause</code></h4>
+
+<p>The simplicity of <code>pause</code> can conceal serious timing errors that
+can make a program hang mysteriously.
+</p>
+<p>It is safe to use <code>pause</code> if the real work of your program is done
+by the signal handlers themselves, and the &ldquo;main program&rdquo; does nothing
+but call <code>pause</code>.  Each time a signal is delivered, the handler
+will do the next batch of work that is to be done, and then return, so
+that the main loop of the program can call <code>pause</code> again.
+</p>
+<p>You can&rsquo;t safely use <code>pause</code> to wait until one more signal arrives,
+and then resume real work.  Even if you arrange for the signal handler
+to cooperate by setting a flag, you still can&rsquo;t use <code>pause</code>
+reliably.  Here is an example of this problem:
+</p>
+<div class="smallexample">
+<pre class="smallexample">/* <span class="roman"><code>usr_interrupt</code> is set by the signal handler.</span>  */
+if (!usr_interrupt)
+  pause ();
+
+/* <span class="roman">Do work once the signal arrives.</span>  */
+&hellip;
+</pre></div>
+
+<p>This has a bug: the signal could arrive after the variable
+<code>usr_interrupt</code> is checked, but before the call to <code>pause</code>.
+If no further signals arrive, the process would never wake up again.
+</p>
+<p>You can put an upper limit on the excess waiting by using <code>sleep</code>
+in a loop, instead of using <code>pause</code>.  (See <a href="Sleeping.html#Sleeping">Sleeping</a>, for more
+about <code>sleep</code>.)  Here is what this looks like:
+</p>
+<div class="smallexample">
+<pre class="smallexample">/* <span class="roman"><code>usr_interrupt</code> is set by the signal handler.</span>
+while (!usr_interrupt)
+  sleep (1);
+
+/* <span class="roman">Do work once the signal arrives.</span>  */
+&hellip;
+</pre></div>
+
+<p>For some purposes, that is good enough.  But with a little more
+complexity, you can wait reliably until a particular signal handler is
+run, using <code>sigsuspend</code>.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Sigsuspend.html#Sigsuspend" accesskey="n" rel="next">Sigsuspend</a>, Previous: <a href="Using-Pause.html#Using-Pause" accesskey="p" rel="prev">Using Pause</a>, Up: <a href="Waiting-for-a-Signal.html#Waiting-for-a-Signal" accesskey="u" rel="up">Waiting for a Signal</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

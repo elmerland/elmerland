@@ -1,0 +1,84 @@
+<a name="IOCTLs"></a>
+<div class="header">
+<p>
+Previous: <a href="Interrupt-Input.html#Interrupt-Input" accesskey="p" rel="prev">Interrupt Input</a>, Up: <a href="Low_002dLevel-I_002fO.html#Low_002dLevel-I_002fO" accesskey="u" rel="up">Low-Level I/O</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Generic-I_002fO-Control-operations"></a>
+<h3 class="section">13.19 Generic I/O Control operations</h3>
+<a name="index-generic-i_002fo-control-operations"></a>
+<a name="index-IOCTLs"></a>
+
+<p>GNU systems can handle most input/output operations on many different
+devices and objects in terms of a few file primitives - <code>read</code>,
+<code>write</code> and <code>lseek</code>.  However, most devices also have a few
+peculiar operations which do not fit into this model.  Such as:
+</p>
+<ul>
+<li> Changing the character font used on a terminal.
+
+</li><li> Telling a magnetic tape system to rewind or fast forward.  (Since they
+cannot move in byte increments, <code>lseek</code> is inapplicable).
+
+</li><li> Ejecting a disk from a drive.
+
+</li><li> Playing an audio track from a CD-ROM drive.
+
+</li><li> Maintaining routing tables for a network.
+
+</li></ul>
+
+<p>Although some such objects such as sockets and terminals
+<a name="DOCF2" href="#FOOT2"><sup>2</sup></a> have special functions of their own, it would
+not be practical to create functions for all these cases.
+</p>
+<p>Instead these minor operations, known as <em>IOCTL</em>s, are assigned code
+numbers and multiplexed through the <code>ioctl</code> function, defined in
+<code>sys/ioctl.h</code>.  The code numbers themselves are defined in many
+different headers.
+</p>
+<dl>
+<dt><a name="index-ioctl"></a>Function: <em>int</em> <strong>ioctl</strong> <em>(int <var>filedes</var>, int <var>command</var>, &hellip;)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+
+<p>The <code>ioctl</code> function performs the generic I/O operation
+<var>command</var> on <var>filedes</var>.
+</p>
+<p>A third argument is usually present, either a single number or a pointer
+to a structure.  The meaning of this argument, the returned value, and
+any error codes depends upon the command used.  Often <em>-1</em> is
+returned for a failure.
+</p>
+</dd></dl>
+
+<p>On some systems, IOCTLs used by different devices share the same numbers.
+Thus, although use of an inappropriate IOCTL <em>usually</em> only produces
+an error, you should not attempt to use device-specific IOCTLs on an
+unknown device.
+</p>
+<p>Most IOCTLs are OS-specific and/or only used in special system utilities,
+and are thus beyond the scope of this document.  For an example of the use
+of an IOCTL, see <a href="Out_002dof_002dBand-Data.html#Out_002dof_002dBand-Data">Out-of-Band Data</a>.
+</p>
+<div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT2" href="#DOCF2">(2)</a></h3>
+<p>Actually, the terminal-specific functions are implemented with
+IOCTLs on many platforms.</p>
+</div>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Interrupt-Input.html#Interrupt-Input" accesskey="p" rel="prev">Interrupt Input</a>, Up: <a href="Low_002dLevel-I_002fO.html#Low_002dLevel-I_002fO" accesskey="u" rel="up">Low-Level I/O</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

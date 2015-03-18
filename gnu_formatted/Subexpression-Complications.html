@@ -1,0 +1,59 @@
+<a name="Subexpression-Complications"></a>
+<div class="header">
+<p>
+Next: <a href="Regexp-Cleanup.html#Regexp-Cleanup" accesskey="n" rel="next">Regexp Cleanup</a>, Previous: <a href="Regexp-Subexpressions.html#Regexp-Subexpressions" accesskey="p" rel="prev">Regexp Subexpressions</a>, Up: <a href="Regular-Expressions.html#Regular-Expressions" accesskey="u" rel="up">Regular Expressions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Complications-in-Subexpression-Matching"></a>
+<h4 class="subsection">10.3.5 Complications in Subexpression Matching</h4>
+
+<p>Sometimes a subexpression matches a substring of no characters.  This
+happens when &lsquo;<samp>f\(o*\)</samp>&rsquo; matches the string &lsquo;<samp>fum</samp>&rsquo;.  (It really
+matches just the &lsquo;<samp>f</samp>&rsquo;.)  In this case, both of the offsets identify
+the point in the string where the null substring was found.  In this
+example, the offsets are both <code>1</code>.
+</p>
+<p>Sometimes the entire regular expression can match without using some of
+its subexpressions at all&mdash;for example, when &lsquo;<samp>ba\(na\)*</samp>&rsquo; matches the
+string &lsquo;<samp>ba</samp>&rsquo;, the parenthetical subexpression is not used.  When
+this happens, <code>regexec</code> stores <code>-1</code> in both fields of the
+element for that subexpression.
+</p>
+<p>Sometimes matching the entire regular expression can match a particular
+subexpression more than once&mdash;for example, when &lsquo;<samp>ba\(na\)*</samp>&rsquo;
+matches the string &lsquo;<samp>bananana</samp>&rsquo;, the parenthetical subexpression
+matches three times.  When this happens, <code>regexec</code> usually stores
+the offsets of the last part of the string that matched the
+subexpression.  In the case of &lsquo;<samp>bananana</samp>&rsquo;, these offsets are
+<code>6</code> and <code>8</code>.
+</p>
+<p>But the last match is not always the one that is chosen.  It&rsquo;s more
+accurate to say that the last <em>opportunity</em> to match is the one
+that takes precedence.  What this means is that when one subexpression
+appears within another, then the results reported for the inner
+subexpression reflect whatever happened on the last match of the outer
+subexpression.  For an example, consider &lsquo;<samp>\(ba\(na\)*s \)*</samp>&rsquo; matching
+the string &lsquo;<samp>bananas bas </samp>&rsquo;.  The last time the inner expression
+actually matches is near the end of the first word.  But it is
+<em>considered</em> again in the second word, and fails to match there.
+<code>regexec</code> reports nonuse of the &ldquo;na&rdquo; subexpression.
+</p>
+<p>Another place where this rule applies is when the regular expression
+</p><div class="smallexample">
+<pre class="smallexample">\(ba\(na\)*s \|nefer\(ti\)* \)*
+</pre></div>
+<p>matches &lsquo;<samp>bananas nefertiti</samp>&rsquo;.  The &ldquo;na&rdquo; subexpression does match
+in the first word, but it doesn&rsquo;t match in the second word because the
+other alternative is used there.  Once again, the second repetition of
+the outer subexpression overrides the first, and within that second
+repetition, the &ldquo;na&rdquo; subexpression is not used.  So <code>regexec</code>
+reports nonuse of the &ldquo;na&rdquo; subexpression.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Regexp-Cleanup.html#Regexp-Cleanup" accesskey="n" rel="next">Regexp Cleanup</a>, Previous: <a href="Regexp-Subexpressions.html#Regexp-Subexpressions" accesskey="p" rel="prev">Regexp Subexpressions</a>, Up: <a href="Regular-Expressions.html#Regular-Expressions" accesskey="u" rel="up">Regular Expressions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

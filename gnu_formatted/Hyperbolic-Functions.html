@@ -1,0 +1,220 @@
+<a name="Hyperbolic-Functions"></a>
+<div class="header">
+<p>
+Next: <a href="Special-Functions.html#Special-Functions" accesskey="n" rel="next">Special Functions</a>, Previous: <a href="Exponents-and-Logarithms.html#Exponents-and-Logarithms" accesskey="p" rel="prev">Exponents and Logarithms</a>, Up: <a href="Mathematics.html#Mathematics" accesskey="u" rel="up">Mathematics</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Hyperbolic-Functions-1"></a>
+<h3 class="section">19.5 Hyperbolic Functions</h3>
+<a name="index-hyperbolic-functions"></a>
+
+<p>The functions in this section are related to the exponential functions;
+see <a href="Exponents-and-Logarithms.html#Exponents-and-Logarithms">Exponents and Logarithms</a>.
+</p>
+<dl>
+<dt><a name="index-sinh"></a>Function: <em>double</em> <strong>sinh</strong> <em>(double <var>x</var>)</em></dt>
+<dt><a name="index-sinhf"></a>Function: <em>float</em> <strong>sinhf</strong> <em>(float <var>x</var>)</em></dt>
+<dt><a name="index-sinhl"></a>Function: <em>long double</em> <strong>sinhl</strong> <em>(long double <var>x</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>These functions return the hyperbolic sine of <var>x</var>, defined
+mathematically as <code>(exp&nbsp;(<var>x</var>)&nbsp;<span class="nolinebreak">-</span>&nbsp;exp&nbsp;<span class="nolinebreak">(-</span><var>x</var>))&nbsp;/&nbsp;2</code><!-- /@w -->.  They
+may signal overflow if <var>x</var> is too large.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-cosh"></a>Function: <em>double</em> <strong>cosh</strong> <em>(double <var>x</var>)</em></dt>
+<dt><a name="index-coshf"></a>Function: <em>float</em> <strong>coshf</strong> <em>(float <var>x</var>)</em></dt>
+<dt><a name="index-coshl"></a>Function: <em>long double</em> <strong>coshl</strong> <em>(long double <var>x</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>These function return the hyperbolic cosine of <var>x</var>,
+defined mathematically as <code>(exp&nbsp;(<var>x</var>)&nbsp;+&nbsp;exp&nbsp;<span class="nolinebreak">(-</span><var>x</var>))&nbsp;/&nbsp;2</code><!-- /@w -->.
+They may signal overflow if <var>x</var> is too large.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-tanh"></a>Function: <em>double</em> <strong>tanh</strong> <em>(double <var>x</var>)</em></dt>
+<dt><a name="index-tanhf"></a>Function: <em>float</em> <strong>tanhf</strong> <em>(float <var>x</var>)</em></dt>
+<dt><a name="index-tanhl"></a>Function: <em>long double</em> <strong>tanhl</strong> <em>(long double <var>x</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>These functions return the hyperbolic tangent of <var>x</var>,
+defined mathematically as <code>sinh&nbsp;(<var>x</var>)&nbsp;/&nbsp;cosh&nbsp;(<var>x</var>)</code><!-- /@w -->.
+They may signal overflow if <var>x</var> is too large.
+</p></dd></dl>
+
+<a name="index-hyperbolic-functions-1"></a>
+
+<p>There are counterparts for the hyperbolic functions which take
+complex arguments.
+</p>
+<dl>
+<dt><a name="index-csinh"></a>Function: <em>complex double</em> <strong>csinh</strong> <em>(complex double <var>z</var>)</em></dt>
+<dt><a name="index-csinhf"></a>Function: <em>complex float</em> <strong>csinhf</strong> <em>(complex float <var>z</var>)</em></dt>
+<dt><a name="index-csinhl"></a>Function: <em>complex long double</em> <strong>csinhl</strong> <em>(complex long double <var>z</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>These functions return the complex hyperbolic sine of <var>z</var>, defined
+mathematically as <code>(exp&nbsp;(<var>z</var>)&nbsp;<span class="nolinebreak">-</span>&nbsp;exp&nbsp;<span class="nolinebreak">(-</span><var>z</var>))&nbsp;/&nbsp;2</code><!-- /@w -->.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-ccosh"></a>Function: <em>complex double</em> <strong>ccosh</strong> <em>(complex double <var>z</var>)</em></dt>
+<dt><a name="index-ccoshf"></a>Function: <em>complex float</em> <strong>ccoshf</strong> <em>(complex float <var>z</var>)</em></dt>
+<dt><a name="index-ccoshl"></a>Function: <em>complex long double</em> <strong>ccoshl</strong> <em>(complex long double <var>z</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>These functions return the complex hyperbolic cosine of <var>z</var>, defined
+mathematically as <code>(exp&nbsp;(<var>z</var>)&nbsp;+&nbsp;exp&nbsp;<span class="nolinebreak">(-</span><var>z</var>))&nbsp;/&nbsp;2</code><!-- /@w -->.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-ctanh"></a>Function: <em>complex double</em> <strong>ctanh</strong> <em>(complex double <var>z</var>)</em></dt>
+<dt><a name="index-ctanhf"></a>Function: <em>complex float</em> <strong>ctanhf</strong> <em>(complex float <var>z</var>)</em></dt>
+<dt><a name="index-ctanhl"></a>Function: <em>complex long double</em> <strong>ctanhl</strong> <em>(complex long double <var>z</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>These functions return the complex hyperbolic tangent of <var>z</var>,
+defined mathematically as <code>csinh&nbsp;(<var>z</var>)&nbsp;/&nbsp;ccosh&nbsp;(<var>z</var>)</code><!-- /@w -->.
+</p></dd></dl>
+
+
+<a name="index-inverse-hyperbolic-functions"></a>
+
+<dl>
+<dt><a name="index-asinh"></a>Function: <em>double</em> <strong>asinh</strong> <em>(double <var>x</var>)</em></dt>
+<dt><a name="index-asinhf"></a>Function: <em>float</em> <strong>asinhf</strong> <em>(float <var>x</var>)</em></dt>
+<dt><a name="index-asinhl"></a>Function: <em>long double</em> <strong>asinhl</strong> <em>(long double <var>x</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>These functions return the inverse hyperbolic sine of <var>x</var>&mdash;the
+value whose hyperbolic sine is <var>x</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-acosh"></a>Function: <em>double</em> <strong>acosh</strong> <em>(double <var>x</var>)</em></dt>
+<dt><a name="index-acoshf"></a>Function: <em>float</em> <strong>acoshf</strong> <em>(float <var>x</var>)</em></dt>
+<dt><a name="index-acoshl"></a>Function: <em>long double</em> <strong>acoshl</strong> <em>(long double <var>x</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>These functions return the inverse hyperbolic cosine of <var>x</var>&mdash;the
+value whose hyperbolic cosine is <var>x</var>.  If <var>x</var> is less than
+<code>1</code>, <code>acosh</code> signals a domain error.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-atanh"></a>Function: <em>double</em> <strong>atanh</strong> <em>(double <var>x</var>)</em></dt>
+<dt><a name="index-atanhf"></a>Function: <em>float</em> <strong>atanhf</strong> <em>(float <var>x</var>)</em></dt>
+<dt><a name="index-atanhl"></a>Function: <em>long double</em> <strong>atanhl</strong> <em>(long double <var>x</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>These functions return the inverse hyperbolic tangent of <var>x</var>&mdash;the
+value whose hyperbolic tangent is <var>x</var>.  If the absolute value of
+<var>x</var> is greater than <code>1</code>, <code>atanh</code> signals a domain error;
+if it is equal to 1, <code>atanh</code> returns infinity.
+</p></dd></dl>
+
+<a name="index-inverse-complex-hyperbolic-functions"></a>
+
+<dl>
+<dt><a name="index-casinh"></a>Function: <em>complex double</em> <strong>casinh</strong> <em>(complex double <var>z</var>)</em></dt>
+<dt><a name="index-casinhf"></a>Function: <em>complex float</em> <strong>casinhf</strong> <em>(complex float <var>z</var>)</em></dt>
+<dt><a name="index-casinhl"></a>Function: <em>complex long double</em> <strong>casinhl</strong> <em>(complex long double <var>z</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>These functions return the inverse complex hyperbolic sine of
+<var>z</var>&mdash;the value whose complex hyperbolic sine is <var>z</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-cacosh"></a>Function: <em>complex double</em> <strong>cacosh</strong> <em>(complex double <var>z</var>)</em></dt>
+<dt><a name="index-cacoshf"></a>Function: <em>complex float</em> <strong>cacoshf</strong> <em>(complex float <var>z</var>)</em></dt>
+<dt><a name="index-cacoshl"></a>Function: <em>complex long double</em> <strong>cacoshl</strong> <em>(complex long double <var>z</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>These functions return the inverse complex hyperbolic cosine of
+<var>z</var>&mdash;the value whose complex hyperbolic cosine is <var>z</var>.  Unlike
+the real-valued functions, there are no restrictions on the value of <var>z</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-catanh"></a>Function: <em>complex double</em> <strong>catanh</strong> <em>(complex double <var>z</var>)</em></dt>
+<dt><a name="index-catanhf"></a>Function: <em>complex float</em> <strong>catanhf</strong> <em>(complex float <var>z</var>)</em></dt>
+<dt><a name="index-catanhl"></a>Function: <em>complex long double</em> <strong>catanhl</strong> <em>(complex long double <var>z</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>These functions return the inverse complex hyperbolic tangent of
+<var>z</var>&mdash;the value whose complex hyperbolic tangent is <var>z</var>.  Unlike
+the real-valued functions, there are no restrictions on the value of
+<var>z</var>.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Special-Functions.html#Special-Functions" accesskey="n" rel="next">Special Functions</a>, Previous: <a href="Exponents-and-Logarithms.html#Exponents-and-Logarithms" accesskey="p" rel="prev">Exponents and Logarithms</a>, Up: <a href="Mathematics.html#Mathematics" accesskey="u" rel="up">Mathematics</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

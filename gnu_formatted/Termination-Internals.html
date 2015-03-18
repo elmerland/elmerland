@@ -1,0 +1,85 @@
+<a name="Termination-Internals"></a>
+<div class="header">
+<p>
+Previous: <a href="Aborting-a-Program.html#Aborting-a-Program" accesskey="p" rel="prev">Aborting a Program</a>, Up: <a href="Program-Termination.html#Program-Termination" accesskey="u" rel="up">Program Termination</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Termination-Internals-1"></a>
+<h4 class="subsection">25.7.5 Termination Internals</h4>
+
+<p>The <code>_exit</code> function is the primitive used for process termination
+by <code>exit</code>.  It is declared in the header file <samp>unistd.h</samp>.
+<a name="index-unistd_002eh-16"></a>
+</p>
+<dl>
+<dt><a name="index-_005fexit"></a>Function: <em>void</em> <strong>_exit</strong> <em>(int <var>status</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>_exit</code> function is the primitive for causing a process to
+terminate with status <var>status</var>.  Calling this function does not
+execute cleanup functions registered with <code>atexit</code> or
+<code>on_exit</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_005fExit"></a>Function: <em>void</em> <strong>_Exit</strong> <em>(int <var>status</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>_Exit</code> function is the ISO&nbsp;C<!-- /@w --> equivalent to <code>_exit</code>.
+The ISO&nbsp;C<!-- /@w --> committee members were not sure whether the definitions of
+<code>_exit</code> and <code>_Exit</code> were compatible so they have not used the
+POSIX name.
+</p>
+<p>This function was introduced in ISO&nbsp;C99<!-- /@w --> and is declared in
+<samp>stdlib.h</samp>.
+</p></dd></dl>
+
+<p>When a process terminates for any reason&mdash;either because the program
+terminates, or as a result of a signal&mdash;the
+following things happen:
+</p>
+<ul>
+<li> All open file descriptors in the process are closed.  See <a href="Low_002dLevel-I_002fO.html#Low_002dLevel-I_002fO">Low-Level I/O</a>.
+Note that streams are not flushed automatically when the process
+terminates; see <a href="I_002fO-on-Streams.html#I_002fO-on-Streams">I/O on Streams</a>.
+
+</li><li> A process exit status is saved to be reported back to the parent process
+via <code>wait</code> or <code>waitpid</code>; see <a href="Process-Completion.html#Process-Completion">Process Completion</a>.  If the
+program exited, this status includes as its low-order 8 bits the program
+exit status.
+
+
+</li><li> Any child processes of the process being terminated are assigned a new
+parent process.  (On most systems, including GNU, this is the <code>init</code>
+process, with process ID 1.)
+
+</li><li> A <code>SIGCHLD</code> signal is sent to the parent process.
+
+</li><li> If the process is a session leader that has a controlling terminal, then
+a <code>SIGHUP</code> signal is sent to each process in the foreground job,
+and the controlling terminal is disassociated from that session.
+See <a href="Job-Control.html#Job-Control">Job Control</a>.
+
+</li><li> If termination of a process causes a process group to become orphaned,
+and any member of that process group is stopped, then a <code>SIGHUP</code>
+signal and a <code>SIGCONT</code> signal are sent to each process in the
+group.  See <a href="Job-Control.html#Job-Control">Job Control</a>.
+</li></ul>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Aborting-a-Program.html#Aborting-a-Program" accesskey="p" rel="prev">Aborting a Program</a>, Up: <a href="Program-Termination.html#Program-Termination" accesskey="u" rel="up">Program Termination</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

@@ -1,0 +1,29 @@
+<a name="Controlling-Terminal"></a>
+<div class="header">
+<p>
+Next: <a href="Access-to-the-Terminal.html#Access-to-the-Terminal" accesskey="n" rel="next">Access to the Terminal</a>, Previous: <a href="Job-Control-is-Optional.html#Job-Control-is-Optional" accesskey="p" rel="prev">Job Control is Optional</a>, Up: <a href="Job-Control.html#Job-Control" accesskey="u" rel="up">Job Control</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Controlling-Terminal-of-a-Process"></a>
+<h3 class="section">28.3 Controlling Terminal of a Process</h3>
+
+<p>One of the attributes of a process is its controlling terminal.  Child
+processes created with <code>fork</code> inherit the controlling terminal from
+their parent process.  In this way, all the processes in a session
+inherit the controlling terminal from the session leader.  A session
+leader that has control of a terminal is called the <em>controlling
+process</em> of that terminal.
+</p>
+<a name="index-controlling-process"></a>
+<p>You generally do not need to worry about the exact mechanism used to
+allocate a controlling terminal to a session, since it is done for you
+by the system when you log in.
+</p>
+<p>An individual process disconnects from its controlling terminal when it
+calls <code>setsid</code> to become the leader of a new session.
+See <a href="Process-Group-Functions.html#Process-Group-Functions">Process Group Functions</a>.
+</p>
+
+
+
+

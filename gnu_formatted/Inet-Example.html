@@ -1,0 +1,83 @@
+<a name="Inet-Example"></a>
+<div class="header">
+<p>
+Previous: <a href="Protocols-Database.html#Protocols-Database" accesskey="p" rel="prev">Protocols Database</a>, Up: <a href="Internet-Namespace.html#Internet-Namespace" accesskey="u" rel="up">Internet Namespace</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Internet-Socket-Example"></a>
+<h4 class="subsection">16.6.7 Internet Socket Example</h4>
+
+<p>Here is an example showing how to create and name a socket in the
+Internet namespace.  The newly created socket exists on the machine that
+the program is running on.  Rather than finding and using the machine&rsquo;s
+Internet address, this example specifies <code>INADDR_ANY</code> as the host
+address; the system replaces that with the machine&rsquo;s actual address.
+</p>
+<div class="smallexample">
+<pre class="smallexample">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+
+int
+make_socket (uint16_t port)
+{
+  int sock;
+  struct sockaddr_in name;
+
+  /* <span class="roman">Create the socket.</span> */
+  sock = socket (PF_INET, SOCK_STREAM, 0);
+  if (sock &lt; 0)
+    {
+      perror (&quot;socket&quot;);
+      exit (EXIT_FAILURE);
+    }
+
+  /* <span class="roman">Give the socket a name.</span> */
+  name.sin_family = AF_INET;
+  name.sin_port = htons (port);
+  name.sin_addr.s_addr = htonl (INADDR_ANY);
+  if (bind (sock, (struct sockaddr *) &amp;name, sizeof (name)) &lt; 0)
+    {
+      perror (&quot;bind&quot;);
+      exit (EXIT_FAILURE);
+    }
+
+  return sock;
+}
+</pre></div>
+
+<p>Here is another example, showing how you can fill in a <code>sockaddr_in</code>
+structure, given a host name string and a port number:
+</p>
+<div class="smallexample">
+<pre class="smallexample">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;netdb.h&gt;
+
+void
+init_sockaddr (struct sockaddr_in *name,
+               const char *hostname,
+               uint16_t port)
+{
+  struct hostent *hostinfo;
+
+  name-&gt;sin_family = AF_INET;
+  name-&gt;sin_port = htons (port);
+  hostinfo = gethostbyname (hostname);
+  if (hostinfo == NULL)
+    {
+      fprintf (stderr, &quot;Unknown host %s.\n&quot;, hostname);
+      exit (EXIT_FAILURE);
+    }
+  name-&gt;sin_addr = *(struct in_addr *) hostinfo-&gt;h_addr;
+}
+</pre></div>
+
+
+
+

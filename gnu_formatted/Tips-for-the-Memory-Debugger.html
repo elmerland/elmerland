@@ -1,0 +1,55 @@
+<a name="Tips-for-the-Memory-Debugger"></a>
+<div class="header">
+<p>
+Next: <a href="Interpreting-the-traces.html#Interpreting-the-traces" accesskey="n" rel="next">Interpreting the traces</a>, Previous: <a href="Using-the-Memory-Debugger.html#Using-the-Memory-Debugger" accesskey="p" rel="prev">Using the Memory Debugger</a>, Up: <a href="Allocation-Debugging.html#Allocation-Debugging" accesskey="u" rel="up">Allocation Debugging</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Some-more-or-less-clever-ideas"></a>
+<h4 class="subsubsection">3.2.3.3 Some more or less clever ideas</h4>
+
+<p>You know the situation.  The program is prepared for debugging and in
+all debugging sessions it runs well.  But once it is started without
+debugging the error shows up.  A typical example is a memory leak that
+becomes visible only when we turn off the debugging.  If you foresee
+such situations you can still win.  Simply use something equivalent to
+the following little program:
+</p>
+<div class="example">
+<pre class="example">#include &lt;mcheck.h&gt;
+#include &lt;signal.h&gt;
+
+static void
+enable (int sig)
+{
+  mtrace ();
+  signal (SIGUSR1, enable);
+}
+
+static void
+disable (int sig)
+{
+  muntrace ();
+  signal (SIGUSR2, disable);
+}
+
+int
+main (int argc, char *argv[])
+{
+  &hellip;
+
+  signal (SIGUSR1, enable);
+  signal (SIGUSR2, disable);
+
+  &hellip;
+}
+</pre></div>
+
+<p>I.e., the user can start the memory debugger any time s/he wants if the
+program was started with <code>MALLOC_TRACE</code> set in the environment.
+The output will of course not show the allocations which happened before
+the first signal but if there is a memory leak this will show up
+nevertheless.
+</p>
+
+
+

@@ -1,0 +1,39 @@
+<a name="Variadic-Functions"></a>
+<div class="header">
+<p>
+Next: <a href="Null-Pointer-Constant.html#Null-Pointer-Constant" accesskey="n" rel="next">Null Pointer Constant</a>, Previous: <a href="Consistency-Checking.html#Consistency-Checking" accesskey="p" rel="prev">Consistency Checking</a>, Up: <a href="Language-Features.html#Language-Features" accesskey="u" rel="up">Language Features</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Variadic-Functions-1"></a>
+<h3 class="section">A.2 Variadic Functions</h3>
+<a name="index-variable-number-of-arguments"></a>
+<a name="index-variadic-functions"></a>
+<a name="index-optional-arguments"></a>
+
+<p>ISO&nbsp;C<!-- /@w --> defines a syntax for declaring a function to take a variable
+number or type of arguments.  (Such functions are referred to as
+<em>varargs functions</em> or <em>variadic functions</em>.)  However, the
+language itself provides no mechanism for such functions to access their
+non-required arguments; instead, you use the variable arguments macros
+defined in <samp>stdarg.h</samp>.
+</p>
+<p>This section describes how to declare variadic functions, how to write
+them, and how to call them properly.
+</p>
+<p><strong>Compatibility Note:</strong> Many older C dialects provide a similar,
+but incompatible, mechanism for defining functions with variable numbers
+of arguments, using <samp>varargs.h</samp>.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Why-Variadic.html#Why-Variadic" accesskey="1">Why Variadic</a>:</td><td align="left" valign="top">Reasons for making functions take
+                                 variable arguments.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="How-Variadic.html#How-Variadic" accesskey="2">How Variadic</a>:</td><td align="left" valign="top">How to define and call variadic functions.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Variadic-Example.html#Variadic-Example" accesskey="3">Variadic Example</a>:</td><td align="left" valign="top">A complete example.
+</td></tr>
+</table>
+
+
+
+

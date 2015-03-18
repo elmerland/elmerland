@@ -1,0 +1,64 @@
+<a name="Cryptographic-Functions"></a>
+<div class="header">
+<p>
+Next: <a href="Debugging-Support.html#Debugging-Support" accesskey="n" rel="next">Debugging Support</a>, Previous: <a href="System-Configuration.html#System-Configuration" accesskey="p" rel="prev">System Configuration</a>, Up: <a href="index.html#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="DES-Encryption-and-Password-Handling"></a>
+<h2 class="chapter">33 DES Encryption and Password Handling</h2>
+
+<p>On many systems, it is unnecessary to have any kind of user
+authentication; for instance, a workstation which is not connected to a
+network probably does not need any user authentication, because to use
+the machine an intruder must have physical access.
+</p>
+<p>Sometimes, however, it is necessary to be sure that a user is authorized
+to use some service a machine provides&mdash;for instance, to log in as a
+particular user id (see <a href="Users-and-Groups.html#Users-and-Groups">Users and Groups</a>).  One traditional way of
+doing this is for each user to choose a secret <em>password</em>; then, the
+system can ask someone claiming to be a user what the user&rsquo;s password
+is, and if the person gives the correct password then the system can
+grant the appropriate privileges.
+</p>
+<p>If all the passwords are just stored in a file somewhere, then this file
+has to be very carefully protected.  To avoid this, passwords are run
+through a <em>one-way function</em>, a function which makes it difficult to
+work out what its input was by looking at its output, before storing in
+the file.
+</p>
+<p>The GNU C Library provides a one-way function that is compatible with
+the behavior of the <code>crypt</code> function introduced in FreeBSD 2.0.
+It supports two one-way algorithms: one based on the MD5
+message-digest algorithm that is compatible with modern BSD systems,
+and the other based on the Data Encryption Standard (DES) that is
+compatible with Unix systems.
+</p>
+<a name="index-AUTH_005fDES"></a>
+<a name="index-FIPS-140_002d2"></a>
+<p>It also provides support for Secure RPC, and some library functions that
+can be used to perform normal DES encryption.  The <code>AUTH_DES</code>
+authentication flavor in Secure RPC, as provided by the GNU C Library,
+uses DES and does not comply with FIPS 140-2 nor does any other use of DES
+within the GNU C Library.  It is recommended that Secure RPC should not be used
+for systems that need to comply with FIPS 140-2 since all flavors of
+encrypted authentication use normal DES.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Legal-Problems.html#Legal-Problems" accesskey="1">Legal Problems</a>:</td><td align="left" valign="top">This software can get you locked up, or worse.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="getpass.html#getpass" accesskey="2">getpass</a>:</td><td align="left" valign="top">Prompting the user for a password.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="crypt.html#crypt" accesskey="3">crypt</a>:</td><td align="left" valign="top">A one-way function for passwords.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="DES-Encryption.html#DES-Encryption" accesskey="4">DES Encryption</a>:</td><td align="left" valign="top">Routines for DES encryption.
+</td></tr>
+</table>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Debugging-Support.html#Debugging-Support" accesskey="n" rel="next">Debugging Support</a>, Previous: <a href="System-Configuration.html#System-Configuration" accesskey="p" rel="prev">System Configuration</a>, Up: <a href="index.html#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

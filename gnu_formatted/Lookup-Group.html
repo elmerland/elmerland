@@ -1,0 +1,102 @@
+<a name="Lookup-Group"></a>
+<div class="header">
+<p>
+Next: <a href="Scanning-All-Groups.html#Scanning-All-Groups" accesskey="n" rel="next">Scanning All Groups</a>, Previous: <a href="Group-Data-Structure.html#Group-Data-Structure" accesskey="p" rel="prev">Group Data Structure</a>, Up: <a href="Group-Database.html#Group-Database" accesskey="u" rel="up">Group Database</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Looking-Up-One-Group"></a>
+<h4 class="subsection">30.14.2 Looking Up One Group</h4>
+<a name="index-converting-group-name-to-group-ID"></a>
+<a name="index-converting-group-ID-to-group-name"></a>
+
+<p>You can search the group database for information about a specific
+group using <code>getgrgid</code> or <code>getgrnam</code>.  These functions are
+declared in <samp>grp.h</samp>.
+</p>
+<dl>
+<dt><a name="index-getgrgid"></a>Function: <em>struct group *</em> <strong>getgrgid</strong> <em>(gid_t <var>gid</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe race:grgid locale
+| AS-Unsafe dlopen plugin heap lock
+| AC-Unsafe corrupt lock fd mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function returns a pointer to a statically-allocated structure
+containing information about the group whose group ID is <var>gid</var>.
+This structure may be overwritten by subsequent calls to
+<code>getgrgid</code>.
+</p>
+<p>A null pointer indicates there is no group with ID <var>gid</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-getgrgid_005fr"></a>Function: <em>int</em> <strong>getgrgid_r</strong> <em>(gid_t <var>gid</var>, struct group *<var>result_buf</var>, char *<var>buffer</var>, size_t <var>buflen</var>, struct group **<var>result</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe locale
+| AS-Unsafe dlopen plugin heap lock
+| AC-Unsafe corrupt lock fd mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function is similar to <code>getgrgid</code> in that it returns
+information about the group whose group ID is <var>gid</var>.  However, it
+fills the user supplied structure pointed to by <var>result_buf</var> with
+the information instead of using a static buffer.  The first
+<var>buflen</var> bytes of the additional buffer pointed to by <var>buffer</var>
+are used to contain additional information, normally strings which are
+pointed to by the elements of the result structure.
+</p>
+<p>If a group with ID <var>gid</var> is found, the pointer returned in
+<var>result</var> points to the record which contains the wanted data (i.e.,
+<var>result</var> contains the value <var>result_buf</var>).  If no group is found
+or if an error occurred, the pointer returned in <var>result</var> is a null
+pointer.  The function returns zero or an error code.  If the buffer
+<var>buffer</var> is too small to contain all the needed information, the
+error code <code>ERANGE</code> is returned and <var>errno</var> is set to
+<code>ERANGE</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-getgrnam"></a>Function: <em>struct group *</em> <strong>getgrnam</strong> <em>(const char *<var>name</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe race:grnam locale
+| AS-Unsafe dlopen plugin heap lock
+| AC-Unsafe corrupt lock fd mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function returns a pointer to a statically-allocated structure
+containing information about the group whose group name is <var>name</var>.
+This structure may be overwritten by subsequent calls to
+<code>getgrnam</code>.
+</p>
+<p>A null pointer indicates there is no group named <var>name</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-getgrnam_005fr"></a>Function: <em>int</em> <strong>getgrnam_r</strong> <em>(const char *<var>name</var>, struct group *<var>result_buf</var>, char *<var>buffer</var>, size_t <var>buflen</var>, struct group **<var>result</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe locale
+| AS-Unsafe dlopen plugin heap lock
+| AC-Unsafe corrupt lock fd mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function is similar to <code>getgrnam</code> in that is returns
+information about the group whose group name is <var>name</var>.  Like
+<code>getgrgid_r</code>, it uses the user supplied buffers in
+<var>result_buf</var> and <var>buffer</var>, not a static buffer.
+</p>
+<p>The return values are the same as for <code>getgrgid_r</code>
+<code>ERANGE</code>.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Scanning-All-Groups.html#Scanning-All-Groups" accesskey="n" rel="next">Scanning All Groups</a>, Previous: <a href="Group-Data-Structure.html#Group-Data-Structure" accesskey="p" rel="prev">Group Data Structure</a>, Up: <a href="Group-Database.html#Group-Database" accesskey="u" rel="up">Group Database</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

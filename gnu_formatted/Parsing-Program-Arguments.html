@@ -1,0 +1,39 @@
+<a name="Parsing-Program-Arguments"></a>
+<div class="header">
+<p>
+Previous: <a href="Argument-Syntax.html#Argument-Syntax" accesskey="p" rel="prev">Argument Syntax</a>, Up: <a href="Program-Arguments.html#Program-Arguments" accesskey="u" rel="up">Program Arguments</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Parsing-Program-Arguments-1"></a>
+<h4 class="subsection">25.1.2 Parsing Program Arguments</h4>
+
+<a name="index-program-arguments_002c-parsing"></a>
+<a name="index-command-arguments_002c-parsing"></a>
+<a name="index-parsing-program-arguments"></a>
+<p>If the syntax for the command line arguments to your program is simple
+enough, you can simply pick the arguments off from <var>argv</var> by hand.
+But unless your program takes a fixed number of arguments, or all of the
+arguments are interpreted in the same way (as file names, for example),
+you are usually better off using <code>getopt</code> (see <a href="Getopt.html#Getopt">Getopt</a>) or
+<code>argp_parse</code> (see <a href="Argp.html#Argp">Argp</a>) to do the parsing.
+</p>
+<p><code>getopt</code> is more standard (the short-option only version of it is a
+part of the POSIX standard), but using <code>argp_parse</code> is often
+easier, both for very simple and very complex option structures, because
+it does more of the dirty work for you.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Getopt.html#Getopt" accesskey="1">Getopt</a>:</td><td align="left" valign="top">Parsing program options using <code>getopt</code>.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Argp.html#Argp" accesskey="2">Argp</a>:</td><td align="left" valign="top">Parsing program options using <code>argp_parse</code>.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Suboptions.html#Suboptions" accesskey="3">Suboptions</a>:</td><td align="left" valign="top">Some programs need more detailed options.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Suboptions-Example.html#Suboptions-Example" accesskey="4">Suboptions Example</a>:</td><td align="left" valign="top">This shows how it could be done for <code>mount</code>.
+</td></tr>
+</table>
+
+
+
+
+

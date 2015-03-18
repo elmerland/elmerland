@@ -1,0 +1,92 @@
+<a name="Hook-Functions"></a>
+<div class="header">
+<p>
+Previous: <a href="Streams-and-Cookies.html#Streams-and-Cookies" accesskey="p" rel="prev">Streams and Cookies</a>, Up: <a href="Custom-Streams.html#Custom-Streams" accesskey="u" rel="up">Custom Streams</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Custom-Stream-Hook-Functions"></a>
+<h4 class="subsubsection">12.21.2.2 Custom Stream Hook Functions</h4>
+<a name="index-hook-functions-_0028of-custom-streams_0029"></a>
+
+<p>Here are more details on how you should define the four hook functions
+that a custom stream needs.
+</p>
+<p>You should define the function to read data from the cookie as:
+</p>
+<div class="smallexample">
+<pre class="smallexample">ssize_t <var>reader</var> (void *<var>cookie</var>, char *<var>buffer</var>, size_t <var>size</var>)
+</pre></div>
+
+<p>This is very similar to the <code>read</code> function; see <a href="I_002fO-Primitives.html#I_002fO-Primitives">I/O Primitives</a>.  Your function should transfer up to <var>size</var> bytes into
+the <var>buffer</var>, and return the number of bytes read, or zero to
+indicate end-of-file.  You can return a value of <code>-1</code> to indicate
+an error.
+</p>
+<p>You should define the function to write data to the cookie as:
+</p>
+<div class="smallexample">
+<pre class="smallexample">ssize_t <var>writer</var> (void *<var>cookie</var>, const char *<var>buffer</var>, size_t <var>size</var>)
+</pre></div>
+
+<p>This is very similar to the <code>write</code> function; see <a href="I_002fO-Primitives.html#I_002fO-Primitives">I/O Primitives</a>.  Your function should transfer up to <var>size</var> bytes from
+the buffer, and return the number of bytes written.  You can return a
+value of <code>0</code> to indicate an error.  You must not return any
+negative value.
+</p>
+<p>You should define the function to perform seek operations on the cookie
+as:
+</p>
+<div class="smallexample">
+<pre class="smallexample">int <var>seeker</var> (void *<var>cookie</var>, off64_t *<var>position</var>, int <var>whence</var>)
+</pre></div>
+
+<p>For this function, the <var>position</var> and <var>whence</var> arguments are
+interpreted as for <code>fgetpos</code>; see <a href="Portable-Positioning.html#Portable-Positioning">Portable Positioning</a>.
+</p>
+<p>After doing the seek operation, your function should store the resulting
+file position relative to the beginning of the file in <var>position</var>.
+Your function should return a value of <code>0</code> on success and <code>-1</code>
+to indicate an error.
+</p>
+<p>You should define the function to do cleanup operations on the cookie
+appropriate for closing the stream as:
+</p>
+<div class="smallexample">
+<pre class="smallexample">int <var>cleaner</var> (void *<var>cookie</var>)
+</pre></div>
+
+<p>Your function should return <code>-1</code> to indicate an error, and <code>0</code>
+otherwise.
+</p>
+<dl>
+<dt><a name="index-cookie_005fread_005ffunction_005ft"></a>Data Type: <strong>cookie_read_function_t</strong></dt>
+<dd><p>This is the data type that the read function for a custom stream should have.
+If you declare the function as shown above, this is the type it will have.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-cookie_005fwrite_005ffunction_005ft"></a>Data Type: <strong>cookie_write_function_t</strong></dt>
+<dd><p>The data type of the write function for a custom stream.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-cookie_005fseek_005ffunction_005ft"></a>Data Type: <strong>cookie_seek_function_t</strong></dt>
+<dd><p>The data type of the seek function for a custom stream.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-cookie_005fclose_005ffunction_005ft"></a>Data Type: <strong>cookie_close_function_t</strong></dt>
+<dd><p>The data type of the close function for a custom stream.
+</p></dd></dl>
+
+
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Streams-and-Cookies.html#Streams-and-Cookies" accesskey="p" rel="prev">Streams and Cookies</a>, Up: <a href="Custom-Streams.html#Custom-Streams" accesskey="u" rel="up">Custom Streams</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

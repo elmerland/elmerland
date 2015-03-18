@@ -1,0 +1,56 @@
+<a name="Identifying-the-Terminal"></a>
+<div class="header">
+<p>
+Next: <a href="Process-Group-Functions.html#Process-Group-Functions" accesskey="n" rel="next">Process Group Functions</a>, Up: <a href="Functions-for-Job-Control.html#Functions-for-Job-Control" accesskey="u" rel="up">Functions for Job Control</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Identifying-the-Controlling-Terminal"></a>
+<h4 class="subsection">28.7.1 Identifying the Controlling Terminal</h4>
+<a name="index-controlling-terminal_002c-determining"></a>
+
+<p>You can use the <code>ctermid</code> function to get a file name that you can
+use to open the controlling terminal.  In the GNU C Library, it returns
+the same string all the time: <code>&quot;/dev/tty&quot;</code>.  That is a special
+&ldquo;magic&rdquo; file name that refers to the controlling terminal of the
+current process (if it has one).  To find the name of the specific
+terminal device, use <code>ttyname</code>; see <a href="Is-It-a-Terminal.html#Is-It-a-Terminal">Is It a Terminal</a>.
+</p>
+<p>The function <code>ctermid</code> is declared in the header file
+<samp>stdio.h</samp>.
+<a name="index-stdio_002eh-19"></a>
+</p>
+<dl>
+<dt><a name="index-ctermid"></a>Function: <em>char *</em> <strong>ctermid</strong> <em>(char *<var>string</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe !posix/!string
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>ctermid</code> function returns a string containing the file name of
+the controlling terminal for the current process.  If <var>string</var> is
+not a null pointer, it should be an array that can hold at least
+<code>L_ctermid</code> characters; the string is returned in this array.
+Otherwise, a pointer to a string in a static area is returned, which
+might get overwritten on subsequent calls to this function.
+</p>
+<p>An empty string is returned if the file name cannot be determined for
+any reason.  Even if a file name is returned, access to the file it
+represents is not guaranteed.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-L_005fctermid"></a>Macro: <em>int</em> <strong>L_ctermid</strong></dt>
+<dd><p>The value of this macro is an integer constant expression that
+represents the size of a string large enough to hold the file name
+returned by <code>ctermid</code>.
+</p></dd></dl>
+
+<p>See also the <code>isatty</code> and <code>ttyname</code> functions, in
+<a href="Is-It-a-Terminal.html#Is-It-a-Terminal">Is It a Terminal</a>.
+</p>
+
+
+
+

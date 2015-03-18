@@ -1,0 +1,116 @@
+<a name="Non_002dLocal-Intro"></a>
+<div class="header">
+<p>
+Next: <a href="Non_002dLocal-Details.html#Non_002dLocal-Details" accesskey="n" rel="next">Non-Local Details</a>, Up: <a href="Non_002dLocal-Exits.html#Non_002dLocal-Exits" accesskey="u" rel="up">Non-Local Exits</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Introduction-to-Non_002dLocal-Exits"></a>
+<h3 class="section">23.1 Introduction to Non-Local Exits</h3>
+
+<p>As an example of a situation where a non-local exit can be useful,
+suppose you have an interactive program that has a &ldquo;main loop&rdquo; that
+prompts for and executes commands.  Suppose the &ldquo;read&rdquo; command reads
+input from a file, doing some lexical analysis and parsing of the input
+while processing it.  If a low-level input error is detected, it would
+be useful to be able to return immediately to the &ldquo;main loop&rdquo; instead
+of having to make each of the lexical analysis, parsing, and processing
+phases all have to explicitly deal with error situations initially
+detected by nested calls.
+</p>
+<p>(On the other hand, if each of these phases has to do a substantial
+amount of cleanup when it exits&mdash;such as closing files, deallocating
+buffers or other data structures, and the like&mdash;then it can be more
+appropriate to do a normal return and have each phase do its own
+cleanup, because a non-local exit would bypass the intervening phases and
+their associated cleanup code entirely.  Alternatively, you could use a
+non-local exit but do the cleanup explicitly either before or after
+returning to the &ldquo;main loop&rdquo;.)
+</p>
+<p>In some ways, a non-local exit is similar to using the &lsquo;<samp>return</samp>&rsquo;
+statement to return from a function.  But while &lsquo;<samp>return</samp>&rsquo; abandons
+only a single function call, transferring control back to the point at
+which it was called, a non-local exit can potentially abandon many
+levels of nested function calls.
+</p>
+<p>You identify return points for non-local exits by calling the function
+<code>setjmp</code>.  This function saves information about the execution
+environment in which the call to <code>setjmp</code> appears in an object of
+type <code>jmp_buf</code>.  Execution of the program continues normally after
+the call to <code>setjmp</code>, but if an exit is later made to this return
+point by calling <code>longjmp</code> with the corresponding <code><span class="nolinebreak">jmp_buf</span></code><!-- /@w -->
+object, control is transferred back to the point where <code>setjmp</code> was
+called.  The return value from <code>setjmp</code> is used to distinguish
+between an ordinary return and a return made by a call to
+<code>longjmp</code>, so calls to <code>setjmp</code> usually appear in an &lsquo;<samp>if</samp>&rsquo;
+statement.
+</p>
+<p>Here is how the example program described above might be set up:
+</p>
+<div class="smallexample">
+<pre class="smallexample">
+#include &lt;setjmp.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+jmp_buf main_loop;
+
+void
+abort_to_main_loop (int status)
+{
+  longjmp (main_loop, status);
+}
+
+int
+main (void)
+{
+  while (1)
+    if (setjmp (main_loop))
+      puts (&quot;Back at main loop....&quot;);
+    else
+      do_command ();
+}
+
+
+void
+do_command (void)
+{
+  char buffer[128];
+  if (fgets (buffer, 128, stdin) == NULL)
+    abort_to_main_loop (-1);
+  else
+    exit (EXIT_SUCCESS);
+}
+</pre></div>
+
+<p>The function <code>abort_to_main_loop</code> causes an immediate transfer of
+control back to the main loop of the program, no matter where it is
+called from.
+</p>
+<p>The flow of control inside the <code>main</code> function may appear a little
+mysterious at first, but it is actually a common idiom with
+<code>setjmp</code>.  A normal call to <code>setjmp</code> returns zero, so the
+&ldquo;else&rdquo; clause of the conditional is executed.  If
+<code>abort_to_main_loop</code> is called somewhere within the execution of
+<code>do_command</code>, then it actually appears as if the <em>same</em> call
+to <code>setjmp</code> in <code>main</code> were returning a second time with a value
+of <code>-1</code>.
+</p>
+<p>So, the general pattern for using <code>setjmp</code> looks something like:
+</p>
+<div class="smallexample">
+<pre class="smallexample">if (setjmp (<var>buffer</var>))
+  /* <span class="roman">Code to clean up after premature return.</span> */
+  &hellip;
+else
+  /* <span class="roman">Code to be executed normally after setting up the return point.</span> */
+  &hellip;
+</pre></div>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Non_002dLocal-Details.html#Non_002dLocal-Details" accesskey="n" rel="next">Non-Local Details</a>, Up: <a href="Non_002dLocal-Exits.html#Non_002dLocal-Exits" accesskey="u" rel="up">Non-Local Exits</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

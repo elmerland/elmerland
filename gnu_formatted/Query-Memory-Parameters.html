@@ -1,0 +1,125 @@
+<a name="Query-Memory-Parameters"></a>
+<div class="header">
+<p>
+Previous: <a href="Memory-Subsystem.html#Memory-Subsystem" accesskey="p" rel="prev">Memory Subsystem</a>, Up: <a href="Memory-Resources.html#Memory-Resources" accesskey="u" rel="up">Memory Resources</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="How-to-get-information-about-the-memory-subsystem_003f"></a>
+<h4 class="subsection">22.4.2 How to get information about the memory subsystem?</h4>
+
+<p>The page size of the virtual memory the process sees is essential to
+know in several situations.  Some programming interface (e.g.,
+<code>mmap</code>, see <a href="Memory_002dmapped-I_002fO.html#Memory_002dmapped-I_002fO">Memory-mapped I/O</a>) require the user to provide
+information adjusted to the page size.  In the case of <code>mmap</code> is it
+necessary to provide a length argument which is a multiple of the page
+size.  Another place where the knowledge about the page size is useful
+is in memory allocation.  If one allocates pieces of memory in larger
+chunks which are then subdivided by the application code it is useful to
+adjust the size of the larger blocks to the page size.  If the total
+memory requirement for the block is close (but not larger) to a multiple
+of the page size the kernel&rsquo;s memory handling can work more effectively
+since it only has to allocate memory pages which are fully used.  (To do
+this optimization it is necessary to know a bit about the memory
+allocator which will require a bit of memory itself for each block and
+this overhead must not push the total size over the page size multiple.
+</p>
+<p>The page size traditionally was a compile time constant.  But recent
+development of processors changed this.  Processors now support
+different page sizes and they can possibly even vary among different
+processes on the same system.  Therefore the system should be queried at
+runtime about the current page size and no assumptions (except about it
+being a power of two) should be made.
+</p>
+<a name="index-_005fSC_005fPAGESIZE-1"></a>
+<p>The correct interface to query about the page size is <code>sysconf</code>
+(see <a href="Sysconf-Definition.html#Sysconf-Definition">Sysconf Definition</a>) with the parameter <code>_SC_PAGESIZE</code>.
+There is a much older interface available, too.
+</p>
+<dl>
+<dt><a name="index-getpagesize"></a>Function: <em>int</em> <strong>getpagesize</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>getpagesize</code> function returns the page size of the process.
+This value is fixed for the runtime of the process but can vary in
+different runs of the application.
+</p>
+<p>The function is declared in <samp>unistd.h</samp>.
+</p></dd></dl>
+
+<p>Widely available on System&nbsp;V<!-- /@w --> derived systems is a method to get
+information about the physical memory the system has.  The call
+</p>
+<a name="index-_005fSC_005fPHYS_005fPAGES"></a>
+<a name="index-sysconf"></a>
+<div class="smallexample">
+<pre class="smallexample">  sysconf (_SC_PHYS_PAGES)
+</pre></div>
+
+<p>returns the total number of pages of physical the system has.
+This does not mean all this memory is available.  This information can
+be found using
+</p>
+<a name="index-_005fSC_005fAVPHYS_005fPAGES"></a>
+<a name="index-sysconf-1"></a>
+<div class="smallexample">
+<pre class="smallexample">  sysconf (_SC_AVPHYS_PAGES)
+</pre></div>
+
+<p>These two values help to optimize applications.  The value returned for
+<code>_SC_AVPHYS_PAGES</code> is the amount of memory the application can use
+without hindering any other process (given that no other process
+increases its memory usage).  The value returned for
+<code>_SC_PHYS_PAGES</code> is more or less a hard limit for the working set.
+If all applications together constantly use more than that amount of
+memory the system is in trouble.
+</p>
+<p>The GNU C Library provides in addition to these already described way to
+get this information two functions.  They are declared in the file
+<samp>sys/sysinfo.h</samp>.  Programmers should prefer to use the
+<code>sysconf</code> method described above.
+</p>
+<dl>
+<dt><a name="index-get_005fphys_005fpages"></a>Function: <em>long int</em> <strong>get_phys_pages</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe heap lock
+| AC-Unsafe lock fd mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>get_phys_pages</code> function returns the total number of pages of
+physical the system has.  To get the amount of memory this number has to
+be multiplied by the page size.
+</p>
+<p>This function is a GNU extension.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-get_005favphys_005fpages"></a>Function: <em>long int</em> <strong>get_avphys_pages</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe heap lock
+| AC-Unsafe lock fd mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>get_avphys_pages</code> function returns the number of available pages of
+physical the system has.  To get the amount of memory this number has to
+be multiplied by the page size.
+</p>
+<p>This function is a GNU extension.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Memory-Subsystem.html#Memory-Subsystem" accesskey="p" rel="prev">Memory Subsystem</a>, Up: <a href="Memory-Resources.html#Memory-Resources" accesskey="u" rel="up">Memory Resources</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

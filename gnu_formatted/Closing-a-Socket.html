@@ -1,0 +1,76 @@
+<a name="Closing-a-Socket"></a>
+<div class="header">
+<p>
+Next: <a href="Socket-Pairs.html#Socket-Pairs" accesskey="n" rel="next">Socket Pairs</a>, Previous: <a href="Creating-a-Socket.html#Creating-a-Socket" accesskey="p" rel="prev">Creating a Socket</a>, Up: <a href="Open_002fClose-Sockets.html#Open_002fClose-Sockets" accesskey="u" rel="up">Open/Close Sockets</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Closing-a-Socket-1"></a>
+<h4 class="subsection">16.8.2 Closing a Socket</h4>
+<a name="index-socket_002c-closing"></a>
+<a name="index-closing-a-socket"></a>
+<a name="index-shutting-down-a-socket"></a>
+<a name="index-socket-shutdown"></a>
+
+<p>When you have finished using a socket, you can simply close its
+file descriptor with <code>close</code>; see <a href="Opening-and-Closing-Files.html#Opening-and-Closing-Files">Opening and Closing Files</a>.
+If there is still data waiting to be transmitted over the connection,
+normally <code>close</code> tries to complete this transmission.  You
+can control this behavior using the <code>SO_LINGER</code> socket option to
+specify a timeout period; see <a href="Socket-Options.html#Socket-Options">Socket Options</a>.
+</p>
+<a name="index-sys_002fsocket_002eh-7"></a>
+<p>You can also shut down only reception or transmission on a
+connection by calling <code>shutdown</code>, which is declared in
+<samp>sys/socket.h</samp>.
+</p>
+<dl>
+<dt><a name="index-shutdown"></a>Function: <em>int</em> <strong>shutdown</strong> <em>(int <var>socket</var>, int <var>how</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>shutdown</code> function shuts down the connection of socket
+<var>socket</var>.  The argument <var>how</var> specifies what action to
+perform:
+</p>
+<dl compact="compact">
+<dt><code>0</code></dt>
+<dd><p>Stop receiving data for this socket.  If further data arrives,
+reject it.
+</p>
+</dd>
+<dt><code>1</code></dt>
+<dd><p>Stop trying to transmit data from this socket.  Discard any data
+waiting to be sent.  Stop looking for acknowledgement of data already
+sent; don&rsquo;t retransmit it if it is lost.
+</p>
+</dd>
+<dt><code>2</code></dt>
+<dd><p>Stop both reception and transmission.
+</p></dd>
+</dl>
+
+<p>The return value is <code>0</code> on success and <code>-1</code> on failure.  The
+following <code>errno</code> error conditions are defined for this function:
+</p>
+<dl compact="compact">
+<dt><code>EBADF</code></dt>
+<dd><p><var>socket</var> is not a valid file descriptor.
+</p>
+</dd>
+<dt><code>ENOTSOCK</code></dt>
+<dd><p><var>socket</var> is not a socket.
+</p>
+</dd>
+<dt><code>ENOTCONN</code></dt>
+<dd><p><var>socket</var> is not connected.
+</p></dd>
+</dl>
+</dd></dl>
+
+
+
+

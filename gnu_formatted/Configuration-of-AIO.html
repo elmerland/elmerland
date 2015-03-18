@@ -1,0 +1,85 @@
+<a name="Configuration-of-AIO"></a>
+<div class="header">
+<p>
+Previous: <a href="Cancel-AIO-Operations.html#Cancel-AIO-Operations" accesskey="p" rel="prev">Cancel AIO Operations</a>, Up: <a href="Asynchronous-I_002fO.html#Asynchronous-I_002fO" accesskey="u" rel="up">Asynchronous I/O</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="How-to-optimize-the-AIO-implementation"></a>
+<h4 class="subsection">13.10.5 How to optimize the AIO implementation</h4>
+
+<p>The POSIX standard does not specify how the AIO functions are
+implemented.  They could be system calls, but it is also possible to
+emulate them at userlevel.
+</p>
+<p>At the point of this writing, the available implementation is a userlevel
+implementation which uses threads for handling the enqueued requests.
+While this implementation requires making some decisions about
+limitations, hard limitations are something which is best avoided
+in the GNU C Library.  Therefore, the GNU C Library provides a means
+for tuning the AIO implementation according to the individual use.
+</p>
+<dl>
+<dt><a name="index-struct-aioinit"></a>Data Type: <strong>struct aioinit</strong></dt>
+<dd><p>This data type is used to pass the configuration or tunable parameters
+to the implementation.  The program has to initialize the members of
+this struct and pass it to the implementation using the <code>aio_init</code>
+function.
+</p>
+<dl compact="compact">
+<dt><code>int aio_threads</code></dt>
+<dd><p>This member specifies the maximal number of threads which may be used
+at any one time.
+</p></dd>
+<dt><code>int aio_num</code></dt>
+<dd><p>This number provides an estimate on the maximal number of simultaneously
+enqueued requests.
+</p></dd>
+<dt><code>int aio_locks</code></dt>
+<dd><p>Unused.
+</p></dd>
+<dt><code>int aio_usedba</code></dt>
+<dd><p>Unused.
+</p></dd>
+<dt><code>int aio_debug</code></dt>
+<dd><p>Unused.
+</p></dd>
+<dt><code>int aio_numusers</code></dt>
+<dd><p>Unused.
+</p></dd>
+<dt><code>int aio_reserved[2]</code></dt>
+<dd><p>Unused.
+</p></dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><a name="index-aio_005finit"></a>Function: <em>void</em> <strong>aio_init</strong> <em>(const struct aioinit *<var>init</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock
+| AC-Unsafe lock
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function must be called before any other AIO function.  Calling it
+is completely voluntary, as it is only meant to help the AIO
+implementation perform better.
+</p>
+<p>Before calling the <code>aio_init</code>, function the members of a variable of
+type <code>struct aioinit</code> must be initialized.  Then a reference to
+this variable is passed as the parameter to <code>aio_init</code> which itself
+may or may not pay attention to the hints.
+</p>
+<p>The function has no return value and no error cases are defined.  It is
+a extension which follows a proposal from the SGI implementation in
+Irix&nbsp;6<!-- /@w -->.  It is not covered by POSIX.1b or Unix98.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Cancel-AIO-Operations.html#Cancel-AIO-Operations" accesskey="p" rel="prev">Cancel AIO Operations</a>, Up: <a href="Asynchronous-I_002fO.html#Asynchronous-I_002fO" accesskey="u" rel="up">Asynchronous I/O</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

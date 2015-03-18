@@ -1,0 +1,44 @@
+<a name="Argp-Help"></a>
+<div class="header">
+<p>
+Next: <a href="Argp-Examples.html#Argp-Examples" accesskey="n" rel="next">Argp Examples</a>, Previous: <a href="Argp-Flags.html#Argp-Flags" accesskey="p" rel="prev">Argp Flags</a>, Up: <a href="Argp.html#Argp" accesskey="u" rel="up">Argp</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="The-argp_005fhelp-Function"></a>
+<h4 class="subsection">25.3.9 The <code>argp_help</code> Function</h4>
+
+<p>Normally programs using argp need not be written with particular
+printing argument-usage-type help messages in mind as the standard
+&lsquo;<samp>--help</samp>&rsquo; option is handled automatically by argp.  Typical error
+cases can be handled using <code>argp_usage</code> and
+<code>argp_error</code>.  See <a href="Argp-Helper-Functions.html#Argp-Helper-Functions">Argp Helper Functions</a>.  However, if it&rsquo;s
+desirable to print a help message in some context other than parsing the
+program options, argp offers the <code>argp_help</code> interface.
+</p>
+<dl>
+<dt><a name="index-argp_005fhelp"></a>Function: <em>void</em> <strong>argp_help</strong> <em>(const struct argp *<var>argp</var>, FILE *<var>stream</var>, unsigned <var>flags</var>, char *<var>name</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe race:argpbuf env locale
+| AS-Unsafe heap i18n corrupt
+| AC-Unsafe mem corrupt lock
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This outputs a help message for the argp parser <var>argp</var> to
+<var>stream</var>.  The type of messages printed will be determined by
+<var>flags</var>.
+</p>
+<p>Any options such as &lsquo;<samp>--help</samp>&rsquo; that are implemented automatically by
+argp itself will <em>not</em> be present in the help output; for this
+reason it is best to use <code>argp_state_help</code> if calling from within
+an argp parser function.  See <a href="Argp-Helper-Functions.html#Argp-Helper-Functions">Argp Helper Functions</a>.
+</p></dd></dl>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Argp-Help-Flags.html#Argp-Help-Flags" accesskey="1">Flags</a>:</td><td align="left" valign="top">Specifying what sort of help message to print.
+</td></tr>
+</table>
+
+
+
+

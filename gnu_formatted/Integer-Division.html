@@ -1,0 +1,185 @@
+<a name="Integer-Division"></a>
+<div class="header">
+<p>
+Next: <a href="Floating-Point-Numbers.html#Floating-Point-Numbers" accesskey="n" rel="next">Floating Point Numbers</a>, Previous: <a href="Integers.html#Integers" accesskey="p" rel="prev">Integers</a>, Up: <a href="Arithmetic.html#Arithmetic" accesskey="u" rel="up">Arithmetic</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Integer-Division-1"></a>
+<h3 class="section">20.2 Integer Division</h3>
+<a name="index-integer-division-functions"></a>
+
+<p>This section describes functions for performing integer division.  These
+functions are redundant when GNU CC is used, because in GNU C the
+&lsquo;<samp>/</samp>&rsquo; operator always rounds towards zero.  But in other C
+implementations, &lsquo;<samp>/</samp>&rsquo; may round differently with negative arguments.
+<code>div</code> and <code>ldiv</code> are useful because they specify how to round
+the quotient: towards zero.  The remainder has the same sign as the
+numerator.
+</p>
+<p>These functions are specified to return a result <var>r</var> such that the value
+<code><var>r</var>.quot*<var>denominator</var> + <var>r</var>.rem</code> equals
+<var>numerator</var>.
+</p>
+<a name="index-stdlib_002eh-15"></a>
+<p>To use these facilities, you should include the header file
+<samp>stdlib.h</samp> in your program.
+</p>
+<dl>
+<dt><a name="index-div_005ft"></a>Data Type: <strong>div_t</strong></dt>
+<dd><p>This is a structure type used to hold the result returned by the <code>div</code>
+function.  It has the following members:
+</p>
+<dl compact="compact">
+<dt><code>int quot</code></dt>
+<dd><p>The quotient from the division.
+</p>
+</dd>
+<dt><code>int rem</code></dt>
+<dd><p>The remainder from the division.
+</p></dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><a name="index-div"></a>Function: <em>div_t</em> <strong>div</strong> <em>(int <var>numerator</var>, int <var>denominator</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function <code>div</code> computes the quotient and remainder from
+the division of <var>numerator</var> by <var>denominator</var>, returning the
+result in a structure of type <code>div_t</code>.
+</p>
+<p>If the result cannot be represented (as in a division by zero), the
+behavior is undefined.
+</p>
+<p>Here is an example, albeit not a very useful one.
+</p>
+<div class="smallexample">
+<pre class="smallexample">div_t result;
+result = div (20, -6);
+</pre></div>
+
+<p>Now <code>result.quot</code> is <code>-3</code> and <code>result.rem</code> is <code>2</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-ldiv_005ft"></a>Data Type: <strong>ldiv_t</strong></dt>
+<dd><p>This is a structure type used to hold the result returned by the <code>ldiv</code>
+function.  It has the following members:
+</p>
+<dl compact="compact">
+<dt><code>long int quot</code></dt>
+<dd><p>The quotient from the division.
+</p>
+</dd>
+<dt><code>long int rem</code></dt>
+<dd><p>The remainder from the division.
+</p></dd>
+</dl>
+
+<p>(This is identical to <code>div_t</code> except that the components are of
+type <code>long int</code> rather than <code>int</code>.)
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-ldiv"></a>Function: <em>ldiv_t</em> <strong>ldiv</strong> <em>(long int <var>numerator</var>, long int <var>denominator</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>ldiv</code> function is similar to <code>div</code>, except that the
+arguments are of type <code>long int</code> and the result is returned as a
+structure of type <code>ldiv_t</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-lldiv_005ft"></a>Data Type: <strong>lldiv_t</strong></dt>
+<dd><p>This is a structure type used to hold the result returned by the <code>lldiv</code>
+function.  It has the following members:
+</p>
+<dl compact="compact">
+<dt><code>long long int quot</code></dt>
+<dd><p>The quotient from the division.
+</p>
+</dd>
+<dt><code>long long int rem</code></dt>
+<dd><p>The remainder from the division.
+</p></dd>
+</dl>
+
+<p>(This is identical to <code>div_t</code> except that the components are of
+type <code>long long int</code> rather than <code>int</code>.)
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-lldiv"></a>Function: <em>lldiv_t</em> <strong>lldiv</strong> <em>(long long int <var>numerator</var>, long long int <var>denominator</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>lldiv</code> function is like the <code>div</code> function, but the
+arguments are of type <code>long long int</code> and the result is returned as
+a structure of type <code>lldiv_t</code>.
+</p>
+<p>The <code>lldiv</code> function was added in ISO&nbsp;C99<!-- /@w -->.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-imaxdiv_005ft"></a>Data Type: <strong>imaxdiv_t</strong></dt>
+<dd><p>This is a structure type used to hold the result returned by the <code>imaxdiv</code>
+function.  It has the following members:
+</p>
+<dl compact="compact">
+<dt><code>intmax_t quot</code></dt>
+<dd><p>The quotient from the division.
+</p>
+</dd>
+<dt><code>intmax_t rem</code></dt>
+<dd><p>The remainder from the division.
+</p></dd>
+</dl>
+
+<p>(This is identical to <code>div_t</code> except that the components are of
+type <code>intmax_t</code> rather than <code>int</code>.)
+</p>
+<p>See <a href="Integers.html#Integers">Integers</a> for a description of the <code>intmax_t</code> type.
+</p>
+</dd></dl>
+
+<dl>
+<dt><a name="index-imaxdiv"></a>Function: <em>imaxdiv_t</em> <strong>imaxdiv</strong> <em>(intmax_t <var>numerator</var>, intmax_t <var>denominator</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>imaxdiv</code> function is like the <code>div</code> function, but the
+arguments are of type <code>intmax_t</code> and the result is returned as
+a structure of type <code>imaxdiv_t</code>.
+</p>
+<p>See <a href="Integers.html#Integers">Integers</a> for a description of the <code>intmax_t</code> type.
+</p>
+<p>The <code>imaxdiv</code> function was added in ISO&nbsp;C99<!-- /@w -->.
+</p></dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Floating-Point-Numbers.html#Floating-Point-Numbers" accesskey="n" rel="next">Floating Point Numbers</a>, Previous: <a href="Integers.html#Integers" accesskey="p" rel="prev">Integers</a>, Up: <a href="Arithmetic.html#Arithmetic" accesskey="u" rel="up">Arithmetic</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

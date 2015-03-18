@@ -1,0 +1,115 @@
+---
+---
+
+// body { background-color: white; }
+
+.wrapper {
+  padding: 0;
+}
+
+.gnu .title {
+  padding: 1em;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.gnu .gnu-manual {
+  display: flex;
+  position: absolute;
+  top: 4em;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  .list-level {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 30%;
+    overflow-y: scroll;
+    ul {
+      list-style-type: none;
+      li {
+        padding: .5em;
+        background-color: #34A1DE;
+        color: white;
+        font-weight: 700;
+        border-bottom: 1px solid white;
+        cursor: pointer;
+      }
+      li:last-child {
+        border-bottom: none;
+      }
+      li:hover {
+        background-color: #0F83C4;
+      }
+    }
+  }
+  .section-wrapper {
+    flex-grow: 1;
+    flex-shrink: 1;
+    border-top: 1px solid gray;
+    background-color: white;
+    overflow-y: scroll;
+    .section-content, .sub-section-content {
+      font-size: .75em;
+      padding: .5em;
+      ul, ol {
+        padding-left: 2em;
+        list-style-type: initial;
+      }
+      th, td {
+        border: none;
+        padding: .2em 0;
+      }
+      .header, hr { display: none; }
+    }
+    .sub-section-item {
+      cursor: pointer;
+      font-size: 1.2em;
+      // background-color: #C380E4;
+      color: white;
+      border-bottom: 1px solid white;
+      > i {
+        display: inline-block;
+        width: 1.5em;
+        padding: 0 .5em;
+      }
+    }
+
+    .sub-section-item {
+      &.level-1 { background-color: #C380E4; }
+      &.level-1:hover { background-color: #9464AC; }
+      &.level-2 { background-color: #ED8373; }
+      &.level-2:hover { background-color: #E9614C; }
+      &.level-3 { background-color: #52D379; }
+      &.level-3:hover { background-color: #37B25C; }
+    }
+  }
+}
+
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}

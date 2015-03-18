@@ -1,0 +1,76 @@
+<a name="setlogmask"></a>
+<div class="header">
+<p>
+Next: <a href="Syslog-Example.html#Syslog-Example" accesskey="n" rel="next">Syslog Example</a>, Previous: <a href="closelog.html#closelog" accesskey="p" rel="prev">closelog</a>, Up: <a href="Submitting-Syslog-Messages.html#Submitting-Syslog-Messages" accesskey="u" rel="up">Submitting Syslog Messages</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="setlogmask-1"></a>
+<h4 class="subsection">18.2.4 setlogmask</h4>
+
+<p>The symbols referred to in this section are declared in the file
+<samp>syslog.h</samp>.
+</p>
+<dl>
+<dt><a name="index-setlogmask"></a>Function: <em>int</em> <strong>setlogmask</strong> <em>(int <var>mask</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe race:LogMask
+| AS-Unsafe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+
+<p><code>setlogmask</code> sets a mask (the &ldquo;logmask&rdquo;) that determines which
+future <code>syslog</code> calls shall be ignored.  If a program has not
+called <code>setlogmask</code>, <code>syslog</code> doesn&rsquo;t ignore any calls.  You
+can use <code>setlogmask</code> to specify that messages of particular
+priorities shall be ignored in the future.
+</p>
+<p>A <code>setlogmask</code> call overrides any previous <code>setlogmask</code> call.
+</p>
+<p>Note that the logmask exists entirely independently of opening and
+closing of Syslog connections.
+</p>
+<p>Setting the logmask has a similar effect to, but is not the same as,
+configuring Syslog.  The Syslog configuration may cause Syslog to
+discard certain messages it receives, but the logmask causes certain
+messages never to get submitted to Syslog in the first place.
+</p>
+<p><var>mask</var> is a bit string with one bit corresponding to each of the
+possible message priorities.  If the bit is on, <code>syslog</code> handles
+messages of that priority normally.  If it is off, <code>syslog</code>
+discards messages of that priority.  Use the message priority macros
+described in <a href="syslog_003b-vsyslog.html#syslog_003b-vsyslog">syslog; vsyslog</a> and the <code>LOG_MASK</code> to construct
+an appropriate <var>mask</var> value, as in this example:
+</p>
+<div class="smallexample">
+<pre class="smallexample">LOG_MASK(LOG_EMERG) | LOG_MASK(LOG_ERROR)
+</pre></div>
+
+<p>or
+</p>
+<div class="smallexample">
+<pre class="smallexample">~(LOG_MASK(LOG_INFO))
+</pre></div>
+
+<p>There is also a <code>LOG_UPTO</code> macro, which generates a mask with the bits
+on for a certain priority and all priorities above it:
+</p>
+<div class="smallexample">
+<pre class="smallexample">LOG_UPTO(LOG_ERROR)
+</pre></div>
+
+<p>The unfortunate naming of the macro is due to the fact that internally,
+higher numbers are used for lower message priorities.
+</p>
+</dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Syslog-Example.html#Syslog-Example" accesskey="n" rel="next">Syslog Example</a>, Previous: <a href="closelog.html#closelog" accesskey="p" rel="prev">closelog</a>, Up: <a href="Submitting-Syslog-Messages.html#Submitting-Syslog-Messages" accesskey="u" rel="up">Submitting Syslog Messages</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

@@ -1,0 +1,79 @@
+<a name="BSD-Wait-Functions"></a>
+<div class="header">
+<p>
+Next: <a href="Process-Creation-Example.html#Process-Creation-Example" accesskey="n" rel="next">Process Creation Example</a>, Previous: <a href="Process-Completion-Status.html#Process-Completion-Status" accesskey="p" rel="prev">Process Completion Status</a>, Up: <a href="Processes.html#Processes" accesskey="u" rel="up">Processes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="BSD-Process-Wait-Functions"></a>
+<h3 class="section">26.8 BSD Process Wait Functions</h3>
+
+<p>The GNU C Library also provides these related facilities for compatibility
+with BSD Unix.  BSD uses the <code>union wait</code> data type to represent
+status values rather than an <code>int</code>.  The two representations are
+actually interchangeable; they describe the same bit patterns.  The GNU C Library
+defines macros such as <code>WEXITSTATUS</code> so that they will
+work on either kind of object, and the <code>wait</code> function is defined
+to accept either type of pointer as its <var>status-ptr</var> argument.
+</p>
+<p>These functions are declared in <samp>sys/wait.h</samp>.
+<a name="index-sys_002fwait_002eh-2"></a>
+</p>
+<dl>
+<dt><a name="index-union-wait"></a>Data Type: <strong>union wait</strong></dt>
+<dd><p>This data type represents program termination status values.  It has
+the following members:
+</p>
+<dl compact="compact">
+<dt><code>int w_termsig</code></dt>
+<dd><p>The value of this member is the same as that of the
+<code>WTERMSIG</code> macro.
+</p>
+</dd>
+<dt><code>int w_coredump</code></dt>
+<dd><p>The value of this member is the same as that of the
+<code>WCOREDUMP</code> macro.
+</p>
+</dd>
+<dt><code>int w_retcode</code></dt>
+<dd><p>The value of this member is the same as that of the
+<code>WEXITSTATUS</code> macro.
+</p>
+</dd>
+<dt><code>int w_stopsig</code></dt>
+<dd><p>The value of this member is the same as that of the
+<code>WSTOPSIG</code> macro.
+</p></dd>
+</dl>
+
+<p>Instead of accessing these members directly, you should use the
+equivalent macros.
+</p></dd></dl>
+
+<p>The <code>wait3</code> function is the predecessor to <code>wait4</code>, which is
+more flexible.  <code>wait3</code> is now obsolete.
+</p>
+<dl>
+<dt><a name="index-wait3"></a>Function: <em>pid_t</em> <strong>wait3</strong> <em>(union wait *<var>status-ptr</var>, int <var>options</var>, struct rusage *<var>usage</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>If <var>usage</var> is a null pointer, <code>wait3</code> is equivalent to
+<code>waitpid (-1, <var>status-ptr</var>, <var>options</var>)</code>.
+</p>
+<p>If <var>usage</var> is not null, <code>wait3</code> stores usage figures for the
+child process in <code>*<var>rusage</var></code> (but only if the child has
+terminated, not if it has stopped).  See <a href="Resource-Usage.html#Resource-Usage">Resource Usage</a>.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Process-Creation-Example.html#Process-Creation-Example" accesskey="n" rel="next">Process Creation Example</a>, Previous: <a href="Process-Completion-Status.html#Process-Completion-Status" accesskey="p" rel="prev">Process Completion Status</a>, Up: <a href="Processes.html#Processes" accesskey="u" rel="up">Processes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

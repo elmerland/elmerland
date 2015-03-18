@@ -1,0 +1,93 @@
+<a name="Example-Receiver"></a>
+<div class="header">
+<p>
+Previous: <a href="Datagram-Example.html#Datagram-Example" accesskey="p" rel="prev">Datagram Example</a>, Up: <a href="Datagrams.html#Datagrams" accesskey="u" rel="up">Datagrams</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Example-of-Reading-Datagrams"></a>
+<h4 class="subsection">16.10.4 Example of Reading Datagrams</h4>
+
+<p>Here is the client program corresponding to the server above.
+</p>
+<p>It sends a datagram to the server and then waits for a reply.  Notice
+that the socket for the client (as well as for the server) in this
+example has to be given a name.  This is so that the server can direct
+a message back to the client.  Since the socket has no associated
+connection state, the only way the server can do this is by
+referencing the name of the client.
+</p>
+<div class="smallexample">
+<pre class="smallexample">
+#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/un.h&gt;
+
+#define SERVER  &quot;/tmp/serversocket&quot;
+#define CLIENT  &quot;/tmp/mysocket&quot;
+#define MAXMSG  512
+#define MESSAGE &quot;Yow!!! Are we having fun yet?!?&quot;
+
+int
+main (void)
+{
+  extern int make_named_socket (const char *name);
+  int sock;
+  char message[MAXMSG];
+  struct sockaddr_un name;
+  size_t size;
+  int nbytes;
+
+  /* <span class="roman">Make the socket.</span> */
+  sock = make_named_socket (CLIENT);
+
+  /* <span class="roman">Initialize the server socket address.</span> */
+  name.sun_family = AF_LOCAL;
+  strcpy (name.sun_path, SERVER);
+  size = strlen (name.sun_path) + sizeof (name.sun_family);
+
+  /* <span class="roman">Send the datagram.</span> */
+  nbytes = sendto (sock, MESSAGE, strlen (MESSAGE) + 1, 0,
+                   (struct sockaddr *) &amp; name, size);
+  if (nbytes &lt; 0)
+    {
+      perror (&quot;sendto (client)&quot;);
+      exit (EXIT_FAILURE);
+    }
+
+  /* <span class="roman">Wait for a reply.</span> */
+  nbytes = recvfrom (sock, message, MAXMSG, 0, NULL, 0);
+  if (nbytes &lt; 0)
+    {
+      perror (&quot;recfrom (client)&quot;);
+      exit (EXIT_FAILURE);
+    }
+
+  /* <span class="roman">Print a diagnostic message.</span> */
+  fprintf (stderr, &quot;Client: got message: %s\n&quot;, message);
+
+  /* <span class="roman">Clean up.</span> */
+  remove (CLIENT);
+  close (sock);
+}
+</pre></div>
+
+<p>Keep in mind that datagram socket communications are unreliable.  In
+this example, the client program waits indefinitely if the message
+never reaches the server or if the server&rsquo;s response never comes
+back.  It&rsquo;s up to the user running the program to kill and restart
+it if desired.  A more automatic solution could be to use
+<code>select</code> (see <a href="Waiting-for-I_002fO.html#Waiting-for-I_002fO">Waiting for I/O</a>) to establish a timeout period
+for the reply, and in case of timeout either re-send the message or
+shut down the socket and exit.
+</p>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Datagram-Example.html#Datagram-Example" accesskey="p" rel="prev">Datagram Example</a>, Up: <a href="Datagrams.html#Datagrams" accesskey="u" rel="up">Datagrams</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

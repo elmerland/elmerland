@@ -1,0 +1,110 @@
+<a name="BSD-Signal-Handling"></a>
+<div class="header">
+<p>
+Previous: <a href="Signal-Stack.html#Signal-Stack" accesskey="p" rel="prev">Signal Stack</a>, Up: <a href="Signal-Handling.html#Signal-Handling" accesskey="u" rel="up">Signal Handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="BSD-Signal-Handling-1"></a>
+<h3 class="section">24.10 BSD Signal Handling</h3>
+
+<p>This section describes alternative signal handling functions derived
+from BSD Unix.  These facilities were an advance, in their time; today,
+they are mostly obsolete, and supported mainly for compatibility with
+BSD Unix.
+</p>
+<p>There are many similarities between the BSD and POSIX signal handling
+facilities, because the POSIX facilities were inspired by the BSD
+facilities.  Besides having different names for all the functions to
+avoid conflicts, the main difference between the two is that BSD Unix
+represents signal masks as an <code>int</code> bit mask, rather than as a
+<code>sigset_t</code> object.
+</p>
+<p>The BSD facilities are declared in <samp>signal.h</samp>.
+<a name="index-signal_002eh-10"></a>
+</p>
+<dl>
+<dt><a name="index-siginterrupt"></a>Function: <em>int</em> <strong>siginterrupt</strong> <em>(int <var>signum</var>, int <var>failflag</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe const:sigintr
+| AS-Unsafe 
+| AC-Unsafe corrupt
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function specifies which approach to use when certain primitives
+are interrupted by handling signal <var>signum</var>.  If <var>failflag</var> is
+false, signal <var>signum</var> restarts primitives.  If <var>failflag</var> is
+true, handling <var>signum</var> causes these primitives to fail with error
+code <code>EINTR</code>.  See <a href="Interrupted-Primitives.html#Interrupted-Primitives">Interrupted Primitives</a>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-sigmask"></a>Macro: <em>int</em> <strong>sigmask</strong> <em>(int <var>signum</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This macro returns a signal mask that has the bit for signal <var>signum</var>
+set.  You can bitwise-OR the results of several calls to <code>sigmask</code>
+together to specify more than one signal.  For example,
+</p>
+<div class="smallexample">
+<pre class="smallexample">(sigmask (SIGTSTP) | sigmask (SIGSTOP)
+ | sigmask (SIGTTIN) | sigmask (SIGTTOU))
+</pre></div>
+
+<p>specifies a mask that includes all the job-control stop signals.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-sigblock"></a>Function: <em>int</em> <strong>sigblock</strong> <em>(int <var>mask</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock/hurd
+| AC-Unsafe lock/hurd
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function is equivalent to <code>sigprocmask</code> (see <a href="Process-Signal-Mask.html#Process-Signal-Mask">Process Signal Mask</a>) with a <var>how</var> argument of <code>SIG_BLOCK</code>: it adds the
+signals specified by <var>mask</var> to the calling process&rsquo;s set of blocked
+signals.  The return value is the previous set of blocked signals.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-sigsetmask"></a>Function: <em>int</em> <strong>sigsetmask</strong> <em>(int <var>mask</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock/hurd
+| AC-Unsafe lock/hurd
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function equivalent to <code>sigprocmask</code> (see <a href="Process-Signal-Mask.html#Process-Signal-Mask">Process Signal Mask</a>) with a <var>how</var> argument of <code>SIG_SETMASK</code>: it sets
+the calling process&rsquo;s signal mask to <var>mask</var>.  The return value is
+the previous set of blocked signals.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-sigpause"></a>Function: <em>int</em> <strong>sigpause</strong> <em>(int <var>mask</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe race:sigprocmask/!bsd!linux
+| AS-Unsafe lock/hurd
+| AC-Unsafe lock/hurd
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function is the equivalent of <code>sigsuspend</code> (see <a href="Waiting-for-a-Signal.html#Waiting-for-a-Signal">Waiting for a Signal</a>):  it sets the calling process&rsquo;s signal mask to <var>mask</var>,
+and waits for a signal to arrive.  On return the previous set of blocked
+signals is restored.
+</p></dd></dl>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Signal-Stack.html#Signal-Stack" accesskey="p" rel="prev">Signal Stack</a>, Up: <a href="Signal-Handling.html#Signal-Handling" accesskey="u" rel="up">Signal Handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

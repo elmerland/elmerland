@@ -1,0 +1,84 @@
+<a name="File-Minimums"></a>
+<div class="header">
+<p>
+Next: <a href="Pathconf.html#Pathconf" accesskey="n" rel="next">Pathconf</a>, Previous: <a href="Options-for-Files.html#Options-for-Files" accesskey="p" rel="prev">Options for Files</a>, Up: <a href="System-Configuration.html#System-Configuration" accesskey="u" rel="up">System Configuration</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Minimum-Values-for-File-System-Limits"></a>
+<h3 class="section">32.8 Minimum Values for File System Limits</h3>
+
+<p>Here are the names for the POSIX minimum upper bounds for some of the
+above parameters.  The significance of these values is that you can
+safely push to these limits without checking whether the particular
+system you are using can go that far.  In most cases GNU systems do not
+have these strict limitations.  The actual limit should be requested if
+necessary.
+</p>
+<dl compact="compact">
+<dt><code>_POSIX_LINK_MAX</code></dt>
+<dd><p>The most restrictive limit permitted by POSIX for the maximum value of a
+file&rsquo;s link count.  The value of this constant is <code>8</code>; thus, you
+can always make up to eight names for a file without running into a
+system limit.
+</p>
+</dd>
+<dt><code>_POSIX_MAX_CANON</code></dt>
+<dd><p>The most restrictive limit permitted by POSIX for the maximum number of
+bytes in a canonical input line from a terminal device.  The value of
+this constant is <code>255</code>.
+</p>
+</dd>
+<dt><code>_POSIX_MAX_INPUT</code></dt>
+<dd><p>The most restrictive limit permitted by POSIX for the maximum number of
+bytes in a terminal device input queue (or typeahead buffer).
+See <a href="Input-Modes.html#Input-Modes">Input Modes</a>.  The value of this constant is <code>255</code>.
+</p>
+</dd>
+<dt><code>_POSIX_NAME_MAX</code></dt>
+<dd><p>The most restrictive limit permitted by POSIX for the maximum number of
+bytes in a file name component.  The value of this constant is
+<code>14</code>.
+</p>
+</dd>
+<dt><code>_POSIX_PATH_MAX</code></dt>
+<dd><p>The most restrictive limit permitted by POSIX for the maximum number of
+bytes in a file name.  The value of this constant is <code>256</code>.
+</p>
+</dd>
+<dt><code>_POSIX_PIPE_BUF</code></dt>
+<dd><p>The most restrictive limit permitted by POSIX for the maximum number of
+bytes that can be written atomically to a pipe.  The value of this
+constant is <code>512</code>.
+</p>
+</dd>
+<dt><code>SYMLINK_MAX</code></dt>
+<dd><p>Maximum number of bytes in a symbolic link.
+</p>
+</dd>
+<dt><code>POSIX_REC_INCR_XFER_SIZE</code></dt>
+<dd><p>Recommended increment for file transfer sizes between the
+<code>POSIX_REC_MIN_XFER_SIZE</code> and <code>POSIX_REC_MAX_XFER_SIZE</code>
+values.
+</p>
+</dd>
+<dt><code>POSIX_REC_MAX_XFER_SIZE</code></dt>
+<dd><p>Maximum recommended file transfer size.
+</p>
+</dd>
+<dt><code>POSIX_REC_MIN_XFER_SIZE</code></dt>
+<dd><p>Minimum recommended file transfer size.
+</p>
+</dd>
+<dt><code>POSIX_REC_XFER_ALIGN</code></dt>
+<dd><p>Recommended file transfer buffer alignment.
+</p></dd>
+</dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Pathconf.html#Pathconf" accesskey="n" rel="next">Pathconf</a>, Previous: <a href="Options-for-Files.html#Options-for-Files" accesskey="p" rel="prev">Options for Files</a>, Up: <a href="System-Configuration.html#System-Configuration" accesskey="u" rel="up">System Configuration</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

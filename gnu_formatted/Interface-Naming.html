@@ -1,0 +1,114 @@
+<a name="Interface-Naming"></a>
+<div class="header">
+<p>
+Next: <a href="Local-Namespace.html#Local-Namespace" accesskey="n" rel="next">Local Namespace</a>, Previous: <a href="Socket-Addresses.html#Socket-Addresses" accesskey="p" rel="prev">Socket Addresses</a>, Up: <a href="Sockets.html#Sockets" accesskey="u" rel="up">Sockets</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Interface-Naming-1"></a>
+<h3 class="section">16.4 Interface Naming</h3>
+
+<p>Each network interface has a name.  This usually consists of a few
+letters that relate to the type of interface, which may be followed by a
+number if there is more than one interface of that type.  Examples
+might be <code>lo</code> (the loopback interface) and <code>eth0</code> (the first
+Ethernet interface).
+</p>
+<p>Although such names are convenient for humans, it would be clumsy to
+have to use them whenever a program needs to refer to an interface.  In
+such situations an interface is referred to by its <em>index</em>, which is
+an arbitrarily-assigned small positive integer.
+</p>
+<p>The following functions, constants and data types are declared in the
+header file <samp>net/if.h</samp>.
+</p>
+<dl>
+<dt><a name="index-IFNAMSIZ"></a>Constant: <em>size_t</em> <strong>IFNAMSIZ</strong></dt>
+<dd><p>This constant defines the maximum buffer size needed to hold an
+interface name, including its terminating zero byte.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-if_005fnametoindex"></a>Function: <em>unsigned int</em> <strong>if_nametoindex</strong> <em>(const char *<var>ifname</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock
+| AC-Unsafe lock fd
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function yields the interface index corresponding to a particular
+name.  If no interface exists with the name given, it returns 0.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-if_005findextoname"></a>Function: <em>char *</em> <strong>if_indextoname</strong> <em>(unsigned int <var>ifindex</var>, char *<var>ifname</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock
+| AC-Unsafe lock fd
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function maps an interface index to its corresponding name.  The
+returned name is placed in the buffer pointed to by <code>ifname</code>, which
+must be at least <code>IFNAMSIZ</code> bytes in length.  If the index was
+invalid, the function&rsquo;s return value is a null pointer, otherwise it is
+<code>ifname</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-struct-if_005fnameindex"></a>Data Type: <strong>struct if_nameindex</strong></dt>
+<dd><p>This data type is used to hold the information about a single
+interface.  It has the following members:
+</p>
+<dl compact="compact">
+<dt><code>unsigned int if_index;</code></dt>
+<dd><p>This is the interface index.
+</p>
+</dd>
+<dt><code>char *if_name</code></dt>
+<dd><p>This is the null-terminated index name.
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><a name="index-if_005fnameindex"></a>Function: <em>struct if_nameindex *</em> <strong>if_nameindex</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe heap lock/hurd
+| AC-Unsafe lock/hurd fd mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function returns an array of <code>if_nameindex</code> structures, one
+for every interface that is present.  The end of the list is indicated
+by a structure with an interface of 0 and a null name pointer.  If an
+error occurs, this function returns a null pointer.
+</p>
+<p>The returned structure must be freed with <code>if_freenameindex</code> after
+use.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-if_005ffreenameindex"></a>Function: <em>void</em> <strong>if_freenameindex</strong> <em>(struct if_nameindex *<var>ptr</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe heap
+| AC-Unsafe mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function frees the structure returned by an earlier call to
+<code>if_nameindex</code>.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Local-Namespace.html#Local-Namespace" accesskey="n" rel="next">Local Namespace</a>, Previous: <a href="Socket-Addresses.html#Socket-Addresses" accesskey="p" rel="prev">Socket Addresses</a>, Up: <a href="Sockets.html#Sockets" accesskey="u" rel="up">Sockets</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

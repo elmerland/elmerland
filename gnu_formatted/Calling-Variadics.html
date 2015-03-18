@@ -1,0 +1,58 @@
+<a name="Calling-Variadics"></a>
+<div class="header">
+<p>
+Next: <a href="Argument-Macros.html#Argument-Macros" accesskey="n" rel="next">Argument Macros</a>, Previous: <a href="How-Many-Arguments.html#How-Many-Arguments" accesskey="p" rel="prev">How Many Arguments</a>, Up: <a href="How-Variadic.html#How-Variadic" accesskey="u" rel="up">How Variadic</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Calling-Variadic-Functions"></a>
+<h4 class="subsubsection">A.2.2.4 Calling Variadic Functions</h4>
+<a name="index-variadic-functions_002c-calling"></a>
+<a name="index-calling-variadic-functions"></a>
+<a name="index-declaring-variadic-functions"></a>
+
+<p>You don&rsquo;t have to do anything special to call a variadic function.
+Just put the arguments (required arguments, followed by optional ones)
+inside parentheses, separated by commas, as usual.  But you must declare
+the function with a prototype and know how the argument values are converted.
+</p>
+<p>In principle, functions that are <em>defined</em> to be variadic must also
+be <em>declared</em> to be variadic using a function prototype whenever
+you call them.  (See <a href="Variadic-Prototypes.html#Variadic-Prototypes">Variadic Prototypes</a>, for how.)  This is because
+some C compilers use a different calling convention to pass the same set
+of argument values to a function depending on whether that function
+takes variable arguments or fixed arguments.
+</p>
+<p>In practice, the GNU C compiler always passes a given set of argument
+types in the same way regardless of whether they are optional or
+required.  So, as long as the argument types are self-promoting, you can
+safely omit declaring them.  Usually it is a good idea to declare the
+argument types for variadic functions, and indeed for all functions.
+But there are a few functions which it is extremely convenient not to
+have to declare as variadic&mdash;for example, <code>open</code> and
+<code>printf</code>.
+</p>
+<a name="index-default-argument-promotions"></a>
+<a name="index-argument-promotion"></a>
+<p>Since the prototype doesn&rsquo;t specify types for optional arguments, in a
+call to a variadic function the <em>default argument promotions</em> are
+performed on the optional argument values.  This means the objects of
+type <code>char</code> or <code>short&nbsp;int</code><!-- /@w --> (whether signed or not) are
+promoted to either <code>int</code> or <code>unsigned&nbsp;int</code><!-- /@w -->, as
+appropriate; and that objects of type <code>float</code> are promoted to type
+<code>double</code>.  So, if the caller passes a <code>char</code> as an optional
+argument, it is promoted to an <code>int</code>, and the function can access
+it with <code>va_arg (<var>ap</var>, int)</code>.
+</p>
+<p>Conversion of the required arguments is controlled by the function
+prototype in the usual way: the argument expression is converted to the
+declared argument type as if it were being assigned to a variable of
+that type.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Argument-Macros.html#Argument-Macros" accesskey="n" rel="next">Argument Macros</a>, Previous: <a href="How-Many-Arguments.html#How-Many-Arguments" accesskey="p" rel="prev">How Many Arguments</a>, Up: <a href="How-Variadic.html#How-Variadic" accesskey="u" rel="up">How Variadic</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

@@ -1,0 +1,47 @@
+<a name="Freeing-Obstack-Objects"></a>
+<div class="header">
+<p>
+Next: <a href="Obstack-Functions.html#Obstack-Functions" accesskey="n" rel="next">Obstack Functions</a>, Previous: <a href="Allocation-in-an-Obstack.html#Allocation-in-an-Obstack" accesskey="p" rel="prev">Allocation in an Obstack</a>, Up: <a href="Obstacks.html#Obstacks" accesskey="u" rel="up">Obstacks</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Freeing-Objects-in-an-Obstack"></a>
+<h4 class="subsubsection">3.2.4.4 Freeing Objects in an Obstack</h4>
+<a name="index-freeing-_0028obstacks_0029"></a>
+
+<p>To free an object allocated in an obstack, use the function
+<code>obstack_free</code>.  Since the obstack is a stack of objects, freeing
+one object automatically frees all other objects allocated more recently
+in the same obstack.
+</p>
+<dl>
+<dt><a name="index-obstack_005ffree"></a>Function: <em>void</em> <strong>obstack_free</strong> <em>(struct obstack *<var>obstack-ptr</var>, void *<var>object</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe race:obstack-ptr
+| AS-Safe 
+| AC-Unsafe corrupt
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>If <var>object</var> is a null pointer, everything allocated in the obstack
+is freed.  Otherwise, <var>object</var> must be the address of an object
+allocated in the obstack.  Then <var>object</var> is freed, along with
+everything allocated in <var>obstack</var> since <var>object</var>.
+</p></dd></dl>
+
+<p>Note that if <var>object</var> is a null pointer, the result is an
+uninitialized obstack.  To free all memory in an obstack but leave it
+valid for further allocation, call <code>obstack_free</code> with the address
+of the first object allocated on the obstack:
+</p>
+<div class="smallexample">
+<pre class="smallexample">obstack_free (obstack_ptr, first_object_allocated_ptr);
+</pre></div>
+
+<p>Recall that the objects in an obstack are grouped into chunks.  When all
+the objects in a chunk become free, the obstack library automatically
+frees the chunk (see <a href="Preparing-for-Obstacks.html#Preparing-for-Obstacks">Preparing for Obstacks</a>).  Then other
+obstacks, or non-obstack allocation, can reuse the space of the chunk.
+</p>
+
+
+

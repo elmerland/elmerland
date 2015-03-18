@@ -1,0 +1,31 @@
+<a name="SVID"></a>
+<div class="header">
+<p>
+Next: <a href="XPG.html#XPG" accesskey="n" rel="next">XPG</a>, Previous: <a href="Berkeley-Unix.html#Berkeley-Unix" accesskey="p" rel="prev">Berkeley Unix</a>, Up: <a href="Standards-and-Portability.html#Standards-and-Portability" accesskey="u" rel="up">Standards and Portability</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="SVID-_0028The-System-V-Interface-Description_0029"></a>
+<h4 class="subsection">1.2.4 SVID (The System V Interface Description)</h4>
+<a name="index-SVID"></a>
+<a name="index-System-V-Unix"></a>
+<a name="index-Unix_002c-System-V"></a>
+
+<p>The <em>System V Interface Description</em> (SVID) is a document describing
+the AT&amp;T Unix System V operating system.  It is to some extent a
+superset of the POSIX standard (see <a href="POSIX.html#POSIX">POSIX</a>).
+</p>
+<p>The GNU C Library defines most of the facilities required by the SVID
+that are not also required by the ISO&nbsp;C<!-- /@w --> or POSIX standards, for
+compatibility with  System V Unix and other Unix systems (such as
+SunOS) which include these facilities.  However, many of the more
+obscure and less generally useful facilities required by the SVID are
+not included.  (In fact, Unix System V itself does not provide them all.)
+</p>
+<p>The supported facilities from System V include the methods for
+inter-process communication and shared memory, the <code>hsearch</code> and
+<code>drand48</code> families of functions, <code>fmtmsg</code> and several of the
+mathematical functions.
+</p>
+
+
+

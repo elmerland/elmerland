@@ -1,0 +1,39 @@
+<a name="Local-Namespace-Concepts"></a>
+<div class="header">
+<p>
+Next: <a href="Local-Namespace-Details.html#Local-Namespace-Details" accesskey="n" rel="next">Local Namespace Details</a>, Up: <a href="Local-Namespace.html#Local-Namespace" accesskey="u" rel="up">Local Namespace</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Local-Namespace-Concepts-1"></a>
+<h4 class="subsection">16.5.1 Local Namespace Concepts</h4>
+
+<p>In the local namespace socket addresses are file names.  You can specify
+any file name you want as the address of the socket, but you must have
+write permission on the directory containing it.
+It&rsquo;s common to put these files in the <samp>/tmp</samp> directory.
+</p>
+<p>One peculiarity of the local namespace is that the name is only used
+when opening the connection; once open the address is not meaningful and
+may not exist.
+</p>
+<p>Another peculiarity is that you cannot connect to such a socket from
+another machine&ndash;not even if the other machine shares the file system
+which contains the name of the socket.  You can see the socket in a
+directory listing, but connecting to it never succeeds.  Some programs
+take advantage of this, such as by asking the client to send its own
+process ID, and using the process IDs to distinguish between clients.
+However, we recommend you not use this method in protocols you design,
+as we might someday permit connections from other machines that mount
+the same file systems.  Instead, send each new client an identifying
+number if you want it to have one.
+</p>
+<p>After you close a socket in the local namespace, you should delete the
+file name from the file system.  Use <code>unlink</code> or <code>remove</code> to
+do this; see <a href="Deleting-Files.html#Deleting-Files">Deleting Files</a>.
+</p>
+<p>The local namespace supports just one protocol for any communication
+style; it is protocol number <code>0</code>.
+</p>
+
+
+

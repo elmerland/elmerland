@@ -1,0 +1,44 @@
+<a name="Name-Service-Switch"></a>
+<div class="header">
+<p>
+Next: <a href="Users-and-Groups.html#Users-and-Groups" accesskey="n" rel="next">Users and Groups</a>, Previous: <a href="Job-Control.html#Job-Control" accesskey="p" rel="prev">Job Control</a>, Up: <a href="index.html#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="System-Databases-and-Name-Service-Switch"></a>
+<h2 class="chapter">29 System Databases and Name Service Switch</h2>
+<a name="index-Name-Service-Switch"></a>
+<a name="index-NSS-1"></a>
+<a name="index-databases"></a>
+
+<p>Various functions in the C Library need to be configured to work
+correctly in the local environment.  Traditionally, this was done by
+using files (e.g., <samp>/etc/passwd</samp>), but other nameservices (like the
+Network Information Service (NIS) and the Domain Name Service (DNS))
+became popular, and were hacked into the C library, usually with a fixed
+search order.
+</p>
+<p>The GNU C Library contains a cleaner solution of this problem.  It is
+designed after a method used by Sun Microsystems in the C library of
+Solaris&nbsp;2<!-- /@w -->.  The GNU C Library follows their name and calls this
+scheme <em>Name Service Switch</em> (NSS).
+</p>
+<p>Though the interface might be similar to Sun&rsquo;s version there is no
+common code.  We never saw any source code of Sun&rsquo;s implementation and
+so the internal interface is incompatible.  This also manifests in the
+file names we use as we will see later.
+</p>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="NSS-Basics.html#NSS-Basics" accesskey="1">NSS Basics</a>:</td><td align="left" valign="top">What is this NSS good for.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="NSS-Configuration-File.html#NSS-Configuration-File" accesskey="2">NSS Configuration File</a>:</td><td align="left" valign="top">Configuring NSS.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="NSS-Module-Internals.html#NSS-Module-Internals" accesskey="3">NSS Module Internals</a>:</td><td align="left" valign="top">How does it work internally.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Extending-NSS.html#Extending-NSS" accesskey="4">Extending NSS</a>:</td><td align="left" valign="top">What to do to add services or databases.
+</td></tr>
+</table>
+
+
+
+

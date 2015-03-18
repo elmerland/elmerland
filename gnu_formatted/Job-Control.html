@@ -1,0 +1,45 @@
+<a name="Job-Control"></a>
+<div class="header">
+<p>
+Next: <a href="Name-Service-Switch.html#Name-Service-Switch" accesskey="n" rel="next">Name Service Switch</a>, Previous: <a href="Inter_002dProcess-Communication.html#Inter_002dProcess-Communication" accesskey="p" rel="prev">Inter-Process Communication</a>, Up: <a href="index.html#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Job-Control-1"></a>
+<h2 class="chapter">28 Job Control</h2>
+
+<a name="index-process-groups"></a>
+<a name="index-job-control"></a>
+<a name="index-job"></a>
+<a name="index-session"></a>
+<p><em>Job control</em> refers to the protocol for allowing a user to move
+between multiple <em>process groups</em> (or <em>jobs</em>) within a single
+<em>login session</em>.  The job control facilities are set up so that
+appropriate behavior for most programs happens automatically and they
+need not do anything special about job control.  So you can probably
+ignore the material in this chapter unless you are writing a shell or
+login program.
+</p>
+<p>You need to be familiar with concepts relating to process creation
+(see <a href="Process-Creation-Concepts.html#Process-Creation-Concepts">Process Creation Concepts</a>) and signal handling (see <a href="Signal-Handling.html#Signal-Handling">Signal Handling</a>) in order to understand this material presented in this
+chapter.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Concepts-of-Job-Control.html#Concepts-of-Job-Control" accesskey="1">Concepts of Job Control</a>:</td><td align="left" valign="top">Jobs can be controlled by a shell.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Job-Control-is-Optional.html#Job-Control-is-Optional" accesskey="2">Job Control is Optional</a>:</td><td align="left" valign="top">Not all POSIX systems support job control.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Controlling-Terminal.html#Controlling-Terminal" accesskey="3">Controlling Terminal</a>:</td><td align="left" valign="top">How a process gets its controlling terminal.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Access-to-the-Terminal.html#Access-to-the-Terminal" accesskey="4">Access to the Terminal</a>:</td><td align="left" valign="top">How processes share the controlling terminal.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Orphaned-Process-Groups.html#Orphaned-Process-Groups" accesskey="5">Orphaned Process Groups</a>:</td><td align="left" valign="top">Jobs left after the user logs out.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Implementing-a-Shell.html#Implementing-a-Shell" accesskey="6">Implementing a Shell</a>:</td><td align="left" valign="top">What a shell must do to implement job control.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Functions-for-Job-Control.html#Functions-for-Job-Control" accesskey="7">Functions for Job Control</a>:</td><td align="left" valign="top">Functions to control process groups.
+</td></tr>
+</table>
+
+
+
+

@@ -1,0 +1,86 @@
+<a name="Freeing-after-Malloc"></a>
+<div class="header">
+<p>
+Next: <a href="Changing-Block-Size.html#Changing-Block-Size" accesskey="n" rel="next">Changing Block Size</a>, Previous: <a href="Malloc-Examples.html#Malloc-Examples" accesskey="p" rel="prev">Malloc Examples</a>, Up: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="u" rel="up">Unconstrained Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Freeing-Memory-Allocated-with-malloc"></a>
+<h4 class="subsubsection">3.2.2.3 Freeing Memory Allocated with <code>malloc</code></h4>
+<a name="index-freeing-memory-allocated-with-malloc"></a>
+<a name="index-heap_002c-freeing-memory-from"></a>
+
+<p>When you no longer need a block that you got with <code>malloc</code>, use the
+function <code>free</code> to make the block available to be allocated again.
+The prototype for this function is in <samp>stdlib.h</samp>.
+<a name="index-stdlib_002eh-1"></a>
+</p>
+<dl>
+<dt><a name="index-free"></a>Function: <em>void</em> <strong>free</strong> <em>(void *<var>ptr</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock
+| AC-Unsafe lock fd mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>free</code> function deallocates the block of memory pointed at
+by <var>ptr</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-cfree"></a>Function: <em>void</em> <strong>cfree</strong> <em>(void *<var>ptr</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock
+| AC-Unsafe lock fd mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function does the same thing as <code>free</code>.  It&rsquo;s provided for
+backward compatibility with SunOS; you should use <code>free</code> instead.
+</p></dd></dl>
+
+<p>Freeing a block alters the contents of the block.  <strong>Do not expect to
+find any data (such as a pointer to the next block in a chain of blocks) in
+the block after freeing it.</strong>  Copy whatever you need out of the block before
+freeing it!  Here is an example of the proper way to free all the blocks in
+a chain, and the strings that they point to:
+</p>
+<div class="smallexample">
+<pre class="smallexample">struct chain
+  {
+    struct chain *next;
+    char *name;
+  }
+
+void
+free_chain (struct chain *chain)
+{
+  while (chain != 0)
+    {
+      struct chain *next = chain-&gt;next;
+      free (chain-&gt;name);
+      free (chain);
+      chain = next;
+    }
+}
+</pre></div>
+
+<p>Occasionally, <code>free</code> can actually return memory to the operating
+system and make the process smaller.  Usually, all it can do is allow a
+later call to <code>malloc</code> to reuse the space.  In the meantime, the
+space remains in your program as part of a free-list used internally by
+<code>malloc</code>.
+</p>
+<p>There is no point in freeing blocks at the end of a program, because all
+of the program&rsquo;s space is given back to the system when the process
+terminates.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Changing-Block-Size.html#Changing-Block-Size" accesskey="n" rel="next">Changing Block Size</a>, Previous: <a href="Malloc-Examples.html#Malloc-Examples" accesskey="p" rel="prev">Malloc Examples</a>, Up: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="u" rel="up">Unconstrained Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

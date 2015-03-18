@@ -1,0 +1,96 @@
+<a name="File-Name-Resolution"></a>
+<div class="header">
+<p>
+Next: <a href="File-Name-Errors.html#File-Name-Errors" accesskey="n" rel="next">File Name Errors</a>, Previous: <a href="Directories.html#Directories" accesskey="p" rel="prev">Directories</a>, Up: <a href="File-Names.html#File-Names" accesskey="u" rel="up">File Names</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="File-Name-Resolution-1"></a>
+<h4 class="subsection">11.2.2 File Name Resolution</h4>
+
+<p>A file name consists of file name components separated by slash
+(&lsquo;<samp>/</samp>&rsquo;) characters.  On the systems that the GNU C Library supports,
+multiple successive &lsquo;<samp>/</samp>&rsquo; characters are equivalent to a single
+&lsquo;<samp>/</samp>&rsquo; character.
+</p>
+<a name="index-file-name-resolution"></a>
+<p>The process of determining what file a file name refers to is called
+<em>file name resolution</em>.  This is performed by examining the
+components that make up a file name in left-to-right order, and locating
+each successive component in the directory named by the previous
+component.  Of course, each of the files that are referenced as
+directories must actually exist, be directories instead of regular
+files, and have the appropriate permissions to be accessible by the
+process; otherwise the file name resolution fails.
+</p>
+<a name="index-root-directory"></a>
+<a name="index-absolute-file-name"></a>
+<p>If a file name begins with a &lsquo;<samp>/</samp>&rsquo;, the first component in the file
+name is located in the <em>root directory</em> of the process (usually all
+processes on the system have the same root directory).  Such a file name
+is called an <em>absolute file name</em>.
+</p>
+<a name="index-relative-file-name"></a>
+<p>Otherwise, the first component in the file name is located in the
+current working directory (see <a href="Working-Directory.html#Working-Directory">Working Directory</a>).  This kind of
+file name is called a <em>relative file name</em>.
+</p>
+<a name="index-parent-directory"></a>
+<p>The file name components <samp>.</samp> (&ldquo;dot&rdquo;) and <samp>..</samp> (&ldquo;dot-dot&rdquo;)
+have special meanings.  Every directory has entries for these file name
+components.  The file name component <samp>.</samp> refers to the directory
+itself, while the file name component <samp>..</samp> refers to its
+<em>parent directory</em> (the directory that contains the link for the
+directory in question).  As a special case, <samp>..</samp> in the root
+directory refers to the root directory itself, since it has no parent;
+thus <samp>/..</samp> is the same as <samp>/</samp>.
+</p>
+<p>Here are some examples of file names:
+</p>
+<dl compact="compact">
+<dt><samp>/a</samp></dt>
+<dd><p>The file named <samp>a</samp>, in the root directory.
+</p>
+</dd>
+<dt><samp>/a/b</samp></dt>
+<dd><p>The file named <samp>b</samp>, in the directory named <samp>a</samp> in the root directory.
+</p>
+</dd>
+<dt><samp>a</samp></dt>
+<dd><p>The file named <samp>a</samp>, in the current working directory.
+</p>
+</dd>
+<dt><samp>/a/./b</samp></dt>
+<dd><p>This is the same as <samp>/a/b</samp>.
+</p>
+</dd>
+<dt><samp>./a</samp></dt>
+<dd><p>The file named <samp>a</samp>, in the current working directory.
+</p>
+</dd>
+<dt><samp>../a</samp></dt>
+<dd><p>The file named <samp>a</samp>, in the parent directory of the current working
+directory.
+</p></dd>
+</dl>
+
+<p>A file name that names a directory may optionally end in a &lsquo;<samp>/</samp>&rsquo;.
+You can specify a file name of <samp>/</samp> to refer to the root directory,
+but the empty string is not a meaningful file name.  If you want to
+refer to the current working directory, use a file name of <samp>.</samp> or
+<samp>./</samp>.
+</p>
+<p>Unlike some other operating systems, GNU systems don&rsquo;t have any
+built-in support for file types (or extensions) or file versions as part
+of its file name syntax.  Many programs and utilities use conventions
+for file names&mdash;for example, files containing C source code usually
+have names suffixed with &lsquo;<samp>.c</samp>&rsquo;&mdash;but there is nothing in the file
+system itself that enforces this kind of convention.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="File-Name-Errors.html#File-Name-Errors" accesskey="n" rel="next">File Name Errors</a>, Previous: <a href="Directories.html#Directories" accesskey="p" rel="prev">Directories</a>, Up: <a href="File-Names.html#File-Names" accesskey="u" rel="up">File Names</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

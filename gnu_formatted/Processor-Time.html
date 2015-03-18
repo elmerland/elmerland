@@ -1,0 +1,94 @@
+<a name="Processor-Time"></a>
+<div class="header">
+<p>
+Previous: <a href="CPU-Time.html#CPU-Time" accesskey="p" rel="prev">CPU Time</a>, Up: <a href="Processor-And-CPU-Time.html#Processor-And-CPU-Time" accesskey="u" rel="up">Processor And CPU Time</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Processor-Time-Inquiry"></a>
+<h4 class="subsection">21.3.2 Processor Time Inquiry</h4>
+
+<p>The <code>times</code> function returns information about a process&rsquo;
+consumption of processor time in a <code>struct&nbsp;tms</code><!-- /@w --> object, in
+addition to the process&rsquo; CPU time.  See <a href="Time-Basics.html#Time-Basics">Time Basics</a>.  You should
+include the header file <samp>sys/times.h</samp> to use this facility.
+<a name="index-processor-time-1"></a>
+<a name="index-CPU-time-2"></a>
+<a name="index-sys_002ftimes_002eh-1"></a>
+</p>
+<dl>
+<dt><a name="index-struct-tms"></a>Data Type: <strong>struct tms</strong></dt>
+<dd><p>The <code>tms</code> structure is used to return information about process
+times.  It contains at least the following members:
+</p>
+<dl compact="compact">
+<dt><code>clock_t tms_utime</code></dt>
+<dd><p>This is the total processor time the calling process has used in
+executing the instructions of its program.
+</p>
+</dd>
+<dt><code>clock_t tms_stime</code></dt>
+<dd><p>This is the processor time the system has used on behalf of the calling
+process.
+</p>
+</dd>
+<dt><code>clock_t tms_cutime</code></dt>
+<dd><p>This is the sum of the <code>tms_utime</code> values and the <code>tms_cutime</code>
+values of all terminated child processes of the calling process, whose
+status has been reported to the parent process by <code>wait</code> or
+<code>waitpid</code>; see <a href="Process-Completion.html#Process-Completion">Process Completion</a>.  In other words, it
+represents the total processor time used in executing the instructions
+of all the terminated child processes of the calling process, excluding
+child processes which have not yet been reported by <code>wait</code> or
+<code>waitpid</code>.
+<a name="index-child-process"></a>
+</p>
+</dd>
+<dt><code>clock_t tms_cstime</code></dt>
+<dd><p>This is similar to <code>tms_cutime</code>, but represents the total processor
+time system has used on behalf of all the terminated child processes
+of the calling process.
+</p></dd>
+</dl>
+
+<p>All of the times are given in numbers of clock ticks.  Unlike CPU time,
+these are the actual amounts of time; not relative to any event.
+See <a href="Creating-a-Process.html#Creating-a-Process">Creating a Process</a>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-CLK_005fTCK"></a>Macro: <em>int</em> <strong>CLK_TCK</strong></dt>
+<dd><p>This is an obsolete name for the number of clock ticks per second.  Use
+<code>sysconf (_SC_CLK_TCK)</code> instead.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-times"></a>Function: <em>clock_t</em> <strong>times</strong> <em>(struct tms *<var>buffer</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>times</code> function stores the processor time information for
+the calling process in <var>buffer</var>.
+</p>
+<p>The return value is the number of clock ticks since an arbitrary point
+in the past, e.g. since system start-up.  <code>times</code> returns
+<code>(clock_t)(-1)</code> to indicate failure.
+</p></dd></dl>
+
+<p><strong>Portability Note:</strong> The <code>clock</code> function described in
+<a href="CPU-Time.html#CPU-Time">CPU Time</a> is specified by the ISO&nbsp;C<!-- /@w --> standard.  The
+<code>times</code> function is a feature of POSIX.1.  On GNU systems, the
+CPU time is defined to be equivalent to the sum of the <code>tms_utime</code>
+and <code>tms_stime</code> fields returned by <code>times</code>.
+</p>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="CPU-Time.html#CPU-Time" accesskey="p" rel="prev">CPU Time</a>, Up: <a href="Processor-And-CPU-Time.html#Processor-And-CPU-Time" accesskey="u" rel="up">Processor And CPU Time</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

@@ -1,0 +1,45 @@
+<a name="Version-Supported"></a>
+<div class="header">
+<p>
+Next: <a href="Sysconf.html#Sysconf" accesskey="n" rel="next">Sysconf</a>, Previous: <a href="System-Options.html#System-Options" accesskey="p" rel="prev">System Options</a>, Up: <a href="System-Configuration.html#System-Configuration" accesskey="u" rel="up">System Configuration</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Which-Version-of-POSIX-is-Supported"></a>
+<h3 class="section">32.3 Which Version of POSIX is Supported</h3>
+
+<dl>
+<dt><a name="index-_005fPOSIX_005fVERSION"></a>Macro: <em>long int</em> <strong>_POSIX_VERSION</strong></dt>
+<dd><p>This constant represents the version of the POSIX.1 standard to which
+the implementation conforms.  For an implementation conforming to the
+1995 POSIX.1 standard, the value is the integer <code>199506L</code>.
+</p>
+<p><code>_POSIX_VERSION</code> is always defined (in <samp>unistd.h</samp>) in any
+POSIX system.
+</p>
+<p><strong>Usage Note:</strong> Don&rsquo;t try to test whether the system supports POSIX
+by including <samp>unistd.h</samp> and then checking whether
+<code>_POSIX_VERSION</code> is defined.  On a non-POSIX system, this will
+probably fail because there is no <samp>unistd.h</samp>.  We do not know of
+<em>any</em> way you can reliably test at compilation time whether your
+target system supports POSIX or whether <samp>unistd.h</samp> exists.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_005fPOSIX2_005fC_005fVERSION"></a>Macro: <em>long int</em> <strong>_POSIX2_C_VERSION</strong></dt>
+<dd><p>This constant represents the version of the POSIX.2 standard which the
+library and system kernel support.  We don&rsquo;t know what value this will
+be for the first version of the POSIX.2 standard, because the value is
+based on the year and month in which the standard is officially adopted.
+</p>
+<p>The value of this symbol says nothing about the utilities installed on
+the system.
+</p>
+<p><strong>Usage Note:</strong> You can use this macro to tell whether a POSIX.1
+system library supports POSIX.2 as well.  Any POSIX.1 system contains
+<samp>unistd.h</samp>, so include that file and then test <code>defined
+(_POSIX2_C_VERSION)</code>.
+</p></dd></dl>
+
+
+
+

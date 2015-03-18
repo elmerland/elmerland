@@ -1,0 +1,67 @@
+<a name="Flags-for-Wordexp"></a>
+<div class="header">
+<p>
+Next: <a href="Wordexp-Example.html#Wordexp-Example" accesskey="n" rel="next">Wordexp Example</a>, Previous: <a href="Calling-Wordexp.html#Calling-Wordexp" accesskey="p" rel="prev">Calling Wordexp</a>, Up: <a href="Word-Expansion.html#Word-Expansion" accesskey="u" rel="up">Word Expansion</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Flags-for-Word-Expansion"></a>
+<h4 class="subsection">10.4.3 Flags for Word Expansion</h4>
+
+<p>This section describes the flags that you can specify in the
+<var>flags</var> argument to <code>wordexp</code>.  Choose the flags you want,
+and combine them with the C operator <code>|</code>.
+</p>
+<dl compact="compact">
+<dt><code>WRDE_APPEND</code></dt>
+<dd><p>Append the words from this expansion to the vector of words produced by
+previous calls to <code>wordexp</code>.  This way you can effectively expand
+several words as if they were concatenated with spaces between them.
+</p>
+<p>In order for appending to work, you must not modify the contents of the
+word vector structure between calls to <code>wordexp</code>.  And, if you set
+<code>WRDE_DOOFFS</code> in the first call to <code>wordexp</code>, you must also
+set it when you append to the results.
+</p>
+</dd>
+<dt><code>WRDE_DOOFFS</code></dt>
+<dd><p>Leave blank slots at the beginning of the vector of words.
+The <code>we_offs</code> field says how many slots to leave.
+The blank slots contain null pointers.
+</p>
+</dd>
+<dt><code>WRDE_NOCMD</code></dt>
+<dd><p>Don&rsquo;t do command substitution; if the input requests command substitution,
+report an error.
+</p>
+</dd>
+<dt><code>WRDE_REUSE</code></dt>
+<dd><p>Reuse a word vector made by a previous call to <code>wordexp</code>.
+Instead of allocating a new vector of words, this call to <code>wordexp</code>
+will use the vector that already exists (making it larger if necessary).
+</p>
+<p>Note that the vector may move, so it is not safe to save an old pointer
+and use it again after calling <code>wordexp</code>.  You must fetch
+<code>we_pathv</code> anew after each call.
+</p>
+</dd>
+<dt><code>WRDE_SHOWERR</code></dt>
+<dd><p>Do show any error messages printed by commands run by command substitution.
+More precisely, allow these commands to inherit the standard error output
+stream of the current process.  By default, <code>wordexp</code> gives these
+commands a standard error stream that discards all output.
+</p>
+</dd>
+<dt><code>WRDE_UNDEF</code></dt>
+<dd><p>If the input refers to a shell variable that is not defined, report an
+error.
+</p></dd>
+</dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Wordexp-Example.html#Wordexp-Example" accesskey="n" rel="next">Wordexp Example</a>, Previous: <a href="Calling-Wordexp.html#Calling-Wordexp" accesskey="p" rel="prev">Calling Wordexp</a>, Up: <a href="Word-Expansion.html#Word-Expansion" accesskey="u" rel="up">Word Expansion</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

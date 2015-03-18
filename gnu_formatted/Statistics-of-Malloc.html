@@ -1,0 +1,95 @@
+<a name="Statistics-of-Malloc"></a>
+<div class="header">
+<p>
+Next: <a href="Summary-of-Malloc.html#Summary-of-Malloc" accesskey="n" rel="next">Summary of Malloc</a>, Previous: <a href="Hooks-for-Malloc.html#Hooks-for-Malloc" accesskey="p" rel="prev">Hooks for Malloc</a>, Up: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="u" rel="up">Unconstrained Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Statistics-for-Memory-Allocation-with-malloc"></a>
+<h4 class="subsubsection">3.2.2.11 Statistics for Memory Allocation with <code>malloc</code></h4>
+
+<a name="index-allocation-statistics"></a>
+<p>You can get information about dynamic memory allocation by calling the
+<code>mallinfo</code> function.  This function and its associated data type
+are declared in <samp>malloc.h</samp>; they are an extension of the standard
+SVID/XPG version.
+<a name="index-malloc_002eh-2"></a>
+</p>
+<dl>
+<dt><a name="index-struct-mallinfo"></a>Data Type: <strong>struct mallinfo</strong></dt>
+<dd><p>This structure type is used to return information about the dynamic
+memory allocator.  It contains the following members:
+</p>
+<dl compact="compact">
+<dt><code>int arena</code></dt>
+<dd><p>This is the total size of memory allocated with <code>sbrk</code> by
+<code>malloc</code>, in bytes.
+</p>
+</dd>
+<dt><code>int ordblks</code></dt>
+<dd><p>This is the number of chunks not in use.  (The memory allocator
+internally gets chunks of memory from the operating system, and then
+carves them up to satisfy individual <code>malloc</code> requests; see
+<a href="Efficiency-and-Malloc.html#Efficiency-and-Malloc">Efficiency and Malloc</a>.)
+</p>
+</dd>
+<dt><code>int smblks</code></dt>
+<dd><p>This field is unused.
+</p>
+</dd>
+<dt><code>int hblks</code></dt>
+<dd><p>This is the total number of chunks allocated with <code>mmap</code>.
+</p>
+</dd>
+<dt><code>int hblkhd</code></dt>
+<dd><p>This is the total size of memory allocated with <code>mmap</code>, in bytes.
+</p>
+</dd>
+<dt><code>int usmblks</code></dt>
+<dd><p>This field is unused.
+</p>
+</dd>
+<dt><code>int fsmblks</code></dt>
+<dd><p>This field is unused.
+</p>
+</dd>
+<dt><code>int uordblks</code></dt>
+<dd><p>This is the total size of memory occupied by chunks handed out by
+<code>malloc</code>.
+</p>
+</dd>
+<dt><code>int fordblks</code></dt>
+<dd><p>This is the total size of memory occupied by free (not in use) chunks.
+</p>
+</dd>
+<dt><code>int keepcost</code></dt>
+<dd><p>This is the size of the top-most releasable chunk that normally
+borders the end of the heap (i.e., the high end of the virtual address
+space&rsquo;s data segment).
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><a name="index-mallinfo"></a>Function: <em>struct mallinfo</em> <strong>mallinfo</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe init const:mallopt
+| AS-Unsafe init lock
+| AC-Unsafe init lock
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+
+
+<p>This function returns information about the current dynamic memory usage
+in a structure of type <code>struct mallinfo</code>.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Summary-of-Malloc.html#Summary-of-Malloc" accesskey="n" rel="next">Summary of Malloc</a>, Previous: <a href="Hooks-for-Malloc.html#Hooks-for-Malloc" accesskey="p" rel="prev">Hooks for Malloc</a>, Up: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="u" rel="up">Unconstrained Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

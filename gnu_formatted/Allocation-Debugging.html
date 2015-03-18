@@ -1,0 +1,37 @@
+<a name="Allocation-Debugging"></a>
+<div class="header">
+<p>
+Next: <a href="Obstacks.html#Obstacks" accesskey="n" rel="next">Obstacks</a>, Previous: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="p" rel="prev">Unconstrained Allocation</a>, Up: <a href="Memory-Allocation.html#Memory-Allocation" accesskey="u" rel="up">Memory Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Allocation-Debugging-1"></a>
+<h4 class="subsection">3.2.3 Allocation Debugging</h4>
+<a name="index-allocation-debugging"></a>
+<a name="index-malloc-debugger"></a>
+
+<p>A complicated task when programming with languages which do not use
+garbage collected dynamic memory allocation is to find memory leaks.
+Long running programs must assure that dynamically allocated objects are
+freed at the end of their lifetime.  If this does not happen the system
+runs out of memory, sooner or later.
+</p>
+<p>The <code>malloc</code> implementation in the GNU C Library provides some
+simple means to detect such leaks and obtain some information to find
+the location.  To do this the application must be started in a special
+mode which is enabled by an environment variable.  There are no speed
+penalties for the program if the debugging mode is not enabled.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Tracing-malloc.html#Tracing-malloc" accesskey="1">Tracing malloc</a>:</td><td align="left" valign="top">How to install the tracing functionality.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Using-the-Memory-Debugger.html#Using-the-Memory-Debugger" accesskey="2">Using the Memory Debugger</a>:</td><td align="left" valign="top">Example programs excerpts.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tips-for-the-Memory-Debugger.html#Tips-for-the-Memory-Debugger" accesskey="3">Tips for the Memory Debugger</a>:</td><td align="left" valign="top">Some more or less clever ideas.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Interpreting-the-traces.html#Interpreting-the-traces" accesskey="4">Interpreting the traces</a>:</td><td align="left" valign="top">What do all these lines mean?
+</td></tr>
+</table>
+
+
+
+

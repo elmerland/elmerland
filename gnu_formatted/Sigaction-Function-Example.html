@@ -1,0 +1,77 @@
+<a name="Sigaction-Function-Example"></a>
+<div class="header">
+<p>
+Next: <a href="Flags-for-Sigaction.html#Flags-for-Sigaction" accesskey="n" rel="next">Flags for Sigaction</a>, Previous: <a href="Signal-and-Sigaction.html#Signal-and-Sigaction" accesskey="p" rel="prev">Signal and Sigaction</a>, Up: <a href="Signal-Actions.html#Signal-Actions" accesskey="u" rel="up">Signal Actions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="sigaction-Function-Example"></a>
+<h4 class="subsection">24.3.4 <code>sigaction</code> Function Example</h4>
+
+<p>In <a href="Basic-Signal-Handling.html#Basic-Signal-Handling">Basic Signal Handling</a>, we gave an example of establishing a
+simple handler for termination signals using <code>signal</code>.  Here is an
+equivalent example using <code>sigaction</code>:
+</p>
+<div class="smallexample">
+<pre class="smallexample">#include &lt;signal.h&gt;
+
+void
+termination_handler (int signum)
+{
+  struct temp_file *p;
+
+  for (p = temp_file_list; p; p = p-&gt;next)
+    unlink (p-&gt;name);
+}
+
+int
+main (void)
+{
+  &hellip;
+  struct sigaction new_action, old_action;
+
+  /* <span class="roman">Set up the structure to specify the new action.</span> */
+  new_action.sa_handler = termination_handler;
+  sigemptyset (&amp;new_action.sa_mask);
+  new_action.sa_flags = 0;
+
+  sigaction (SIGINT, NULL, &amp;old_action);
+  if (old_action.sa_handler != SIG_IGN)
+    sigaction (SIGINT, &amp;new_action, NULL);
+  sigaction (SIGHUP, NULL, &amp;old_action);
+  if (old_action.sa_handler != SIG_IGN)
+    sigaction (SIGHUP, &amp;new_action, NULL);
+  sigaction (SIGTERM, NULL, &amp;old_action);
+  if (old_action.sa_handler != SIG_IGN)
+    sigaction (SIGTERM, &amp;new_action, NULL);
+  &hellip;
+}
+</pre></div>
+
+<p>The program just loads the <code>new_action</code> structure with the desired
+parameters and passes it in the <code>sigaction</code> call.  The usage of
+<code>sigemptyset</code> is described later; see <a href="Blocking-Signals.html#Blocking-Signals">Blocking Signals</a>.
+</p>
+<p>As in the example using <code>signal</code>, we avoid handling signals
+previously set to be ignored.  Here we can avoid altering the signal
+handler even momentarily, by using the feature of <code>sigaction</code> that
+lets us examine the current action without specifying a new one.
+</p>
+<p>Here is another example.  It retrieves information about the current
+action for <code>SIGINT</code> without changing that action.
+</p>
+<div class="smallexample">
+<pre class="smallexample">struct sigaction query_action;
+
+if (sigaction (SIGINT, NULL, &amp;query_action) &lt; 0)
+  /* <span class="roman"><code>sigaction</code> returns -1 in case of error.</span> */
+else if (query_action.sa_handler == SIG_DFL)
+  /* <span class="roman"><code>SIGINT</code> is handled in the default, fatal manner.</span> */
+else if (query_action.sa_handler == SIG_IGN)
+  /* <span class="roman"><code>SIGINT</code> is ignored.</span> */
+else
+  /* <span class="roman">A programmer-defined signal handler is in effect.</span> */
+</pre></div>
+
+
+
+

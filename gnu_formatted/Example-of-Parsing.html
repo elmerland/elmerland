@@ -1,0 +1,81 @@
+<a name="Example-of-Parsing"></a>
+<div class="header">
+<p>
+Previous: <a href="Parsing-a-Template-String.html#Parsing-a-Template-String" accesskey="p" rel="prev">Parsing a Template String</a>, Up: <a href="Formatted-Output.html#Formatted-Output" accesskey="u" rel="up">Formatted Output</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Example-of-Parsing-a-Template-String"></a>
+<h4 class="subsection">12.12.11 Example of Parsing a Template String</h4>
+
+<p>Here is an example of decoding argument types for a format string.  We
+assume this is part of an interpreter which contains arguments of type
+<code>NUMBER</code>, <code>CHAR</code>, <code>STRING</code> and <code>STRUCTURE</code> (and
+perhaps others which are not valid here).
+</p>
+<div class="smallexample">
+<pre class="smallexample">/* <span class="roman">Test whether the <var>nargs</var> specified objects</span>
+   <span class="roman">in the vector <var>args</var> are valid</span>
+   <span class="roman">for the format string <var>format</var>:</span>
+   <span class="roman">if so, return 1.</span>
+   <span class="roman">If not, return 0 after printing an error message.</span>  */
+
+int
+validate_args (char *format, int nargs, OBJECT *args)
+{
+  int *argtypes;
+  int nwanted;
+
+  /* <span class="roman">Get the information about the arguments.</span>
+     <span class="roman">Each conversion specification must be at least two characters</span>
+     <span class="roman">long, so there cannot be more specifications than half the</span>
+     <span class="roman">length of the string.</span>  */
+
+  argtypes = (int *) alloca (strlen (format) / 2 * sizeof (int));
+  nwanted = parse_printf_format (string, nelts, argtypes);
+
+  /* <span class="roman">Check the number of arguments.</span>  */
+  if (nwanted &gt; nargs)
+    {
+      error (&quot;too few arguments (at least %d required)&quot;, nwanted);
+      return 0;
+    }
+
+  /* <span class="roman">Check the C type wanted for each argument</span>
+     <span class="roman">and see if the object given is suitable.</span>  */
+  for (i = 0; i &lt; nwanted; i++)
+    {
+      int wanted;
+
+      if (argtypes[i] &amp; PA_FLAG_PTR)
+	wanted = STRUCTURE;
+      else
+	switch (argtypes[i] &amp; ~PA_FLAG_MASK)
+	  {
+	  case PA_INT:
+	  case PA_FLOAT:
+	  case PA_DOUBLE:
+	    wanted = NUMBER;
+	    break;
+	  case PA_CHAR:
+	    wanted = CHAR;
+	    break;
+	  case PA_STRING:
+	    wanted = STRING;
+	    break;
+	  case PA_POINTER:
+	    wanted = STRUCTURE;
+	    break;
+	  }
+      if (TYPE (args[i]) != wanted)
+	{
+	  error (&quot;type mismatch for arg number %d&quot;, i);
+	  return 0;
+	}
+    }
+  return 1;
+}
+</pre></div>
+
+
+
+

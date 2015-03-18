@@ -1,0 +1,132 @@
+<a name="Variable-Substitution"></a>
+<div class="header">
+<p>
+Previous: <a href="Tilde-Expansion.html#Tilde-Expansion" accesskey="p" rel="prev">Tilde Expansion</a>, Up: <a href="Word-Expansion.html#Word-Expansion" accesskey="u" rel="up">Word Expansion</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Details-of-Variable-Substitution"></a>
+<h4 class="subsection">10.4.6 Details of Variable Substitution</h4>
+
+<p>Part of ordinary shell syntax is the use of &lsquo;<samp>$<var>variable</var></samp>&rsquo; to
+substitute the value of a shell variable into a command.  This is called
+<em>variable substitution</em>, and it is one part of doing word expansion.
+</p>
+<p>There are two basic ways you can write a variable reference for
+substitution:
+</p>
+<dl compact="compact">
+<dt><code>${<var>variable</var>}</code></dt>
+<dd><p>If you write braces around the variable name, then it is completely
+unambiguous where the variable name ends.  You can concatenate
+additional letters onto the end of the variable value by writing them
+immediately after the close brace.  For example, &lsquo;<samp>${foo}s</samp>&rsquo;
+expands into &lsquo;<samp>tractors</samp>&rsquo;.
+</p>
+</dd>
+<dt><code>$<var>variable</var></code></dt>
+<dd><p>If you do not put braces around the variable name, then the variable
+name consists of all the alphanumeric characters and underscores that
+follow the &lsquo;<samp>$</samp>&rsquo;.  The next punctuation character ends the variable
+name.  Thus, &lsquo;<samp>$foo-bar</samp>&rsquo; refers to the variable <code>foo</code> and expands
+into &lsquo;<samp>tractor-bar</samp>&rsquo;.
+</p></dd>
+</dl>
+
+<p>When you use braces, you can also use various constructs to modify the
+value that is substituted, or test it in various ways.
+</p>
+<dl compact="compact">
+<dt><code>${<var>variable</var>:-<var>default</var>}</code></dt>
+<dd><p>Substitute the value of <var>variable</var>, but if that is empty or
+undefined, use <var>default</var> instead.
+</p>
+</dd>
+<dt><code>${<var>variable</var>:=<var>default</var>}</code></dt>
+<dd><p>Substitute the value of <var>variable</var>, but if that is empty or
+undefined, use <var>default</var> instead and set the variable to
+<var>default</var>.
+</p>
+</dd>
+<dt><code>${<var>variable</var>:?<var>message</var>}</code></dt>
+<dd><p>If <var>variable</var> is defined and not empty, substitute its value.
+</p>
+<p>Otherwise, print <var>message</var> as an error message on the standard error
+stream, and consider word expansion a failure.
+</p>
+
+</dd>
+<dt><code>${<var>variable</var>:+<var>replacement</var>}</code></dt>
+<dd><p>Substitute <var>replacement</var>, but only if <var>variable</var> is defined and
+nonempty.  Otherwise, substitute nothing for this construct.
+</p></dd>
+</dl>
+
+<dl compact="compact">
+<dt><code>${#<var>variable</var>}</code></dt>
+<dd><p>Substitute a numeral which expresses in base ten the number of
+characters in the value of <var>variable</var>.  &lsquo;<samp>${#foo}</samp>&rsquo; stands for
+&lsquo;<samp>7</samp>&rsquo;, because &lsquo;<samp>tractor</samp>&rsquo; is seven characters.
+</p></dd>
+</dl>
+
+<p>These variants of variable substitution let you remove part of the
+variable&rsquo;s value before substituting it.  The <var>prefix</var> and
+<var>suffix</var> are not mere strings; they are wildcard patterns, just
+like the patterns that you use to match multiple file names.  But
+in this context, they match against parts of the variable value
+rather than against file names.
+</p>
+<dl compact="compact">
+<dt><code>${<var>variable</var>%%<var>suffix</var>}</code></dt>
+<dd><p>Substitute the value of <var>variable</var>, but first discard from that
+variable any portion at the end that matches the pattern <var>suffix</var>.
+</p>
+<p>If there is more than one alternative for how to match against
+<var>suffix</var>, this construct uses the longest possible match.
+</p>
+<p>Thus, &lsquo;<samp>${foo%%r*}</samp>&rsquo; substitutes &lsquo;<samp>t</samp>&rsquo;, because the largest
+match for &lsquo;<samp>r*</samp>&rsquo; at the end of &lsquo;<samp>tractor</samp>&rsquo; is &lsquo;<samp>ractor</samp>&rsquo;.
+</p>
+</dd>
+<dt><code>${<var>variable</var>%<var>suffix</var>}</code></dt>
+<dd><p>Substitute the value of <var>variable</var>, but first discard from that
+variable any portion at the end that matches the pattern <var>suffix</var>.
+</p>
+<p>If there is more than one alternative for how to match against
+<var>suffix</var>, this construct uses the shortest possible alternative.
+</p>
+<p>Thus, &lsquo;<samp>${foo%r*}</samp>&rsquo; substitutes &lsquo;<samp>tracto</samp>&rsquo;, because the shortest
+match for &lsquo;<samp>r*</samp>&rsquo; at the end of &lsquo;<samp>tractor</samp>&rsquo; is just &lsquo;<samp>r</samp>&rsquo;.
+</p>
+</dd>
+<dt><code>${<var>variable</var>##<var>prefix</var>}</code></dt>
+<dd><p>Substitute the value of <var>variable</var>, but first discard from that
+variable any portion at the beginning that matches the pattern <var>prefix</var>.
+</p>
+<p>If there is more than one alternative for how to match against
+<var>prefix</var>, this construct uses the longest possible match.
+</p>
+<p>Thus, &lsquo;<samp>${foo##*t}</samp>&rsquo; substitutes &lsquo;<samp>or</samp>&rsquo;, because the largest
+match for &lsquo;<samp>*t</samp>&rsquo; at the beginning of &lsquo;<samp>tractor</samp>&rsquo; is &lsquo;<samp>tract</samp>&rsquo;.
+</p>
+</dd>
+<dt><code>${<var>variable</var>#<var>prefix</var>}</code></dt>
+<dd><p>Substitute the value of <var>variable</var>, but first discard from that
+variable any portion at the beginning that matches the pattern <var>prefix</var>.
+</p>
+<p>If there is more than one alternative for how to match against
+<var>prefix</var>, this construct uses the shortest possible alternative.
+</p>
+<p>Thus, &lsquo;<samp>${foo#*t}</samp>&rsquo; substitutes &lsquo;<samp>ractor</samp>&rsquo;, because the shortest
+match for &lsquo;<samp>*t</samp>&rsquo; at the beginning of &lsquo;<samp>tractor</samp>&rsquo; is just &lsquo;<samp>t</samp>&rsquo;.
+</p>
+</dd>
+</dl>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Tilde-Expansion.html#Tilde-Expansion" accesskey="p" rel="prev">Tilde Expansion</a>, Up: <a href="Word-Expansion.html#Word-Expansion" accesskey="u" rel="up">Word Expansion</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

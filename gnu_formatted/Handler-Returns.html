@@ -1,0 +1,76 @@
+<a name="Handler-Returns"></a>
+<div class="header">
+<p>
+Next: <a href="Termination-in-Handler.html#Termination-in-Handler" accesskey="n" rel="next">Termination in Handler</a>, Up: <a href="Defining-Handlers.html#Defining-Handlers" accesskey="u" rel="up">Defining Handlers</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Signal-Handlers-that-Return"></a>
+<h4 class="subsection">24.4.1 Signal Handlers that Return</h4>
+
+<p>Handlers which return normally are usually used for signals such as
+<code>SIGALRM</code> and the I/O and interprocess communication signals.  But
+a handler for <code>SIGINT</code> might also return normally after setting a
+flag that tells the program to exit at a convenient time.
+</p>
+<p>It is not safe to return normally from the handler for a program error
+signal, because the behavior of the program when the handler function
+returns is not defined after a program error.  See <a href="Program-Error-Signals.html#Program-Error-Signals">Program Error Signals</a>.
+</p>
+<p>Handlers that return normally must modify some global variable in order
+to have any effect.  Typically, the variable is one that is examined
+periodically by the program during normal operation.  Its data type
+should be <code>sig_atomic_t</code> for reasons described in <a href="Atomic-Data-Access.html#Atomic-Data-Access">Atomic Data Access</a>.
+</p>
+<p>Here is a simple example of such a program.  It executes the body of
+the loop until it has noticed that a <code>SIGALRM</code> signal has arrived.
+This technique is useful because it allows the iteration in progress
+when the signal arrives to complete before the loop exits.
+</p>
+<div class="smallexample">
+<pre class="smallexample">
+#include &lt;signal.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+/* <span class="roman">This flag controls termination of the main loop.</span> */
+volatile sig_atomic_t keep_going = 1;
+
+/* <span class="roman">The signal handler just clears the flag and re-enables itself.</span> */
+void
+catch_alarm (int sig)
+{
+  keep_going = 0;
+  signal (sig, catch_alarm);
+}
+
+void
+do_stuff (void)
+{
+  puts (&quot;Doing stuff while waiting for alarm....&quot;);
+}
+
+int
+main (void)
+{
+  /* <span class="roman">Establish a handler for SIGALRM signals.</span> */
+  signal (SIGALRM, catch_alarm);
+
+  /* <span class="roman">Set an alarm to go off in a little while.</span> */
+  alarm (2);
+
+  /* <span class="roman">Check the flag once in a while to see when to quit.</span> */
+  while (keep_going)
+    do_stuff ();
+
+  return EXIT_SUCCESS;
+}
+</pre></div>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Termination-in-Handler.html#Termination-in-Handler" accesskey="n" rel="next">Termination in Handler</a>, Up: <a href="Defining-Handlers.html#Defining-Handlers" accesskey="u" rel="up">Defining Handlers</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

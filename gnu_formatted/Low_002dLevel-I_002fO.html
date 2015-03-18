@@ -1,0 +1,97 @@
+<a name="Low_002dLevel-I_002fO"></a>
+<div class="header">
+<p>
+Next: <a href="File-System-Interface.html#File-System-Interface" accesskey="n" rel="next">File System Interface</a>, Previous: <a href="I_002fO-on-Streams.html#I_002fO-on-Streams" accesskey="p" rel="prev">I/O on Streams</a>, Up: <a href="index.html#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Low_002dLevel-Input_002fOutput"></a>
+<h2 class="chapter">13 Low-Level Input/Output</h2>
+
+<p>This chapter describes functions for performing low-level input/output
+operations on file descriptors.  These functions include the primitives
+for the higher-level I/O functions described in <a href="I_002fO-on-Streams.html#I_002fO-on-Streams">I/O on Streams</a>, as
+well as functions for performing low-level control operations for which
+there are no equivalents on streams.
+</p>
+<p>Stream-level I/O is more flexible and usually more convenient;
+therefore, programmers generally use the descriptor-level functions only
+when necessary.  These are some of the usual reasons:
+</p>
+<ul>
+<li> For reading binary files in large chunks.
+
+</li><li> For reading an entire file into core before parsing it.
+
+</li><li> To perform operations other than data transfer, which can only be done
+with a descriptor.  (You can use <code>fileno</code> to get the descriptor
+corresponding to a stream.)
+
+</li><li> To pass descriptors to a child process.  (The child can create its own
+stream to use a descriptor that it inherits, but cannot inherit a stream
+directly.)
+</li></ul>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Opening-and-Closing-Files.html#Opening-and-Closing-Files" accesskey="1">Opening and Closing Files</a>:</td><td align="left" valign="top">How to open and close file
+                                         descriptors.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="I_002fO-Primitives.html#I_002fO-Primitives" accesskey="2">I/O Primitives</a>:</td><td align="left" valign="top">Reading and writing data.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="File-Position-Primitive.html#File-Position-Primitive" accesskey="3">File Position Primitive</a>:</td><td align="left" valign="top">Setting a descriptor&rsquo;s file
+                                         position.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Descriptors-and-Streams.html#Descriptors-and-Streams" accesskey="4">Descriptors and Streams</a>:</td><td align="left" valign="top">Converting descriptor to stream
+                                         or vice-versa.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Stream_002fDescriptor-Precautions.html#Stream_002fDescriptor-Precautions" accesskey="5">Stream/Descriptor Precautions</a>:</td><td align="left" valign="top">Precautions needed if you use both
+                                         descriptors and streams.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Scatter_002dGather.html#Scatter_002dGather" accesskey="6">Scatter-Gather</a>:</td><td align="left" valign="top">Fast I/O to discontinuous buffers.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Memory_002dmapped-I_002fO.html#Memory_002dmapped-I_002fO" accesskey="7">Memory-mapped I/O</a>:</td><td align="left" valign="top">Using files like memory.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Waiting-for-I_002fO.html#Waiting-for-I_002fO" accesskey="8">Waiting for I/O</a>:</td><td align="left" valign="top">How to check for input or output
+					 on multiple file descriptors.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Synchronizing-I_002fO.html#Synchronizing-I_002fO" accesskey="9">Synchronizing I/O</a>:</td><td align="left" valign="top">Making sure all I/O actions completed.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Asynchronous-I_002fO.html#Asynchronous-I_002fO">Asynchronous I/O</a>:</td><td align="left" valign="top">Perform I/O in parallel.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Control-Operations.html#Control-Operations">Control Operations</a>:</td><td align="left" valign="top">Various other operations on file
+					 descriptors.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Duplicating-Descriptors.html#Duplicating-Descriptors">Duplicating Descriptors</a>:</td><td align="left" valign="top">Fcntl commands for duplicating
+                                         file descriptors.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Descriptor-Flags.html#Descriptor-Flags">Descriptor Flags</a>:</td><td align="left" valign="top">Fcntl commands for manipulating
+                                         flags associated with file
+                                         descriptors.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="File-Status-Flags.html#File-Status-Flags">File Status Flags</a>:</td><td align="left" valign="top">Fcntl commands for manipulating
+                                         flags associated with open files.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="File-Locks.html#File-Locks">File Locks</a>:</td><td align="left" valign="top">Fcntl commands for implementing
+                                         file locking.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Open-File-Description-Locks.html#Open-File-Description-Locks">Open File Description Locks</a>:</td><td align="left" valign="top">Fcntl commands for implementing
+                                         open file description locking.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Open-File-Description-Locks-Example.html#Open-File-Description-Locks-Example">Open File Description Locks Example</a>:</td><td align="left" valign="top">An example of open file description lock
+                                         usage
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Interrupt-Input.html#Interrupt-Input">Interrupt Input</a>:</td><td align="left" valign="top">Getting an asynchronous signal when
+                                         input arrives.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="IOCTLs.html#IOCTLs">IOCTLs</a>:</td><td align="left" valign="top">Generic I/O Control operations.
+</td></tr>
+</table>
+
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="File-System-Interface.html#File-System-Interface" accesskey="n" rel="next">File System Interface</a>, Previous: <a href="I_002fO-on-Streams.html#I_002fO-on-Streams" accesskey="p" rel="prev">I/O on Streams</a>, Up: <a href="index.html#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

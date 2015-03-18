@@ -1,0 +1,87 @@
+<a name="Exit-Status"></a>
+<div class="header">
+<p>
+Next: <a href="Cleanups-on-Exit.html#Cleanups-on-Exit" accesskey="n" rel="next">Cleanups on Exit</a>, Previous: <a href="Normal-Termination.html#Normal-Termination" accesskey="p" rel="prev">Normal Termination</a>, Up: <a href="Program-Termination.html#Program-Termination" accesskey="u" rel="up">Program Termination</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Exit-Status-1"></a>
+<h4 class="subsection">25.7.2 Exit Status</h4>
+<a name="index-exit-status"></a>
+
+<p>When a program exits, it can return to the parent process a small
+amount of information about the cause of termination, using the
+<em>exit status</em>.  This is a value between 0 and 255 that the exiting
+process passes as an argument to <code>exit</code>.
+</p>
+<p>Normally you should use the exit status to report very broad information
+about success or failure.  You can&rsquo;t provide a lot of detail about the
+reasons for the failure, and most parent processes would not want much
+detail anyway.
+</p>
+<p>There are conventions for what sorts of status values certain programs
+should return.  The most common convention is simply 0 for success and 1
+for failure.  Programs that perform comparison use a different
+convention: they use status 1 to indicate a mismatch, and status 2 to
+indicate an inability to compare.  Your program should follow an
+existing convention if an existing convention makes sense for it.
+</p>
+<p>A general convention reserves status values 128 and up for special
+purposes.  In particular, the value 128 is used to indicate failure to
+execute another program in a subprocess.  This convention is not
+universally obeyed, but it is a good idea to follow it in your programs.
+</p>
+<p><strong>Warning:</strong> Don&rsquo;t try to use the number of errors as the exit
+status.  This is actually not very useful; a parent process would
+generally not care how many errors occurred.  Worse than that, it does
+not work, because the status value is truncated to eight bits.
+Thus, if the program tried to report 256 errors, the parent would
+receive a report of 0 errors&mdash;that is, success.
+</p>
+<p>For the same reason, it does not work to use the value of <code>errno</code>
+as the exit status&mdash;these can exceed 255.
+</p>
+<p><strong>Portability note:</strong> Some non-POSIX systems use different
+conventions for exit status values.  For greater portability, you can
+use the macros <code>EXIT_SUCCESS</code> and <code>EXIT_FAILURE</code> for the
+conventional status value for success and failure, respectively.  They
+are declared in the file <samp>stdlib.h</samp>.
+<a name="index-stdlib_002eh-20"></a>
+</p>
+<dl>
+<dt><a name="index-EXIT_005fSUCCESS"></a>Macro: <em>int</em> <strong>EXIT_SUCCESS</strong></dt>
+<dd><p>This macro can be used with the <code>exit</code> function to indicate
+successful program completion.
+</p>
+<p>On POSIX systems, the value of this macro is <code>0</code>.  On other
+systems, the value might be some other (possibly non-constant) integer
+expression.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-EXIT_005fFAILURE"></a>Macro: <em>int</em> <strong>EXIT_FAILURE</strong></dt>
+<dd><p>This macro can be used with the <code>exit</code> function to indicate
+unsuccessful program completion in a general sense.
+</p>
+<p>On POSIX systems, the value of this macro is <code>1</code>.  On other
+systems, the value might be some other (possibly non-constant) integer
+expression.  Other nonzero status values also indicate failures.  Certain
+programs use different nonzero status values to indicate particular
+kinds of &quot;non-success&quot;.  For example, <code>diff</code> uses status value
+<code>1</code> to mean that the files are different, and <code>2</code> or more to
+mean that there was difficulty in opening the files.
+</p></dd></dl>
+
+<p>Don&rsquo;t confuse a program&rsquo;s exit status with a process&rsquo; termination status.
+There are lots of ways a process can terminate besides having its program
+finish.  In the event that the process termination <em>is</em> caused by program
+termination (i.e., <code>exit</code>), though, the program&rsquo;s exit status becomes
+part of the process&rsquo; termination status.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Cleanups-on-Exit.html#Cleanups-on-Exit" accesskey="n" rel="next">Cleanups on Exit</a>, Previous: <a href="Normal-Termination.html#Normal-Termination" accesskey="p" rel="prev">Normal Termination</a>, Up: <a href="Program-Termination.html#Program-Termination" accesskey="u" rel="up">Program Termination</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

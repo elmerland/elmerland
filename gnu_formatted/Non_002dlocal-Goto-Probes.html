@@ -1,0 +1,50 @@
+<a name="Non_002dlocal-Goto-Probes"></a>
+<div class="header">
+<p>
+Previous: <a href="Mathematical-Function-Probes.html#Mathematical-Function-Probes" accesskey="p" rel="prev">Mathematical Function Probes</a>, Up: <a href="Internal-Probes.html#Internal-Probes" accesskey="u" rel="up">Internal Probes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Non_002dlocal-Goto-Probes-1"></a>
+<h3 class="section">36.3 Non-local Goto Probes</h3>
+
+<p>These probes are used to signal calls to <code>setjmp</code>, <code>sigsetjmp</code>,
+<code>longjmp</code> or <code>siglongjmp</code>.
+</p>
+<dl>
+<dt><a name="index-setjmp-1"></a>Probe: <strong>setjmp</strong> <em>(void *<var>$arg1</var>, int <var>$arg2</var>, void *<var>$arg3</var>)</em></dt>
+<dd><p>This probe is triggered whenever <code>setjmp</code> or <code>sigsetjmp</code> is
+called.  Argument <var>$arg1</var> is a pointer to the <code>jmp_buf</code>
+passed as the first argument of <code>setjmp</code> or <code>sigsetjmp</code>,
+<var>$arg2</var> is the second argument of <code>sigsetjmp</code> or zero if this
+is a call to <code>setjmp</code> and <var>$arg3</var> is a pointer to the return
+address that will be stored in the <code>jmp_buf</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-longjmp-2"></a>Probe: <strong>longjmp</strong> <em>(void *<var>$arg1</var>, int <var>$arg2</var>, void *<var>$arg3</var>)</em></dt>
+<dd><p>This probe is triggered whenever <code>longjmp</code> or <code>siglongjmp</code>
+is called.  Argument <var>$arg1</var> is a pointer to the <code>jmp_buf</code>
+passed as the first argument of <code>longjmp</code> or <code>siglongjmp</code>,
+<var>$arg2</var> is the return value passed as the second argument of
+<code>longjmp</code> or <code>siglongjmp</code> and <var>$arg3</var> is a pointer to
+the return address <code>longjmp</code> or <code>siglongjmp</code> will return to.
+</p>
+<p>The <code>longjmp</code> probe is triggered at a point where the registers
+have not yet been restored to the values in the <code>jmp_buf</code> and
+unwinding will show a call stack including the caller of
+<code>longjmp</code> or <code>siglongjmp</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-longjmp_005ftarget"></a>Probe: <strong>longjmp_target</strong> <em>(void *<var>$arg1</var>, int <var>$arg2</var>, void *<var>$arg3</var>)</em></dt>
+<dd><p>This probe is triggered under the same conditions and with the same
+arguments as the <code>longjmp</code> probe.
+</p>
+<p>The <code>longjmp_target</code> probe is triggered at a point where the
+registers have been restored to the values in the <code>jmp_buf</code> and
+unwinding will show a call stack including the caller of <code>setjmp</code>
+or <code>sigsetjmp</code>.
+</p></dd></dl>
+
+
+

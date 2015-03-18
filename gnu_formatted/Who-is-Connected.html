@@ -1,0 +1,53 @@
+<a name="Who-is-Connected"></a>
+<div class="header">
+<p>
+Next: <a href="Transferring-Data.html#Transferring-Data" accesskey="n" rel="next">Transferring Data</a>, Previous: <a href="Accepting-Connections.html#Accepting-Connections" accesskey="p" rel="prev">Accepting Connections</a>, Up: <a href="Connections.html#Connections" accesskey="u" rel="up">Connections</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Who-is-Connected-to-Me_003f"></a>
+<h4 class="subsection">16.9.4 Who is Connected to Me?</h4>
+
+<dl>
+<dt><a name="index-getpeername"></a>Function: <em>int</em> <strong>getpeername</strong> <em>(int <var>socket</var>, struct sockaddr *<var>addr</var>, socklen_t *<var>length-ptr</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>getpeername</code> function returns the address of the socket that
+<var>socket</var> is connected to; it stores the address in the memory space
+specified by <var>addr</var> and <var>length-ptr</var>.  It stores the length of
+the address in <code>*<var>length-ptr</var></code>.
+</p>
+<p>See <a href="Socket-Addresses.html#Socket-Addresses">Socket Addresses</a>, for information about the format of the
+address.  In some operating systems, <code>getpeername</code> works only for
+sockets in the Internet domain.
+</p>
+<p>The return value is <code>0</code> on success and <code>-1</code> on error.  The
+following <code>errno</code> error conditions are defined for this function:
+</p>
+<dl compact="compact">
+<dt><code>EBADF</code></dt>
+<dd><p>The argument <var>socket</var> is not a valid file descriptor.
+</p>
+</dd>
+<dt><code>ENOTSOCK</code></dt>
+<dd><p>The descriptor <var>socket</var> is not a socket.
+</p>
+</dd>
+<dt><code>ENOTCONN</code></dt>
+<dd><p>The socket <var>socket</var> is not connected.
+</p>
+</dd>
+<dt><code>ENOBUFS</code></dt>
+<dd><p>There are not enough internal buffers available.
+</p></dd>
+</dl>
+</dd></dl>
+
+
+
+
+

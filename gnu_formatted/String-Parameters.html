@@ -1,0 +1,133 @@
+<a name="String-Parameters"></a>
+<div class="header">
+<p>
+Previous: <a href="Utility-Minimums.html#Utility-Minimums" accesskey="p" rel="prev">Utility Minimums</a>, Up: <a href="System-Configuration.html#System-Configuration" accesskey="u" rel="up">System Configuration</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="String_002dValued-Parameters"></a>
+<h3 class="section">32.12 String-Valued Parameters</h3>
+
+<p>POSIX.2 defines a way to get string-valued parameters from the operating
+system with the function <code>confstr</code>:
+</p>
+<dl>
+<dt><a name="index-confstr"></a>Function: <em>size_t</em> <strong>confstr</strong> <em>(int <var>parameter</var>, char *<var>buf</var>, size_t <var>len</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function reads the value of a string-valued system parameter,
+storing the string into <var>len</var> bytes of memory space starting at
+<var>buf</var>.  The <var>parameter</var> argument should be one of the
+&lsquo;<samp>_CS_</samp>&rsquo; symbols listed below.
+</p>
+<p>The normal return value from <code>confstr</code> is the length of the string
+value that you asked for.  If you supply a null pointer for <var>buf</var>,
+then <code>confstr</code> does not try to store the string; it just returns
+its length.  A value of <code>0</code> indicates an error.
+</p>
+<p>If the string you asked for is too long for the buffer (that is, longer
+than <code><var>len</var> - 1</code>), then <code>confstr</code> stores just that much
+(leaving room for the terminating null character).  You can tell that
+this has happened because <code>confstr</code> returns a value greater than or
+equal to <var>len</var>.
+</p>
+<p>The following <code>errno</code> error conditions are defined for this function:
+</p>
+<dl compact="compact">
+<dt><code>EINVAL</code></dt>
+<dd><p>The value of the <var>parameter</var> is invalid.
+</p></dd>
+</dl>
+</dd></dl>
+
+<p>Currently there is just one parameter you can read with <code>confstr</code>:
+</p>
+<dl compact="compact">
+<dt><code>_CS_PATH</code></dt>
+<dd><p>This parameter&rsquo;s value is the recommended default path for searching for
+executable files.  This is the path that a user has by default just
+after logging in.
+</p>
+</dd>
+<dt><code>_CS_LFS_CFLAGS</code></dt>
+<dd><p>The returned string specifies which additional flags must be given to
+the C compiler if a source is compiled using the
+<code>_LARGEFILE_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>.
+</p>
+</dd>
+<dt><code>_CS_LFS_LDFLAGS</code></dt>
+<dd><p>The returned string specifies which additional flags must be given to
+the linker if a source is compiled using the
+<code>_LARGEFILE_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>.
+</p>
+</dd>
+<dt><code>_CS_LFS_LIBS</code></dt>
+<dd><p>The returned string specifies which additional libraries must be linked
+to the application if a source is compiled using the
+<code>_LARGEFILE_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>.
+</p>
+</dd>
+<dt><code>_CS_LFS_LINTFLAGS</code></dt>
+<dd><p>The returned string specifies which additional flags must be given to
+the lint tool if a source is compiled using the
+<code>_LARGEFILE_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>.
+</p>
+</dd>
+<dt><code>_CS_LFS64_CFLAGS</code></dt>
+<dd><p>The returned string specifies which additional flags must be given to
+the C compiler if a source is compiled using the
+<code>_LARGEFILE64_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>.
+</p>
+</dd>
+<dt><code>_CS_LFS64_LDFLAGS</code></dt>
+<dd><p>The returned string specifies which additional flags must be given to
+the linker if a source is compiled using the
+<code>_LARGEFILE64_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>.
+</p>
+</dd>
+<dt><code>_CS_LFS64_LIBS</code></dt>
+<dd><p>The returned string specifies which additional libraries must be linked
+to the application if a source is compiled using the
+<code>_LARGEFILE64_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>.
+</p>
+</dd>
+<dt><code>_CS_LFS64_LINTFLAGS</code></dt>
+<dd><p>The returned string specifies which additional flags must be given to
+the lint tool if a source is compiled using the
+<code>_LARGEFILE64_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>.
+</p></dd>
+</dl>
+
+<p>The way to use <code>confstr</code> without any arbitrary limit on string size
+is to call it twice: first call it to get the length, allocate the
+buffer accordingly, and then call <code>confstr</code> again to fill the
+buffer, like this:
+</p>
+<div class="smallexample">
+<pre class="smallexample">char *
+get_default_path (void)
+{
+  size_t len = confstr (_CS_PATH, NULL, 0);
+  char *buffer = (char *) xmalloc (len);
+
+  if (confstr (_CS_PATH, buf, len + 1) == 0)
+    {
+      free (buffer);
+      return NULL;
+    }
+
+  return buffer;
+}
+</pre></div>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Utility-Minimums.html#Utility-Minimums" accesskey="p" rel="prev">Utility Minimums</a>, Up: <a href="System-Configuration.html#System-Configuration" accesskey="u" rel="up">System Configuration</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

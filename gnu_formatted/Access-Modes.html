@@ -1,0 +1,81 @@
+<a name="Access-Modes"></a>
+<div class="header">
+<p>
+Next: <a href="Open_002dtime-Flags.html#Open_002dtime-Flags" accesskey="n" rel="next">Open-time Flags</a>, Up: <a href="File-Status-Flags.html#File-Status-Flags" accesskey="u" rel="up">File Status Flags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="File-Access-Modes"></a>
+<h4 class="subsection">13.14.1 File Access Modes</h4>
+
+<p>The file access modes allow a file descriptor to be used for reading,
+writing, or both.  (On GNU/Hurd systems, they can also allow none of these,
+and allow execution of the file as a program.)  The access modes are chosen
+when the file is opened, and never change.
+</p>
+<dl>
+<dt><a name="index-O_005fRDONLY"></a>Macro: <em>int</em> <strong>O_RDONLY</strong></dt>
+<dd><p>Open the file for read access.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-O_005fWRONLY"></a>Macro: <em>int</em> <strong>O_WRONLY</strong></dt>
+<dd><p>Open the file for write access.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-O_005fRDWR"></a>Macro: <em>int</em> <strong>O_RDWR</strong></dt>
+<dd><p>Open the file for both reading and writing.
+</p></dd></dl>
+
+<p>On GNU/Hurd systems (and not on other systems), <code>O_RDONLY</code> and
+<code>O_WRONLY</code> are independent bits that can be bitwise-ORed together,
+and it is valid for either bit to be set or clear.  This means that
+<code>O_RDWR</code> is the same as <code>O_RDONLY|O_WRONLY</code>.  A file access
+mode of zero is permissible; it allows no operations that do input or
+output to the file, but does allow other operations such as
+<code>fchmod</code>.  On GNU/Hurd systems, since &ldquo;read-only&rdquo; or &ldquo;write-only&rdquo;
+is a misnomer, <samp>fcntl.h</samp> defines additional names for the file
+access modes.  These names are preferred when writing GNU-specific code.
+But most programs will want to be portable to other POSIX.1 systems and
+should use the POSIX.1 names above instead.
+</p>
+<dl>
+<dt><a name="index-O_005fREAD"></a>Macro: <em>int</em> <strong>O_READ</strong></dt>
+<dd><p>Open the file for reading.  Same as <code>O_RDONLY</code>; only defined on GNU.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-O_005fWRITE"></a>Macro: <em>int</em> <strong>O_WRITE</strong></dt>
+<dd><p>Open the file for writing.  Same as <code>O_WRONLY</code>; only defined on GNU.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-O_005fEXEC"></a>Macro: <em>int</em> <strong>O_EXEC</strong></dt>
+<dd><p>Open the file for executing.  Only defined on GNU.
+</p></dd></dl>
+
+<p>To determine the file access mode with <code>fcntl</code>, you must extract
+the access mode bits from the retrieved file status flags.  On
+GNU/Hurd systems,
+you can just test the <code>O_READ</code> and <code>O_WRITE</code> bits in
+the flags word.  But in other POSIX.1 systems, reading and writing
+access modes are not stored as distinct bit flags.  The portable way to
+extract the file access mode bits is with <code>O_ACCMODE</code>.
+</p>
+<dl>
+<dt><a name="index-O_005fACCMODE"></a>Macro: <em>int</em> <strong>O_ACCMODE</strong></dt>
+<dd><p>This macro stands for a mask that can be bitwise-ANDed with the file
+status flag value to produce a value representing the file access mode.
+The mode will be <code>O_RDONLY</code>, <code>O_WRONLY</code>, or <code>O_RDWR</code>.
+(On GNU/Hurd systems it could also be zero, and it never includes the
+<code>O_EXEC</code> bit.)
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Open_002dtime-Flags.html#Open_002dtime-Flags" accesskey="n" rel="next">Open-time Flags</a>, Up: <a href="File-Status-Flags.html#File-Status-Flags" accesskey="u" rel="up">File Status Flags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

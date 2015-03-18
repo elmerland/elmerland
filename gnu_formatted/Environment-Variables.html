@@ -1,0 +1,60 @@
+<a name="Environment-Variables"></a>
+<div class="header">
+<p>
+Next: <a href="Auxiliary-Vector.html#Auxiliary-Vector" accesskey="n" rel="next">Auxiliary Vector</a>, Previous: <a href="Program-Arguments.html#Program-Arguments" accesskey="p" rel="prev">Program Arguments</a>, Up: <a href="Program-Basics.html#Program-Basics" accesskey="u" rel="up">Program Basics</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Environment-Variables-1"></a>
+<h3 class="section">25.4 Environment Variables</h3>
+
+<a name="index-environment-variable"></a>
+<p>When a program is executed, it receives information about the context in
+which it was invoked in two ways.  The first mechanism uses the
+<var>argv</var> and <var>argc</var> arguments to its <code>main</code> function, and is
+discussed in <a href="Program-Arguments.html#Program-Arguments">Program Arguments</a>.  The second mechanism uses
+<em>environment variables</em> and is discussed in this section.
+</p>
+<p>The <var>argv</var> mechanism is typically used to pass command-line
+arguments specific to the particular program being invoked.  The
+environment, on the other hand, keeps track of information that is
+shared by many programs, changes infrequently, and that is less
+frequently used.
+</p>
+<p>The environment variables discussed in this section are the same
+environment variables that you set using assignments and the
+<code>export</code> command in the shell.  Programs executed from the shell
+inherit all of the environment variables from the shell.
+</p>
+<a name="index-environment"></a>
+<p>Standard environment variables are used for information about the user&rsquo;s
+home directory, terminal type, current locale, and so on; you can define
+additional variables for other purposes.  The set of all environment
+variables that have values is collectively known as the
+<em>environment</em>.
+</p>
+<p>Names of environment variables are case-sensitive and must not contain
+the character &lsquo;<samp>=</samp>&rsquo;.  System-defined environment variables are
+invariably uppercase.
+</p>
+<p>The values of environment variables can be anything that can be
+represented as a string.  A value must not contain an embedded null
+character, since this is assumed to terminate the string.
+</p>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Environment-Access.html#Environment-Access" accesskey="1">Environment Access</a>:</td><td align="left" valign="top">How to get and set the values of
+				 environment variables.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Standard-Environment.html#Standard-Environment" accesskey="2">Standard Environment</a>:</td><td align="left" valign="top">These environment variables have
+                		 standard interpretations.
+</td></tr>
+</table>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Auxiliary-Vector.html#Auxiliary-Vector" accesskey="n" rel="next">Auxiliary Vector</a>, Previous: <a href="Program-Arguments.html#Program-Arguments" accesskey="p" rel="prev">Program Arguments</a>, Up: <a href="Program-Basics.html#Program-Basics" accesskey="u" rel="up">Program Basics</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

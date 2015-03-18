@@ -1,0 +1,71 @@
+<a name="Standard-Streams"></a>
+<div class="header">
+<p>
+Next: <a href="Opening-Streams.html#Opening-Streams" accesskey="n" rel="next">Opening Streams</a>, Previous: <a href="Streams.html#Streams" accesskey="p" rel="prev">Streams</a>, Up: <a href="I_002fO-on-Streams.html#I_002fO-on-Streams" accesskey="u" rel="up">I/O on Streams</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Standard-Streams-1"></a>
+<h3 class="section">12.2 Standard Streams</h3>
+<a name="index-standard-streams"></a>
+<a name="index-streams_002c-standard"></a>
+
+<p>When the <code>main</code> function of your program is invoked, it already has
+three predefined streams open and available for use.  These represent
+the &ldquo;standard&rdquo; input and output channels that have been established
+for the process.
+</p>
+<p>These streams are declared in the header file <samp>stdio.h</samp>.
+<a name="index-stdio_002eh-1"></a>
+</p>
+<dl>
+<dt><a name="index-stdin"></a>Variable: <em>FILE *</em> <strong>stdin</strong></dt>
+<dd><p>The <em>standard input</em> stream, which is the normal source of input for the
+program.
+</p></dd></dl>
+<a name="index-standard-input-stream"></a>
+
+<dl>
+<dt><a name="index-stdout"></a>Variable: <em>FILE *</em> <strong>stdout</strong></dt>
+<dd><p>The <em>standard output</em> stream, which is used for normal output from
+the program.
+</p></dd></dl>
+<a name="index-standard-output-stream"></a>
+
+<dl>
+<dt><a name="index-stderr"></a>Variable: <em>FILE *</em> <strong>stderr</strong></dt>
+<dd><p>The <em>standard error</em> stream, which is used for error messages and
+diagnostics issued by the program.
+</p></dd></dl>
+<a name="index-standard-error-stream"></a>
+
+<p>On GNU systems, you can specify what files or processes correspond to
+these streams using the pipe and redirection facilities provided by the
+shell.  (The primitives shells use to implement these facilities are
+described in <a href="File-System-Interface.html#File-System-Interface">File System Interface</a>.)  Most other operating systems
+provide similar mechanisms, but the details of how to use them can vary.
+</p>
+<p>In the GNU C Library, <code>stdin</code>, <code>stdout</code>, and <code>stderr</code> are
+normal variables which you can set just like any others.  For example,
+to redirect the standard output to a file, you could do:
+</p>
+<div class="smallexample">
+<pre class="smallexample">fclose (stdout);
+stdout = fopen (&quot;standard-output-file&quot;, &quot;w&quot;);
+</pre></div>
+
+<p>Note however, that in other systems <code>stdin</code>, <code>stdout</code>, and
+<code>stderr</code> are macros that you cannot assign to in the normal way.
+But you can use <code>freopen</code> to get the effect of closing one and
+reopening it.  See <a href="Opening-Streams.html#Opening-Streams">Opening Streams</a>.
+</p>
+<p>The three streams <code>stdin</code>, <code>stdout</code>, and <code>stderr</code> are not
+unoriented at program start (see <a href="Streams-and-I18N.html#Streams-and-I18N">Streams and I18N</a>).
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Opening-Streams.html#Opening-Streams" accesskey="n" rel="next">Opening Streams</a>, Previous: <a href="Streams.html#Streams" accesskey="p" rel="prev">Streams</a>, Up: <a href="I_002fO-on-Streams.html#I_002fO-on-Streams" accesskey="u" rel="up">I/O on Streams</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

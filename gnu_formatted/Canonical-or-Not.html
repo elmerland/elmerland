@@ -1,0 +1,53 @@
+<a name="Canonical-or-Not"></a>
+<div class="header">
+<p>
+Next: <a href="Terminal-Modes.html#Terminal-Modes" accesskey="n" rel="next">Terminal Modes</a>, Previous: <a href="I_002fO-Queues.html#I_002fO-Queues" accesskey="p" rel="prev">I/O Queues</a>, Up: <a href="Low_002dLevel-Terminal-Interface.html#Low_002dLevel-Terminal-Interface" accesskey="u" rel="up">Low-Level Terminal Interface</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Two-Styles-of-Input_003a-Canonical-or-Not"></a>
+<h3 class="section">17.3 Two Styles of Input: Canonical or Not</h3>
+
+<p>POSIX systems support two basic modes of input: canonical and
+noncanonical.
+</p>
+<a name="index-canonical-input-processing"></a>
+<p>In <em>canonical input processing</em> mode, terminal input is processed in
+lines terminated by newline (<code>'\n'</code>), EOF, or EOL characters.  No
+input can be read until an entire line has been typed by the user, and
+the <code>read</code> function (see <a href="I_002fO-Primitives.html#I_002fO-Primitives">I/O Primitives</a>) returns at most a
+single line of input, no matter how many bytes are requested.
+</p>
+<p>In canonical input mode, the operating system provides input editing
+facilities: some characters are interpreted specially to perform editing
+operations within the current line of text, such as ERASE and KILL.
+See <a href="Editing-Characters.html#Editing-Characters">Editing Characters</a>.
+</p>
+<p>The constants <code>_POSIX_MAX_CANON</code> and <code>MAX_CANON</code> parameterize
+the maximum number of bytes which may appear in a single line of
+canonical input.  See <a href="Limits-for-Files.html#Limits-for-Files">Limits for Files</a>.  You are guaranteed a maximum
+line length of at least <code>MAX_CANON</code> bytes, but the maximum might be
+larger, and might even dynamically change size.
+</p>
+<a name="index-noncanonical-input-processing"></a>
+<p>In <em>noncanonical input processing</em> mode, characters are not grouped
+into lines, and ERASE and KILL processing is not performed.  The
+granularity with which bytes are read in noncanonical input mode is
+controlled by the MIN and TIME settings.  See <a href="Noncanonical-Input.html#Noncanonical-Input">Noncanonical Input</a>.
+</p>
+<p>Most programs use canonical input mode, because this gives the user a
+way to edit input line by line.  The usual reason to use noncanonical
+mode is when the program accepts single-character commands or provides
+its own editing facilities.
+</p>
+<p>The choice of canonical or noncanonical input is controlled by the
+<code>ICANON</code> flag in the <code>c_lflag</code> member of <code>struct termios</code>.
+See <a href="Local-Modes.html#Local-Modes">Local Modes</a>.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Terminal-Modes.html#Terminal-Modes" accesskey="n" rel="next">Terminal Modes</a>, Previous: <a href="I_002fO-Queues.html#I_002fO-Queues" accesskey="p" rel="prev">I/O Queues</a>, Up: <a href="Low_002dLevel-Terminal-Interface.html#Low_002dLevel-Terminal-Interface" accesskey="u" rel="up">Low-Level Terminal Interface</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

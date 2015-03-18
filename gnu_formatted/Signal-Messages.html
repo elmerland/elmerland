@@ -1,0 +1,76 @@
+<a name="Signal-Messages"></a>
+<div class="header">
+<p>
+Previous: <a href="Miscellaneous-Signals.html#Miscellaneous-Signals" accesskey="p" rel="prev">Miscellaneous Signals</a>, Up: <a href="Standard-Signals.html#Standard-Signals" accesskey="u" rel="up">Standard Signals</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Signal-Messages-1"></a>
+<h4 class="subsection">24.2.8 Signal Messages</h4>
+<a name="index-signal-messages"></a>
+
+<p>We mentioned above that the shell prints a message describing the signal
+that terminated a child process.  The clean way to print a message
+describing a signal is to use the functions <code>strsignal</code> and
+<code>psignal</code>.  These functions use a signal number to specify which
+kind of signal to describe.  The signal number may come from the
+termination status of a child process (see <a href="Process-Completion.html#Process-Completion">Process Completion</a>) or it
+may come from a signal handler in the same process.
+</p>
+<dl>
+<dt><a name="index-strsignal"></a>Function: <em>char *</em> <strong>strsignal</strong> <em>(int <var>signum</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe race:strsignal locale
+| AS-Unsafe init i18n corrupt heap
+| AC-Unsafe init corrupt mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function returns a pointer to a statically-allocated string
+containing a message describing the signal <var>signum</var>.  You
+should not modify the contents of this string; and, since it can be
+rewritten on subsequent calls, you should save a copy of it if you need
+to reference it later.
+</p>
+<a name="index-string_002eh-7"></a>
+<p>This function is a GNU extension, declared in the header file
+<samp>string.h</samp>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-psignal"></a>Function: <em>void</em> <strong>psignal</strong> <em>(int <var>signum</var>, const char *<var>message</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe locale
+| AS-Unsafe corrupt i18n heap
+| AC-Unsafe lock corrupt mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function prints a message describing the signal <var>signum</var> to the
+standard error output stream <code>stderr</code>; see <a href="Standard-Streams.html#Standard-Streams">Standard Streams</a>.
+</p>
+<p>If you call <code>psignal</code> with a <var>message</var> that is either a null
+pointer or an empty string, <code>psignal</code> just prints the message
+corresponding to <var>signum</var>, adding a trailing newline.
+</p>
+<p>If you supply a non-null <var>message</var> argument, then <code>psignal</code>
+prefixes its output with this string.  It adds a colon and a space
+character to separate the <var>message</var> from the string corresponding
+to <var>signum</var>.
+</p>
+<a name="index-stdio_002eh-18"></a>
+<p>This function is a BSD feature, declared in the header file <samp>signal.h</samp>.
+</p></dd></dl>
+
+<a name="index-sys_005fsiglist"></a>
+<p>There is also an array <code>sys_siglist</code> which contains the messages
+for the various signal codes.  This array exists on BSD systems, unlike
+<code>strsignal</code>.
+</p>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Miscellaneous-Signals.html#Miscellaneous-Signals" accesskey="p" rel="prev">Miscellaneous Signals</a>, Up: <a href="Standard-Signals.html#Standard-Signals" accesskey="u" rel="up">Standard Signals</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

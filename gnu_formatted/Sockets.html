@@ -1,0 +1,71 @@
+<a name="Sockets"></a>
+<div class="header">
+<p>
+Next: <a href="Low_002dLevel-Terminal-Interface.html#Low_002dLevel-Terminal-Interface" accesskey="n" rel="next">Low-Level Terminal Interface</a>, Previous: <a href="Pipes-and-FIFOs.html#Pipes-and-FIFOs" accesskey="p" rel="prev">Pipes and FIFOs</a>, Up: <a href="index.html#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Sockets-1"></a>
+<h2 class="chapter">16 Sockets</h2>
+
+<p>This chapter describes the GNU facilities for interprocess
+communication using sockets.
+</p>
+<a name="index-socket"></a>
+<a name="index-interprocess-communication_002c-with-sockets"></a>
+<p>A <em>socket</em> is a generalized interprocess communication channel.
+Like a pipe, a socket is represented as a file descriptor.  Unlike pipes
+sockets support communication between unrelated processes, and even
+between processes running on different machines that communicate over a
+network.  Sockets are the primary means of communicating with other
+machines; <code>telnet</code>, <code>rlogin</code>, <code>ftp</code>, <code>talk</code> and the
+other familiar network programs use sockets.
+</p>
+<p>Not all operating systems support sockets.  In the GNU C Library, the
+header file <samp>sys/socket.h</samp> exists regardless of the operating
+system, and the socket functions always exist, but if the system does
+not really support sockets these functions always fail.
+</p>
+<p><strong>Incomplete:</strong> We do not currently document the facilities for
+broadcast messages or for configuring Internet interfaces.  The
+reentrant functions and some newer functions that are related to IPv6
+aren&rsquo;t documented either so far.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Socket-Concepts.html#Socket-Concepts" accesskey="1">Socket Concepts</a>:</td><td align="left" valign="top">Basic concepts you need to know about.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Communication-Styles.html#Communication-Styles" accesskey="2">Communication Styles</a>:</td><td align="left" valign="top">Stream communication, datagrams and other styles.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Socket-Addresses.html#Socket-Addresses" accesskey="3">Socket Addresses</a>:</td><td align="left" valign="top">How socket names (&ldquo;addresses&rdquo;) work.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Interface-Naming.html#Interface-Naming" accesskey="4">Interface Naming</a>:</td><td align="left" valign="top">Identifying specific network interfaces.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Local-Namespace.html#Local-Namespace" accesskey="5">Local Namespace</a>:</td><td align="left" valign="top">Details about the local namespace.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Internet-Namespace.html#Internet-Namespace" accesskey="6">Internet Namespace</a>:</td><td align="left" valign="top">Details about the Internet namespace.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Misc-Namespaces.html#Misc-Namespaces" accesskey="7">Misc Namespaces</a>:</td><td align="left" valign="top">Other namespaces not documented fully here.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Open_002fClose-Sockets.html#Open_002fClose-Sockets" accesskey="8">Open/Close Sockets</a>:</td><td align="left" valign="top">Creating sockets and destroying them.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Connections.html#Connections" accesskey="9">Connections</a>:</td><td align="left" valign="top">Operations on sockets with connection state.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Datagrams.html#Datagrams">Datagrams</a>:</td><td align="left" valign="top">Operations on datagram sockets.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Inetd.html#Inetd">Inetd</a>:</td><td align="left" valign="top">Inetd is a daemon that starts servers on request.
+			   The most convenient way to write a server
+			   is to make it work with Inetd.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Socket-Options.html#Socket-Options">Socket Options</a>:</td><td align="left" valign="top">Miscellaneous low-level socket options.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Networks-Database.html#Networks-Database">Networks Database</a>:</td><td align="left" valign="top">Accessing the database of network names.
+</td></tr>
+</table>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Low_002dLevel-Terminal-Interface.html#Low_002dLevel-Terminal-Interface" accesskey="n" rel="next">Low-Level Terminal Interface</a>, Previous: <a href="Pipes-and-FIFOs.html#Pipes-and-FIFOs" accesskey="p" rel="prev">Pipes and FIFOs</a>, Up: <a href="index.html#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

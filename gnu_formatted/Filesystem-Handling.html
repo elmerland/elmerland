@@ -1,0 +1,43 @@
+<a name="Filesystem-Handling"></a>
+<div class="header">
+<p>
+Next: <a href="System-Parameters.html#System-Parameters" accesskey="n" rel="next">System Parameters</a>, Previous: <a href="Platform-Type.html#Platform-Type" accesskey="p" rel="prev">Platform Type</a>, Up: <a href="System-Management.html#System-Management" accesskey="u" rel="up">System Management</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Controlling-and-Querying-Mounts"></a>
+<h3 class="section">31.3 Controlling and Querying Mounts</h3>
+
+<p>All files are in filesystems, and before you can access any file, its
+filesystem must be mounted.  Because of Unix&rsquo;s concept of
+<em>Everything is a file</em>, mounting of filesystems is central to doing
+almost anything.  This section explains how to find out what filesystems
+are currently mounted and what filesystems are available for mounting,
+and how to change what is mounted.
+</p>
+<p>The classic filesystem is the contents of a disk drive.  The concept is
+considerably more abstract, though, and lots of things other than disk
+drives can be mounted.
+</p>
+<p>Some block devices don&rsquo;t correspond to traditional devices like disk
+drives.  For example, a loop device is a block device whose driver uses
+a regular file in another filesystem as its medium.  So if that regular
+file contains appropriate data for a filesystem, you can by mounting the
+loop device essentially mount a regular file.
+</p>
+<p>Some filesystems aren&rsquo;t based on a device of any kind.  The &ldquo;proc&rdquo;
+filesystem, for example, contains files whose data is made up by the
+filesystem driver on the fly whenever you ask for it.  And when you
+write to it, the data you write causes changes in the system.  No data
+gets stored.
+</p>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Mount-Information.html#Mount-Information" accesskey="1">Mount Information</a>:</td><td align="left" valign="top">What is or could be mounted?
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Mount_002dUnmount_002dRemount.html#Mount_002dUnmount_002dRemount" accesskey="2">Mount-Unmount-Remount</a>:</td><td align="left" valign="top">Controlling what is mounted and how
+</td></tr>
+</table>
+
+
+
+

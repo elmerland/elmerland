@@ -1,0 +1,62 @@
+<a name="Obstacks-Data-Alignment"></a>
+<div class="header">
+<p>
+Next: <a href="Obstack-Chunks.html#Obstack-Chunks" accesskey="n" rel="next">Obstack Chunks</a>, Previous: <a href="Status-of-an-Obstack.html#Status-of-an-Obstack" accesskey="p" rel="prev">Status of an Obstack</a>, Up: <a href="Obstacks.html#Obstacks" accesskey="u" rel="up">Obstacks</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Alignment-of-Data-in-Obstacks"></a>
+<h4 class="subsubsection">3.2.4.9 Alignment of Data in Obstacks</h4>
+<a name="index-alignment-_0028in-obstacks_0029"></a>
+
+<p>Each obstack has an <em>alignment boundary</em>; each object allocated in
+the obstack automatically starts on an address that is a multiple of the
+specified boundary.  By default, this boundary is aligned so that
+the object can hold any type of data.
+</p>
+<p>To access an obstack&rsquo;s alignment boundary, use the macro
+<code>obstack_alignment_mask</code>, whose function prototype looks like
+this:
+</p>
+<dl>
+<dt><a name="index-obstack_005falignment_005fmask"></a>Macro: <em>int</em> <strong>obstack_alignment_mask</strong> <em>(struct obstack *<var>obstack-ptr</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The value is a bit mask; a bit that is 1 indicates that the corresponding
+bit in the address of an object should be 0.  The mask value should be one
+less than a power of 2; the effect is that all object addresses are
+multiples of that power of 2.  The default value of the mask is a value
+that allows aligned objects to hold any type of data: for example, if
+its value is 3, any type of data can be stored at locations whose
+addresses are multiples of 4.  A mask value of 0 means an object can start
+on any multiple of 1 (that is, no alignment is required).
+</p>
+<p>The expansion of the macro <code>obstack_alignment_mask</code> is an lvalue,
+so you can alter the mask by assignment.  For example, this statement:
+</p>
+<div class="smallexample">
+<pre class="smallexample">obstack_alignment_mask (obstack_ptr) = 0;
+</pre></div>
+
+<p>has the effect of turning off alignment processing in the specified obstack.
+</p></dd></dl>
+
+<p>Note that a change in alignment mask does not take effect until
+<em>after</em> the next time an object is allocated or finished in the
+obstack.  If you are not growing an object, you can make the new
+alignment mask take effect immediately by calling <code>obstack_finish</code>.
+This will finish a zero-length object and then do proper alignment for
+the next object.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Obstack-Chunks.html#Obstack-Chunks" accesskey="n" rel="next">Obstack Chunks</a>, Previous: <a href="Status-of-an-Obstack.html#Status-of-an-Obstack" accesskey="p" rel="prev">Status of an Obstack</a>, Up: <a href="Obstacks.html#Obstacks" accesskey="u" rel="up">Obstacks</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

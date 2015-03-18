@@ -1,0 +1,94 @@
+<a name="Signal-Characters"></a>
+<div class="header">
+<p>
+Next: <a href="Start_002fStop-Characters.html#Start_002fStop-Characters" accesskey="n" rel="next">Start/Stop Characters</a>, Previous: <a href="Editing-Characters.html#Editing-Characters" accesskey="p" rel="prev">Editing Characters</a>, Up: <a href="Special-Characters.html#Special-Characters" accesskey="u" rel="up">Special Characters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Characters-that-Cause-Signals"></a>
+<h4 class="subsubsection">17.4.9.2 Characters that Cause Signals</h4>
+
+<p>These special characters may be active in either canonical or noncanonical
+input mode, but only when the <code>ISIG</code> flag is set (see <a href="Local-Modes.html#Local-Modes">Local Modes</a>).
+</p>
+<dl>
+<dt><a name="index-VINTR"></a>Macro: <em>int</em> <strong>VINTR</strong></dt>
+<dd><a name="index-INTR-character"></a>
+<a name="index-interrupt-character"></a>
+<p>This is the subscript for the INTR character in the special control
+character array.  <code><var>termios</var>.c_cc[VINTR]</code> holds the character
+itself.
+</p>
+<p>The INTR (interrupt) character raises a <code>SIGINT</code> signal for all
+processes in the foreground job associated with the terminal.  The INTR
+character itself is then discarded.  See <a href="Signal-Handling.html#Signal-Handling">Signal Handling</a>, for more
+information about signals.
+</p>
+<p>Typically, the INTR character is <kbd>C-c</kbd>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-VQUIT"></a>Macro: <em>int</em> <strong>VQUIT</strong></dt>
+<dd><a name="index-QUIT-character"></a>
+<p>This is the subscript for the QUIT character in the special control
+character array.  <code><var>termios</var>.c_cc[VQUIT]</code> holds the character
+itself.
+</p>
+<p>The QUIT character raises a <code>SIGQUIT</code> signal for all processes in
+the foreground job associated with the terminal.  The QUIT character
+itself is then discarded.  See <a href="Signal-Handling.html#Signal-Handling">Signal Handling</a>, for more information
+about signals.
+</p>
+<p>Typically, the QUIT character is <kbd>C-\</kbd>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-VSUSP"></a>Macro: <em>int</em> <strong>VSUSP</strong></dt>
+<dd><a name="index-SUSP-character"></a>
+<a name="index-suspend-character"></a>
+<p>This is the subscript for the SUSP character in the special control
+character array.  <code><var>termios</var>.c_cc[VSUSP]</code> holds the character
+itself.
+</p>
+<p>The SUSP (suspend) character is recognized only if the implementation
+supports job control (see <a href="Job-Control.html#Job-Control">Job Control</a>).  It causes a <code>SIGTSTP</code>
+signal to be sent to all processes in the foreground job associated with
+the terminal.  The SUSP character itself is then discarded.
+See <a href="Signal-Handling.html#Signal-Handling">Signal Handling</a>, for more information about signals.
+</p>
+<p>Typically, the SUSP character is <kbd>C-z</kbd>.
+</p></dd></dl>
+
+<p>Few applications disable the normal interpretation of the SUSP
+character.  If your program does this, it should provide some other
+mechanism for the user to stop the job.  When the user invokes this
+mechanism, the program should send a <code>SIGTSTP</code> signal to the
+process group of the process, not just to the process itself.
+See <a href="Signaling-Another-Process.html#Signaling-Another-Process">Signaling Another Process</a>.
+</p>
+<dl>
+<dt><a name="index-VDSUSP"></a>Macro: <em>int</em> <strong>VDSUSP</strong></dt>
+<dd><a name="index-DSUSP-character"></a>
+<a name="index-delayed-suspend-character"></a>
+<p>This is the subscript for the DSUSP character in the special control
+character array.  <code><var>termios</var>.c_cc[VDSUSP]</code> holds the character
+itself.
+</p>
+<p>The DSUSP (suspend) character is recognized only if the implementation
+supports job control (see <a href="Job-Control.html#Job-Control">Job Control</a>).  It sends a <code>SIGTSTP</code>
+signal, like the SUSP character, but not right away&mdash;only when the
+program tries to read it as input.  Not all systems with job control
+support DSUSP; only BSD-compatible systems (including GNU/Hurd systems).
+</p>
+<p>See <a href="Signal-Handling.html#Signal-Handling">Signal Handling</a>, for more information about signals.
+</p>
+<p>Typically, the DSUSP character is <kbd>C-y</kbd>.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Start_002fStop-Characters.html#Start_002fStop-Characters" accesskey="n" rel="next">Start/Stop Characters</a>, Previous: <a href="Editing-Characters.html#Editing-Characters" accesskey="p" rel="prev">Editing Characters</a>, Up: <a href="Special-Characters.html#Special-Characters" accesskey="u" rel="up">Special Characters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

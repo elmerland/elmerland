@@ -1,0 +1,140 @@
+<a name="Server-Example"></a>
+<div class="header">
+<p>
+Next: <a href="Out_002dof_002dBand-Data.html#Out_002dof_002dBand-Data" accesskey="n" rel="next">Out-of-Band Data</a>, Previous: <a href="Byte-Stream-Example.html#Byte-Stream-Example" accesskey="p" rel="prev">Byte Stream Example</a>, Up: <a href="Connections.html#Connections" accesskey="u" rel="up">Connections</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Byte-Stream-Connection-Server-Example"></a>
+<h4 class="subsection">16.9.7 Byte Stream Connection Server Example</h4>
+
+<p>The server end is much more complicated.  Since we want to allow
+multiple clients to be connected to the server at the same time, it
+would be incorrect to wait for input from a single client by simply
+calling <code>read</code> or <code>recv</code>.  Instead, the right thing to do is
+to use <code>select</code> (see <a href="Waiting-for-I_002fO.html#Waiting-for-I_002fO">Waiting for I/O</a>) to wait for input on
+all of the open sockets.  This also allows the server to deal with
+additional connection requests.
+</p>
+<p>This particular server doesn&rsquo;t do anything interesting once it has
+gotten a message from a client.  It does close the socket for that
+client when it detects an end-of-file condition (resulting from the
+client shutting down its end of the connection).
+</p>
+<p>This program uses <code>make_socket</code> to set up the socket address; see
+<a href="Inet-Example.html#Inet-Example">Inet Example</a>.
+</p>
+<div class="smallexample">
+<pre class="smallexample">
+#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;netdb.h&gt;
+
+#define PORT    5555
+#define MAXMSG  512
+
+int
+read_from_client (int filedes)
+{
+  char buffer[MAXMSG];
+  int nbytes;
+
+  nbytes = read (filedes, buffer, MAXMSG);
+  if (nbytes &lt; 0)
+    {
+      /* <span class="roman">Read error.</span> */
+      perror (&quot;read&quot;);
+      exit (EXIT_FAILURE);
+    }
+  else if (nbytes == 0)
+    /* <span class="roman">End-of-file.</span> */
+    return -1;
+  else
+    {
+      /* <span class="roman">Data read.</span> */
+      fprintf (stderr, &quot;Server: got message: `%s'\n&quot;, buffer);
+      return 0;
+    }
+}
+
+int
+main (void)
+{
+  extern int make_socket (uint16_t port);
+  int sock;
+  fd_set active_fd_set, read_fd_set;
+  int i;
+  struct sockaddr_in clientname;
+  size_t size;
+
+  /* <span class="roman">Create the socket and set it up to accept connections.</span> */
+  sock = make_socket (PORT);
+  if (listen (sock, 1) &lt; 0)
+    {
+      perror (&quot;listen&quot;);
+      exit (EXIT_FAILURE);
+    }
+
+  /* <span class="roman">Initialize the set of active sockets.</span> */
+  FD_ZERO (&amp;active_fd_set);
+  FD_SET (sock, &amp;active_fd_set);
+
+  while (1)
+    {
+      /* <span class="roman">Block until input arrives on one or more active sockets.</span> */
+      read_fd_set = active_fd_set;
+      if (select (FD_SETSIZE, &amp;read_fd_set, NULL, NULL, NULL) &lt; 0)
+        {
+          perror (&quot;select&quot;);
+          exit (EXIT_FAILURE);
+        }
+
+      /* <span class="roman">Service all the sockets with input pending.</span> */
+      for (i = 0; i &lt; FD_SETSIZE; ++i)
+        if (FD_ISSET (i, &amp;read_fd_set))
+          {
+            if (i == sock)
+              {
+                /* <span class="roman">Connection request on original socket.</span> */
+                int new;
+                size = sizeof (clientname);
+                new = accept (sock,
+                              (struct sockaddr *) &amp;clientname,
+                              &amp;size);
+                if (new &lt; 0)
+                  {
+                    perror (&quot;accept&quot;);
+                    exit (EXIT_FAILURE);
+                  }
+                fprintf (stderr,
+                         &quot;Server: connect from host %s, port %hd.\n&quot;,
+                         inet_ntoa (clientname.sin_addr),
+                         ntohs (clientname.sin_port));
+                FD_SET (new, &amp;active_fd_set);
+              }
+            else
+              {
+                /* <span class="roman">Data arriving on an already-connected socket.</span> */
+                if (read_from_client (i) &lt; 0)
+                  {
+                    close (i);
+                    FD_CLR (i, &amp;active_fd_set);
+                  }
+              }
+          }
+    }
+}
+</pre></div>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Out_002dof_002dBand-Data.html#Out_002dof_002dBand-Data" accesskey="n" rel="next">Out-of-Band Data</a>, Previous: <a href="Byte-Stream-Example.html#Byte-Stream-Example" accesskey="p" rel="prev">Byte Stream Example</a>, Up: <a href="Connections.html#Connections" accesskey="u" rel="up">Connections</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

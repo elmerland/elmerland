@@ -1,0 +1,72 @@
+<a name="Formatted-Input-Basics"></a>
+<div class="header">
+<p>
+Next: <a href="Input-Conversion-Syntax.html#Input-Conversion-Syntax" accesskey="n" rel="next">Input Conversion Syntax</a>, Up: <a href="Formatted-Input.html#Formatted-Input" accesskey="u" rel="up">Formatted Input</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Formatted-Input-Basics-1"></a>
+<h4 class="subsection">12.14.1 Formatted Input Basics</h4>
+
+<p>Calls to <code>scanf</code> are superficially similar to calls to
+<code>printf</code> in that arbitrary arguments are read under the control of
+a template string.  While the syntax of the conversion specifications in
+the template is very similar to that for <code>printf</code>, the
+interpretation of the template is oriented more towards free-format
+input and simple pattern matching, rather than fixed-field formatting.
+For example, most <code>scanf</code> conversions skip over any amount of
+&ldquo;white space&rdquo; (including spaces, tabs, and newlines) in the input
+file, and there is no concept of precision for the numeric input
+conversions as there is for the corresponding output conversions.
+Ordinarily, non-whitespace characters in the template are expected to
+match characters in the input stream exactly, but a matching failure is
+distinct from an input error on the stream.
+<a name="index-conversion-specifications-_0028scanf_0029"></a>
+</p>
+<p>Another area of difference between <code>scanf</code> and <code>printf</code> is
+that you must remember to supply pointers rather than immediate values
+as the optional arguments to <code>scanf</code>; the values that are read are
+stored in the objects that the pointers point to.  Even experienced
+programmers tend to forget this occasionally, so if your program is
+getting strange errors that seem to be related to <code>scanf</code>, you
+might want to double-check this.
+</p>
+<p>When a <em>matching failure</em> occurs, <code>scanf</code> returns immediately,
+leaving the first non-matching character as the next character to be
+read from the stream.  The normal return value from <code>scanf</code> is the
+number of values that were assigned, so you can use this to determine if
+a matching error happened before all the expected values were read.
+<a name="index-matching-failure_002c-in-scanf"></a>
+</p>
+<p>The <code>scanf</code> function is typically used for things like reading in
+the contents of tables.  For example, here is a function that uses
+<code>scanf</code> to initialize an array of <code>double</code>:
+</p>
+<div class="smallexample">
+<pre class="smallexample">void
+readarray (double *array, int n)
+{
+  int i;
+  for (i=0; i&lt;n; i++)
+    if (scanf (&quot; %lf&quot;, &amp;(array[i])) != 1)
+      invalid_input_error ();
+}
+</pre></div>
+
+<p>The formatted input functions are not used as frequently as the
+formatted output functions.  Partly, this is because it takes some care
+to use them properly.  Another reason is that it is difficult to recover
+from a matching error.
+</p>
+<p>If you are trying to read input that doesn&rsquo;t match a single, fixed
+pattern, you may be better off using a tool such as Flex to generate a
+lexical scanner, or Bison to generate a parser, rather than using
+<code>scanf</code>.  For more information about these tools, see <cite><a href="../flex/index.html#Top">Flex: The Lexical Scanner Generator</a></cite>, and <cite><a href="http://www.gnu.org/software/bison/manual/html_node/index.html#Top">The Bison Reference Manual</a></cite>.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Input-Conversion-Syntax.html#Input-Conversion-Syntax" accesskey="n" rel="next">Input Conversion Syntax</a>, Up: <a href="Formatted-Input.html#Formatted-Input" accesskey="u" rel="up">Formatted Input</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

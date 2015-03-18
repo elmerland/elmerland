@@ -1,0 +1,44 @@
+<a name="Non_002dreentrant-Conversion"></a>
+<div class="header">
+<p>
+Next: <a href="Generic-Charset-Conversion.html#Generic-Charset-Conversion" accesskey="n" rel="next">Generic Charset Conversion</a>, Previous: <a href="Restartable-multibyte-conversion.html#Restartable-multibyte-conversion" accesskey="p" rel="prev">Restartable multibyte conversion</a>, Up: <a href="Character-Set-Handling.html#Character-Set-Handling" accesskey="u" rel="up">Character Set Handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Non_002dreentrant-Conversion-Function"></a>
+<h3 class="section">6.4 Non-reentrant Conversion Function</h3>
+
+<p>The functions described in the previous chapter are defined in
+Amendment&nbsp;1<!-- /@w --> to ISO&nbsp;C90<!-- /@w -->, but the original ISO&nbsp;C90<!-- /@w --> standard
+also contained functions for character set conversion.  The reason that
+these original functions are not described first is that they are almost
+entirely useless.
+</p>
+<p>The problem is that all the conversion functions described in the
+original ISO&nbsp;C90<!-- /@w --> use a local state.  Using a local state implies that
+multiple conversions at the same time (not only when using threads)
+cannot be done, and that you cannot first convert single characters and
+then strings since you cannot tell the conversion functions which state
+to use.
+</p>
+<p>These original functions are therefore usable only in a very limited set
+of situations.  One must complete converting the entire string before
+starting a new one, and each string/text must be converted with the same
+function (there is no problem with the library itself; it is guaranteed
+that no library function changes the state of any of these functions).
+<strong>For the above reasons it is highly requested that the functions
+described in the previous section be used in place of non-reentrant
+conversion functions.</strong>
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Non_002dreentrant-Character-Conversion.html#Non_002dreentrant-Character-Conversion" accesskey="1">Non-reentrant Character Conversion</a>:</td><td align="left" valign="top">Non-reentrant Conversion of Single
+                                         Characters.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Non_002dreentrant-String-Conversion.html#Non_002dreentrant-String-Conversion" accesskey="2">Non-reentrant String Conversion</a>:</td><td align="left" valign="top">Non-reentrant Conversion of Strings.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Shift-State.html#Shift-State" accesskey="3">Shift State</a>:</td><td align="left" valign="top">States in Non-reentrant Functions.
+</td></tr>
+</table>
+
+
+
+

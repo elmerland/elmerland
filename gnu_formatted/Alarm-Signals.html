@@ -1,0 +1,46 @@
+<a name="Alarm-Signals"></a>
+<div class="header">
+<p>
+Next: <a href="Asynchronous-I_002fO-Signals.html#Asynchronous-I_002fO-Signals" accesskey="n" rel="next">Asynchronous I/O Signals</a>, Previous: <a href="Termination-Signals.html#Termination-Signals" accesskey="p" rel="prev">Termination Signals</a>, Up: <a href="Standard-Signals.html#Standard-Signals" accesskey="u" rel="up">Standard Signals</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Alarm-Signals-1"></a>
+<h4 class="subsection">24.2.3 Alarm Signals</h4>
+
+<p>These signals are used to indicate the expiration of timers.
+See <a href="Setting-an-Alarm.html#Setting-an-Alarm">Setting an Alarm</a>, for information about functions that cause
+these signals to be sent.
+</p>
+<p>The default behavior for these signals is to cause program termination.
+This default is rarely useful, but no other default would be useful;
+most of the ways of using these signals would require handler functions
+in any case.
+</p>
+<dl>
+<dt><a name="index-SIGALRM"></a>Macro: <em>int</em> <strong>SIGALRM</strong></dt>
+<dd><p>This signal typically indicates expiration of a timer that measures real
+or clock time.  It is used by the <code>alarm</code> function, for example.
+</p></dd></dl>
+<a name="index-alarm-signal"></a>
+
+<dl>
+<dt><a name="index-SIGVTALRM"></a>Macro: <em>int</em> <strong>SIGVTALRM</strong></dt>
+<dd><p>This signal typically indicates expiration of a timer that measures CPU
+time used by the current process.  The name is an abbreviation for
+&ldquo;virtual time alarm&rdquo;.
+</p></dd></dl>
+<a name="index-virtual-time-alarm-signal"></a>
+
+<dl>
+<dt><a name="index-SIGPROF"></a>Macro: <em>int</em> <strong>SIGPROF</strong></dt>
+<dd><p>This signal typically indicates expiration of a timer that measures
+both CPU time used by the current process, and CPU time expended on
+behalf of the process by the system.  Such a timer is used to implement
+code profiling facilities, hence the name of this signal.
+</p></dd></dl>
+<a name="index-profiling-alarm-signal"></a>
+
+
+
+
+

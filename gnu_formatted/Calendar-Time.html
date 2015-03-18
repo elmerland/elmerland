@@ -1,0 +1,69 @@
+<a name="Calendar-Time"></a>
+<div class="header">
+<p>
+Next: <a href="Setting-an-Alarm.html#Setting-an-Alarm" accesskey="n" rel="next">Setting an Alarm</a>, Previous: <a href="Processor-And-CPU-Time.html#Processor-And-CPU-Time" accesskey="p" rel="prev">Processor And CPU Time</a>, Up: <a href="Date-and-Time.html#Date-and-Time" accesskey="u" rel="up">Date and Time</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Calendar-Time-1"></a>
+<h3 class="section">21.4 Calendar Time</h3>
+
+<p>This section describes facilities for keeping track of calendar time.
+See <a href="Time-Basics.html#Time-Basics">Time Basics</a>.
+</p>
+<p>The GNU C Library represents calendar time three ways:
+</p>
+<ul>
+<li> <em>Simple time</em> (the <code>time_t</code> data type) is a compact
+representation, typically giving the number of seconds of elapsed time
+since some implementation-specific base time.
+<a name="index-simple-time"></a>
+
+</li><li> There is also a &quot;high-resolution time&quot; representation.  Like simple
+time, this represents a calendar time as an elapsed time since a base
+time, but instead of measuring in whole seconds, it uses a <code>struct
+timeval</code> data type, which includes fractions of a second.  Use this time
+representation instead of simple time when you need greater precision.
+<a name="index-high_002dresolution-time"></a>
+
+</li><li> <em>Local time</em> or <em>broken-down time</em> (the <code>struct tm</code> data
+type) represents a calendar time as a set of components specifying the
+year, month, and so on in the Gregorian calendar, for a specific time
+zone.  This calendar time representation is usually used only to
+communicate with people.
+<a name="index-local-time"></a>
+<a name="index-broken_002ddown-time"></a>
+<a name="index-Gregorian-calendar"></a>
+<a name="index-calendar_002c-Gregorian"></a>
+</li></ul>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Simple-Calendar-Time.html#Simple-Calendar-Time" accesskey="1">Simple Calendar Time</a>:</td><td align="left" valign="top">Facilities for manipulating calendar time.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="High_002dResolution-Calendar.html#High_002dResolution-Calendar" accesskey="2">High-Resolution Calendar</a>:</td><td align="left" valign="top">A time representation with greater precision.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Broken_002ddown-Time.html#Broken_002ddown-Time" accesskey="3">Broken-down Time</a>:</td><td align="left" valign="top">Facilities for manipulating local time.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="High-Accuracy-Clock.html#High-Accuracy-Clock" accesskey="4">High Accuracy Clock</a>:</td><td align="left" valign="top">Maintaining a high accuracy system clock.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Formatting-Calendar-Time.html#Formatting-Calendar-Time" accesskey="5">Formatting Calendar Time</a>:</td><td align="left" valign="top">Converting times to strings.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Parsing-Date-and-Time.html#Parsing-Date-and-Time" accesskey="6">Parsing Date and Time</a>:</td><td align="left" valign="top">Convert textual time and date information back
+                                 into broken-down time values.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="TZ-Variable.html#TZ-Variable" accesskey="7">TZ Variable</a>:</td><td align="left" valign="top">How users specify the time zone.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Time-Zone-Functions.html#Time-Zone-Functions" accesskey="8">Time Zone Functions</a>:</td><td align="left" valign="top">Functions to examine or specify the time zone.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Time-Functions-Example.html#Time-Functions-Example" accesskey="9">Time Functions Example</a>:</td><td align="left" valign="top">An example program showing use of some of
+				 the time functions.
+</td></tr>
+</table>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Setting-an-Alarm.html#Setting-an-Alarm" accesskey="n" rel="next">Setting an Alarm</a>, Previous: <a href="Processor-And-CPU-Time.html#Processor-And-CPU-Time" accesskey="p" rel="prev">Processor And CPU Time</a>, Up: <a href="Date-and-Time.html#Date-and-Time" accesskey="u" rel="up">Date and Time</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

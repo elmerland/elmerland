@@ -1,0 +1,76 @@
+<a name="Program-Arguments"></a>
+<div class="header">
+<p>
+Next: <a href="Environment-Variables.html#Environment-Variables" accesskey="n" rel="next">Environment Variables</a>, Up: <a href="Program-Basics.html#Program-Basics" accesskey="u" rel="up">Program Basics</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Program-Arguments-1"></a>
+<h3 class="section">25.1 Program Arguments</h3>
+<a name="index-program-arguments"></a>
+<a name="index-command-line-arguments"></a>
+<a name="index-arguments_002c-to-program"></a>
+
+<a name="index-program-startup"></a>
+<a name="index-startup-of-program"></a>
+<a name="index-invocation-of-program"></a>
+<a name="index-main-function"></a>
+<a name="index-main"></a>
+<p>The system starts a C program by calling the function <code>main</code>.  It
+is up to you to write a function named <code>main</code>&mdash;otherwise, you
+won&rsquo;t even be able to link your program without errors.
+</p>
+<p>In ISO&nbsp;C<!-- /@w --> you can define <code>main</code> either to take no arguments, or to
+take two arguments that represent the command line arguments to the
+program, like this:
+</p>
+<div class="smallexample">
+<pre class="smallexample">int main (int <var>argc</var>, char *<var>argv</var>[])
+</pre></div>
+
+<a name="index-argc-_0028program-argument-count_0029"></a>
+<a name="index-argv-_0028program-argument-vector_0029"></a>
+<p>The command line arguments are the whitespace-separated tokens given in
+the shell command used to invoke the program; thus, in &lsquo;<samp>cat foo
+bar</samp>&rsquo;, the arguments are &lsquo;<samp>foo</samp>&rsquo; and &lsquo;<samp>bar</samp>&rsquo;.  The only way a
+program can look at its command line arguments is via the arguments of
+<code>main</code>.  If <code>main</code> doesn&rsquo;t take arguments, then you cannot get
+at the command line.
+</p>
+<p>The value of the <var>argc</var> argument is the number of command line
+arguments.  The <var>argv</var> argument is a vector of C strings; its
+elements are the individual command line argument strings.  The file
+name of the program being run is also included in the vector as the
+first element; the value of <var>argc</var> counts this element.  A null
+pointer always follows the last element: <code><var>argv</var>[<var>argc</var>]</code>
+is this null pointer.
+</p>
+<p>For the command &lsquo;<samp>cat foo bar</samp>&rsquo;, <var>argc</var> is 3 and <var>argv</var> has
+three elements, <code>&quot;cat&quot;</code>, <code>&quot;foo&quot;</code> and <code>&quot;bar&quot;</code>.
+</p>
+<p>In Unix systems you can define <code>main</code> a third way, using three arguments:
+</p>
+<div class="smallexample">
+<pre class="smallexample">int main (int <var>argc</var>, char *<var>argv</var>[], char *<var>envp</var>[])
+</pre></div>
+
+<p>The first two arguments are just the same.  The third argument
+<var>envp</var> gives the program&rsquo;s environment; it is the same as the value
+of <code>environ</code>.  See <a href="Environment-Variables.html#Environment-Variables">Environment Variables</a>.  POSIX.1 does not
+allow this three-argument form, so to be portable it is best to write
+<code>main</code> to take two arguments, and use the value of <code>environ</code>.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Argument-Syntax.html#Argument-Syntax" accesskey="1">Argument Syntax</a>:</td><td align="left" valign="top">By convention, options start with a hyphen.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Parsing-Program-Arguments.html#Parsing-Program-Arguments" accesskey="2">Parsing Program Arguments</a>:</td><td align="left" valign="top">Ways to parse program options and arguments.
+</td></tr>
+</table>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Environment-Variables.html#Environment-Variables" accesskey="n" rel="next">Environment Variables</a>, Up: <a href="Program-Basics.html#Program-Basics" accesskey="u" rel="up">Program Basics</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

@@ -1,0 +1,78 @@
+<a name="Argp-Option-Flags"></a>
+<div class="header">
+<p>
+Up: <a href="Argp-Option-Vectors.html#Argp-Option-Vectors" accesskey="u" rel="up">Argp Option Vectors</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Flags-for-Argp-Options"></a>
+<h4 class="subsubsection">25.3.4.1 Flags for Argp Options</h4>
+
+<p>The following flags may be or&rsquo;d together in the <code>flags</code> field of a
+<code>struct argp_option</code>.  These flags control various aspects of how
+that option is parsed or displayed in help messages:
+</p>
+
+<dl compact="compact">
+<dt><code>OPTION_ARG_OPTIONAL</code>
+<a name="index-OPTION_005fARG_005fOPTIONAL"></a>
+</dt>
+<dd><p>The argument associated with this option is optional.
+</p>
+</dd>
+<dt><code>OPTION_HIDDEN</code>
+<a name="index-OPTION_005fHIDDEN"></a>
+</dt>
+<dd><p>This option isn&rsquo;t displayed in any help messages.
+</p>
+</dd>
+<dt><code>OPTION_ALIAS</code>
+<a name="index-OPTION_005fALIAS"></a>
+</dt>
+<dd><p>This option is an alias for the closest previous non-alias option.  This
+means that it will be displayed in the same help entry, and will inherit
+fields other than <code>name</code> and <code>key</code> from the option being
+aliased.
+</p>
+
+</dd>
+<dt><code>OPTION_DOC</code>
+<a name="index-OPTION_005fDOC"></a>
+</dt>
+<dd><p>This option isn&rsquo;t actually an option and should be ignored by the actual
+option parser.  It is an arbitrary section of documentation that should
+be displayed in much the same manner as the options.  This is known as a
+<em>documentation option</em>.
+</p>
+<p>If this flag is set, then the option <code>name</code> field is displayed
+unmodified (e.g., no &lsquo;<samp>--</samp>&rsquo; prefix is added) at the left-margin where
+a <em>short</em> option would normally be displayed, and this
+documentation string is left in it&rsquo;s usual place.  For purposes of
+sorting, any leading whitespace and punctuation is ignored, unless the
+first non-whitespace character is &lsquo;<samp>-</samp>&rsquo;.  This entry is displayed
+after all options, after <code>OPTION_DOC</code> entries with a leading
+&lsquo;<samp>-</samp>&rsquo;, in the same group.
+</p>
+</dd>
+<dt><code>OPTION_NO_USAGE</code>
+<a name="index-OPTION_005fNO_005fUSAGE"></a>
+</dt>
+<dd><p>This option shouldn&rsquo;t be included in &lsquo;long&rsquo; usage messages, but should
+still be included in other help messages.  This is intended for options
+that are completely documented in an argp&rsquo;s <code>args_doc</code>
+field.  See <a href="Argp-Parsers.html#Argp-Parsers">Argp Parsers</a>.  Including this option in the generic usage
+list would be redundant, and should be avoided.
+</p>
+<p>For instance, if <code>args_doc</code> is <code>&quot;FOO BAR\n-x BLAH&quot;</code>, and the
+&lsquo;<samp>-x</samp>&rsquo; option&rsquo;s purpose is to distinguish these two cases, &lsquo;<samp>-x</samp>&rsquo;
+should probably be marked <code>OPTION_NO_USAGE</code>.
+</p></dd>
+</dl>
+
+<hr>
+<div class="header">
+<p>
+Up: <a href="Argp-Option-Vectors.html#Argp-Option-Vectors" accesskey="u" rel="up">Argp Option Vectors</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

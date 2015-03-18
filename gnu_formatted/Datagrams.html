@@ -1,0 +1,38 @@
+<a name="Datagrams"></a>
+<div class="header">
+<p>
+Next: <a href="Inetd.html#Inetd" accesskey="n" rel="next">Inetd</a>, Previous: <a href="Connections.html#Connections" accesskey="p" rel="prev">Connections</a>, Up: <a href="Sockets.html#Sockets" accesskey="u" rel="up">Sockets</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Datagram-Socket-Operations"></a>
+<h3 class="section">16.10 Datagram Socket Operations</h3>
+
+<a name="index-datagram-socket"></a>
+<p>This section describes how to use communication styles that don&rsquo;t use
+connections (styles <code>SOCK_DGRAM</code> and <code>SOCK_RDM</code>).  Using
+these styles, you group data into packets and each packet is an
+independent communication.  You specify the destination for each
+packet individually.
+</p>
+<p>Datagram packets are like letters: you send each one independently
+with its own destination address, and they may arrive in the wrong
+order or not at all.
+</p>
+<p>The <code>listen</code> and <code>accept</code> functions are not allowed for
+sockets using connectionless communication styles.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Sending-Datagrams.html#Sending-Datagrams" accesskey="1">Sending Datagrams</a>:</td><td align="left" valign="top">Sending packets on a datagram socket.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Receiving-Datagrams.html#Receiving-Datagrams" accesskey="2">Receiving Datagrams</a>:</td><td align="left" valign="top">Receiving packets on a datagram socket.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Datagram-Example.html#Datagram-Example" accesskey="3">Datagram Example</a>:</td><td align="left" valign="top">An example program: packets sent over a
+                           datagram socket in the local namespace.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Example-Receiver.html#Example-Receiver" accesskey="4">Example Receiver</a>:</td><td align="left" valign="top">Another program, that receives those packets.
+</td></tr>
+</table>
+
+
+
+

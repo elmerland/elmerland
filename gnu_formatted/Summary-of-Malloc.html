@@ -1,0 +1,91 @@
+<a name="Summary-of-Malloc"></a>
+<div class="header">
+<p>
+Previous: <a href="Statistics-of-Malloc.html#Statistics-of-Malloc" accesskey="p" rel="prev">Statistics of Malloc</a>, Up: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="u" rel="up">Unconstrained Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Summary-of-malloc_002dRelated-Functions"></a>
+<h4 class="subsubsection">3.2.2.12 Summary of <code>malloc</code>-Related Functions</h4>
+
+<p>Here is a summary of the functions that work with <code>malloc</code>:
+</p>
+<dl compact="compact">
+<dt><code>void *malloc (size_t <var>size</var>)</code></dt>
+<dd><p>Allocate a block of <var>size</var> bytes.  See <a href="Basic-Allocation.html#Basic-Allocation">Basic Allocation</a>.
+</p>
+</dd>
+<dt><code>void free (void *<var>addr</var>)</code></dt>
+<dd><p>Free a block previously allocated by <code>malloc</code>.  See <a href="Freeing-after-Malloc.html#Freeing-after-Malloc">Freeing after Malloc</a>.
+</p>
+</dd>
+<dt><code>void *realloc (void *<var>addr</var>, size_t <var>size</var>)</code></dt>
+<dd><p>Make a block previously allocated by <code>malloc</code> larger or smaller,
+possibly by copying it to a new location.  See <a href="Changing-Block-Size.html#Changing-Block-Size">Changing Block Size</a>.
+</p>
+</dd>
+<dt><code>void *calloc (size_t <var>count</var>, size_t <var>eltsize</var>)</code></dt>
+<dd><p>Allocate a block of <var>count</var> * <var>eltsize</var> bytes using
+<code>malloc</code>, and set its contents to zero.  See <a href="Allocating-Cleared-Space.html#Allocating-Cleared-Space">Allocating Cleared Space</a>.
+</p>
+</dd>
+<dt><code>void *valloc (size_t <var>size</var>)</code></dt>
+<dd><p>Allocate a block of <var>size</var> bytes, starting on a page boundary.
+See <a href="Aligned-Memory-Blocks.html#Aligned-Memory-Blocks">Aligned Memory Blocks</a>.
+</p>
+</dd>
+<dt><code>void *aligned_alloc (size_t <var>size</var>, size_t <var>alignment</var>)</code></dt>
+<dd><p>Allocate a block of <var>size</var> bytes, starting on an address that is a
+multiple of <var>alignment</var>.  See <a href="Aligned-Memory-Blocks.html#Aligned-Memory-Blocks">Aligned Memory Blocks</a>.
+</p>
+</dd>
+<dt><code>int posix_memalign (void **<var>memptr</var>, size_t <var>alignment</var>, size_t <var>size</var>)</code></dt>
+<dd><p>Allocate a block of <var>size</var> bytes, starting on an address that is a
+multiple of <var>alignment</var>.  See <a href="Aligned-Memory-Blocks.html#Aligned-Memory-Blocks">Aligned Memory Blocks</a>.
+</p>
+</dd>
+<dt><code>void *memalign (size_t <var>size</var>, size_t <var>boundary</var>)</code></dt>
+<dd><p>Allocate a block of <var>size</var> bytes, starting on an address that is a
+multiple of <var>boundary</var>.  See <a href="Aligned-Memory-Blocks.html#Aligned-Memory-Blocks">Aligned Memory Blocks</a>.
+</p>
+</dd>
+<dt><code>int mallopt (int <var>param</var>, int <var>value</var>)</code></dt>
+<dd><p>Adjust a tunable parameter.  See <a href="Malloc-Tunable-Parameters.html#Malloc-Tunable-Parameters">Malloc Tunable Parameters</a>.
+</p>
+</dd>
+<dt><code>int mcheck (void (*<var>abortfn</var>) (void))</code></dt>
+<dd><p>Tell <code>malloc</code> to perform occasional consistency checks on
+dynamically allocated memory, and to call <var>abortfn</var> when an
+inconsistency is found.  See <a href="Heap-Consistency-Checking.html#Heap-Consistency-Checking">Heap Consistency Checking</a>.
+</p>
+</dd>
+<dt><code>void *(*__malloc_hook) (size_t <var>size</var>, const void *<var>caller</var>)</code></dt>
+<dd><p>A pointer to a function that <code>malloc</code> uses whenever it is called.
+</p>
+</dd>
+<dt><code>void *(*__realloc_hook) (void *<var>ptr</var>, size_t <var>size</var>, const void *<var>caller</var>)</code></dt>
+<dd><p>A pointer to a function that <code>realloc</code> uses whenever it is called.
+</p>
+</dd>
+<dt><code>void (*__free_hook) (void *<var>ptr</var>, const void *<var>caller</var>)</code></dt>
+<dd><p>A pointer to a function that <code>free</code> uses whenever it is called.
+</p>
+</dd>
+<dt><code>void (*__memalign_hook) (size_t <var>size</var>, size_t <var>alignment</var>, const void *<var>caller</var>)</code></dt>
+<dd><p>A pointer to a function that <code>aligned_alloc</code>, <code>memalign</code>,
+<code>posix_memalign</code> and <code>valloc</code> use whenever they are called.
+</p>
+</dd>
+<dt><code>struct mallinfo mallinfo (void)</code></dt>
+<dd><p>Return information about the current dynamic memory usage.
+See <a href="Statistics-of-Malloc.html#Statistics-of-Malloc">Statistics of Malloc</a>.
+</p></dd>
+</dl>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Statistics-of-Malloc.html#Statistics-of-Malloc" accesskey="p" rel="prev">Statistics of Malloc</a>, Up: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="u" rel="up">Unconstrained Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

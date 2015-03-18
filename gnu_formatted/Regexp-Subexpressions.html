@@ -1,0 +1,67 @@
+<a name="Regexp-Subexpressions"></a>
+<div class="header">
+<p>
+Next: <a href="Subexpression-Complications.html#Subexpression-Complications" accesskey="n" rel="next">Subexpression Complications</a>, Previous: <a href="Matching-POSIX-Regexps.html#Matching-POSIX-Regexps" accesskey="p" rel="prev">Matching POSIX Regexps</a>, Up: <a href="Regular-Expressions.html#Regular-Expressions" accesskey="u" rel="up">Regular Expressions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Match-Results-with-Subexpressions"></a>
+<h4 class="subsection">10.3.4 Match Results with Subexpressions</h4>
+
+<p>When <code>regexec</code> matches parenthetical subexpressions of
+<var>pattern</var>, it records which parts of <var>string</var> they match.  It
+returns that information by storing the offsets into an array whose
+elements are structures of type <code>regmatch_t</code>.  The first element of
+the array (index <code>0</code>) records the part of the string that matched
+the entire regular expression.  Each other element of the array records
+the beginning and end of the part that matched a single parenthetical
+subexpression.
+</p>
+<dl>
+<dt><a name="index-regmatch_005ft"></a>Data Type: <strong>regmatch_t</strong></dt>
+<dd><p>This is the data type of the <var>matcharray</var> array that you pass to
+<code>regexec</code>.  It contains two structure fields, as follows:
+</p>
+<dl compact="compact">
+<dt><code>rm_so</code></dt>
+<dd><p>The offset in <var>string</var> of the beginning of a substring.  Add this
+value to <var>string</var> to get the address of that part.
+</p>
+</dd>
+<dt><code>rm_eo</code></dt>
+<dd><p>The offset in <var>string</var> of the end of the substring.
+</p></dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><a name="index-regoff_005ft"></a>Data Type: <strong>regoff_t</strong></dt>
+<dd><p><code>regoff_t</code> is an alias for another signed integer type.
+The fields of <code>regmatch_t</code> have type <code>regoff_t</code>.
+</p></dd></dl>
+
+<p>The <code>regmatch_t</code> elements correspond to subexpressions
+positionally; the first element (index <code>1</code>) records where the first
+subexpression matched, the second element records the second
+subexpression, and so on.  The order of the subexpressions is the order
+in which they begin.
+</p>
+<p>When you call <code>regexec</code>, you specify how long the <var>matchptr</var>
+array is, with the <var>nmatch</var> argument.  This tells <code>regexec</code> how
+many elements to store.  If the actual regular expression has more than
+<var>nmatch</var> subexpressions, then you won&rsquo;t get offset information about
+the rest of them.  But this doesn&rsquo;t alter whether the pattern matches a
+particular string or not.
+</p>
+<p>If you don&rsquo;t want <code>regexec</code> to return any information about where
+the subexpressions matched, you can either supply <code>0</code> for
+<var>nmatch</var>, or use the flag <code>REG_NOSUB</code> when you compile the
+pattern with <code>regcomp</code>.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Subexpression-Complications.html#Subexpression-Complications" accesskey="n" rel="next">Subexpression Complications</a>, Previous: <a href="Matching-POSIX-Regexps.html#Matching-POSIX-Regexps" accesskey="p" rel="prev">Matching POSIX Regexps</a>, Up: <a href="Regular-Expressions.html#Regular-Expressions" accesskey="u" rel="up">Regular Expressions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

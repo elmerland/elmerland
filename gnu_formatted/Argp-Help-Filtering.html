@@ -1,0 +1,40 @@
+<a name="Argp-Help-Filtering"></a>
+<div class="header">
+<p>
+Previous: <a href="Argp-Children.html#Argp-Children" accesskey="p" rel="prev">Argp Children</a>, Up: <a href="Argp-Parsers.html#Argp-Parsers" accesskey="u" rel="up">Argp Parsers</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Customizing-Argp-Help-Output"></a>
+<h4 class="subsection">25.3.8 Customizing Argp Help Output</h4>
+
+<p>The <code>help_filter</code> field in a <code>struct argp</code> is a pointer to a
+function that filters the text of help messages before displaying
+them.  They have a function signature like:
+</p>
+<div class="smallexample">
+<pre class="smallexample">char *<var>help-filter</var> (int <var>key</var>, const char *<var>text</var>, void *<var>input</var>)
+</pre></div>
+
+
+<p>Where <var>key</var> is either a key from an option, in which case <var>text</var>
+is that option&rsquo;s help text.  See <a href="Argp-Option-Vectors.html#Argp-Option-Vectors">Argp Option Vectors</a>.  Alternately, one
+of the special keys with names beginning with &lsquo;<samp>ARGP_KEY_HELP_</samp>&rsquo;
+might be used, describing which other help text <var>text</var> will contain.
+See <a href="Argp-Help-Filter-Keys.html#Argp-Help-Filter-Keys">Argp Help Filter Keys</a>.
+</p>
+<p>The function should return either <var>text</var> if it remains as-is, or a
+replacement string allocated using <code>malloc</code>.  This will be either be
+freed by argp or zero, which prints nothing.  The value of <var>text</var> is
+supplied <em>after</em> any translation has been done, so if any of the
+replacement text needs translation, it will be done by the filter
+function.  <var>input</var> is either the input supplied to <code>argp_parse</code>
+or it is zero, if <code>argp_help</code> was called directly by the user.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Argp-Help-Filter-Keys.html#Argp-Help-Filter-Keys" accesskey="1">Keys</a>:</td><td align="left" valign="top">Special <var>key</var> values for help filter functions.
+</td></tr>
+</table>
+
+
+
+

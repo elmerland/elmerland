@@ -1,0 +1,116 @@
+<a name="Initializing-the-Shell"></a>
+<div class="header">
+<p>
+Next: <a href="Launching-Jobs.html#Launching-Jobs" accesskey="n" rel="next">Launching Jobs</a>, Previous: <a href="Data-Structures.html#Data-Structures" accesskey="p" rel="prev">Data Structures</a>, Up: <a href="Implementing-a-Shell.html#Implementing-a-Shell" accesskey="u" rel="up">Implementing a Shell</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Initializing-the-Shell-1"></a>
+<h4 class="subsection">28.6.2 Initializing the Shell</h4>
+<a name="index-job-control_002c-enabling"></a>
+<a name="index-subshell"></a>
+
+<p>When a shell program that normally performs job control is started, it
+has to be careful in case it has been invoked from another shell that is
+already doing its own job control.
+</p>
+<p>A subshell that runs interactively has to ensure that it has been placed
+in the foreground by its parent shell before it can enable job control
+itself.  It does this by getting its initial process group ID with the
+<code>getpgrp</code> function, and comparing it to the process group ID of the
+current foreground job associated with its controlling terminal (which
+can be retrieved using the <code>tcgetpgrp</code> function).
+</p>
+<p>If the subshell is not running as a foreground job, it must stop itself
+by sending a <code>SIGTTIN</code> signal to its own process group.  It may not
+arbitrarily put itself into the foreground; it must wait for the user to
+tell the parent shell to do this.  If the subshell is continued again,
+it should repeat the check and stop itself again if it is still not in
+the foreground.
+</p>
+<a name="index-job-control_002c-enabling-1"></a>
+<p>Once the subshell has been placed into the foreground by its parent
+shell, it can enable its own job control.  It does this by calling
+<code>setpgid</code> to put itself into its own process group, and then
+calling <code>tcsetpgrp</code> to place this process group into the
+foreground.
+</p>
+<p>When a shell enables job control, it should set itself to ignore all the
+job control stop signals so that it doesn&rsquo;t accidentally stop itself.
+You can do this by setting the action for all the stop signals to
+<code>SIG_IGN</code>.
+</p>
+<p>A subshell that runs non-interactively cannot and should not support job
+control.  It must leave all processes it creates in the same process
+group as the shell itself; this allows the non-interactive shell and its
+child processes to be treated as a single job by the parent shell.  This
+is easy to do&mdash;just don&rsquo;t use any of the job control primitives&mdash;but
+you must remember to make the shell do it.
+</p>
+
+<p>Here is the initialization code for the sample shell that shows how to
+do all of this.
+</p>
+<div class="smallexample">
+<pre class="smallexample">/* <span class="roman">Keep track of attributes of the shell.</span>  */
+
+#include &lt;sys/types.h&gt;
+#include &lt;termios.h&gt;
+#include &lt;unistd.h&gt;
+
+pid_t shell_pgid;
+struct termios shell_tmodes;
+int shell_terminal;
+int shell_is_interactive;
+
+
+/* <span class="roman">Make sure the shell is running interactively as the foreground job</span>
+   <span class="roman">before proceeding.</span> */
+
+void
+init_shell ()
+{
+
+  /* <span class="roman">See if we are running interactively.</span>  */
+  shell_terminal = STDIN_FILENO;
+  shell_is_interactive = isatty (shell_terminal);
+
+  if (shell_is_interactive)
+    {
+      /* <span class="roman">Loop until we are in the foreground.</span>  */
+      while (tcgetpgrp (shell_terminal) != (shell_pgid = getpgrp ()))
+        kill (- shell_pgid, SIGTTIN);
+
+      /* <span class="roman">Ignore interactive and job-control signals.</span>  */
+      signal (SIGINT, SIG_IGN);
+      signal (SIGQUIT, SIG_IGN);
+      signal (SIGTSTP, SIG_IGN);
+      signal (SIGTTIN, SIG_IGN);
+      signal (SIGTTOU, SIG_IGN);
+      signal (SIGCHLD, SIG_IGN);
+
+      /* <span class="roman">Put ourselves in our own process group.</span>  */
+      shell_pgid = getpid ();
+      if (setpgid (shell_pgid, shell_pgid) &lt; 0)
+        {
+          perror (&quot;Couldn't put the shell in its own process group&quot;);
+          exit (1);
+        }
+
+      /* <span class="roman">Grab control of the terminal.</span>  */
+      tcsetpgrp (shell_terminal, shell_pgid);
+
+      /* <span class="roman">Save default terminal attributes for shell.</span>  */
+      tcgetattr (shell_terminal, &amp;shell_tmodes);
+    }
+}
+</pre></div>
+
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Launching-Jobs.html#Launching-Jobs" accesskey="n" rel="next">Launching Jobs</a>, Previous: <a href="Data-Structures.html#Data-Structures" accesskey="p" rel="prev">Data Structures</a>, Up: <a href="Implementing-a-Shell.html#Implementing-a-Shell" accesskey="u" rel="up">Implementing a Shell</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

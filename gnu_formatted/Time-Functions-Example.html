@@ -1,0 +1,57 @@
+<a name="Time-Functions-Example"></a>
+<div class="header">
+<p>
+Previous: <a href="Time-Zone-Functions.html#Time-Zone-Functions" accesskey="p" rel="prev">Time Zone Functions</a>, Up: <a href="Calendar-Time.html#Calendar-Time" accesskey="u" rel="up">Calendar Time</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Time-Functions-Example-1"></a>
+<h4 class="subsection">21.4.9 Time Functions Example</h4>
+
+<p>Here is an example program showing the use of some of the calendar time
+functions.
+</p>
+<div class="smallexample">
+<pre class="smallexample">
+#include &lt;time.h&gt;
+#include &lt;stdio.h&gt;
+
+#define SIZE 256
+
+int
+main (void)
+{
+  char buffer[SIZE];
+  time_t curtime;
+  struct tm *loctime;
+
+  /* <span class="roman">Get the current time.</span> */
+  curtime = time (NULL);
+
+  /* <span class="roman">Convert it to local time representation.</span> */
+  loctime = localtime (&amp;curtime);
+
+  /* <span class="roman">Print out the date and time in the standard format.</span> */
+  fputs (asctime (loctime), stdout);
+
+</pre><pre class="smallexample">  /* <span class="roman">Print it out in a nice format.</span> */
+  strftime (buffer, SIZE, &quot;Today is %A, %B %d.\n&quot;, loctime);
+  fputs (buffer, stdout);
+  strftime (buffer, SIZE, &quot;The time is %I:%M %p.\n&quot;, loctime);
+  fputs (buffer, stdout);
+
+  return 0;
+}
+</pre></div>
+
+<p>It produces output like this:
+</p>
+<div class="smallexample">
+<pre class="smallexample">Wed Jul 31 13:02:36 1991
+Today is Wednesday, July 31.
+The time is 01:02 PM.
+</pre></div>
+
+
+
+
+

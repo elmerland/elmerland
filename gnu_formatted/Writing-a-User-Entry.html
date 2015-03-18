@@ -1,0 +1,38 @@
+<a name="Writing-a-User-Entry"></a>
+<div class="header">
+<p>
+Previous: <a href="Scanning-All-Users.html#Scanning-All-Users" accesskey="p" rel="prev">Scanning All Users</a>, Up: <a href="User-Database.html#User-Database" accesskey="u" rel="up">User Database</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Writing-a-User-Entry-1"></a>
+<h4 class="subsection">30.13.4 Writing a User Entry</h4>
+
+<dl>
+<dt><a name="index-putpwent"></a>Function: <em>int</em> <strong>putpwent</strong> <em>(const struct passwd *<var>p</var>, FILE *<var>stream</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe locale
+| AS-Unsafe corrupt
+| AC-Unsafe lock corrupt
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function writes the user entry <code>*<var>p</var></code> to the stream
+<var>stream</var>, in the format used for the standard user database
+file.  The return value is zero on success and nonzero on failure.
+</p>
+<p>This function exists for compatibility with SVID.  We recommend that you
+avoid using it, because it makes sense only on the assumption that the
+<code>struct passwd</code> structure has no members except the standard ones;
+on a system which merges the traditional Unix data base with other
+extended information about users, adding an entry using this function
+would inevitably leave out much of the important information.
+</p>
+<p>The group and user ID fields are left empty if the group or user name
+starts with a - or +.
+</p>
+<p>The function <code>putpwent</code> is declared in <samp>pwd.h</samp>.
+</p></dd></dl>
+
+
+
+

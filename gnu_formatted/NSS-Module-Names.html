@@ -1,0 +1,81 @@
+<a name="NSS-Module-Names"></a>
+<div class="header">
+<p>
+Next: <a href="NSS-Modules-Interface.html#NSS-Modules-Interface" accesskey="n" rel="next">NSS Modules Interface</a>, Previous: <a href="NSS-Module-Internals.html#NSS-Module-Internals" accesskey="p" rel="prev">NSS Module Internals</a>, Up: <a href="NSS-Module-Internals.html#NSS-Module-Internals" accesskey="u" rel="up">NSS Module Internals</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="The-Naming-Scheme-of-the-NSS-Modules"></a>
+<h4 class="subsection">29.3.1 The Naming Scheme of the NSS Modules</h4>
+
+<p>The name of each function consist of various parts:
+</p>
+<blockquote>
+<p>_nss_<var>service</var>_<var>function</var>
+</p></blockquote>
+
+<p><var>service</var> of course corresponds to the name of the module this
+function is found in.<a name="DOCF3" href="#FOOT3"><sup>3</sup></a>  The <var>function</var> part is derived
+from the interface function in the C library itself.  If the user calls
+the function <code>gethostbyname</code> and the service used is <code>files</code>
+the function
+</p>
+<div class="smallexample">
+<pre class="smallexample">       _nss_files_gethostbyname_r
+</pre></div>
+
+<p>in the module
+</p>
+<div class="smallexample">
+<pre class="smallexample">       libnss_files.so.2
+</pre></div>
+
+<a name="index-reentrant-NSS-functions"></a>
+<p>is used.  You see, what is explained above in not the whole truth.  In
+fact the NSS modules only contain reentrant versions of the lookup
+functions.  I.e., if the user would call the <code>gethostbyname_r</code>
+function this also would end in the above function.  For all user
+interface functions the C library maps this call to a call to the
+reentrant function.  For reentrant functions this is trivial since the
+interface is (nearly) the same.  For the non-reentrant version The
+library keeps internal buffers which are used to replace the user
+supplied buffer.
+</p>
+<p>I.e., the reentrant functions <em>can</em> have counterparts.  No service
+module is forced to have functions for all databases and all kinds to
+access them.  If a function is not available it is simply treated as if
+the function would return <code>unavail</code>
+(see <a href="Actions-in-the-NSS-configuration.html#Actions-in-the-NSS-configuration">Actions in the NSS configuration</a>).
+</p>
+<p>The file name <samp>libnss_files.so.2</samp> would be on a Solaris&nbsp;2<!-- /@w -->
+system <samp>nss_files.so.2</samp>.  This is the difference mentioned above.
+Sun&rsquo;s NSS modules are usable as modules which get indirectly loaded
+only.
+</p>
+<p>The NSS modules in the GNU C Library are prepared to be used as normal
+libraries themselves.  This is <em>not</em> true at the moment, though.
+However,  the organization of the name space in the modules does not make it
+impossible like it is for Solaris.  Now you can see why the modules are
+still libraries.<a name="DOCF4" href="#FOOT4"><sup>4</sup></a>
+</p>
+
+<div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT3" href="#DOCF3">(3)</a></h3>
+<p>Now you might ask why this information is
+duplicated.  The answer is that we want to make it possible to link
+directly with these shared objects.</p>
+<h3><a name="FOOT4" href="#DOCF4">(4)</a></h3>
+<p>There is a second explanation: we were too
+lazy to change the Makefiles to allow the generation of shared objects
+not starting with <samp>lib</samp> but don&rsquo;t tell this to anybody.</p>
+</div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="NSS-Modules-Interface.html#NSS-Modules-Interface" accesskey="n" rel="next">NSS Modules Interface</a>, Previous: <a href="NSS-Module-Internals.html#NSS-Module-Internals" accesskey="p" rel="prev">NSS Module Internals</a>, Up: <a href="NSS-Module-Internals.html#NSS-Module-Internals" accesskey="u" rel="up">NSS Module Internals</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

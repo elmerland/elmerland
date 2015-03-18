@@ -1,0 +1,52 @@
+<a name="Process-Identification"></a>
+<div class="header">
+<p>
+Next: <a href="Creating-a-Process.html#Creating-a-Process" accesskey="n" rel="next">Creating a Process</a>, Previous: <a href="Process-Creation-Concepts.html#Process-Creation-Concepts" accesskey="p" rel="prev">Process Creation Concepts</a>, Up: <a href="Processes.html#Processes" accesskey="u" rel="up">Processes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Process-Identification-1"></a>
+<h3 class="section">26.3 Process Identification</h3>
+
+<p>The <code>pid_t</code> data type represents process IDs.  You can get the
+process ID of a process by calling <code>getpid</code>.  The function
+<code>getppid</code> returns the process ID of the parent of the current
+process (this is also known as the <em>parent process ID</em>).  Your
+program should include the header files <samp>unistd.h</samp> and
+<samp>sys/types.h</samp> to use these functions.
+<a name="index-sys_002ftypes_002eh-1"></a>
+<a name="index-unistd_002eh-17"></a>
+</p>
+<dl>
+<dt><a name="index-pid_005ft"></a>Data Type: <strong>pid_t</strong></dt>
+<dd><p>The <code>pid_t</code> data type is a signed integer type which is capable
+of representing a process ID.  In the GNU C Library, this is an <code>int</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-getpid"></a>Function: <em>pid_t</em> <strong>getpid</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>getpid</code> function returns the process ID of the current process.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-getppid"></a>Function: <em>pid_t</em> <strong>getppid</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>getppid</code> function returns the process ID of the parent of the
+current process.
+</p></dd></dl>
+
+
+
+

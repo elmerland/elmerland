@@ -1,0 +1,119 @@
+<a name="Status-of-AIO-Operations"></a>
+<div class="header">
+<p>
+Next: <a href="Synchronizing-AIO-Operations.html#Synchronizing-AIO-Operations" accesskey="n" rel="next">Synchronizing AIO Operations</a>, Previous: <a href="Asynchronous-Reads_002fWrites.html#Asynchronous-Reads_002fWrites" accesskey="p" rel="prev">Asynchronous Reads/Writes</a>, Up: <a href="Asynchronous-I_002fO.html#Asynchronous-I_002fO" accesskey="u" rel="up">Asynchronous I/O</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Getting-the-Status-of-AIO-Operations"></a>
+<h4 class="subsection">13.10.2 Getting the Status of AIO Operations</h4>
+
+<p>As already described in the documentation of the functions in the last
+section, it must be possible to get information about the status of an I/O
+request.  When the operation is performed truly asynchronously (as with
+<code>aio_read</code> and <code>aio_write</code> and with <code>lio_listio</code> when the
+mode is <code>LIO_NOWAIT</code>), one sometimes needs to know whether a
+specific request already terminated and if so, what the result was.
+The following two functions allow you to get this kind of information.
+</p>
+<dl>
+<dt><a name="index-aio_005ferror"></a>Function: <em>int</em> <strong>aio_error</strong> <em>(const struct aiocb *<var>aiocbp</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function determines the error state of the request described by the
+<code>struct aiocb</code> variable pointed to by <var>aiocbp</var>.  If the
+request has not yet terminated the value returned is always
+<code>EINPROGRESS</code>.  Once the request has terminated the value
+<code>aio_error</code> returns is either <em>0</em> if the request completed
+successfully or it returns the value which would be stored in the
+<code>errno</code> variable if the request would have been done using
+<code>read</code>, <code>write</code>, or <code>fsync</code>.
+</p>
+<p>The function can return <code>ENOSYS</code> if it is not implemented.  It
+could also return <code>EINVAL</code> if the <var>aiocbp</var> parameter does not
+refer to an asynchronous operation whose return status is not yet known.
+</p>
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is in fact <code>aio_error64</code> since the LFS interface
+transparently replaces the normal implementation.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-aio_005ferror64"></a>Function: <em>int</em> <strong>aio_error64</strong> <em>(const struct aiocb64 *<var>aiocbp</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function is similar to <code>aio_error</code> with the only difference
+that the argument is a reference to a variable of type <code>struct
+aiocb64</code>.
+</p>
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is available under the name <code>aio_error</code> and so
+transparently replaces the interface for small files on 32 bit
+machines.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-aio_005freturn"></a>Function: <em>ssize_t</em> <strong>aio_return</strong> <em>(struct aiocb *<var>aiocbp</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function can be used to retrieve the return status of the operation
+carried out by the request described in the variable pointed to by
+<var>aiocbp</var>.  As long as the error status of this request as returned
+by <code>aio_error</code> is <code>EINPROGRESS</code> the return of this function is
+undefined.
+</p>
+<p>Once the request is finished this function can be used exactly once to
+retrieve the return value.  Following calls might lead to undefined
+behavior.  The return value itself is the value which would have been
+returned by the <code>read</code>, <code>write</code>, or <code>fsync</code> call.
+</p>
+<p>The function can return <code>ENOSYS</code> if it is not implemented.  It
+could also return <code>EINVAL</code> if the <var>aiocbp</var> parameter does not
+refer to an asynchronous operation whose return status is not yet known.
+</p>
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is in fact <code>aio_return64</code> since the LFS interface
+transparently replaces the normal implementation.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-aio_005freturn64"></a>Function: <em>ssize_t</em> <strong>aio_return64</strong> <em>(struct aiocb64 *<var>aiocbp</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function is similar to <code>aio_return</code> with the only difference
+that the argument is a reference to a variable of type <code>struct
+aiocb64</code>.
+</p>
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is available under the name <code>aio_return</code> and so
+transparently replaces the interface for small files on 32 bit
+machines.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Synchronizing-AIO-Operations.html#Synchronizing-AIO-Operations" accesskey="n" rel="next">Synchronizing AIO Operations</a>, Previous: <a href="Asynchronous-Reads_002fWrites.html#Asynchronous-Reads_002fWrites" accesskey="p" rel="prev">Asynchronous Reads/Writes</a>, Up: <a href="Asynchronous-I_002fO.html#Asynchronous-I_002fO" accesskey="u" rel="up">Asynchronous I/O</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

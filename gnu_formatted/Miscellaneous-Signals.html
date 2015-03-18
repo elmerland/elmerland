@@ -1,0 +1,53 @@
+<a name="Miscellaneous-Signals"></a>
+<div class="header">
+<p>
+Next: <a href="Signal-Messages.html#Signal-Messages" accesskey="n" rel="next">Signal Messages</a>, Previous: <a href="Operation-Error-Signals.html#Operation-Error-Signals" accesskey="p" rel="prev">Operation Error Signals</a>, Up: <a href="Standard-Signals.html#Standard-Signals" accesskey="u" rel="up">Standard Signals</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Miscellaneous-Signals-1"></a>
+<h4 class="subsection">24.2.7 Miscellaneous Signals</h4>
+
+<p>These signals are used for various other purposes.  In general, they
+will not affect your program unless it explicitly uses them for something.
+</p>
+<dl>
+<dt><a name="index-SIGUSR1"></a>Macro: <em>int</em> <strong>SIGUSR1</strong></dt>
+<dt><a name="index-SIGUSR2"></a>Macro: <em>int</em> <strong>SIGUSR2</strong></dt>
+<dd><a name="index-user-signals"></a>
+<p>The <code>SIGUSR1</code> and <code>SIGUSR2</code> signals are set aside for you to
+use any way you want.  They&rsquo;re useful for simple interprocess
+communication, if you write a signal handler for them in the program
+that receives the signal.
+</p>
+<p>There is an example showing the use of <code>SIGUSR1</code> and <code>SIGUSR2</code>
+in <a href="Signaling-Another-Process.html#Signaling-Another-Process">Signaling Another Process</a>.
+</p>
+<p>The default action is to terminate the process.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-SIGWINCH"></a>Macro: <em>int</em> <strong>SIGWINCH</strong></dt>
+<dd><p>Window size change.  This is generated on some systems (including GNU)
+when the terminal driver&rsquo;s record of the number of rows and columns on
+the screen is changed.  The default action is to ignore it.
+</p>
+<p>If a program does full-screen display, it should handle <code>SIGWINCH</code>.
+When the signal arrives, it should fetch the new screen size and
+reformat its display accordingly.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-SIGINFO"></a>Macro: <em>int</em> <strong>SIGINFO</strong></dt>
+<dd><p>Information request.  On 4.4 BSD and GNU/Hurd systems, this signal is sent
+to all the processes in the foreground process group of the controlling
+terminal when the user types the STATUS character in canonical mode;
+see <a href="Signal-Characters.html#Signal-Characters">Signal Characters</a>.
+</p>
+<p>If the process is the leader of the process group, the default action is
+to print some status information about the system and what the process
+is doing.  Otherwise the default is to do nothing.
+</p></dd></dl>
+
+
+
+

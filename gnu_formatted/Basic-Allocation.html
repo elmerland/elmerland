@@ -1,0 +1,71 @@
+<a name="Basic-Allocation"></a>
+<div class="header">
+<p>
+Next: <a href="Malloc-Examples.html#Malloc-Examples" accesskey="n" rel="next">Malloc Examples</a>, Up: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="u" rel="up">Unconstrained Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Basic-Memory-Allocation"></a>
+<h4 class="subsubsection">3.2.2.1 Basic Memory Allocation</h4>
+<a name="index-allocation-of-memory-with-malloc"></a>
+
+<p>To allocate a block of memory, call <code>malloc</code>.  The prototype for
+this function is in <samp>stdlib.h</samp>.
+<a name="index-stdlib_002eh"></a>
+</p>
+<dl>
+<dt><a name="index-malloc"></a>Function: <em>void *</em> <strong>malloc</strong> <em>(size_t <var>size</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock
+| AC-Unsafe lock fd mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+
+
+<p>This function returns a pointer to a newly allocated block <var>size</var>
+bytes long, or a null pointer if the block could not be allocated.
+</p></dd></dl>
+
+<p>The contents of the block are undefined; you must initialize it yourself
+(or use <code>calloc</code> instead; see <a href="Allocating-Cleared-Space.html#Allocating-Cleared-Space">Allocating Cleared Space</a>).
+Normally you would cast the value as a pointer to the kind of object
+that you want to store in the block.  Here we show an example of doing
+so, and of initializing the space with zeros using the library function
+<code>memset</code> (see <a href="Copying-and-Concatenation.html#Copying-and-Concatenation">Copying and Concatenation</a>):
+</p>
+<div class="smallexample">
+<pre class="smallexample">struct foo *ptr;
+&hellip;
+ptr = (struct foo *) malloc (sizeof (struct foo));
+if (ptr == 0) abort ();
+memset (ptr, 0, sizeof (struct foo));
+</pre></div>
+
+<p>You can store the result of <code>malloc</code> into any pointer variable
+without a cast, because ISO&nbsp;C<!-- /@w --> automatically converts the type
+<code>void *</code> to another type of pointer when necessary.  But the cast
+is necessary in contexts other than assignment operators or if you might
+want your code to run in traditional C.
+</p>
+<p>Remember that when allocating space for a string, the argument to
+<code>malloc</code> must be one plus the length of the string.  This is
+because a string is terminated with a null character that doesn&rsquo;t count
+in the &ldquo;length&rdquo; of the string but does need space.  For example:
+</p>
+<div class="smallexample">
+<pre class="smallexample">char *ptr;
+&hellip;
+ptr = (char *) malloc (length + 1);
+</pre></div>
+
+<p>See <a href="Representation-of-Strings.html#Representation-of-Strings">Representation of Strings</a>, for more information about this.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Malloc-Examples.html#Malloc-Examples" accesskey="n" rel="next">Malloc Examples</a>, Up: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="u" rel="up">Unconstrained Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

@@ -1,0 +1,61 @@
+<a name="NSS-Configuration-File"></a>
+<div class="header">
+<p>
+Next: <a href="NSS-Module-Internals.html#NSS-Module-Internals" accesskey="n" rel="next">NSS Module Internals</a>, Previous: <a href="NSS-Basics.html#NSS-Basics" accesskey="p" rel="prev">NSS Basics</a>, Up: <a href="Name-Service-Switch.html#Name-Service-Switch" accesskey="u" rel="up">Name Service Switch</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="The-NSS-Configuration-File"></a>
+<h3 class="section">29.2 The NSS Configuration File</h3>
+
+<a name="index-_002fetc_002fnsswitch_002econf"></a>
+<a name="index-nsswitch_002econf"></a>
+<p>Somehow the NSS code must be told about the wishes of the user.  For
+this reason there is the file <samp>/etc/nsswitch.conf</samp>.  For each
+database this file contain a specification how the lookup process should
+work.  The file could look like this:
+</p>
+<div class="example">
+<pre class="example"># /etc/nsswitch.conf
+#
+# Name Service Switch configuration file.
+#
+
+passwd:     db files nis
+shadow:     files
+group:      db files nis
+
+hosts:      files nisplus nis dns
+networks:   nisplus [NOTFOUND=return] files
+
+ethers:     nisplus [NOTFOUND=return] db files
+protocols:  nisplus [NOTFOUND=return] db files
+rpc:        nisplus [NOTFOUND=return] db files
+services:   nisplus [NOTFOUND=return] db files
+</pre></div>
+
+<p>The first column is the database as you can guess from the table above.
+The rest of the line specifies how the lookup process works.  Please
+note that you specify the way it works for each database individually.
+This cannot be done with the old way of a monolithic implementation.
+</p>
+<p>The configuration specification for each database can contain two
+different items:
+</p>
+<ul>
+<li> the service specification like <code>files</code>, <code>db</code>, or <code>nis</code>.
+</li><li> the reaction on lookup result like <code>[NOTFOUND=return]</code>.
+</li></ul>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Services-in-the-NSS-configuration.html#Services-in-the-NSS-configuration" accesskey="1">Services in the NSS configuration</a>:</td><td align="left" valign="top">Service names in the NSS configuration.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Actions-in-the-NSS-configuration.html#Actions-in-the-NSS-configuration" accesskey="2">Actions in the NSS configuration</a>:</td><td align="left" valign="top">React appropriately to the lookup result.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Notes-on-NSS-Configuration-File.html#Notes-on-NSS-Configuration-File" accesskey="3">Notes on NSS Configuration File</a>:</td><td align="left" valign="top">Things to take care about while
+                                     configuring NSS.
+</td></tr>
+</table>
+
+
+
+

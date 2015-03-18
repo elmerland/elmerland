@@ -1,0 +1,47 @@
+<a name="Simple-Directory-Lister"></a>
+<div class="header">
+<p>
+Next: <a href="Random-Access-Directory.html#Random-Access-Directory" accesskey="n" rel="next">Random Access Directory</a>, Previous: <a href="Reading_002fClosing-Directory.html#Reading_002fClosing-Directory" accesskey="p" rel="prev">Reading/Closing Directory</a>, Up: <a href="Accessing-Directories.html#Accessing-Directories" accesskey="u" rel="up">Accessing Directories</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Simple-Program-to-List-a-Directory"></a>
+<h4 class="subsection">14.2.4 Simple Program to List a Directory</h4>
+
+<p>Here&rsquo;s a simple program that prints the names of the files in
+the current working directory:
+</p>
+<div class="smallexample">
+<pre class="smallexample">
+</pre><pre class="smallexample">#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;dirent.h&gt;
+</pre><pre class="smallexample">
+int
+main (void)
+{
+  DIR *dp;
+  struct dirent *ep;
+
+  dp = opendir (&quot;./&quot;);
+  if (dp != NULL)
+    {
+      while (ep = readdir (dp))
+        puts (ep-&gt;d_name);
+      (void) closedir (dp);
+    }
+  else
+    perror (&quot;Couldn't open the directory&quot;);
+
+  return 0;
+}
+</pre></div>
+
+<p>The order in which files appear in a directory tends to be fairly
+random.  A more useful program would sort the entries (perhaps by
+alphabetizing them) before printing them; see
+<a href="Scanning-Directory-Content.html#Scanning-Directory-Content">Scanning Directory Content</a>, and <a href="Array-Sort-Function.html#Array-Sort-Function">Array Sort Function</a>.
+</p>
+
+
+
+

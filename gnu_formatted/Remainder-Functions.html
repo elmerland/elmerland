@@ -1,0 +1,84 @@
+<a name="Remainder-Functions"></a>
+<div class="header">
+<p>
+Next: <a href="FP-Bit-Twiddling.html#FP-Bit-Twiddling" accesskey="n" rel="next">FP Bit Twiddling</a>, Previous: <a href="Rounding-Functions.html#Rounding-Functions" accesskey="p" rel="prev">Rounding Functions</a>, Up: <a href="Arithmetic-Functions.html#Arithmetic-Functions" accesskey="u" rel="up">Arithmetic Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Remainder-Functions-1"></a>
+<h4 class="subsection">20.8.4 Remainder Functions</h4>
+
+<p>The functions in this section compute the remainder on division of two
+floating-point numbers.  Each is a little different; pick the one that
+suits your problem.
+</p>
+<dl>
+<dt><a name="index-fmod"></a>Function: <em>double</em> <strong>fmod</strong> <em>(double <var>numerator</var>, double <var>denominator</var>)</em></dt>
+<dt><a name="index-fmodf"></a>Function: <em>float</em> <strong>fmodf</strong> <em>(float <var>numerator</var>, float <var>denominator</var>)</em></dt>
+<dt><a name="index-fmodl"></a>Function: <em>long double</em> <strong>fmodl</strong> <em>(long double <var>numerator</var>, long double <var>denominator</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>These functions compute the remainder from the division of
+<var>numerator</var> by <var>denominator</var>.  Specifically, the return value is
+<code><var>numerator</var> - <var>n</var>&nbsp;*&nbsp;<var>denominator</var><!-- /@w --></code>, where <var>n</var>
+is the quotient of <var>numerator</var> divided by <var>denominator</var>, rounded
+towards zero to an integer.  Thus, <code>fmod&nbsp;(6.5,&nbsp;2.3)</code><!-- /@w --> returns
+<code>1.9</code>, which is <code>6.5</code> minus <code>4.6</code>.
+</p>
+<p>The result has the same sign as the <var>numerator</var> and has magnitude
+less than the magnitude of the <var>denominator</var>.
+</p>
+<p>If <var>denominator</var> is zero, <code>fmod</code> signals a domain error.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-drem"></a>Function: <em>double</em> <strong>drem</strong> <em>(double <var>numerator</var>, double <var>denominator</var>)</em></dt>
+<dt><a name="index-dremf"></a>Function: <em>float</em> <strong>dremf</strong> <em>(float <var>numerator</var>, float <var>denominator</var>)</em></dt>
+<dt><a name="index-dreml"></a>Function: <em>long double</em> <strong>dreml</strong> <em>(long double <var>numerator</var>, long double <var>denominator</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>These functions are like <code>fmod</code> except that they round the
+internal quotient <var>n</var> to the nearest integer instead of towards zero
+to an integer.  For example, <code>drem (6.5, 2.3)</code> returns <code>-0.4</code>,
+which is <code>6.5</code> minus <code>6.9</code>.
+</p>
+<p>The absolute value of the result is less than or equal to half the
+absolute value of the <var>denominator</var>.  The difference between
+<code>fmod (<var>numerator</var>, <var>denominator</var>)</code> and <code>drem
+(<var>numerator</var>, <var>denominator</var>)</code> is always either
+<var>denominator</var>, minus <var>denominator</var>, or zero.
+</p>
+<p>If <var>denominator</var> is zero, <code>drem</code> signals a domain error.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-remainder"></a>Function: <em>double</em> <strong>remainder</strong> <em>(double <var>numerator</var>, double <var>denominator</var>)</em></dt>
+<dt><a name="index-remainderf"></a>Function: <em>float</em> <strong>remainderf</strong> <em>(float <var>numerator</var>, float <var>denominator</var>)</em></dt>
+<dt><a name="index-remainderl"></a>Function: <em>long double</em> <strong>remainderl</strong> <em>(long double <var>numerator</var>, long double <var>denominator</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function is another name for <code>drem</code>.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="FP-Bit-Twiddling.html#FP-Bit-Twiddling" accesskey="n" rel="next">FP Bit Twiddling</a>, Previous: <a href="Rounding-Functions.html#Rounding-Functions" accesskey="p" rel="prev">Rounding Functions</a>, Up: <a href="Arithmetic-Functions.html#Arithmetic-Functions" accesskey="u" rel="up">Arithmetic Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

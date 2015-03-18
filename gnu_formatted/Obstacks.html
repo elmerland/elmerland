@@ -1,0 +1,59 @@
+<a name="Obstacks"></a>
+<div class="header">
+<p>
+Next: <a href="Variable-Size-Automatic.html#Variable-Size-Automatic" accesskey="n" rel="next">Variable Size Automatic</a>, Previous: <a href="Allocation-Debugging.html#Allocation-Debugging" accesskey="p" rel="prev">Allocation Debugging</a>, Up: <a href="Memory-Allocation.html#Memory-Allocation" accesskey="u" rel="up">Memory Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Obstacks-1"></a>
+<h4 class="subsection">3.2.4 Obstacks</h4>
+<a name="index-obstacks"></a>
+
+<p>An <em>obstack</em> is a pool of memory containing a stack of objects.  You
+can create any number of separate obstacks, and then allocate objects in
+specified obstacks.  Within each obstack, the last object allocated must
+always be the first one freed, but distinct obstacks are independent of
+each other.
+</p>
+<p>Aside from this one constraint of order of freeing, obstacks are totally
+general: an obstack can contain any number of objects of any size.  They
+are implemented with macros, so allocation is usually very fast as long as
+the objects are usually small.  And the only space overhead per object is
+the padding needed to start each object on a suitable boundary.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Creating-Obstacks.html#Creating-Obstacks" accesskey="1">Creating Obstacks</a>:</td><td align="left" valign="top">How to declare an obstack in your program.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Preparing-for-Obstacks.html#Preparing-for-Obstacks" accesskey="2">Preparing for Obstacks</a>:</td><td align="left" valign="top">Preparations needed before you can
+				 use obstacks.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Allocation-in-an-Obstack.html#Allocation-in-an-Obstack" accesskey="3">Allocation in an Obstack</a>:</td><td align="left" valign="top">Allocating objects in an obstack.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Freeing-Obstack-Objects.html#Freeing-Obstack-Objects" accesskey="4">Freeing Obstack Objects</a>:</td><td align="left" valign="top">Freeing objects in an obstack.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Obstack-Functions.html#Obstack-Functions" accesskey="5">Obstack Functions</a>:</td><td align="left" valign="top">The obstack functions are both
+				 functions and macros.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Growing-Objects.html#Growing-Objects" accesskey="6">Growing Objects</a>:</td><td align="left" valign="top">Making an object bigger by stages.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Extra-Fast-Growing.html#Extra-Fast-Growing" accesskey="7">Extra Fast Growing</a>:</td><td align="left" valign="top">Extra-high-efficiency (though more
+				 complicated) growing objects.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Status-of-an-Obstack.html#Status-of-an-Obstack" accesskey="8">Status of an Obstack</a>:</td><td align="left" valign="top">Inquiries about the status of an obstack.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Obstacks-Data-Alignment.html#Obstacks-Data-Alignment" accesskey="9">Obstacks Data Alignment</a>:</td><td align="left" valign="top">Controlling alignment of objects in obstacks.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Obstack-Chunks.html#Obstack-Chunks">Obstack Chunks</a>:</td><td align="left" valign="top">How obstacks obtain and release chunks;
+				 efficiency considerations.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Summary-of-Obstacks.html#Summary-of-Obstacks">Summary of Obstacks</a>:</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Variable-Size-Automatic.html#Variable-Size-Automatic" accesskey="n" rel="next">Variable Size Automatic</a>, Previous: <a href="Allocation-Debugging.html#Allocation-Debugging" accesskey="p" rel="prev">Allocation Debugging</a>, Up: <a href="Memory-Allocation.html#Memory-Allocation" accesskey="u" rel="up">Memory Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

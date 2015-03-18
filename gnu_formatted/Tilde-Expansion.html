@@ -1,0 +1,31 @@
+<a name="Tilde-Expansion"></a>
+<div class="header">
+<p>
+Next: <a href="Variable-Substitution.html#Variable-Substitution" accesskey="n" rel="next">Variable Substitution</a>, Previous: <a href="Wordexp-Example.html#Wordexp-Example" accesskey="p" rel="prev">Wordexp Example</a>, Up: <a href="Word-Expansion.html#Word-Expansion" accesskey="u" rel="up">Word Expansion</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Details-of-Tilde-Expansion"></a>
+<h4 class="subsection">10.4.5 Details of Tilde Expansion</h4>
+
+<p>It&rsquo;s a standard part of shell syntax that you can use &lsquo;<samp>~</samp>&rsquo; at the
+beginning of a file name to stand for your own home directory.  You
+can use &lsquo;<samp>~<var>user</var></samp>&rsquo; to stand for <var>user</var>&rsquo;s home directory.
+</p>
+<p><em>Tilde expansion</em> is the process of converting these abbreviations
+to the directory names that they stand for.
+</p>
+<p>Tilde expansion applies to the &lsquo;<samp>~</samp>&rsquo; plus all following characters up
+to whitespace or a slash.  It takes place only at the beginning of a
+word, and only if none of the characters to be transformed is quoted in
+any way.
+</p>
+<p>Plain &lsquo;<samp>~</samp>&rsquo; uses the value of the environment variable <code>HOME</code>
+as the proper home directory name.  &lsquo;<samp>~</samp>&rsquo; followed by a user name
+uses <code>getpwname</code> to look up that user in the user database, and
+uses whatever directory is recorded there.  Thus, &lsquo;<samp>~</samp>&rsquo; followed
+by your own name can give different results from plain &lsquo;<samp>~</samp>&rsquo;, if
+the value of <code>HOME</code> is not really your home directory.
+</p>
+
+
+

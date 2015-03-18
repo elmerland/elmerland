@@ -1,0 +1,43 @@
+<a name="Floating-Type-Macros"></a>
+<div class="header">
+<p>
+Next: <a href="Structure-Measurement.html#Structure-Measurement" accesskey="n" rel="next">Structure Measurement</a>, Previous: <a href="Range-of-Type.html#Range-of-Type" accesskey="p" rel="prev">Range of Type</a>, Up: <a href="Data-Type-Measurements.html#Data-Type-Measurements" accesskey="u" rel="up">Data Type Measurements</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Floating-Type-Macros-1"></a>
+<h4 class="subsection">A.5.3 Floating Type Macros</h4>
+<a name="index-floating-type-measurements"></a>
+<a name="index-measurements-of-floating-types"></a>
+<a name="index-type-measurements_002c-floating"></a>
+<a name="index-limits_002c-floating-types"></a>
+
+<p>The specific representation of floating point numbers varies from
+machine to machine.  Because floating point numbers are represented
+internally as approximate quantities, algorithms for manipulating
+floating point data often need to take account of the precise details of
+the machine&rsquo;s floating point representation.
+</p>
+<p>Some of the functions in the C library itself need this information; for
+example, the algorithms for printing and reading floating point numbers
+(see <a href="I_002fO-on-Streams.html#I_002fO-on-Streams">I/O on Streams</a>) and for calculating trigonometric and
+irrational functions (see <a href="Mathematics.html#Mathematics">Mathematics</a>) use it to avoid round-off
+error and loss of accuracy.  User programs that implement numerical
+analysis techniques also often need this information in order to
+minimize or compute error bounds.
+</p>
+<p>The header file <samp>float.h</samp> describes the format used by your
+machine.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Floating-Point-Concepts.html#Floating-Point-Concepts" accesskey="1">Floating Point Concepts</a>:</td><td align="left" valign="top">Definitions of terminology.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Floating-Point-Parameters.html#Floating-Point-Parameters" accesskey="2">Floating Point Parameters</a>:</td><td align="left" valign="top">Details of specific macros.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="IEEE-Floating-Point.html#IEEE-Floating-Point" accesskey="3">IEEE Floating Point</a>:</td><td align="left" valign="top">The measurements for one common
+                                 representation.
+</td></tr>
+</table>
+
+
+
+

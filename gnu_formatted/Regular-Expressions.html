@@ -1,0 +1,36 @@
+<a name="Regular-Expressions"></a>
+<div class="header">
+<p>
+Next: <a href="Word-Expansion.html#Word-Expansion" accesskey="n" rel="next">Word Expansion</a>, Previous: <a href="Globbing.html#Globbing" accesskey="p" rel="prev">Globbing</a>, Up: <a href="Pattern-Matching.html#Pattern-Matching" accesskey="u" rel="up">Pattern Matching</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Regular-Expression-Matching"></a>
+<h3 class="section">10.3 Regular Expression Matching</h3>
+
+<p>The GNU C Library supports two interfaces for matching regular
+expressions.  One is the standard POSIX.2 interface, and the other is
+what the GNU C Library has had for many years.
+</p>
+<p>Both interfaces are declared in the header file <samp>regex.h</samp>.
+If you define <code><span class="nolinebreak">_POSIX_C_SOURCE</span></code><!-- /@w -->, then only the POSIX.2
+functions, structures, and constants are declared.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="POSIX-Regexp-Compilation.html#POSIX-Regexp-Compilation" accesskey="1">POSIX Regexp Compilation</a>:</td><td align="left" valign="top">Using <code>regcomp</code> to prepare to match.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Flags-for-POSIX-Regexps.html#Flags-for-POSIX-Regexps" accesskey="2">Flags for POSIX Regexps</a>:</td><td align="left" valign="top">Syntax variations for <code>regcomp</code>.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Matching-POSIX-Regexps.html#Matching-POSIX-Regexps" accesskey="3">Matching POSIX Regexps</a>:</td><td align="left" valign="top">Using <code>regexec</code> to match the compiled
+				   pattern that you get from <code>regcomp</code>.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Regexp-Subexpressions.html#Regexp-Subexpressions" accesskey="4">Regexp Subexpressions</a>:</td><td align="left" valign="top">Finding which parts of the string were matched.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Subexpression-Complications.html#Subexpression-Complications" accesskey="5">Subexpression Complications</a>:</td><td align="left" valign="top">Find points of which parts were matched.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Regexp-Cleanup.html#Regexp-Cleanup" accesskey="6">Regexp Cleanup</a>:</td><td align="left" valign="top">Freeing storage; reporting errors.
+</td></tr>
+</table>
+
+
+
+

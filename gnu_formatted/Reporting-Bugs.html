@@ -1,0 +1,61 @@
+<a name="Reporting-Bugs"></a>
+<div class="header">
+<p>
+Previous: <a href="Linux.html#Linux" accesskey="p" rel="prev">Linux</a>, Up: <a href="Installation.html#Installation" accesskey="u" rel="up">Installation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Reporting-Bugs-1"></a>
+<h3 class="appendixsec">C.5 Reporting Bugs</h3>
+<a name="index-reporting-bugs"></a>
+<a name="index-bugs_002c-reporting"></a>
+
+<p>There are probably bugs in the GNU C Library.  There are certainly
+errors and omissions in this manual.  If you report them, they will get
+fixed.  If you don&rsquo;t, no one will ever know about them and they will
+remain unfixed for all eternity, if not longer.
+</p>
+<p>It is a good idea to verify that the problem has not already been
+reported.  Bugs are documented in two places: The file <samp>BUGS</samp>
+describes a number of well known bugs and the central GNU C Library
+bug tracking system has a
+WWW interface at
+<a href="http://sourceware.org/bugzilla/">http://sourceware.org/bugzilla/</a>.  The WWW
+interface gives you access to open and closed reports.  A closed report
+normally includes a patch or a hint on solving the problem.
+</p>
+<p>To report a bug, first you must find it.  With any luck, this will be the
+hard part.  Once you&rsquo;ve found a bug, make sure it&rsquo;s really a bug.  A
+good way to do this is to see if the GNU C Library behaves the same way
+some other C library does.  If so, probably you are wrong and the
+libraries are right (but not necessarily).  If not, one of the libraries
+is probably wrong.  It might not be the GNU C Library.  Many historical
+Unix C libraries permit things that we don&rsquo;t, such as closing a file
+twice.
+</p>
+<p>If you think you have found some way in which the GNU C Library does not
+conform to the ISO and POSIX standards (see <a href="Standards-and-Portability.html#Standards-and-Portability">Standards and Portability</a>), that is definitely a bug.  Report it!
+</p>
+<p>Once you&rsquo;re sure you&rsquo;ve found a bug, try to narrow it down to the
+smallest test case that reproduces the problem.  In the case of a C
+library, you really only need to narrow it down to one library
+function call, if possible.  This should not be too difficult.
+</p>
+<p>The final step when you have a simple test case is to report the bug.
+Do this at <a href="http://www.gnu.org/software/libc/bugs.html">http://www.gnu.org/software/libc/bugs.html</a>.
+</p>
+<p>If you are not sure how a function should behave, and this manual
+doesn&rsquo;t tell you, that&rsquo;s a bug in the manual.  Report that too!  If the
+function&rsquo;s behavior disagrees with the manual, then either the library
+or the manual has a bug, so report the disagreement.  If you find any
+errors or omissions in this manual, please report them to the
+bug database.  If you refer to specific
+sections of the manual, please include the section names for easier
+identification.
+</p><hr>
+<div class="header">
+<p>
+Previous: <a href="Linux.html#Linux" accesskey="p" rel="prev">Linux</a>, Up: <a href="Installation.html#Installation" accesskey="u" rel="up">Installation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

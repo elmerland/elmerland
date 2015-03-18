@@ -1,0 +1,29 @@
+<a name="Orphaned-Process-Groups"></a>
+<div class="header">
+<p>
+Next: <a href="Implementing-a-Shell.html#Implementing-a-Shell" accesskey="n" rel="next">Implementing a Shell</a>, Previous: <a href="Access-to-the-Terminal.html#Access-to-the-Terminal" accesskey="p" rel="prev">Access to the Terminal</a>, Up: <a href="Job-Control.html#Job-Control" accesskey="u" rel="up">Job Control</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Orphaned-Process-Groups-1"></a>
+<h3 class="section">28.5 Orphaned Process Groups</h3>
+<a name="index-orphaned-process-group"></a>
+
+<p>When a controlling process terminates, its terminal becomes free and a
+new session can be established on it.  (In fact, another user could log
+in on the terminal.)  This could cause a problem if any processes from
+the old session are still trying to use that terminal.
+</p>
+<p>To prevent problems, process groups that continue running even after the
+session leader has terminated are marked as <em>orphaned process
+groups</em>.
+</p>
+<p>When a process group becomes an orphan, its processes are sent a
+<code>SIGHUP</code> signal.  Ordinarily, this causes the processes to
+terminate.  However, if a program ignores this signal or establishes a
+handler for it (see <a href="Signal-Handling.html#Signal-Handling">Signal Handling</a>), it can continue running as in
+the orphan process group even after its controlling process terminates;
+but it still cannot access the terminal any more.
+</p>
+
+
+

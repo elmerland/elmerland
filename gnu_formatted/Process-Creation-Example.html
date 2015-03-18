@@ -1,0 +1,77 @@
+<a name="Process-Creation-Example"></a>
+<div class="header">
+<p>
+Previous: <a href="BSD-Wait-Functions.html#BSD-Wait-Functions" accesskey="p" rel="prev">BSD Wait Functions</a>, Up: <a href="Processes.html#Processes" accesskey="u" rel="up">Processes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Process-Creation-Example-1"></a>
+<h3 class="section">26.9 Process Creation Example</h3>
+
+<p>Here is an example program showing how you might write a function
+similar to the built-in <code>system</code>.  It executes its <var>command</var>
+argument using the equivalent of &lsquo;<samp>sh -c <var>command</var></samp>&rsquo;.
+</p>
+<div class="smallexample">
+<pre class="smallexample">#include &lt;stddef.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/wait.h&gt;
+
+/* <span class="roman">Execute the command using this shell program.</span>  */
+#define SHELL &quot;/bin/sh&quot;
+
+</pre><pre class="smallexample">int
+my_system (const char *command)
+{
+  int status;
+  pid_t pid;
+</pre><pre class="smallexample">
+  pid = fork ();
+  if (pid == 0)
+    {
+      /* <span class="roman">This is the child process.  Execute the shell command.</span> */
+      execl (SHELL, SHELL, &quot;-c&quot;, command, NULL);
+      _exit (EXIT_FAILURE);
+    }
+  else if (pid &lt; 0)
+    /* <span class="roman">The fork failed.  Report failure.</span>  */
+    status = -1;
+  else
+    /* <span class="roman">This is the parent process.  Wait for the child to complete.</span>  */
+    if (waitpid (pid, &amp;status, 0) != pid)
+      status = -1;
+  return status;
+}
+</pre></div>
+
+
+<p>There are a couple of things you should pay attention to in this
+example.
+</p>
+<p>Remember that the first <code>argv</code> argument supplied to the program
+represents the name of the program being executed.  That is why, in the
+call to <code>execl</code>, <code>SHELL</code> is supplied once to name the program
+to execute and a second time to supply a value for <code>argv[0]</code>.
+</p>
+<p>The <code>execl</code> call in the child process doesn&rsquo;t return if it is
+successful.  If it fails, you must do something to make the child
+process terminate.  Just returning a bad status code with <code>return</code>
+would leave two processes running the original program.  Instead, the
+right behavior is for the child process to report failure to its parent
+process.
+</p>
+<p>Call <code>_exit</code> to accomplish this.  The reason for using <code>_exit</code>
+instead of <code>exit</code> is to avoid flushing fully buffered streams such
+as <code>stdout</code>.  The buffers of these streams probably contain data
+that was copied from the parent process by the <code>fork</code>, data that
+will be output eventually by the parent process.  Calling <code>exit</code> in
+the child would output the data twice.  See <a href="Termination-Internals.html#Termination-Internals">Termination Internals</a>.
+</p><hr>
+<div class="header">
+<p>
+Previous: <a href="BSD-Wait-Functions.html#BSD-Wait-Functions" accesskey="p" rel="prev">BSD Wait Functions</a>, Up: <a href="Processes.html#Processes" accesskey="u" rel="up">Processes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

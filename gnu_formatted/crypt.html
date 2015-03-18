@@ -1,0 +1,161 @@
+<a name="crypt"></a>
+<div class="header">
+<p>
+Next: <a href="DES-Encryption.html#DES-Encryption" accesskey="n" rel="next">DES Encryption</a>, Previous: <a href="getpass.html#getpass" accesskey="p" rel="prev">getpass</a>, Up: <a href="Cryptographic-Functions.html#Cryptographic-Functions" accesskey="u" rel="up">Cryptographic Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Encrypting-Passwords"></a>
+<h3 class="section">33.3 Encrypting Passwords</h3>
+
+<dl>
+<dt><a name="index-crypt"></a>Function: <em>char *</em> <strong>crypt</strong> <em>(const char *<var>key</var>, const char *<var>salt</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe race:crypt
+| AS-Unsafe corrupt lock heap dlopen
+| AC-Unsafe lock mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+
+<p>The <code>crypt</code> function takes a password, <var>key</var>, as a string, and
+a <var>salt</var> character array which is described below, and returns a
+printable ASCII string which starts with another salt.  It is believed
+that, given the output of the function, the best way to find a <var>key</var>
+that will produce that output is to guess values of <var>key</var> until the
+original value of <var>key</var> is found.
+</p>
+<p>The <var>salt</var> parameter does two things.  Firstly, it selects which
+algorithm is used, the MD5-based one or the DES-based one.  Secondly, it
+makes life harder for someone trying to guess passwords against a file
+containing many passwords; without a <var>salt</var>, an intruder can make a
+guess, run <code>crypt</code> on it once, and compare the result with all the
+passwords.  With a <var>salt</var>, the intruder must run <code>crypt</code> once
+for each different salt.
+</p>
+<p>For the MD5-based algorithm, the <var>salt</var> should consist of the string
+<code>$1$</code>, followed by up to 8 characters, terminated by either
+another <code>$</code> or the end of the string.  The result of <code>crypt</code>
+will be the <var>salt</var>, followed by a <code>$</code> if the salt didn&rsquo;t end
+with one, followed by 22 characters from the alphabet
+<code>./0-9A-Za-z</code>, up to 34 characters total.  Every character in the
+<var>key</var> is significant.
+</p>
+<p>For the DES-based algorithm, the <var>salt</var> should consist of two
+characters from the alphabet <code>./0-9A-Za-z</code>, and the result of
+<code>crypt</code> will be those two characters followed by 11 more from the
+same alphabet, 13 in total.  Only the first 8 characters in the
+<var>key</var> are significant.
+</p>
+<p>The MD5-based algorithm has no limit on the useful length of the
+password used, and is slightly more secure.  It is therefore preferred
+over the DES-based algorithm.
+</p>
+<p>When the user enters their password for the first time, the <var>salt</var>
+should be set to a new string which is reasonably random.  To verify a
+password against the result of a previous call to <code>crypt</code>, pass
+the result of the previous call as the <var>salt</var>.
+</p></dd></dl>
+
+<p>The following short program is an example of how to use <code>crypt</code> the
+first time a password is entered.  Note that the <var>salt</var> generation
+is just barely acceptable; in particular, it is not unique between
+machines, and in many applications it would not be acceptable to let an
+attacker know what time the user&rsquo;s password was last set.
+</p>
+<div class="smallexample">
+<pre class="smallexample">
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;crypt.h&gt;
+
+int
+main(void)
+{
+  unsigned long seed[2];
+  char salt[] = &quot;$1$........&quot;;
+  const char *const seedchars =
+    &quot;./0123456789ABCDEFGHIJKLMNOPQRST&quot;
+    &quot;UVWXYZabcdefghijklmnopqrstuvwxyz&quot;;
+  char *password;
+  int i;
+
+  /* <span class="roman">Generate a (not very) random seed.
+     You should do it better than this...</span> */
+  seed[0] = time(NULL);
+  seed[1] = getpid() ^ (seed[0] &gt;&gt; 14 &amp; 0x30000);
+
+  /* <span class="roman">Turn it into printable characters from &lsquo;seedchars&rsquo;.</span> */
+  for (i = 0; i &lt; 8; i++)
+    salt[3+i] = seedchars[(seed[i/5] &gt;&gt; (i%5)*6) &amp; 0x3f];
+
+  /* <span class="roman">Read in the user&rsquo;s password and encrypt it.</span> */
+  password = crypt(getpass(&quot;Password:&quot;), salt);
+
+  /* <span class="roman">Print the results.</span> */
+  puts(password);
+  return 0;
+}
+</pre></div>
+
+<p>The next program shows how to verify a password.  It prompts the user
+for a password and prints &ldquo;Access granted.&rdquo; if the user types
+<code>GNU libc manual</code>.
+</p>
+<div class="smallexample">
+<pre class="smallexample">
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;crypt.h&gt;
+
+int
+main(void)
+{
+  /* <span class="roman">Hashed form of &quot;GNU libc manual&quot;.</span> */
+  const char *const pass = &quot;$1$/iSaq7rB$EoUw5jJPPvAPECNaaWzMK/&quot;;
+
+  char *result;
+  int ok;
+
+</pre><pre class="smallexample">  /* <span class="roman">Read in the user&rsquo;s password and encrypt it,
+     passing the expected password in as the salt.</span> */
+  result = crypt(getpass(&quot;Password:&quot;), pass);
+</pre><pre class="smallexample">
+  /* <span class="roman">Test the result.</span> */
+  ok = strcmp (result, pass) == 0;
+
+  puts(ok ? &quot;Access granted.&quot; : &quot;Access denied.&quot;);
+  return ok ? 0 : 1;
+}
+</pre></div>
+
+<dl>
+<dt><a name="index-crypt_005fr"></a>Function: <em>char *</em> <strong>crypt_r</strong> <em>(const char *<var>key</var>, const char *<var>salt</var>, struct crypt_data * <var>data</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe corrupt lock heap dlopen
+| AC-Unsafe lock mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+
+<p>The <code>crypt_r</code> function does the same thing as <code>crypt</code>, but
+takes an extra parameter which includes space for its result (among
+other things), so it can be reentrant.  <code>data<span class="nolinebreak">-&gt;</span><!-- /@w -->initialized</code> must be
+cleared to zero before the first time <code>crypt_r</code> is called.
+</p>
+<p>The <code>crypt_r</code> function is a GNU extension.
+</p></dd></dl>
+
+<p>The <code>crypt</code> and <code>crypt_r</code> functions are prototyped in the
+header <samp>crypt.h</samp>.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="DES-Encryption.html#DES-Encryption" accesskey="n" rel="next">DES Encryption</a>, Previous: <a href="getpass.html#getpass" accesskey="p" rel="prev">getpass</a>, Up: <a href="Cryptographic-Functions.html#Cryptographic-Functions" accesskey="u" rel="up">Cryptographic Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

@@ -1,0 +1,45 @@
+<a name="Message-catalogs-a-la-X_002fOpen"></a>
+<div class="header">
+<p>
+Next: <a href="The-Uniforum-approach.html#The-Uniforum-approach" accesskey="n" rel="next">The Uniforum approach</a>, Up: <a href="Message-Translation.html#Message-Translation" accesskey="u" rel="up">Message Translation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="X_002fOpen-Message-Catalog-Handling"></a>
+<h3 class="section">8.1 X/Open Message Catalog Handling</h3>
+
+<p>The <code>catgets</code> functions are based on the simple scheme:
+</p>
+<blockquote>
+<p>Associate every message to translate in the source code with a unique
+identifier.  To retrieve a message from a catalog file solely the
+identifier is used.
+</p></blockquote>
+
+<p>This means for the author of the program that s/he will have to make
+sure the meaning of the identifier in the program code and in the
+message catalogs are always the same.
+</p>
+<p>Before a message can be translated the catalog file must be located.
+The user of the program must be able to guide the responsible function
+to find whatever catalog the user wants.  This is separated from what
+the programmer had in mind.
+</p>
+<p>All the types, constants and functions for the <code>catgets</code> functions
+are defined/declared in the <samp>nl_types.h</samp> header file.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="The-catgets-Functions.html#The-catgets-Functions" accesskey="1">The catgets Functions</a>:</td><td align="left" valign="top">The <code>catgets</code> function family.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="The-message-catalog-files.html#The-message-catalog-files" accesskey="2">The message catalog files</a>:</td><td align="left" valign="top">Format of the message catalog files.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="The-gencat-program.html#The-gencat-program" accesskey="3">The gencat program</a>:</td><td align="left" valign="top">How to generate message catalogs files which
+                                can be used by the functions.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Common-Usage.html#Common-Usage" accesskey="4">Common Usage</a>:</td><td align="left" valign="top">How to use the <code>catgets</code> interface.
+</td></tr>
+</table>
+
+
+
+
+

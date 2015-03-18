@@ -1,0 +1,73 @@
+<a name="Malloc-Tunable-Parameters"></a>
+<div class="header">
+<p>
+Next: <a href="Heap-Consistency-Checking.html#Heap-Consistency-Checking" accesskey="n" rel="next">Heap Consistency Checking</a>, Previous: <a href="Aligned-Memory-Blocks.html#Aligned-Memory-Blocks" accesskey="p" rel="prev">Aligned Memory Blocks</a>, Up: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="u" rel="up">Unconstrained Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Malloc-Tunable-Parameters-1"></a>
+<h4 class="subsubsection">3.2.2.8 Malloc Tunable Parameters</h4>
+
+<p>You can adjust some parameters for dynamic memory allocation with the
+<code>mallopt</code> function.  This function is the general SVID/XPG
+interface, defined in <samp>malloc.h</samp>.
+<a name="index-malloc_002eh"></a>
+</p>
+<dl>
+<dt><a name="index-mallopt"></a>Function: <em>int</em> <strong>mallopt</strong> <em>(int <var>param</var>, int <var>value</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe init const:mallopt
+| AS-Unsafe init lock
+| AC-Unsafe init lock
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+
+<p>When calling <code>mallopt</code>, the <var>param</var> argument specifies the
+parameter to be set, and <var>value</var> the new value to be set.  Possible
+choices for <var>param</var>, as defined in <samp>malloc.h</samp>, are:
+</p>
+<dl compact="compact">
+<dt><code>M_MMAP_MAX</code></dt>
+<dd><p>The maximum number of chunks to allocate with <code>mmap</code>.  Setting this
+to zero disables all use of <code>mmap</code>.
+</p></dd>
+<dt><code>M_MMAP_THRESHOLD</code></dt>
+<dd><p>All chunks larger than this value are allocated outside the normal
+heap, using the <code>mmap</code> system call.  This way it is guaranteed
+that the memory for these chunks can be returned to the system on
+<code>free</code>.  Note that requests smaller than this threshold might still
+be allocated via <code>mmap</code>.
+</p></dd>
+<dt><code>M_PERTURB</code></dt>
+<dd><p>If non-zero, memory blocks are filled with values depending on some
+low order bits of this parameter when they are allocated (except when
+allocated by <code>calloc</code>) and freed.  This can be used to debug the
+use of uninitialized or freed heap memory.  Note that this option does not
+guarantee that the freed block will have any specific values.  It only
+guarantees that the content the block had before it was freed will be
+overwritten.
+</p></dd>
+<dt><code>M_TOP_PAD</code></dt>
+<dd><p>This parameter determines the amount of extra memory to obtain from the
+system when a call to <code>sbrk</code> is required.  It also specifies the
+number of bytes to retain when shrinking the heap by calling <code>sbrk</code>
+with a negative argument.  This provides the necessary hysteresis in
+heap size such that excessive amounts of system calls can be avoided.
+</p></dd>
+<dt><code>M_TRIM_THRESHOLD</code></dt>
+<dd><p>This is the minimum size (in bytes) of the top-most, releasable chunk
+that will cause <code>sbrk</code> to be called with a negative argument in
+order to return memory to the system.
+</p></dd>
+</dl>
+
+</dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Heap-Consistency-Checking.html#Heap-Consistency-Checking" accesskey="n" rel="next">Heap Consistency Checking</a>, Previous: <a href="Aligned-Memory-Blocks.html#Aligned-Memory-Blocks" accesskey="p" rel="prev">Aligned Memory Blocks</a>, Up: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="u" rel="up">Unconstrained Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

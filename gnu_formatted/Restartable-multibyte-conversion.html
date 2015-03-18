@@ -1,0 +1,59 @@
+<a name="Restartable-multibyte-conversion"></a>
+<div class="header">
+<p>
+Next: <a href="Non_002dreentrant-Conversion.html#Non_002dreentrant-Conversion" accesskey="n" rel="next">Non-reentrant Conversion</a>, Previous: <a href="Charset-Function-Overview.html#Charset-Function-Overview" accesskey="p" rel="prev">Charset Function Overview</a>, Up: <a href="Character-Set-Handling.html#Character-Set-Handling" accesskey="u" rel="up">Character Set Handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Restartable-Multibyte-Conversion-Functions"></a>
+<h3 class="section">6.3 Restartable Multibyte Conversion Functions</h3>
+
+<p>The ISO&nbsp;C<!-- /@w --> standard defines functions to convert strings from a
+multibyte representation to wide character strings.  There are a number
+of peculiarities:
+</p>
+<ul>
+<li> The character set assumed for the multibyte encoding is not specified
+as an argument to the functions.  Instead the character set specified by
+the <code>LC_CTYPE</code> category of the current locale is used; see
+<a href="Locale-Categories.html#Locale-Categories">Locale Categories</a>.
+
+</li><li> The functions handling more than one character at a time require NUL
+terminated strings as the argument (i.e., converting blocks of text
+does not work unless one can add a NUL byte at an appropriate place).
+The GNU C Library contains some extensions to the standard that allow
+specifying a size, but basically they also expect terminated strings.
+</li></ul>
+
+<p>Despite these limitations the ISO&nbsp;C<!-- /@w --> functions can be used in many
+contexts.  In graphical user interfaces, for instance, it is not
+uncommon to have functions that require text to be displayed in a wide
+character string if the text is not simple ASCII.  The text itself might
+come from a file with translations and the user should decide about the
+current locale, which determines the translation and therefore also the
+external encoding used.  In such a situation (and many others) the
+functions described here are perfect.  If more freedom while performing
+the conversion is necessary take a look at the <code>iconv</code> functions
+(see <a href="Generic-Charset-Conversion.html#Generic-Charset-Conversion">Generic Charset Conversion</a>).
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Selecting-the-Conversion.html#Selecting-the-Conversion" accesskey="1">Selecting the Conversion</a>:</td><td align="left" valign="top">Selecting the conversion and its properties.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Keeping-the-state.html#Keeping-the-state" accesskey="2">Keeping the state</a>:</td><td align="left" valign="top">Representing the state of the conversion.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Converting-a-Character.html#Converting-a-Character" accesskey="3">Converting a Character</a>:</td><td align="left" valign="top">Converting Single Characters.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Converting-Strings.html#Converting-Strings" accesskey="4">Converting Strings</a>:</td><td align="left" valign="top">Converting Multibyte and Wide Character
+                                  Strings.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Multibyte-Conversion-Example.html#Multibyte-Conversion-Example" accesskey="5">Multibyte Conversion Example</a>:</td><td align="left" valign="top">A Complete Multibyte Conversion Example.
+</td></tr>
+</table>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Non_002dreentrant-Conversion.html#Non_002dreentrant-Conversion" accesskey="n" rel="next">Non-reentrant Conversion</a>, Previous: <a href="Charset-Function-Overview.html#Charset-Function-Overview" accesskey="p" rel="prev">Charset Function Overview</a>, Up: <a href="Character-Set-Handling.html#Character-Set-Handling" accesskey="u" rel="up">Character Set Handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

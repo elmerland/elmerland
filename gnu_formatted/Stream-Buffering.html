@@ -1,0 +1,44 @@
+<a name="Stream-Buffering"></a>
+<div class="header">
+<p>
+Next: <a href="Other-Kinds-of-Streams.html#Other-Kinds-of-Streams" accesskey="n" rel="next">Other Kinds of Streams</a>, Previous: <a href="Portable-Positioning.html#Portable-Positioning" accesskey="p" rel="prev">Portable Positioning</a>, Up: <a href="I_002fO-on-Streams.html#I_002fO-on-Streams" accesskey="u" rel="up">I/O on Streams</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Stream-Buffering-1"></a>
+<h3 class="section">12.20 Stream Buffering</h3>
+
+<a name="index-buffering-of-streams"></a>
+<p>Characters that are written to a stream are normally accumulated and
+transmitted asynchronously to the file in a block, instead of appearing
+as soon as they are output by the application program.  Similarly,
+streams often retrieve input from the host environment in blocks rather
+than on a character-by-character basis.  This is called <em>buffering</em>.
+</p>
+<p>If you are writing programs that do interactive input and output using
+streams, you need to understand how buffering works when you design the
+user interface to your program.  Otherwise, you might find that output
+(such as progress or prompt messages) doesn&rsquo;t appear when you intended
+it to, or displays some other unexpected behavior.
+</p>
+<p>This section deals only with controlling when characters are transmitted
+between the stream and the file or device, and <em>not</em> with how
+things like echoing, flow control, and the like are handled on specific
+classes of devices.  For information on common control operations on
+terminal devices, see <a href="Low_002dLevel-Terminal-Interface.html#Low_002dLevel-Terminal-Interface">Low-Level Terminal Interface</a>.
+</p>
+<p>You can bypass the stream buffering facilities altogether by using the
+low-level input and output functions that operate on file descriptors
+instead.  See <a href="Low_002dLevel-I_002fO.html#Low_002dLevel-I_002fO">Low-Level I/O</a>.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Buffering-Concepts.html#Buffering-Concepts" accesskey="1">Buffering Concepts</a>:</td><td align="left" valign="top">Terminology is defined here.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Flushing-Buffers.html#Flushing-Buffers" accesskey="2">Flushing Buffers</a>:</td><td align="left" valign="top">How to ensure that output buffers are flushed.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Controlling-Buffering.html#Controlling-Buffering" accesskey="3">Controlling Buffering</a>:</td><td align="left" valign="top">How to specify what kind of buffering to use.
+</td></tr>
+</table>
+
+
+
+

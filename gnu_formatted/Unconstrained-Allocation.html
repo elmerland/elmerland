@@ -1,0 +1,54 @@
+<a name="Unconstrained-Allocation"></a>
+<div class="header">
+<p>
+Next: <a href="Allocation-Debugging.html#Allocation-Debugging" accesskey="n" rel="next">Allocation Debugging</a>, Previous: <a href="Memory-Allocation-and-C.html#Memory-Allocation-and-C" accesskey="p" rel="prev">Memory Allocation and C</a>, Up: <a href="Memory-Allocation.html#Memory-Allocation" accesskey="u" rel="up">Memory Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Unconstrained-Allocation-1"></a>
+<h4 class="subsection">3.2.2 Unconstrained Allocation</h4>
+<a name="index-unconstrained-memory-allocation"></a>
+<a name="index-malloc-function"></a>
+<a name="index-heap_002c-dynamic-allocation-from"></a>
+
+<p>The most general dynamic allocation facility is <code>malloc</code>.  It
+allows you to allocate blocks of memory of any size at any time, make
+them bigger or smaller at any time, and free the blocks individually at
+any time (or never).
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Basic-Allocation.html#Basic-Allocation" accesskey="1">Basic Allocation</a>:</td><td align="left" valign="top">Simple use of <code>malloc</code>.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Malloc-Examples.html#Malloc-Examples" accesskey="2">Malloc Examples</a>:</td><td align="left" valign="top">Examples of <code>malloc</code>.  <code>xmalloc</code>.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Freeing-after-Malloc.html#Freeing-after-Malloc" accesskey="3">Freeing after Malloc</a>:</td><td align="left" valign="top">Use <code>free</code> to free a block you
+				 got with <code>malloc</code>.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Changing-Block-Size.html#Changing-Block-Size" accesskey="4">Changing Block Size</a>:</td><td align="left" valign="top">Use <code>realloc</code> to make a block
+				 bigger or smaller.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Allocating-Cleared-Space.html#Allocating-Cleared-Space" accesskey="5">Allocating Cleared Space</a>:</td><td align="left" valign="top">Use <code>calloc</code> to allocate a
+				 block and clear it.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Efficiency-and-Malloc.html#Efficiency-and-Malloc" accesskey="6">Efficiency and Malloc</a>:</td><td align="left" valign="top">Efficiency considerations in use of
+				 these functions.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Aligned-Memory-Blocks.html#Aligned-Memory-Blocks" accesskey="7">Aligned Memory Blocks</a>:</td><td align="left" valign="top">Allocating specially aligned memory.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Malloc-Tunable-Parameters.html#Malloc-Tunable-Parameters" accesskey="8">Malloc Tunable Parameters</a>:</td><td align="left" valign="top">Use <code>mallopt</code> to adjust allocation
+                                 parameters.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Heap-Consistency-Checking.html#Heap-Consistency-Checking" accesskey="9">Heap Consistency Checking</a>:</td><td align="left" valign="top">Automatic checking for errors.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Hooks-for-Malloc.html#Hooks-for-Malloc">Hooks for Malloc</a>:</td><td align="left" valign="top">You can use these hooks for debugging
+				 programs that use <code>malloc</code>.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Statistics-of-Malloc.html#Statistics-of-Malloc">Statistics of Malloc</a>:</td><td align="left" valign="top">Getting information about how much
+				 memory your program is using.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Summary-of-Malloc.html#Summary-of-Malloc">Summary of Malloc</a>:</td><td align="left" valign="top">Summary of <code>malloc</code> and related functions.
+</td></tr>
+</table>
+
+
+
+

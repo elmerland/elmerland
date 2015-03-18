@@ -1,0 +1,100 @@
+<a name="Floating-Point-Concepts"></a>
+<div class="header">
+<p>
+Next: <a href="Floating-Point-Parameters.html#Floating-Point-Parameters" accesskey="n" rel="next">Floating Point Parameters</a>, Up: <a href="Floating-Type-Macros.html#Floating-Type-Macros" accesskey="u" rel="up">Floating Type Macros</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Floating-Point-Representation-Concepts"></a>
+<h4 class="subsubsection">A.5.3.1 Floating Point Representation Concepts</h4>
+
+<p>This section introduces the terminology for describing floating point
+representations.
+</p>
+<p>You are probably already familiar with most of these concepts in terms
+of scientific or exponential notation for floating point numbers.  For
+example, the number <code>123456.0</code> could be expressed in exponential
+notation as <code>1.23456e+05</code>, a shorthand notation indicating that the
+mantissa <code>1.23456</code> is multiplied by the base <code>10</code> raised to
+power <code>5</code>.
+</p>
+<p>More formally, the internal representation of a floating point number
+can be characterized in terms of the following parameters:
+</p>
+<ul>
+<li> <a name="index-sign-_0028of-floating-point-number_0029"></a>
+The <em>sign</em> is either <code>-1</code> or <code>1</code>.
+
+</li><li> <a name="index-base-_0028of-floating-point-number_0029"></a>
+<a name="index-radix-_0028of-floating-point-number_0029"></a>
+The <em>base</em> or <em>radix</em> for exponentiation, an integer greater
+than <code>1</code>.  This is a constant for a particular representation.
+
+</li><li> <a name="index-exponent-_0028of-floating-point-number_0029"></a>
+The <em>exponent</em> to which the base is raised.  The upper and lower
+bounds of the exponent value are constants for a particular
+representation.
+
+<a name="index-bias-_0028of-floating-point-number-exponent_0029"></a>
+<p>Sometimes, in the actual bits representing the floating point number,
+the exponent is <em>biased</em> by adding a constant to it, to make it
+always be represented as an unsigned quantity.  This is only important
+if you have some reason to pick apart the bit fields making up the
+floating point number by hand, which is something for which the GNU C Library
+provides no support.  So this is ignored in the discussion that
+follows.
+</p>
+</li><li> <a name="index-mantissa-_0028of-floating-point-number_0029"></a>
+<a name="index-significand-_0028of-floating-point-number_0029"></a>
+The <em>mantissa</em> or <em>significand</em> is an unsigned integer which is a
+part of each floating point number.
+
+</li><li> <a name="index-precision-_0028of-floating-point-number_0029"></a>
+The <em>precision</em> of the mantissa.  If the base of the representation
+is <var>b</var>, then the precision is the number of base-<var>b</var> digits in
+the mantissa.  This is a constant for a particular representation.
+
+<a name="index-hidden-bit-_0028of-floating-point-number-mantissa_0029"></a>
+<p>Many floating point representations have an implicit <em>hidden bit</em> in
+the mantissa.  This is a bit which is present virtually in the mantissa,
+but not stored in memory because its value is always 1 in a normalized
+number.  The precision figure (see above) includes any hidden bits.
+</p>
+<p>Again, the GNU C Library provides no facilities for dealing with such
+low-level aspects of the representation.
+</p></li></ul>
+
+<p>The mantissa of a floating point number represents an implicit fraction
+whose denominator is the base raised to the power of the precision.  Since
+the largest representable mantissa is one less than this denominator, the
+value of the fraction is always strictly less than <code>1</code>.  The
+mathematical value of a floating point number is then the product of this
+fraction, the sign, and the base raised to the exponent.
+</p>
+<a name="index-normalized-floating-point-number"></a>
+<p>We say that the floating point number is <em>normalized</em> if the
+fraction is at least <code>1/<var>b</var></code>, where <var>b</var> is the base.  In
+other words, the mantissa would be too large to fit if it were
+multiplied by the base.  Non-normalized numbers are sometimes called
+<em>denormal</em>; they contain less precision than the representation
+normally can hold.
+</p>
+<p>If the number is not normalized, then you can subtract <code>1</code> from the
+exponent while multiplying the mantissa by the base, and get another
+floating point number with the same value.  <em>Normalization</em> consists
+of doing this repeatedly until the number is normalized.  Two distinct
+normalized floating point numbers cannot be equal in value.
+</p>
+<p>(There is an exception to this rule: if the mantissa is zero, it is
+considered normalized.  Another exception happens on certain machines
+where the exponent is as small as the representation can hold.  Then
+it is impossible to subtract <code>1</code> from the exponent, so a number
+may be normalized even if its fraction is less than <code>1/<var>b</var></code>.)
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Floating-Point-Parameters.html#Floating-Point-Parameters" accesskey="n" rel="next">Floating Point Parameters</a>, Up: <a href="Floating-Type-Macros.html#Floating-Type-Macros" accesskey="u" rel="up">Floating Type Macros</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

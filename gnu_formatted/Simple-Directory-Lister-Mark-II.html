@@ -1,0 +1,52 @@
+<a name="Simple-Directory-Lister-Mark-II"></a>
+<div class="header">
+<p>
+Previous: <a href="Scanning-Directory-Content.html#Scanning-Directory-Content" accesskey="p" rel="prev">Scanning Directory Content</a>, Up: <a href="Accessing-Directories.html#Accessing-Directories" accesskey="u" rel="up">Accessing Directories</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Simple-Program-to-List-a-Directory_002c-Mark-II"></a>
+<h4 class="subsection">14.2.7 Simple Program to List a Directory, Mark II</h4>
+
+<p>Here is a revised version of the directory lister found above
+(see <a href="Simple-Directory-Lister.html#Simple-Directory-Lister">Simple Directory Lister</a>).  Using the <code>scandir</code> function we
+can avoid the functions which work directly with the directory contents.
+After the call the returned entries are available for direct use.
+</p>
+<div class="smallexample">
+<pre class="smallexample">
+</pre><pre class="smallexample">#include &lt;stdio.h&gt;
+#include &lt;dirent.h&gt;
+</pre><pre class="smallexample">
+static int
+one (const struct dirent *unused)
+{
+  return 1;
+}
+
+int
+main (void)
+{
+  struct dirent **eps;
+  int n;
+
+  n = scandir (&quot;./&quot;, &amp;eps, one, alphasort);
+  if (n &gt;= 0)
+    {
+      int cnt;
+      for (cnt = 0; cnt &lt; n; ++cnt)
+        puts (eps[cnt]-&gt;d_name);
+    }
+  else
+    perror (&quot;Couldn't open the directory&quot;);
+
+  return 0;
+}
+</pre></div>
+
+<p>Note the simple selector function in this example.  Since we want to see
+all directory entries we always return <code>1</code>.
+</p>
+
+
+
+

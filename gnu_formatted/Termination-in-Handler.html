@@ -1,0 +1,49 @@
+<a name="Termination-in-Handler"></a>
+<div class="header">
+<p>
+Next: <a href="Longjmp-in-Handler.html#Longjmp-in-Handler" accesskey="n" rel="next">Longjmp in Handler</a>, Previous: <a href="Handler-Returns.html#Handler-Returns" accesskey="p" rel="prev">Handler Returns</a>, Up: <a href="Defining-Handlers.html#Defining-Handlers" accesskey="u" rel="up">Defining Handlers</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Handlers-That-Terminate-the-Process"></a>
+<h4 class="subsection">24.4.2 Handlers That Terminate the Process</h4>
+
+<p>Handler functions that terminate the program are typically used to cause
+orderly cleanup or recovery from program error signals and interactive
+interrupts.
+</p>
+<p>The cleanest way for a handler to terminate the process is to raise the
+same signal that ran the handler in the first place.  Here is how to do
+this:
+</p>
+<div class="smallexample">
+<pre class="smallexample">volatile sig_atomic_t fatal_error_in_progress = 0;
+
+void
+fatal_error_signal (int sig)
+{
+</pre><pre class="smallexample">  /* <span class="roman">Since this handler is established for more than one kind of signal, </span>
+     <span class="roman">it might still get invoked recursively by delivery of some other kind</span>
+     <span class="roman">of signal.  Use a static variable to keep track of that.</span> */
+  if (fatal_error_in_progress)
+    raise (sig);
+  fatal_error_in_progress = 1;
+</pre><pre class="smallexample">
+</pre><pre class="smallexample">  /* <span class="roman">Now do the clean up actions:</span>
+     <span class="roman">- reset terminal modes</span>
+     <span class="roman">- kill child processes</span>
+     <span class="roman">- remove lock files</span> */
+  &hellip;
+</pre><pre class="smallexample">
+</pre><pre class="smallexample">  /* <span class="roman">Now reraise the signal.  We reactivate the signal&rsquo;s</span>
+     <span class="roman">default handling, which is to terminate the process.</span>
+     <span class="roman">We could just call <code>exit</code> or <code>abort</code>,</span>
+     <span class="roman">but reraising the signal sets the return status</span>
+     <span class="roman">from the process correctly.</span> */
+  signal (sig, SIG_DFL);
+  raise (sig);
+}
+</pre></div>
+
+
+
+

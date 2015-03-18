@@ -1,0 +1,95 @@
+<a name="Signaling-Yourself"></a>
+<div class="header">
+<p>
+Next: <a href="Signaling-Another-Process.html#Signaling-Another-Process" accesskey="n" rel="next">Signaling Another Process</a>, Up: <a href="Generating-Signals.html#Generating-Signals" accesskey="u" rel="up">Generating Signals</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Signaling-Yourself-1"></a>
+<h4 class="subsection">24.6.1 Signaling Yourself</h4>
+
+<p>A process can send itself a signal with the <code>raise</code> function.  This
+function is declared in <samp>signal.h</samp>.
+<a name="index-signal_002eh-5"></a>
+</p>
+<dl>
+<dt><a name="index-raise"></a>Function: <em>int</em> <strong>raise</strong> <em>(int <var>signum</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>raise</code> function sends the signal <var>signum</var> to the calling
+process.  It returns zero if successful and a nonzero value if it fails.
+About the only reason for failure would be if the value of <var>signum</var>
+is invalid.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-gsignal"></a>Function: <em>int</em> <strong>gsignal</strong> <em>(int <var>signum</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>gsignal</code> function does the same thing as <code>raise</code>; it is
+provided only for compatibility with SVID.
+</p></dd></dl>
+
+<p>One convenient use for <code>raise</code> is to reproduce the default behavior
+of a signal that you have trapped.  For instance, suppose a user of your
+program types the SUSP character (usually <kbd>C-z</kbd>; see <a href="Special-Characters.html#Special-Characters">Special Characters</a>) to send it an interactive stop signal
+(<code>SIGTSTP</code>), and you want to clean up some internal data buffers
+before stopping.  You might set this up like this:
+</p>
+
+<div class="smallexample">
+<pre class="smallexample">#include &lt;signal.h&gt;
+
+/* <span class="roman">When a stop signal arrives, set the action back to the default
+   and then resend the signal after doing cleanup actions.</span> */
+
+void
+tstp_handler (int sig)
+{
+  signal (SIGTSTP, SIG_DFL);
+  /* <span class="roman">Do cleanup actions here.</span> */
+  &hellip;
+  raise (SIGTSTP);
+}
+
+/* <span class="roman">When the process is continued again, restore the signal handler.</span> */
+
+void
+cont_handler (int sig)
+{
+  signal (SIGCONT, cont_handler);
+  signal (SIGTSTP, tstp_handler);
+}
+
+</pre><pre class="smallexample">/* <span class="roman">Enable both handlers during program initialization.</span> */
+
+int
+main (void)
+{
+  signal (SIGCONT, cont_handler);
+  signal (SIGTSTP, tstp_handler);
+  &hellip;
+}
+</pre></div>
+
+<p><strong>Portability note:</strong> <code>raise</code> was invented by the ISO&nbsp;C<!-- /@w -->
+committee.  Older systems may not support it, so using <code>kill</code> may
+be more portable.  See <a href="Signaling-Another-Process.html#Signaling-Another-Process">Signaling Another Process</a>.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Signaling-Another-Process.html#Signaling-Another-Process" accesskey="n" rel="next">Signaling Another Process</a>, Up: <a href="Generating-Signals.html#Generating-Signals" accesskey="u" rel="up">Generating Signals</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

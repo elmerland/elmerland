@@ -1,0 +1,110 @@
+<a name="Currency-Symbol"></a>
+<div class="header">
+<p>
+Next: <a href="Sign-of-Money-Amount.html#Sign-of-Money-Amount" accesskey="n" rel="next">Sign of Money Amount</a>, Previous: <a href="General-Numeric.html#General-Numeric" accesskey="p" rel="prev">General Numeric</a>, Up: <a href="The-Lame-Way-to-Locale-Data.html#The-Lame-Way-to-Locale-Data" accesskey="u" rel="up">The Lame Way to Locale Data</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Printing-the-Currency-Symbol"></a>
+<h4 class="subsubsection">7.7.1.2 Printing the Currency Symbol</h4>
+<a name="index-currency-symbols"></a>
+
+<p>These members of the <code>struct lconv</code> structure specify how to print
+the symbol to identify a monetary value&mdash;the international analog of
+&lsquo;<samp>$</samp>&rsquo; for US dollars.
+</p>
+<p>Each country has two standard currency symbols.  The <em>local currency
+symbol</em> is used commonly within the country, while the
+<em>international currency symbol</em> is used internationally to refer to
+that country&rsquo;s currency when it is necessary to indicate the country
+unambiguously.
+</p>
+<p>For example, many countries use the dollar as their monetary unit, and
+when dealing with international currencies it&rsquo;s important to specify
+that one is dealing with (say) Canadian dollars instead of U.S. dollars
+or Australian dollars.  But when the context is known to be Canada,
+there is no need to make this explicit&mdash;dollar amounts are implicitly
+assumed to be in Canadian dollars.
+</p>
+<dl compact="compact">
+<dt><code>char *currency_symbol</code></dt>
+<dd><p>The local currency symbol for the selected locale.
+</p>
+<p>In the standard &lsquo;<samp>C</samp>&rsquo; locale, this member has a value of <code>&quot;&quot;</code>
+(the empty string), meaning &ldquo;unspecified&rdquo;.  The ISO standard doesn&rsquo;t
+say what to do when you find this value; we recommend you simply print
+the empty string as you would print any other string pointed to by this
+variable.
+</p>
+</dd>
+<dt><code>char *int_curr_symbol</code></dt>
+<dd><p>The international currency symbol for the selected locale.
+</p>
+<p>The value of <code>int_curr_symbol</code> should normally consist of a
+three-letter abbreviation determined by the international standard
+<cite>ISO 4217 Codes for the Representation of Currency and Funds</cite>,
+followed by a one-character separator (often a space).
+</p>
+<p>In the standard &lsquo;<samp>C</samp>&rsquo; locale, this member has a value of <code>&quot;&quot;</code>
+(the empty string), meaning &ldquo;unspecified&rdquo;.  We recommend you simply print
+the empty string as you would print any other string pointed to by this
+variable.
+</p>
+</dd>
+<dt><code>char p_cs_precedes</code></dt>
+<dt><code>char n_cs_precedes</code></dt>
+<dt><code>char int_p_cs_precedes</code></dt>
+<dt><code>char int_n_cs_precedes</code></dt>
+<dd><p>These members are <code>1</code> if the <code>currency_symbol</code> or
+<code>int_curr_symbol</code> strings should precede the value of a monetary
+amount, or <code>0</code> if the strings should follow the value.  The
+<code>p_cs_precedes</code> and <code>int_p_cs_precedes</code> members apply to
+positive amounts (or zero), and the <code>n_cs_precedes</code> and
+<code>int_n_cs_precedes</code> members apply to negative amounts.
+</p>
+<p>In the standard &lsquo;<samp>C</samp>&rsquo; locale, all of these members have a value of
+<code>CHAR_MAX</code>, meaning &ldquo;unspecified&rdquo;.  The ISO standard doesn&rsquo;t say
+what to do when you find this value.  We recommend printing the
+currency symbol before the amount, which is right for most countries.
+In other words, treat all nonzero values alike in these members.
+</p>
+<p>The members with the <code>int_</code> prefix apply to the
+<code>int_curr_symbol</code> while the other two apply to
+<code>currency_symbol</code>.
+</p>
+</dd>
+<dt><code>char p_sep_by_space</code></dt>
+<dt><code>char n_sep_by_space</code></dt>
+<dt><code>char int_p_sep_by_space</code></dt>
+<dt><code>char int_n_sep_by_space</code></dt>
+<dd><p>These members are <code>1</code> if a space should appear between the
+<code>currency_symbol</code> or <code>int_curr_symbol</code> strings and the
+amount, or <code>0</code> if no space should appear.  The
+<code>p_sep_by_space</code> and <code>int_p_sep_by_space</code> members apply to
+positive amounts (or zero), and the <code>n_sep_by_space</code> and
+<code>int_n_sep_by_space</code> members apply to negative amounts.
+</p>
+<p>In the standard &lsquo;<samp>C</samp>&rsquo; locale, all of these members have a value of
+<code>CHAR_MAX</code>, meaning &ldquo;unspecified&rdquo;.  The ISO standard doesn&rsquo;t say
+what you should do when you find this value; we suggest you treat it as
+1 (print a space).  In other words, treat all nonzero values alike in
+these members.
+</p>
+<p>The members with the <code>int_</code> prefix apply to the
+<code>int_curr_symbol</code> while the other two apply to
+<code>currency_symbol</code>.  There is one specialty with the
+<code>int_curr_symbol</code>, though.  Since all legal values contain a space
+at the end the string one either printf this space (if the currency
+symbol must appear in front and must be separated) or one has to avoid
+printing this character at all (especially when at the end of the
+string).
+</p></dd>
+</dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Sign-of-Money-Amount.html#Sign-of-Money-Amount" accesskey="n" rel="next">Sign of Money Amount</a>, Previous: <a href="General-Numeric.html#General-Numeric" accesskey="p" rel="prev">General Numeric</a>, Up: <a href="The-Lame-Way-to-Locale-Data.html#The-Lame-Way-to-Locale-Data" accesskey="u" rel="up">The Lame Way to Locale Data</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

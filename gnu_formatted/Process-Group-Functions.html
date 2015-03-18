@@ -1,0 +1,188 @@
+<a name="Process-Group-Functions"></a>
+<div class="header">
+<p>
+Next: <a href="Terminal-Access-Functions.html#Terminal-Access-Functions" accesskey="n" rel="next">Terminal Access Functions</a>, Previous: <a href="Identifying-the-Terminal.html#Identifying-the-Terminal" accesskey="p" rel="prev">Identifying the Terminal</a>, Up: <a href="Functions-for-Job-Control.html#Functions-for-Job-Control" accesskey="u" rel="up">Functions for Job Control</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Process-Group-Functions-1"></a>
+<h4 class="subsection">28.7.2 Process Group Functions</h4>
+
+<p>Here are descriptions of the functions for manipulating process groups.
+Your program should include the header files <samp>sys/types.h</samp> and
+<samp>unistd.h</samp> to use these functions.
+<a name="index-unistd_002eh-20"></a>
+<a name="index-sys_002ftypes_002eh-2"></a>
+</p>
+<dl>
+<dt><a name="index-setsid"></a>Function: <em>pid_t</em> <strong>setsid</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>setsid</code> function creates a new session.  The calling process
+becomes the session leader, and is put in a new process group whose
+process group ID is the same as the process ID of that process.  There
+are initially no other processes in the new process group, and no other
+process groups in the new session.
+</p>
+<p>This function also makes the calling process have no controlling terminal.
+</p>
+<p>The <code>setsid</code> function returns the new process group ID of the
+calling process if successful.  A return value of <code>-1</code> indicates an
+error.  The following <code>errno</code> error conditions are defined for this
+function:
+</p>
+<dl compact="compact">
+<dt><code>EPERM</code></dt>
+<dd><p>The calling process is already a process group leader, or there is
+already another process group around that has the same process group ID.
+</p></dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><a name="index-getsid"></a>Function: <em>pid_t</em> <strong>getsid</strong> <em>(pid_t <var>pid</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+
+<p>The <code>getsid</code> function returns the process group ID of the session
+leader of the specified process.  If a <var>pid</var> is <code>0</code>, the
+process group ID of the session leader of the current process is
+returned.
+</p>
+<p>In case of error <code>-1</code> is returned and <code>errno</code> is set.  The
+following <code>errno</code> error conditions are defined for this function:
+</p>
+<dl compact="compact">
+<dt><code>ESRCH</code></dt>
+<dd><p>There is no process with the given process ID <var>pid</var>.
+</p></dd>
+<dt><code>EPERM</code></dt>
+<dd><p>The calling process and the process specified by <var>pid</var> are in
+different sessions, and the implementation doesn&rsquo;t allow to access the
+process group ID of the session leader of the process with ID <var>pid</var>
+from the calling process.
+</p></dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><a name="index-getpgrp"></a>Function: <em>pid_t</em> <strong>getpgrp</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>getpgrp</code> function returns the process group ID of
+the calling process.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-getpgid"></a>Function: <em>int</em> <strong>getpgid</strong> <em>(pid_t <var>pid</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+
+<p>The <code>getpgid</code> function
+returns the process group ID of the process <var>pid</var>.  You can supply a
+value of <code>0</code> for the <var>pid</var> argument to get information about
+the calling process.
+</p>
+<p>In case of error <code>-1</code> is returned and <code>errno</code> is set.  The
+following <code>errno</code> error conditions are defined for this function:
+</p>
+<dl compact="compact">
+<dt><code>ESRCH</code></dt>
+<dd><p>There is no process with the given process ID <var>pid</var>.
+The calling process and the process specified by <var>pid</var> are in
+different sessions, and the implementation doesn&rsquo;t allow to access the
+process group ID of the process with ID <var>pid</var> from the calling
+process.
+</p></dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><a name="index-setpgid"></a>Function: <em>int</em> <strong>setpgid</strong> <em>(pid_t <var>pid</var>, pid_t <var>pgid</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>setpgid</code> function puts the process <var>pid</var> into the process
+group <var>pgid</var>.  As a special case, either <var>pid</var> or <var>pgid</var> can
+be zero to indicate the process ID of the calling process.
+</p>
+<p>This function fails on a system that does not support job control.
+See <a href="Job-Control-is-Optional.html#Job-Control-is-Optional">Job Control is Optional</a>, for more information.
+</p>
+<p>If the operation is successful, <code>setpgid</code> returns zero.  Otherwise
+it returns <code>-1</code>.  The following <code>errno</code> error conditions are
+defined for this function:
+</p>
+<dl compact="compact">
+<dt><code>EACCES</code></dt>
+<dd><p>The child process named by <var>pid</var> has executed an <code>exec</code>
+function since it was forked.
+</p>
+</dd>
+<dt><code>EINVAL</code></dt>
+<dd><p>The value of the <var>pgid</var> is not valid.
+</p>
+</dd>
+<dt><code>ENOSYS</code></dt>
+<dd><p>The system doesn&rsquo;t support job control.
+</p>
+</dd>
+<dt><code>EPERM</code></dt>
+<dd><p>The process indicated by the <var>pid</var> argument is a session leader,
+or is not in the same session as the calling process, or the value of
+the <var>pgid</var> argument doesn&rsquo;t match a process group ID in the same
+session as the calling process.
+</p>
+</dd>
+<dt><code>ESRCH</code></dt>
+<dd><p>The process indicated by the <var>pid</var> argument is not the calling
+process or a child of the calling process.
+</p></dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><a name="index-setpgrp"></a>Function: <em>int</em> <strong>setpgrp</strong> <em>(pid_t <var>pid</var>, pid_t <var>pgid</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This is the BSD Unix name for <code>setpgid</code>.  Both functions do exactly
+the same thing.
+</p></dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Terminal-Access-Functions.html#Terminal-Access-Functions" accesskey="n" rel="next">Terminal Access Functions</a>, Previous: <a href="Identifying-the-Terminal.html#Identifying-the-Terminal" accesskey="p" rel="prev">Identifying the Terminal</a>, Up: <a href="Functions-for-Job-Control.html#Functions-for-Job-Control" accesskey="u" rel="up">Functions for Job Control</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

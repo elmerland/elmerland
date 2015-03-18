@@ -1,0 +1,182 @@
+<a name="BSD-Random"></a>
+<div class="header">
+<p>
+Next: <a href="SVID-Random.html#SVID-Random" accesskey="n" rel="next">SVID Random</a>, Previous: <a href="ISO-Random.html#ISO-Random" accesskey="p" rel="prev">ISO Random</a>, Up: <a href="Pseudo_002dRandom-Numbers.html#Pseudo_002dRandom-Numbers" accesskey="u" rel="up">Pseudo-Random Numbers</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="BSD-Random-Number-Functions"></a>
+<h4 class="subsection">19.8.2 BSD Random Number Functions</h4>
+
+<p>This section describes a set of random number generation functions that
+are derived from BSD.  There is no advantage to using these functions
+with the GNU C Library; we support them for BSD compatibility only.
+</p>
+<p>The prototypes for these functions are in <samp>stdlib.h</samp>.
+<a name="index-stdlib_002eh-13"></a>
+</p>
+<dl>
+<dt><a name="index-random"></a>Function: <em>long int</em> <strong>random</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock
+| AC-Unsafe lock
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function returns the next pseudo-random number in the sequence.
+The value returned ranges from <code>0</code> to <code>2147483647</code>.
+</p>
+<p><strong>NB:</strong> Temporarily this function was defined to return a
+<code>int32_t</code> value to indicate that the return value always contains
+32 bits even if <code>long int</code> is wider.  The standard demands it
+differently.  Users must always be aware of the 32-bit limitation,
+though.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-srandom"></a>Function: <em>void</em> <strong>srandom</strong> <em>(unsigned int <var>seed</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock
+| AC-Unsafe lock
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>srandom</code> function sets the state of the random number
+generator based on the integer <var>seed</var>.  If you supply a <var>seed</var> value
+of <code>1</code>, this will cause <code>random</code> to reproduce the default set
+of random numbers.
+</p>
+<p>To produce a different set of pseudo-random numbers each time your
+program runs, do <code>srandom (time (0))</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-initstate"></a>Function: <em>char *</em> <strong>initstate</strong> <em>(unsigned int <var>seed</var>, char *<var>state</var>, size_t <var>size</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock
+| AC-Unsafe lock
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>initstate</code> function is used to initialize the random number
+generator state.  The argument <var>state</var> is an array of <var>size</var>
+bytes, used to hold the state information.  It is initialized based on
+<var>seed</var>.  The size must be between 8 and 256 bytes, and should be a
+power of two.  The bigger the <var>state</var> array, the better.
+</p>
+<p>The return value is the previous value of the state information array.
+You can use this value later as an argument to <code>setstate</code> to
+restore that state.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-setstate"></a>Function: <em>char *</em> <strong>setstate</strong> <em>(char *<var>state</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock
+| AC-Unsafe lock
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>setstate</code> function restores the random number state
+information <var>state</var>.  The argument must have been the result of
+a previous call to <var>initstate</var> or <var>setstate</var>.
+</p>
+<p>The return value is the previous value of the state information array.
+You can use this value later as an argument to <code>setstate</code> to
+restore that state.
+</p>
+<p>If the function fails the return value is <code>NULL</code>.
+</p></dd></dl>
+
+<p>The four functions described so far in this section all work on a state
+which is shared by all threads.  The state is not directly accessible to
+the user and can only be modified by these functions.  This makes it
+hard to deal with situations where each thread should have its own
+pseudo-random number generator.
+</p>
+<p>The GNU C Library contains four additional functions which contain the
+state as an explicit parameter and therefore make it possible to handle
+thread-local PRNGs.  Beside this there is no difference.  In fact, the
+four functions already discussed are implemented internally using the
+following interfaces.
+</p>
+<p>The <samp>stdlib.h</samp> header contains a definition of the following type:
+</p>
+<dl>
+<dt><a name="index-struct-random_005fdata"></a>Data Type: <strong>struct random_data</strong></dt>
+<dd>
+<p>Objects of type <code>struct random_data</code> contain the information
+necessary to represent the state of the PRNG.  Although a complete
+definition of the type is present the type should be treated as opaque.
+</p></dd></dl>
+
+<p>The functions modifying the state follow exactly the already described
+functions.
+</p>
+<dl>
+<dt><a name="index-random_005fr"></a>Function: <em>int</em> <strong>random_r</strong> <em>(struct random_data *restrict <var>buf</var>, int32_t *restrict <var>result</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe race:buf
+| AS-Safe 
+| AC-Unsafe corrupt
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>random_r</code> function behaves exactly like the <code>random</code>
+function except that it uses and modifies the state in the object
+pointed to by the first parameter instead of the global state.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-srandom_005fr"></a>Function: <em>int</em> <strong>srandom_r</strong> <em>(unsigned int <var>seed</var>, struct random_data *<var>buf</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe race:buf
+| AS-Safe 
+| AC-Unsafe corrupt
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>srandom_r</code> function behaves exactly like the <code>srandom</code>
+function except that it uses and modifies the state in the object
+pointed to by the second parameter instead of the global state.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-initstate_005fr"></a>Function: <em>int</em> <strong>initstate_r</strong> <em>(unsigned int <var>seed</var>, char *restrict <var>statebuf</var>, size_t <var>statelen</var>, struct random_data *restrict <var>buf</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe race:buf
+| AS-Safe 
+| AC-Unsafe corrupt
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>initstate_r</code> function behaves exactly like the <code>initstate</code>
+function except that it uses and modifies the state in the object
+pointed to by the fourth parameter instead of the global state.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-setstate_005fr"></a>Function: <em>int</em> <strong>setstate_r</strong> <em>(char *restrict <var>statebuf</var>, struct random_data *restrict <var>buf</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe race:buf
+| AS-Safe 
+| AC-Unsafe corrupt
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>setstate_r</code> function behaves exactly like the <code>setstate</code>
+function except that it uses and modifies the state in the object
+pointed to by the first parameter instead of the global state.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="SVID-Random.html#SVID-Random" accesskey="n" rel="next">SVID Random</a>, Previous: <a href="ISO-Random.html#ISO-Random" accesskey="p" rel="prev">ISO Random</a>, Up: <a href="Pseudo_002dRandom-Numbers.html#Pseudo_002dRandom-Numbers" accesskey="u" rel="up">Pseudo-Random Numbers</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

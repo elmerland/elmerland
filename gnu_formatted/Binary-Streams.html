@@ -1,0 +1,68 @@
+<a name="Binary-Streams"></a>
+<div class="header">
+<p>
+Next: <a href="File-Positioning.html#File-Positioning" accesskey="n" rel="next">File Positioning</a>, Previous: <a href="Error-Recovery.html#Error-Recovery" accesskey="p" rel="prev">Error Recovery</a>, Up: <a href="I_002fO-on-Streams.html#I_002fO-on-Streams" accesskey="u" rel="up">I/O on Streams</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Text-and-Binary-Streams"></a>
+<h3 class="section">12.17 Text and Binary Streams</h3>
+
+<p>GNU systems and other POSIX-compatible operating systems organize all
+files as uniform sequences of characters.  However, some other systems
+make a distinction between files containing text and files containing
+binary data, and the input and output facilities of ISO&nbsp;C<!-- /@w --> provide for
+this distinction.  This section tells you how to write programs portable
+to such systems.
+</p>
+<a name="index-text-stream"></a>
+<a name="index-binary-stream"></a>
+<p>When you open a stream, you can specify either a <em>text stream</em> or a
+<em>binary stream</em>.  You indicate that you want a binary stream by
+specifying the &lsquo;<samp>b</samp>&rsquo; modifier in the <var>opentype</var> argument to
+<code>fopen</code>; see <a href="Opening-Streams.html#Opening-Streams">Opening Streams</a>.  Without this
+option, <code>fopen</code> opens the file as a text stream.
+</p>
+<p>Text and binary streams differ in several ways:
+</p>
+<ul>
+<li> The data read from a text stream is divided into <em>lines</em> which are
+terminated by newline (<code>'\n'</code>) characters, while a binary stream is
+simply a long series of characters.  A text stream might on some systems
+fail to handle lines more than 254 characters long (including the
+terminating newline character).
+<a name="index-lines-_0028in-a-text-file_0029"></a>
+
+</li><li> On some systems, text files can contain only printing characters,
+horizontal tab characters, and newlines, and so text streams may not
+support other characters.  However, binary streams can handle any
+character value.
+
+</li><li> Space characters that are written immediately preceding a newline
+character in a text stream may disappear when the file is read in again.
+
+</li><li> More generally, there need not be a one-to-one mapping between
+characters that are read from or written to a text stream, and the
+characters in the actual file.
+</li></ul>
+
+<p>Since a binary stream is always more capable and more predictable than a
+text stream, you might wonder what purpose text streams serve.  Why not
+simply always use binary streams?  The answer is that on these operating
+systems, text and binary streams use different file formats, and the
+only way to read or write &ldquo;an ordinary file of text&rdquo; that can work
+with other text-oriented programs is through a text stream.
+</p>
+<p>In the GNU C Library, and on all POSIX systems, there is no difference
+between text streams and binary streams.  When you open a stream, you
+get the same kind of stream regardless of whether you ask for binary.
+This stream can handle any file content, and has none of the
+restrictions that text streams sometimes have.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="File-Positioning.html#File-Positioning" accesskey="n" rel="next">File Positioning</a>, Previous: <a href="Error-Recovery.html#Error-Recovery" accesskey="p" rel="prev">Error Recovery</a>, Up: <a href="I_002fO-on-Streams.html#I_002fO-on-Streams" accesskey="u" rel="up">I/O on Streams</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

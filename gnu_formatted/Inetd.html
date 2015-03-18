@@ -1,0 +1,31 @@
+<a name="Inetd"></a>
+<div class="header">
+<p>
+Next: <a href="Socket-Options.html#Socket-Options" accesskey="n" rel="next">Socket Options</a>, Previous: <a href="Datagrams.html#Datagrams" accesskey="p" rel="prev">Datagrams</a>, Up: <a href="Sockets.html#Sockets" accesskey="u" rel="up">Sockets</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="The-inetd-Daemon"></a>
+<h3 class="section">16.11 The <code>inetd</code> Daemon</h3>
+
+<p>We&rsquo;ve explained above how to write a server program that does its own
+listening.  Such a server must already be running in order for anyone
+to connect to it.
+</p>
+<p>Another way to provide a service on an Internet port is to let the daemon
+program <code>inetd</code> do the listening.  <code>inetd</code> is a program that
+runs all the time and waits (using <code>select</code>) for messages on a
+specified set of ports.  When it receives a message, it accepts the
+connection (if the socket style calls for connections) and then forks a
+child process to run the corresponding server program.  You specify the
+ports and their programs in the file <samp>/etc/inetd.conf</samp>.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Inetd-Servers.html#Inetd-Servers" accesskey="1">Inetd Servers</a>:</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Configuring-Inetd.html#Configuring-Inetd" accesskey="2">Configuring Inetd</a>:</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+
+
+

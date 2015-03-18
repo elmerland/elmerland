@@ -1,0 +1,44 @@
+<a name="GNU-C-Variable_002dSize-Arrays"></a>
+<div class="header">
+<p>
+Previous: <a href="Disadvantages-of-Alloca.html#Disadvantages-of-Alloca" accesskey="p" rel="prev">Disadvantages of Alloca</a>, Up: <a href="Variable-Size-Automatic.html#Variable-Size-Automatic" accesskey="u" rel="up">Variable Size Automatic</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="GNU-C-Variable_002dSize-Arrays-1"></a>
+<h4 class="subsubsection">3.2.5.4 GNU C Variable-Size Arrays</h4>
+<a name="index-variable_002dsized-arrays"></a>
+
+<p>In GNU C, you can replace most uses of <code>alloca</code> with an array of
+variable size.  Here is how <code>open2</code> would look then:
+</p>
+<div class="smallexample">
+<pre class="smallexample">int open2 (char *str1, char *str2, int flags, int mode)
+{
+  char name[strlen (str1) + strlen (str2) + 1];
+  stpcpy (stpcpy (name, str1), str2);
+  return open (name, flags, mode);
+}
+</pre></div>
+
+<p>But <code>alloca</code> is not always equivalent to a variable-sized array, for
+several reasons:
+</p>
+<ul>
+<li> A variable size array&rsquo;s space is freed at the end of the scope of the
+name of the array.  The space allocated with <code>alloca</code>
+remains until the end of the function.
+
+</li><li> It is possible to use <code>alloca</code> within a loop, allocating an
+additional block on each iteration.  This is impossible with
+variable-sized arrays.
+</li></ul>
+
+<p><strong>NB:</strong> If you mix use of <code>alloca</code> and variable-sized arrays
+within one function, exiting a scope in which a variable-sized array was
+declared frees all blocks allocated with <code>alloca</code> during the
+execution of that scope.
+</p>
+
+
+
+

@@ -1,0 +1,57 @@
+<a name="Expansion-Stages"></a>
+<div class="header">
+<p>
+Next: <a href="Calling-Wordexp.html#Calling-Wordexp" accesskey="n" rel="next">Calling Wordexp</a>, Up: <a href="Word-Expansion.html#Word-Expansion" accesskey="u" rel="up">Word Expansion</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="The-Stages-of-Word-Expansion"></a>
+<h4 class="subsection">10.4.1 The Stages of Word Expansion</h4>
+
+<p>When word expansion is applied to a sequence of words, it performs the
+following transformations in the order shown here:
+</p>
+<ol>
+<li> <a name="index-tilde-expansion"></a>
+<em>Tilde expansion</em>: Replacement of &lsquo;<samp>~foo</samp>&rsquo; with the name of
+the home directory of &lsquo;<samp>foo</samp>&rsquo;.
+
+</li><li> Next, three different transformations are applied in the same step,
+from left to right:
+
+<ul>
+<li> <a name="index-variable-substitution"></a>
+<a name="index-substitution-of-variables-and-commands"></a>
+<em>Variable substitution</em>: Environment variables are substituted for
+references such as &lsquo;<samp>$foo</samp>&rsquo;.
+
+</li><li> <a name="index-command-substitution"></a>
+<em>Command substitution</em>: Constructs such as &lsquo;<samp>`cat&nbsp;foo`</samp>&rsquo;<!-- /@w --> and
+the equivalent &lsquo;<samp>$(cat&nbsp;foo)</samp>&rsquo;<!-- /@w --> are replaced with the output from
+the inner command.
+
+</li><li> <a name="index-arithmetic-expansion"></a>
+<em>Arithmetic expansion</em>: Constructs such as &lsquo;<samp>$(($x-1))</samp>&rsquo; are
+replaced with the result of the arithmetic computation.
+</li></ul>
+
+</li><li> <a name="index-field-splitting"></a>
+<em>Field splitting</em>: subdivision of the text into <em>words</em>.
+
+</li><li> <a name="index-wildcard-expansion"></a>
+<em>Wildcard expansion</em>: The replacement of a construct such as &lsquo;<samp>*.c</samp>&rsquo;
+with a list of &lsquo;<samp>.c</samp>&rsquo; file names.  Wildcard expansion applies to an
+entire word at a time, and replaces that word with 0 or more file names
+that are themselves words.
+
+</li><li> <a name="index-quote-removal"></a>
+<a name="index-removal-of-quotes"></a>
+<em>Quote removal</em>: The deletion of string-quotes, now that they have
+done their job by inhibiting the above transformations when appropriate.
+</li></ol>
+
+<p>For the details of these transformations, and how to write the constructs
+that use them, see <cite>The&nbsp;BASH&nbsp;Manual</cite><!-- /@w --> (to appear).
+</p>
+
+
+

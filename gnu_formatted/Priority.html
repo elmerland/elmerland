@@ -1,0 +1,69 @@
+<a name="Priority"></a>
+<div class="header">
+<p>
+Next: <a href="Memory-Resources.html#Memory-Resources" accesskey="n" rel="next">Memory Resources</a>, Previous: <a href="Limits-on-Resources.html#Limits-on-Resources" accesskey="p" rel="prev">Limits on Resources</a>, Up: <a href="Resource-Usage-And-Limitation.html#Resource-Usage-And-Limitation" accesskey="u" rel="up">Resource Usage And Limitation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Process-CPU-Priority-And-Scheduling"></a>
+<h3 class="section">22.3 Process CPU Priority And Scheduling</h3>
+<a name="index-process-priority"></a>
+<a name="index-cpu-priority"></a>
+<a name="index-priority-of-a-process"></a>
+
+<p>When multiple processes simultaneously require CPU time, the system&rsquo;s
+scheduling policy and process CPU priorities determine which processes
+get it.  This section describes how that determination is made and
+GNU C Library functions to control it.
+</p>
+<p>It is common to refer to CPU scheduling simply as scheduling and a
+process&rsquo; CPU priority simply as the process&rsquo; priority, with the CPU
+resource being implied.  Bear in mind, though, that CPU time is not the
+only resource a process uses or that processes contend for.  In some
+cases, it is not even particularly important.  Giving a process a high
+&ldquo;priority&rdquo; may have very little effect on how fast a process runs with
+respect to other processes.  The priorities discussed in this section
+apply only to CPU time.
+</p>
+<p>CPU scheduling is a complex issue and different systems do it in wildly
+different ways.  New ideas continually develop and find their way into
+the intricacies of the various systems&rsquo; scheduling algorithms.  This
+section discusses the general concepts, some specifics of systems
+that commonly use the GNU C Library, and some standards.
+</p>
+<p>For simplicity, we talk about CPU contention as if there is only one CPU
+in the system.  But all the same principles apply when a processor has
+multiple CPUs, and knowing that the number of processes that can run at
+any one time is equal to the number of CPUs, you can easily extrapolate
+the information.
+</p>
+<p>The functions described in this section are all defined by the POSIX.1
+and POSIX.1b standards (the <code>sched&hellip;</code> functions are POSIX.1b).
+However, POSIX does not define any semantics for the values that these
+functions get and set.  In this chapter, the semantics are based on the
+Linux kernel&rsquo;s implementation of the POSIX standard.  As you will see,
+the Linux implementation is quite the inverse of what the authors of the
+POSIX syntax had in mind.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Absolute-Priority.html#Absolute-Priority" accesskey="1">Absolute Priority</a>:</td><td align="left" valign="top">The first tier of priority.  Posix
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Realtime-Scheduling.html#Realtime-Scheduling" accesskey="2">Realtime Scheduling</a>:</td><td align="left" valign="top">Scheduling among the process nobility
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Basic-Scheduling-Functions.html#Basic-Scheduling-Functions" accesskey="3">Basic Scheduling Functions</a>:</td><td align="left" valign="top">Get/set scheduling policy, priority
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Traditional-Scheduling.html#Traditional-Scheduling" accesskey="4">Traditional Scheduling</a>:</td><td align="left" valign="top">Scheduling among the vulgar masses
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="CPU-Affinity.html#CPU-Affinity" accesskey="5">CPU Affinity</a>:</td><td align="left" valign="top">Limiting execution to certain CPUs
+</td></tr>
+</table>
+
+
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Memory-Resources.html#Memory-Resources" accesskey="n" rel="next">Memory Resources</a>, Previous: <a href="Limits-on-Resources.html#Limits-on-Resources" accesskey="p" rel="prev">Limits on Resources</a>, Up: <a href="Resource-Usage-And-Limitation.html#Resource-Usage-And-Limitation" accesskey="u" rel="up">Resource Usage And Limitation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

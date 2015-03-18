@@ -1,0 +1,57 @@
+<a name="Linux"></a>
+<div class="header">
+<p>
+Next: <a href="Reporting-Bugs.html#Reporting-Bugs" accesskey="n" rel="next">Reporting Bugs</a>, Previous: <a href="Tools-for-Compilation.html#Tools-for-Compilation" accesskey="p" rel="prev">Tools for Compilation</a>, Up: <a href="Installation.html#Installation" accesskey="u" rel="up">Installation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Specific-advice-for-GNU_002fLinux-systems"></a>
+<h3 class="appendixsec">C.4 Specific advice for GNU/Linux systems</h3>
+<a name="index-kernel-header-files"></a>
+
+<p>If you are installing the GNU C Library on GNU/Linux systems, you need to have
+the header files from a 2.6.32 or newer kernel around for reference.
+These headers must be installed using &lsquo;<samp>make headers_install</samp>&rsquo;; the
+headers present in the kernel source directory are not suitable for
+direct use by the GNU C Library.  You do not need to use that kernel, just have
+its headers installed where the GNU C Library can access them, referred to here as
+<var>install-directory</var>.  The easiest way to do this is to unpack it
+in a directory such as <samp>/usr/src/linux-<var>version</var></samp>.  In that
+directory, run &lsquo;<samp>make headers_install
+INSTALL_HDR_PATH=<var>install-directory</var></samp>&rsquo;.  Finally, configure the GNU C Library
+with the option &lsquo;<samp>--with-headers=<var>install-directory</var>/include</samp>&rsquo;.
+Use the most recent kernel you can get your hands on.  (If you are
+cross-compiling the GNU C Library, you need to specify
+&lsquo;<samp>ARCH=<var>architecture</var></samp>&rsquo; in the &lsquo;<samp>make headers_install</samp>&rsquo;
+command, where <var>architecture</var> is the architecture name used by the
+Linux kernel, such as &lsquo;<samp>x86</samp>&rsquo; or &lsquo;<samp>powerpc</samp>&rsquo;.)
+</p>
+<p>After installing the GNU C Library, you may need to remove or rename
+directories such as <samp>/usr/include/linux</samp> and
+<samp>/usr/include/asm</samp>, and replace them with copies of directories
+such as <samp>linux</samp> and <samp>asm</samp> from
+<samp><var>install-directory</var>/include</samp>.  All directories present in
+<samp><var>install-directory</var>/include</samp> should be copied, except that
+the GNU C Library provides its own version of <samp>/usr/include/scsi</samp>; the
+files provided by the kernel should be copied without replacing those
+provided by the GNU C Library.  The <samp>linux</samp>, <samp>asm</samp> and
+<samp>asm-generic</samp> directories are required to compile programs using
+the GNU C Library; the other directories describe interfaces to the kernel but
+are not required if not compiling programs using those interfaces.
+You do not need to copy kernel headers if you did not specify an
+alternate kernel header source using &lsquo;<samp>--with-headers</samp>&rsquo;.
+</p>
+<p>The Filesystem Hierarchy Standard for GNU/Linux systems expects some
+components of the GNU C Library installation to be in
+<samp>/lib</samp> and some in <samp>/usr/lib</samp>.  This is handled automatically
+if you configure the GNU C Library with &lsquo;<samp>--prefix=/usr</samp>&rsquo;.  If you set some other
+prefix or allow it to default to <samp>/usr/local</samp>, then all the
+components are installed there.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Reporting-Bugs.html#Reporting-Bugs" accesskey="n" rel="next">Reporting Bugs</a>, Previous: <a href="Tools-for-Compilation.html#Tools-for-Compilation" accesskey="p" rel="prev">Tools for Compilation</a>, Up: <a href="Installation.html#Installation" accesskey="u" rel="up">Installation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

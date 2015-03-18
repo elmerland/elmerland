@@ -1,0 +1,50 @@
+<a name="Locale-Information"></a>
+<div class="header">
+<p>
+Next: <a href="Formatting-Numbers.html#Formatting-Numbers" accesskey="n" rel="next">Formatting Numbers</a>, Previous: <a href="Locale-Names.html#Locale-Names" accesskey="p" rel="prev">Locale Names</a>, Up: <a href="Locales.html#Locales" accesskey="u" rel="up">Locales</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Accessing-Locale-Information"></a>
+<h3 class="section">7.7 Accessing Locale Information</h3>
+
+<p>There are several ways to access locale information.  The simplest
+way is to let the C library itself do the work.  Several of the
+functions in this library implicitly access the locale data, and use
+what information is provided by the currently selected locale.  This is
+how the locale model is meant to work normally.
+</p>
+<p>As an example take the <code>strftime</code> function, which is meant to nicely
+format date and time information (see <a href="Formatting-Calendar-Time.html#Formatting-Calendar-Time">Formatting Calendar Time</a>).
+Part of the standard information contained in the <code>LC_TIME</code>
+category is the names of the months.  Instead of requiring the
+programmer to take care of providing the translations the
+<code>strftime</code> function does this all by itself.  <code>%A</code>
+in the format string is replaced by the appropriate weekday
+name of the locale currently selected by <code>LC_TIME</code>.  This is an
+easy example, and wherever possible functions do things automatically
+in this way.
+</p>
+<p>But there are quite often situations when there is simply no function
+to perform the task, or it is simply not possible to do the work
+automatically.  For these cases it is necessary to access the
+information in the locale directly.  To do this the C library provides
+two functions: <code>localeconv</code> and <code>nl_langinfo</code>.  The former is
+part of ISO&nbsp;C<!-- /@w --> and therefore portable, but has a brain-damaged
+interface.  The second is part of the Unix interface and is portable in
+as far as the system follows the Unix standards.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="The-Lame-Way-to-Locale-Data.html#The-Lame-Way-to-Locale-Data" accesskey="1">The Lame Way to Locale Data</a>:</td><td align="left" valign="top">ISO C&rsquo;s <code>localeconv</code>.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="The-Elegant-and-Fast-Way.html#The-Elegant-and-Fast-Way" accesskey="2">The Elegant and Fast Way</a>:</td><td align="left" valign="top">X/Open&rsquo;s <code>nl_langinfo</code>.
+</td></tr>
+</table>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Formatting-Numbers.html#Formatting-Numbers" accesskey="n" rel="next">Formatting Numbers</a>, Previous: <a href="Locale-Names.html#Locale-Names" accesskey="p" rel="prev">Locale Names</a>, Up: <a href="Locales.html#Locales" accesskey="u" rel="up">Locales</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

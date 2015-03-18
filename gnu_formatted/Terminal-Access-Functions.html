@@ -1,0 +1,140 @@
+<a name="Terminal-Access-Functions"></a>
+<div class="header">
+<p>
+Previous: <a href="Process-Group-Functions.html#Process-Group-Functions" accesskey="p" rel="prev">Process Group Functions</a>, Up: <a href="Functions-for-Job-Control.html#Functions-for-Job-Control" accesskey="u" rel="up">Functions for Job Control</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Functions-for-Controlling-Terminal-Access"></a>
+<h4 class="subsection">28.7.3 Functions for Controlling Terminal Access</h4>
+
+<p>These are the functions for reading or setting the foreground
+process group of a terminal.  You should include the header files
+<samp>sys/types.h</samp> and <samp>unistd.h</samp> in your application to use
+these functions.
+<a name="index-unistd_002eh-21"></a>
+<a name="index-sys_002ftypes_002eh-3"></a>
+</p>
+<p>Although these functions take a file descriptor argument to specify
+the terminal device, the foreground job is associated with the terminal
+file itself and not a particular open file descriptor.
+</p>
+<dl>
+<dt><a name="index-tcgetpgrp"></a>Function: <em>pid_t</em> <strong>tcgetpgrp</strong> <em>(int <var>filedes</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function returns the process group ID of the foreground process
+group associated with the terminal open on descriptor <var>filedes</var>.
+</p>
+<p>If there is no foreground process group, the return value is a number
+greater than <code>1</code> that does not match the process group ID of any
+existing process group.  This can happen if all of the processes in the
+job that was formerly the foreground job have terminated, and no other
+job has yet been moved into the foreground.
+</p>
+<p>In case of an error, a value of <code>-1</code> is returned.  The
+following <code>errno</code> error conditions are defined for this function:
+</p>
+<dl compact="compact">
+<dt><code>EBADF</code></dt>
+<dd><p>The <var>filedes</var> argument is not a valid file descriptor.
+</p>
+</dd>
+<dt><code>ENOSYS</code></dt>
+<dd><p>The system doesn&rsquo;t support job control.
+</p>
+</dd>
+<dt><code>ENOTTY</code></dt>
+<dd><p>The terminal file associated with the <var>filedes</var> argument isn&rsquo;t the
+controlling terminal of the calling process.
+</p></dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><a name="index-tcsetpgrp"></a>Function: <em>int</em> <strong>tcsetpgrp</strong> <em>(int <var>filedes</var>, pid_t <var>pgid</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function is used to set a terminal&rsquo;s foreground process group ID.
+The argument <var>filedes</var> is a descriptor which specifies the terminal;
+<var>pgid</var> specifies the process group.  The calling process must be a
+member of the same session as <var>pgid</var> and must have the same
+controlling terminal.
+</p>
+<p>For terminal access purposes, this function is treated as output.  If it
+is called from a background process on its controlling terminal,
+normally all processes in the process group are sent a <code>SIGTTOU</code>
+signal.  The exception is if the calling process itself is ignoring or
+blocking <code>SIGTTOU</code> signals, in which case the operation is
+performed and no signal is sent.
+</p>
+<p>If successful, <code>tcsetpgrp</code> returns <code>0</code>.  A return value of
+<code>-1</code> indicates an error.  The following <code>errno</code> error
+conditions are defined for this function:
+</p>
+<dl compact="compact">
+<dt><code>EBADF</code></dt>
+<dd><p>The <var>filedes</var> argument is not a valid file descriptor.
+</p>
+</dd>
+<dt><code>EINVAL</code></dt>
+<dd><p>The <var>pgid</var> argument is not valid.
+</p>
+</dd>
+<dt><code>ENOSYS</code></dt>
+<dd><p>The system doesn&rsquo;t support job control.
+</p>
+</dd>
+<dt><code>ENOTTY</code></dt>
+<dd><p>The <var>filedes</var> isn&rsquo;t the controlling terminal of the calling process.
+</p>
+</dd>
+<dt><code>EPERM</code></dt>
+<dd><p>The <var>pgid</var> isn&rsquo;t a process group in the same session as the calling
+process.
+</p></dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><a name="index-tcgetsid"></a>Function: <em>pid_t</em> <strong>tcgetsid</strong> <em>(int <var>fildes</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function is used to obtain the process group ID of the session
+for which the terminal specified by <var>fildes</var> is the controlling terminal.
+If the call is successful the group ID is returned.  Otherwise the
+return value is <code>(pid_t) -1</code> and the global variable <var>errno</var>
+is set to the following value:
+</p><dl compact="compact">
+<dt><code>EBADF</code></dt>
+<dd><p>The <var>filedes</var> argument is not a valid file descriptor.
+</p>
+</dd>
+<dt><code>ENOTTY</code></dt>
+<dd><p>The calling process does not have a controlling terminal, or the file
+is not the controlling terminal.
+</p></dd>
+</dl>
+</dd></dl>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Process-Group-Functions.html#Process-Group-Functions" accesskey="p" rel="prev">Process Group Functions</a>, Up: <a href="Functions-for-Job-Control.html#Functions-for-Job-Control" accesskey="u" rel="up">Functions for Job Control</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

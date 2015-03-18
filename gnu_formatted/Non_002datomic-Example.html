@@ -1,0 +1,62 @@
+<a name="Non_002datomic-Example"></a>
+<div class="header">
+<p>
+Next: <a href="Atomic-Types.html#Atomic-Types" accesskey="n" rel="next">Atomic Types</a>, Up: <a href="Atomic-Data-Access.html#Atomic-Data-Access" accesskey="u" rel="up">Atomic Data Access</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Problems-with-Non_002dAtomic-Access"></a>
+<h4 class="subsubsection">24.4.7.1 Problems with Non-Atomic Access</h4>
+
+<p>Here is an example which shows what can happen if a signal handler runs
+in the middle of modifying a variable.  (Interrupting the reading of a
+variable can also lead to paradoxical results, but here we only show
+writing.)
+</p>
+<div class="smallexample">
+<pre class="smallexample">#include &lt;signal.h&gt;
+#include &lt;stdio.h&gt;
+
+volatile struct two_words { int a, b; } memory;
+
+void
+handler(int signum)
+{
+   printf (&quot;%d,%d\n&quot;, memory.a, memory.b);
+   alarm (1);
+}
+
+</pre><pre class="smallexample">int
+main (void)
+{
+   static struct two_words zeros = { 0, 0 }, ones = { 1, 1 };
+   signal (SIGALRM, handler);
+   memory = zeros;
+   alarm (1);
+   while (1)
+     {
+       memory = zeros;
+       memory = ones;
+     }
+}
+</pre></div>
+
+<p>This program fills <code>memory</code> with zeros, ones, zeros, ones,
+alternating forever; meanwhile, once per second, the alarm signal handler
+prints the current contents.  (Calling <code>printf</code> in the handler is
+safe in this program because it is certainly not being called outside
+the handler when the signal happens.)
+</p>
+<p>Clearly, this program can print a pair of zeros or a pair of ones.  But
+that&rsquo;s not all it can do!  On most machines, it takes several
+instructions to store a new value in <code>memory</code>, and the value is
+stored one word at a time.  If the signal is delivered in between these
+instructions, the handler might find that <code>memory.a</code> is zero and
+<code>memory.b</code> is one (or vice versa).
+</p>
+<p>On some machines it may be possible to store a new value in
+<code>memory</code> with just one instruction that cannot be interrupted.  On
+these machines, the handler will always print two zeros or two ones.
+</p>
+
+
+

@@ -1,0 +1,52 @@
+<a name="Porting-to-Unix"></a>
+<div class="header">
+<p>
+Previous: <a href="Hierarchy-Conventions.html#Hierarchy-Conventions" accesskey="p" rel="prev">Hierarchy Conventions</a>, Up: <a href="Porting.html#Porting" accesskey="u" rel="up">Porting</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Porting-the-GNU-C-Library-to-Unix-Systems"></a>
+<h4 class="appendixsubsec">D.2.2 Porting the GNU C Library to Unix Systems</h4>
+
+<p>Most Unix systems are fundamentally very similar.  There are variations
+between different machines, and variations in what facilities are
+provided by the kernel.  But the interface to the operating system
+facilities is, for the most part, pretty uniform and simple.
+</p>
+<p>The code for Unix systems is in the directory <samp>unix</samp>, at the top
+level of the <samp>sysdeps</samp> hierarchy.  This directory contains
+subdirectories (and subdirectory trees) for various Unix variants.
+</p>
+<p>The functions which are system calls in most Unix systems are
+implemented in assembly code, which is generated automatically from
+specifications in files named <samp>syscalls.list</samp>.  There are several
+such files, one in <samp>sysdeps/unix</samp> and others in its subdirectories.
+Some special system calls are implemented in files that are named with a
+suffix of &lsquo;<samp>.S</samp>&rsquo;; for example, <samp>_exit.S</samp>.  Files ending in
+&lsquo;<samp>.S</samp>&rsquo; are run through the C preprocessor before being fed to the
+assembler.
+</p>
+<p>These files all use a set of macros that should be defined in
+<samp>sysdep.h</samp>.  The <samp>sysdep.h</samp> file in <samp>sysdeps/unix</samp>
+partially defines them; a <samp>sysdep.h</samp> file in another directory must
+finish defining them for the particular machine and operating system
+variant.  See <samp>sysdeps/unix/sysdep.h</samp> and the machine-specific
+<samp>sysdep.h</samp> implementations to see what these macros are and what
+they should do.
+</p>
+<p>The system-specific makefile for the <samp>unix</samp> directory
+(<samp>sysdeps/unix/Makefile</samp>) gives rules to generate several files
+from the Unix system you are building the library on (which is assumed
+to be the target system you are building the library <em>for</em>).  All
+the generated files are put in the directory where the object files are
+kept; they should not affect the source tree itself.  The files
+generated are <samp>ioctls.h</samp>, <samp>errnos.h</samp>, <samp>sys/param.h</samp>, and
+<samp>errlist.c</samp> (for the <samp>stdio</samp> section of the library).
+</p>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Hierarchy-Conventions.html#Hierarchy-Conventions" accesskey="p" rel="prev">Hierarchy Conventions</a>, Up: <a href="Porting.html#Porting" accesskey="u" rel="up">Porting</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

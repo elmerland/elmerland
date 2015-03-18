@@ -1,0 +1,161 @@
+<a name="Reading-Attributes"></a>
+<div class="header">
+<p>
+Next: <a href="Testing-File-Type.html#Testing-File-Type" accesskey="n" rel="next">Testing File Type</a>, Previous: <a href="Attribute-Meanings.html#Attribute-Meanings" accesskey="p" rel="prev">Attribute Meanings</a>, Up: <a href="File-Attributes.html#File-Attributes" accesskey="u" rel="up">File Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Reading-the-Attributes-of-a-File"></a>
+<h4 class="subsection">14.9.2 Reading the Attributes of a File</h4>
+
+<p>To examine the attributes of files, use the functions <code>stat</code>,
+<code>fstat</code> and <code>lstat</code>.  They return the attribute information in
+a <code>struct stat</code> object.  All three functions are declared in the
+header file <samp>sys/stat.h</samp>.
+</p>
+<dl>
+<dt><a name="index-stat"></a>Function: <em>int</em> <strong>stat</strong> <em>(const char *<var>filename</var>, struct stat *<var>buf</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>stat</code> function returns information about the attributes of the
+file named by <var>filename</var><!-- /@w --> in the structure pointed to by <var>buf</var>.
+</p>
+<p>If <var>filename</var> is the name of a symbolic link, the attributes you get
+describe the file that the link points to.  If the link points to a
+nonexistent file name, then <code>stat</code> fails reporting a nonexistent
+file.
+</p>
+<p>The return value is <code>0</code> if the operation is successful, or
+<code>-1</code> on failure.  In addition to the usual file name errors
+(see <a href="File-Name-Errors.html#File-Name-Errors">File Name Errors</a>, the following <code>errno</code> error conditions
+are defined for this function:
+</p>
+<dl compact="compact">
+<dt><code>ENOENT</code></dt>
+<dd><p>The file named by <var>filename</var> doesn&rsquo;t exist.
+</p></dd>
+</dl>
+
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is in fact <code>stat64</code> since the LFS interface transparently
+replaces the normal implementation.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-stat64"></a>Function: <em>int</em> <strong>stat64</strong> <em>(const char *<var>filename</var>, struct stat64 *<var>buf</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function is similar to <code>stat</code> but it is also able to work on
+files larger than <em>2^31</em> bytes on 32-bit systems.  To be able to do
+this the result is stored in a variable of type <code>struct stat64</code> to
+which <var>buf</var> must point.
+</p>
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is available under the name <code>stat</code> and so transparently
+replaces the interface for small files on 32-bit machines.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-fstat"></a>Function: <em>int</em> <strong>fstat</strong> <em>(int <var>filedes</var>, struct stat *<var>buf</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>fstat</code> function is like <code>stat</code>, except that it takes an
+open file descriptor as an argument instead of a file name.
+See <a href="Low_002dLevel-I_002fO.html#Low_002dLevel-I_002fO">Low-Level I/O</a>.
+</p>
+<p>Like <code>stat</code>, <code>fstat</code> returns <code>0</code> on success and <code>-1</code>
+on failure.  The following <code>errno</code> error conditions are defined for
+<code>fstat</code>:
+</p>
+<dl compact="compact">
+<dt><code>EBADF</code></dt>
+<dd><p>The <var>filedes</var> argument is not a valid file descriptor.
+</p></dd>
+</dl>
+
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is in fact <code>fstat64</code> since the LFS interface transparently
+replaces the normal implementation.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-fstat64"></a>Function: <em>int</em> <strong>fstat64</strong> <em>(int <var>filedes</var>, struct stat64 *<var>buf</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function is similar to <code>fstat</code> but is able to work on large
+files on 32-bit platforms.  For large files the file descriptor
+<var>filedes</var> should be obtained by <code>open64</code> or <code>creat64</code>.
+The <var>buf</var> pointer points to a variable of type <code>struct stat64</code>
+which is able to represent the larger values.
+</p>
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is available under the name <code>fstat</code> and so transparently
+replaces the interface for small files on 32-bit machines.
+</p></dd></dl>
+
+
+<dl>
+<dt><a name="index-lstat"></a>Function: <em>int</em> <strong>lstat</strong> <em>(const char *<var>filename</var>, struct stat *<var>buf</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>lstat</code> function is like <code>stat</code>, except that it does not
+follow symbolic links.  If <var>filename</var> is the name of a symbolic
+link, <code>lstat</code> returns information about the link itself; otherwise
+<code>lstat</code> works like <code>stat</code>.  See <a href="Symbolic-Links.html#Symbolic-Links">Symbolic Links</a>.
+</p>
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is in fact <code>lstat64</code> since the LFS interface transparently
+replaces the normal implementation.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-lstat64"></a>Function: <em>int</em> <strong>lstat64</strong> <em>(const char *<var>filename</var>, struct stat64 *<var>buf</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function is similar to <code>lstat</code> but it is also able to work on
+files larger than <em>2^31</em> bytes on 32-bit systems.  To be able to do
+this the result is stored in a variable of type <code>struct stat64</code> to
+which <var>buf</var> must point.
+</p>
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is available under the name <code>lstat</code> and so transparently
+replaces the interface for small files on 32-bit machines.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Testing-File-Type.html#Testing-File-Type" accesskey="n" rel="next">Testing File Type</a>, Previous: <a href="Attribute-Meanings.html#Attribute-Meanings" accesskey="p" rel="prev">Attribute Meanings</a>, Up: <a href="File-Attributes.html#File-Attributes" accesskey="u" rel="up">File Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

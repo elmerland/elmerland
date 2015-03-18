@@ -1,0 +1,65 @@
+<a name="Variable-Size-Automatic"></a>
+<div class="header">
+<p>
+Previous: <a href="Obstacks.html#Obstacks" accesskey="p" rel="prev">Obstacks</a>, Up: <a href="Memory-Allocation.html#Memory-Allocation" accesskey="u" rel="up">Memory Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Automatic-Storage-with-Variable-Size"></a>
+<h4 class="subsection">3.2.5 Automatic Storage with Variable Size</h4>
+<a name="index-automatic-freeing"></a>
+<a name="index-alloca-function"></a>
+<a name="index-automatic-storage-with-variable-size"></a>
+
+<p>The function <code>alloca</code> supports a kind of half-dynamic allocation in
+which blocks are allocated dynamically but freed automatically.
+</p>
+<p>Allocating a block with <code>alloca</code> is an explicit action; you can
+allocate as many blocks as you wish, and compute the size at run time.  But
+all the blocks are freed when you exit the function that <code>alloca</code> was
+called from, just as if they were automatic variables declared in that
+function.  There is no way to free the space explicitly.
+</p>
+<p>The prototype for <code>alloca</code> is in <samp>stdlib.h</samp>.  This function is
+a BSD extension.
+<a name="index-stdlib_002eh-5"></a>
+</p>
+<dl>
+<dt><a name="index-alloca"></a>Function: <em>void *</em> <strong>alloca</strong> <em>(size_t <var>size</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The return value of <code>alloca</code> is the address of a block of <var>size</var>
+bytes of memory, allocated in the stack frame of the calling function.
+</p></dd></dl>
+
+<p>Do not use <code>alloca</code> inside the arguments of a function call&mdash;you
+will get unpredictable results, because the stack space for the
+<code>alloca</code> would appear on the stack in the middle of the space for
+the function arguments.  An example of what to avoid is <code>foo (x,
+alloca (4), y)</code>.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Alloca-Example.html#Alloca-Example" accesskey="1">Alloca Example</a>:</td><td align="left" valign="top">Example of using <code>alloca</code>.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Advantages-of-Alloca.html#Advantages-of-Alloca" accesskey="2">Advantages of Alloca</a>:</td><td align="left" valign="top">Reasons to use <code>alloca</code>.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Disadvantages-of-Alloca.html#Disadvantages-of-Alloca" accesskey="3">Disadvantages of Alloca</a>:</td><td align="left" valign="top">Reasons to avoid <code>alloca</code>.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="GNU-C-Variable_002dSize-Arrays.html#GNU-C-Variable_002dSize-Arrays" accesskey="4">GNU C Variable-Size Arrays</a>:</td><td align="left" valign="top">Only in GNU C, here is an alternative
+				 method of allocating dynamically and
+				 freeing automatically.
+</td></tr>
+</table>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Obstacks.html#Obstacks" accesskey="p" rel="prev">Obstacks</a>, Up: <a href="Memory-Allocation.html#Memory-Allocation" accesskey="u" rel="up">Memory Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

@@ -1,0 +1,142 @@
+<a name="Normalization-Functions"></a>
+<div class="header">
+<p>
+Next: <a href="Rounding-Functions.html#Rounding-Functions" accesskey="n" rel="next">Rounding Functions</a>, Previous: <a href="Absolute-Value.html#Absolute-Value" accesskey="p" rel="prev">Absolute Value</a>, Up: <a href="Arithmetic-Functions.html#Arithmetic-Functions" accesskey="u" rel="up">Arithmetic Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Normalization-Functions-1"></a>
+<h4 class="subsection">20.8.2 Normalization Functions</h4>
+<a name="index-normalization-functions-_0028floating_002dpoint_0029"></a>
+
+<p>The functions described in this section are primarily provided as a way
+to efficiently perform certain low-level manipulations on floating point
+numbers that are represented internally using a binary radix;
+see <a href="Floating-Point-Concepts.html#Floating-Point-Concepts">Floating Point Concepts</a>.  These functions are required to
+have equivalent behavior even if the representation does not use a radix
+of 2, but of course they are unlikely to be particularly efficient in
+those cases.
+</p>
+<a name="index-math_002eh-3"></a>
+<p>All these functions are declared in <samp>math.h</samp>.
+</p>
+<dl>
+<dt><a name="index-frexp"></a>Function: <em>double</em> <strong>frexp</strong> <em>(double <var>value</var>, int *<var>exponent</var>)</em></dt>
+<dt><a name="index-frexpf"></a>Function: <em>float</em> <strong>frexpf</strong> <em>(float <var>value</var>, int *<var>exponent</var>)</em></dt>
+<dt><a name="index-frexpl"></a>Function: <em>long double</em> <strong>frexpl</strong> <em>(long double <var>value</var>, int *<var>exponent</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>These functions are used to split the number <var>value</var>
+into a normalized fraction and an exponent.
+</p>
+<p>If the argument <var>value</var> is not zero, the return value is <var>value</var>
+times a power of two, and its magnitude is always in the range 1/2
+(inclusive) to 1 (exclusive).  The corresponding exponent is stored in
+<code>*<var>exponent</var></code>; the return value multiplied by 2 raised to this
+exponent equals the original number <var>value</var>.
+</p>
+<p>For example, <code>frexp (12.8, &amp;exponent)</code> returns <code>0.8</code> and
+stores <code>4</code> in <code>exponent</code>.
+</p>
+<p>If <var>value</var> is zero, then the return value is zero and
+zero is stored in <code>*<var>exponent</var></code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-ldexp"></a>Function: <em>double</em> <strong>ldexp</strong> <em>(double <var>value</var>, int <var>exponent</var>)</em></dt>
+<dt><a name="index-ldexpf"></a>Function: <em>float</em> <strong>ldexpf</strong> <em>(float <var>value</var>, int <var>exponent</var>)</em></dt>
+<dt><a name="index-ldexpl"></a>Function: <em>long double</em> <strong>ldexpl</strong> <em>(long double <var>value</var>, int <var>exponent</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>These functions return the result of multiplying the floating-point
+number <var>value</var> by 2 raised to the power <var>exponent</var>.  (It can
+be used to reassemble floating-point numbers that were taken apart
+by <code>frexp</code>.)
+</p>
+<p>For example, <code>ldexp (0.8, 4)</code> returns <code>12.8</code>.
+</p></dd></dl>
+
+<p>The following functions, which come from BSD, provide facilities
+equivalent to those of <code>ldexp</code> and <code>frexp</code>.  See also the
+ISO&nbsp;C<!-- /@w --> function <code>logb</code> which originally also appeared in BSD.
+</p>
+<dl>
+<dt><a name="index-scalb"></a>Function: <em>double</em> <strong>scalb</strong> <em>(double <var>value</var>, double <var>exponent</var>)</em></dt>
+<dt><a name="index-scalbf"></a>Function: <em>float</em> <strong>scalbf</strong> <em>(float <var>value</var>, float <var>exponent</var>)</em></dt>
+<dt><a name="index-scalbl"></a>Function: <em>long double</em> <strong>scalbl</strong> <em>(long double <var>value</var>, long double <var>exponent</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>scalb</code> function is the BSD name for <code>ldexp</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-scalbn"></a>Function: <em>double</em> <strong>scalbn</strong> <em>(double <var>x</var>, int <var>n</var>)</em></dt>
+<dt><a name="index-scalbnf"></a>Function: <em>float</em> <strong>scalbnf</strong> <em>(float <var>x</var>, int <var>n</var>)</em></dt>
+<dt><a name="index-scalbnl"></a>Function: <em>long double</em> <strong>scalbnl</strong> <em>(long double <var>x</var>, int <var>n</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p><code>scalbn</code> is identical to <code>scalb</code>, except that the exponent
+<var>n</var> is an <code>int</code> instead of a floating-point number.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-scalbln"></a>Function: <em>double</em> <strong>scalbln</strong> <em>(double <var>x</var>, long int <var>n</var>)</em></dt>
+<dt><a name="index-scalblnf"></a>Function: <em>float</em> <strong>scalblnf</strong> <em>(float <var>x</var>, long int <var>n</var>)</em></dt>
+<dt><a name="index-scalblnl"></a>Function: <em>long double</em> <strong>scalblnl</strong> <em>(long double <var>x</var>, long int <var>n</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p><code>scalbln</code> is identical to <code>scalb</code>, except that the exponent
+<var>n</var> is a <code>long int</code> instead of a floating-point number.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-significand"></a>Function: <em>double</em> <strong>significand</strong> <em>(double <var>x</var>)</em></dt>
+<dt><a name="index-significandf"></a>Function: <em>float</em> <strong>significandf</strong> <em>(float <var>x</var>)</em></dt>
+<dt><a name="index-significandl"></a>Function: <em>long double</em> <strong>significandl</strong> <em>(long double <var>x</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p><code>significand</code> returns the mantissa of <var>x</var> scaled to the range
+<em>[1, 2)</em>.
+It is equivalent to <code>scalb&nbsp;(<var>x</var>,&nbsp;(double)&nbsp;<span class="nolinebreak">-ilogb</span>&nbsp;(<var>x</var>))</code><!-- /@w -->.
+</p>
+<p>This function exists mainly for use in certain standardized tests
+of IEEE&nbsp;754<!-- /@w --> conformance.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Rounding-Functions.html#Rounding-Functions" accesskey="n" rel="next">Rounding Functions</a>, Previous: <a href="Absolute-Value.html#Absolute-Value" accesskey="p" rel="prev">Absolute Value</a>, Up: <a href="Arithmetic-Functions.html#Arithmetic-Functions" accesskey="u" rel="up">Arithmetic Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

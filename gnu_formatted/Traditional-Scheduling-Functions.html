@@ -1,0 +1,181 @@
+<a name="Traditional-Scheduling-Functions"></a>
+<div class="header">
+<p>
+Previous: <a href="Traditional-Scheduling-Intro.html#Traditional-Scheduling-Intro" accesskey="p" rel="prev">Traditional Scheduling Intro</a>, Up: <a href="Traditional-Scheduling.html#Traditional-Scheduling" accesskey="u" rel="up">Traditional Scheduling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Functions-For-Traditional-Scheduling"></a>
+<h4 class="subsubsection">22.3.4.2 Functions For Traditional Scheduling</h4>
+
+<a name="index-sys_002fresource_002eh-2"></a>
+<p>This section describes how you can read and set the nice value of a
+process.  All these symbols are declared in <samp>sys/resource.h</samp>.
+</p>
+<p>The function and macro names are defined by POSIX, and refer to
+&quot;priority,&quot; but the functions actually have to do with nice values, as
+the terms are used both in the manual and POSIX.
+</p>
+<p>The range of valid nice values depends on the kernel, but typically it
+runs from <code>-20</code> to <code>20</code>.  A lower nice value corresponds to
+higher priority for the process.  These constants describe the range of
+priority values:
+</p>
+<dl compact="compact">
+<dt><code>PRIO_MIN</code>
+<a name="index-PRIO_005fMIN"></a>
+</dt>
+<dd><p>The lowest valid nice value.
+</p>
+</dd>
+<dt><code>PRIO_MAX</code>
+<a name="index-PRIO_005fMAX"></a>
+</dt>
+<dd><p>The highest valid nice value.
+</p></dd>
+</dl>
+
+<dl>
+<dt><a name="index-getpriority"></a>Function: <em>int</em> <strong>getpriority</strong> <em>(int <var>class</var>, int <var>id</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>Return the nice value of a set of processes; <var>class</var> and <var>id</var>
+specify which ones (see below).  If the processes specified do not all
+have the same nice value, this returns the lowest value that any of them
+has.
+</p>
+<p>On success, the return value is <code>0</code>.  Otherwise, it is <code>-1</code>
+and <code>ERRNO</code> is set accordingly.  The <code>errno</code> values specific
+to this function are:
+</p>
+<dl compact="compact">
+<dt><code>ESRCH</code></dt>
+<dd><p>The combination of <var>class</var> and <var>id</var> does not match any existing
+process.
+</p>
+</dd>
+<dt><code>EINVAL</code></dt>
+<dd><p>The value of <var>class</var> is not valid.
+</p></dd>
+</dl>
+
+<p>If the return value is <code>-1</code>, it could indicate failure, or it could
+be the nice value.  The only way to make certain is to set <code>errno =
+0</code> before calling <code>getpriority</code>, then use <code>errno != 0</code>
+afterward as the criterion for failure.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-setpriority"></a>Function: <em>int</em> <strong>setpriority</strong> <em>(int <var>class</var>, int <var>id</var>, int <var>niceval</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>Set the nice value of a set of processes to <var>niceval</var>; <var>class</var>
+and <var>id</var> specify which ones (see below).
+</p>
+<p>The return value is <code>0</code> on success, and <code>-1</code> on
+failure.  The following <code>errno</code> error condition are possible for
+this function:
+</p>
+<dl compact="compact">
+<dt><code>ESRCH</code></dt>
+<dd><p>The combination of <var>class</var> and <var>id</var> does not match any existing
+process.
+</p>
+</dd>
+<dt><code>EINVAL</code></dt>
+<dd><p>The value of <var>class</var> is not valid.
+</p>
+</dd>
+<dt><code>EPERM</code></dt>
+<dd><p>The call would set the nice value of a process which is owned by a different
+user than the calling process (i.e., the target process&rsquo; real or effective
+uid does not match the calling process&rsquo; effective uid) and the calling
+process does not have <code>CAP_SYS_NICE</code> permission.
+</p>
+</dd>
+<dt><code>EACCES</code></dt>
+<dd><p>The call would lower the process&rsquo; nice value and the process does not have
+<code>CAP_SYS_NICE</code> permission.
+</p></dd>
+</dl>
+
+</dd></dl>
+
+<p>The arguments <var>class</var> and <var>id</var> together specify a set of
+processes in which you are interested.  These are the possible values of
+<var>class</var>:
+</p>
+<dl compact="compact">
+<dt><code>PRIO_PROCESS</code>
+<a name="index-PRIO_005fPROCESS"></a>
+</dt>
+<dd><p>One particular process.  The argument <var>id</var> is a process ID (pid).
+</p>
+</dd>
+<dt><code>PRIO_PGRP</code>
+<a name="index-PRIO_005fPGRP"></a>
+</dt>
+<dd><p>All the processes in a particular process group.  The argument <var>id</var> is
+a process group ID (pgid).
+</p>
+</dd>
+<dt><code>PRIO_USER</code>
+<a name="index-PRIO_005fUSER"></a>
+</dt>
+<dd><p>All the processes owned by a particular user (i.e., whose real uid
+indicates the user).  The argument <var>id</var> is a user ID (uid).
+</p></dd>
+</dl>
+
+<p>If the argument <var>id</var> is 0, it stands for the calling process, its
+process group, or its owner (real uid), according to <var>class</var>.
+</p>
+<dl>
+<dt><a name="index-nice"></a>Function: <em>int</em> <strong>nice</strong> <em>(int <var>increment</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe race:setpriority
+| AS-Unsafe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>Increment the nice value of the calling process by <var>increment</var>.
+The return value is the new nice value on success, and <code>-1</code> on
+failure.  In the case of failure, <code>errno</code> will be set to the
+same values as for <code>setpriority</code>.
+</p>
+
+<p>Here is an equivalent definition of <code>nice</code>:
+</p>
+<div class="smallexample">
+<pre class="smallexample">int
+nice (int increment)
+{
+  int result, old = getpriority (PRIO_PROCESS, 0);
+  result = setpriority (PRIO_PROCESS, 0, old + increment);
+  if (result != -1)
+      return old + increment;
+  else
+      return -1;
+}
+</pre></div>
+</dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Traditional-Scheduling-Intro.html#Traditional-Scheduling-Intro" accesskey="p" rel="prev">Traditional Scheduling Intro</a>, Up: <a href="Traditional-Scheduling.html#Traditional-Scheduling" accesskey="u" rel="up">Traditional Scheduling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

@@ -1,0 +1,181 @@
+<a name="Host-Address-Functions"></a>
+<div class="header">
+<p>
+Next: <a href="Host-Names.html#Host-Names" accesskey="n" rel="next">Host Names</a>, Previous: <a href="Host-Address-Data-Type.html#Host-Address-Data-Type" accesskey="p" rel="prev">Host Address Data Type</a>, Up: <a href="Host-Addresses.html#Host-Addresses" accesskey="u" rel="up">Host Addresses</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Host-Address-Functions-1"></a>
+<h4 class="subsubsection">16.6.2.3 Host Address Functions</h4>
+
+<a name="index-arpa_002finet_002eh"></a>
+<p>These additional functions for manipulating Internet addresses are
+declared in the header file <samp>arpa/inet.h</samp>.  They represent Internet
+addresses in network byte order, and network numbers and
+local-address-within-network numbers in host byte order.  See <a href="Byte-Order.html#Byte-Order">Byte Order</a>, for an explanation of network and host byte order.
+</p>
+<dl>
+<dt><a name="index-inet_005faton"></a>Function: <em>int</em> <strong>inet_aton</strong> <em>(const char *<var>name</var>, struct in_addr *<var>addr</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe locale
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function converts the IPv4 Internet host address <var>name</var>
+from the standard numbers-and-dots notation into binary data and stores
+it in the <code>struct in_addr</code> that <var>addr</var> points to.
+<code>inet_aton</code> returns nonzero if the address is valid, zero if not.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-inet_005faddr"></a>Function: <em>uint32_t</em> <strong>inet_addr</strong> <em>(const char *<var>name</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe locale
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function converts the IPv4 Internet host address <var>name</var> from the
+standard numbers-and-dots notation into binary data.  If the input is
+not valid, <code>inet_addr</code> returns <code>INADDR_NONE</code>.  This is an
+obsolete interface to <code>inet_aton</code>, described immediately above.  It
+is obsolete because <code>INADDR_NONE</code> is a valid address
+(255.255.255.255), and <code>inet_aton</code> provides a cleaner way to
+indicate error return.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-inet_005fnetwork"></a>Function: <em>uint32_t</em> <strong>inet_network</strong> <em>(const char *<var>name</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe locale
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function extracts the network number from the address <var>name</var>,
+given in the standard numbers-and-dots notation.  The returned address is
+in host order.  If the input is not valid, <code>inet_network</code> returns
+<code>-1</code>.
+</p>
+<p>The function works only with traditional IPv4 class A, B and C network
+types.  It doesn&rsquo;t work with classless addresses and shouldn&rsquo;t be used
+anymore.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-inet_005fntoa"></a>Function: <em>char *</em> <strong>inet_ntoa</strong> <em>(struct in_addr <var>addr</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe locale
+| AS-Unsafe race
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function converts the IPv4 Internet host address <var>addr</var> to a
+string in the standard numbers-and-dots notation.  The return value is
+a pointer into a statically-allocated buffer.  Subsequent calls will
+overwrite the same buffer, so you should copy the string if you need
+to save it.
+</p>
+<p>In multi-threaded programs each thread has an own statically-allocated
+buffer.  But still subsequent calls of <code>inet_ntoa</code> in the same
+thread will overwrite the result of the last call.
+</p>
+<p>Instead of <code>inet_ntoa</code> the newer function <code>inet_ntop</code> which is
+described below should be used since it handles both IPv4 and IPv6
+addresses.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-inet_005fmakeaddr"></a>Function: <em>struct in_addr</em> <strong>inet_makeaddr</strong> <em>(uint32_t <var>net</var>, uint32_t <var>local</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function makes an IPv4 Internet host address by combining the network
+number <var>net</var> with the local-address-within-network number
+<var>local</var>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-inet_005flnaof"></a>Function: <em>uint32_t</em> <strong>inet_lnaof</strong> <em>(struct in_addr <var>addr</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function returns the local-address-within-network part of the
+Internet host address <var>addr</var>.
+</p>
+<p>The function works only with traditional IPv4 class A, B and C network
+types.  It doesn&rsquo;t work with classless addresses and shouldn&rsquo;t be used
+anymore.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-inet_005fnetof"></a>Function: <em>uint32_t</em> <strong>inet_netof</strong> <em>(struct in_addr <var>addr</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function returns the network number part of the Internet host
+address <var>addr</var>.
+</p>
+<p>The function works only with traditional IPv4 class A, B and C network
+types.  It doesn&rsquo;t work with classless addresses and shouldn&rsquo;t be used
+anymore.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-inet_005fpton"></a>Function: <em>int</em> <strong>inet_pton</strong> <em>(int <var>af</var>, const char *<var>cp</var>, void *<var>buf</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe locale
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function converts an Internet address (either IPv4 or IPv6) from
+presentation (textual) to network (binary) format.  <var>af</var> should be
+either <code>AF_INET</code> or <code>AF_INET6</code>, as appropriate for the type of
+address being converted.  <var>cp</var> is a pointer to the input string, and
+<var>buf</var> is a pointer to a buffer for the result.  It is the caller&rsquo;s
+responsibility to make sure the buffer is large enough.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-inet_005fntop"></a>Function: <em>const char *</em> <strong>inet_ntop</strong> <em>(int <var>af</var>, const void *<var>cp</var>, char *<var>buf</var>, socklen_t <var>len</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe locale
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function converts an Internet address (either IPv4 or IPv6) from
+network (binary) to presentation (textual) form.  <var>af</var> should be
+either <code>AF_INET</code> or <code>AF_INET6</code>, as appropriate.  <var>cp</var> is a
+pointer to the address to be converted.  <var>buf</var> should be a pointer
+to a buffer to hold the result, and <var>len</var> is the length of this
+buffer.  The return value from the function will be this buffer address.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Host-Names.html#Host-Names" accesskey="n" rel="next">Host Names</a>, Previous: <a href="Host-Address-Data-Type.html#Host-Address-Data-Type" accesskey="p" rel="prev">Host Address Data Type</a>, Up: <a href="Host-Addresses.html#Host-Addresses" accesskey="u" rel="up">Host Addresses</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

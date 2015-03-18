@@ -1,0 +1,26 @@
+<a name="Pipe-Atomicity"></a>
+<div class="header">
+<p>
+Previous: <a href="FIFO-Special-Files.html#FIFO-Special-Files" accesskey="p" rel="prev">FIFO Special Files</a>, Up: <a href="Pipes-and-FIFOs.html#Pipes-and-FIFOs" accesskey="u" rel="up">Pipes and FIFOs</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Atomicity-of-Pipe-I_002fO"></a>
+<h3 class="section">15.4 Atomicity of Pipe I/O</h3>
+
+<p>Reading or writing pipe data is <em>atomic</em> if the size of data written
+is not greater than <code>PIPE_BUF</code>.  This means that the data transfer
+seems to be an instantaneous unit, in that nothing else in the system
+can observe a state in which it is partially complete.  Atomic I/O may
+not begin right away (it may need to wait for buffer space or for data),
+but once it does begin it finishes immediately.
+</p>
+<p>Reading or writing a larger amount of data may not be atomic; for
+example, output data from other processes sharing the descriptor may be
+interspersed.  Also, once <code>PIPE_BUF</code> characters have been written,
+further writes will block until some characters are read.
+</p>
+<p>See <a href="Limits-for-Files.html#Limits-for-Files">Limits for Files</a>, for information about the <code>PIPE_BUF</code>
+parameter.
+</p>
+
+

@@ -1,0 +1,48 @@
+<a name="How-Many-Arguments"></a>
+<div class="header">
+<p>
+Next: <a href="Calling-Variadics.html#Calling-Variadics" accesskey="n" rel="next">Calling Variadics</a>, Previous: <a href="Receiving-Arguments.html#Receiving-Arguments" accesskey="p" rel="prev">Receiving Arguments</a>, Up: <a href="How-Variadic.html#How-Variadic" accesskey="u" rel="up">How Variadic</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="How-Many-Arguments-Were-Supplied"></a>
+<h4 class="subsubsection">A.2.2.3 How Many Arguments Were Supplied</h4>
+<a name="index-number-of-arguments-passed"></a>
+<a name="index-how-many-arguments"></a>
+<a name="index-arguments_002c-how-many"></a>
+
+<p>There is no general way for a function to determine the number and type
+of the optional arguments it was called with.  So whoever designs the
+function typically designs a convention for the caller to specify the number
+and type of arguments.  It is up to you to define an appropriate calling
+convention for each variadic function, and write all calls accordingly.
+</p>
+<p>One kind of calling convention is to pass the number of optional
+arguments as one of the fixed arguments.  This convention works provided
+all of the optional arguments are of the same type.
+</p>
+<p>A similar alternative is to have one of the required arguments be a bit
+mask, with a bit for each possible purpose for which an optional
+argument might be supplied.  You would test the bits in a predefined
+sequence; if the bit is set, fetch the value of the next argument,
+otherwise use a default value.
+</p>
+<p>A required argument can be used as a pattern to specify both the number
+and types of the optional arguments.  The format string argument to
+<code>printf</code> is one example of this (see <a href="Formatted-Output-Functions.html#Formatted-Output-Functions">Formatted Output Functions</a>).
+</p>
+<p>Another possibility is to pass an &ldquo;end marker&rdquo; value as the last
+optional argument.  For example, for a function that manipulates an
+arbitrary number of pointer arguments, a null pointer might indicate the
+end of the argument list.  (This assumes that a null pointer isn&rsquo;t
+otherwise meaningful to the function.)  The <code>execl</code> function works
+in just this way; see <a href="Executing-a-File.html#Executing-a-File">Executing a File</a>.
+</p>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Calling-Variadics.html#Calling-Variadics" accesskey="n" rel="next">Calling Variadics</a>, Previous: <a href="Receiving-Arguments.html#Receiving-Arguments" accesskey="p" rel="prev">Receiving Arguments</a>, Up: <a href="How-Variadic.html#How-Variadic" accesskey="u" rel="up">How Variadic</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

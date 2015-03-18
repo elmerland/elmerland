@@ -1,0 +1,59 @@
+<a name="Standard-Signals"></a>
+<div class="header">
+<p>
+Next: <a href="Signal-Actions.html#Signal-Actions" accesskey="n" rel="next">Signal Actions</a>, Previous: <a href="Concepts-of-Signals.html#Concepts-of-Signals" accesskey="p" rel="prev">Concepts of Signals</a>, Up: <a href="Signal-Handling.html#Signal-Handling" accesskey="u" rel="up">Signal Handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Standard-Signals-1"></a>
+<h3 class="section">24.2 Standard Signals</h3>
+<a name="index-signal-names"></a>
+<a name="index-names-of-signals"></a>
+
+<a name="index-signal_002eh-1"></a>
+<a name="index-signal-number"></a>
+<p>This section lists the names for various standard kinds of signals and
+describes what kind of event they mean.  Each signal name is a macro
+which stands for a positive integer&mdash;the <em>signal number</em> for that
+kind of signal.  Your programs should never make assumptions about the
+numeric code for a particular kind of signal, but rather refer to them
+always by the names defined here.  This is because the number for a
+given kind of signal can vary from system to system, but the meanings of
+the names are standardized and fairly uniform.
+</p>
+<p>The signal names are defined in the header file <samp>signal.h</samp>.
+</p>
+<dl>
+<dt><a name="index-NSIG"></a>Macro: <em>int</em> <strong>NSIG</strong></dt>
+<dd><p>The value of this symbolic constant is the total number of signals
+defined.  Since the signal numbers are allocated consecutively,
+<code>NSIG</code> is also one greater than the largest defined signal number.
+</p></dd></dl>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Program-Error-Signals.html#Program-Error-Signals" accesskey="1">Program Error Signals</a>:</td><td align="left" valign="top">Used to report serious program errors.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Termination-Signals.html#Termination-Signals" accesskey="2">Termination Signals</a>:</td><td align="left" valign="top">Used to interrupt and/or terminate the
+                                 program.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Alarm-Signals.html#Alarm-Signals" accesskey="3">Alarm Signals</a>:</td><td align="left" valign="top">Used to indicate expiration of timers.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Asynchronous-I_002fO-Signals.html#Asynchronous-I_002fO-Signals" accesskey="4">Asynchronous I/O Signals</a>:</td><td align="left" valign="top">Used to indicate input is available.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Job-Control-Signals.html#Job-Control-Signals" accesskey="5">Job Control Signals</a>:</td><td align="left" valign="top">Signals used to support job control.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Operation-Error-Signals.html#Operation-Error-Signals" accesskey="6">Operation Error Signals</a>:</td><td align="left" valign="top">Used to report operational system errors.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Miscellaneous-Signals.html#Miscellaneous-Signals" accesskey="7">Miscellaneous Signals</a>:</td><td align="left" valign="top">Miscellaneous Signals.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Signal-Messages.html#Signal-Messages" accesskey="8">Signal Messages</a>:</td><td align="left" valign="top">Printing a message describing a signal.
+</td></tr>
+</table>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Signal-Actions.html#Signal-Actions" accesskey="n" rel="next">Signal Actions</a>, Previous: <a href="Concepts-of-Signals.html#Concepts-of-Signals" accesskey="p" rel="prev">Concepts of Signals</a>, Up: <a href="Signal-Handling.html#Signal-Handling" accesskey="u" rel="up">Signal Handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

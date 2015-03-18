@@ -1,0 +1,90 @@
+<a name="Resizing-the-Data-Segment"></a>
+<div class="header">
+<p>
+Next: <a href="Locking-Pages.html#Locking-Pages" accesskey="n" rel="next">Locking Pages</a>, Previous: <a href="Memory-Allocation.html#Memory-Allocation" accesskey="p" rel="prev">Memory Allocation</a>, Up: <a href="Memory.html#Memory" accesskey="u" rel="up">Memory</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Resizing-the-Data-Segment-1"></a>
+<h3 class="section">3.3 Resizing the Data Segment</h3>
+
+<p>The symbols in this section are declared in <samp>unistd.h</samp>.
+</p>
+<p>You will not normally use the functions in this section, because the
+functions described in <a href="Memory-Allocation.html#Memory-Allocation">Memory Allocation</a> are easier to use.  Those
+are interfaces to a GNU C Library memory allocator that uses the
+functions below itself.  The functions below are simple interfaces to
+system calls.
+</p>
+<dl>
+<dt><a name="index-brk"></a>Function: <em>int</em> <strong>brk</strong> <em>(void *<var>addr</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+
+<p><code>brk</code> sets the high end of the calling process&rsquo; data segment to
+<var>addr</var>.
+</p>
+<p>The address of the end of a segment is defined to be the address of the
+last byte in the segment plus 1.
+</p>
+<p>The function has no effect if <var>addr</var> is lower than the low end of
+the data segment.  (This is considered success, by the way).
+</p>
+<p>The function fails if it would cause the data segment to overlap another
+segment or exceed the process&rsquo; data storage limit (see <a href="Limits-on-Resources.html#Limits-on-Resources">Limits on Resources</a>).
+</p>
+<p>The function is named for a common historical case where data storage
+and the stack are in the same segment.  Data storage allocation grows
+upward from the bottom of the segment while the stack grows downward
+toward it from the top of the segment and the curtain between them is
+called the <em>break</em>.
+</p>
+<p>The return value is zero on success.  On failure, the return value is
+<code>-1</code> and <code>errno</code> is set accordingly.  The following <code>errno</code>
+values are specific to this function:
+</p>
+<dl compact="compact">
+<dt><code>ENOMEM</code></dt>
+<dd><p>The request would cause the data segment to overlap another segment or
+exceed the process&rsquo; data storage limit.
+</p></dd>
+</dl>
+
+
+</dd></dl>
+
+
+<dl>
+<dt><a name="index-_002asbrk"></a>Function: <em>void</em> <strong>*sbrk</strong> <em>(ptrdiff_t <var>delta</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+
+<p>This function is the same as <code>brk</code> except that you specify the new
+end of the data segment as an offset <var>delta</var> from the current end
+and on success the return value is the address of the resulting end of
+the data segment instead of zero.
+</p>
+<p>This means you can use &lsquo;<samp>sbrk(0)</samp>&rsquo; to find out what the current end
+of the data segment is.
+</p>
+</dd></dl>
+
+
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Locking-Pages.html#Locking-Pages" accesskey="n" rel="next">Locking Pages</a>, Previous: <a href="Memory-Allocation.html#Memory-Allocation" accesskey="p" rel="prev">Memory Allocation</a>, Up: <a href="Memory.html#Memory" accesskey="u" rel="up">Memory</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

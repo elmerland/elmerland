@@ -1,0 +1,162 @@
+<a name="Pathconf"></a>
+<div class="header">
+<p>
+Next: <a href="Utility-Limits.html#Utility-Limits" accesskey="n" rel="next">Utility Limits</a>, Previous: <a href="File-Minimums.html#File-Minimums" accesskey="p" rel="prev">File Minimums</a>, Up: <a href="System-Configuration.html#System-Configuration" accesskey="u" rel="up">System Configuration</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Using-pathconf"></a>
+<h3 class="section">32.9 Using <code>pathconf</code></h3>
+
+<p>When your machine allows different files to have different values for a
+file system parameter, you can use the functions in this section to find
+out the value that applies to any particular file.
+</p>
+<p>These functions and the associated constants for the <var>parameter</var>
+argument are declared in the header file <samp>unistd.h</samp>.
+</p>
+<dl>
+<dt><a name="index-pathconf"></a>Function: <em>long int</em> <strong>pathconf</strong> <em>(const char *<var>filename</var>, int <var>parameter</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock heap
+| AC-Unsafe lock fd mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function is used to inquire about the limits that apply to
+the file named <var>filename</var>.
+</p>
+<p>The <var>parameter</var> argument should be one of the &lsquo;<samp>_PC_</samp>&rsquo; constants
+listed below.
+</p>
+<p>The normal return value from <code>pathconf</code> is the value you requested.
+A value of <code>-1</code> is returned both if the implementation does not
+impose a limit, and in case of an error.  In the former case,
+<code>errno</code> is not set, while in the latter case, <code>errno</code> is set
+to indicate the cause of the problem.  So the only way to use this
+function robustly is to store <code>0</code> into <code>errno</code> just before
+calling it.
+</p>
+<p>Besides the usual file name errors (see <a href="File-Name-Errors.html#File-Name-Errors">File Name Errors</a>),
+the following error condition is defined for this function:
+</p>
+<dl compact="compact">
+<dt><code>EINVAL</code></dt>
+<dd><p>The value of <var>parameter</var> is invalid, or the implementation doesn&rsquo;t
+support the <var>parameter</var> for the specific file.
+</p></dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><a name="index-fpathconf"></a>Function: <em>long int</em> <strong>fpathconf</strong> <em>(int <var>filedes</var>, int <var>parameter</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock heap
+| AC-Unsafe lock fd mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This is just like <code>pathconf</code> except that an open file descriptor
+is used to specify the file for which information is requested, instead
+of a file name.
+</p>
+<p>The following <code>errno</code> error conditions are defined for this function:
+</p>
+<dl compact="compact">
+<dt><code>EBADF</code></dt>
+<dd><p>The <var>filedes</var> argument is not a valid file descriptor.
+</p>
+</dd>
+<dt><code>EINVAL</code></dt>
+<dd><p>The value of <var>parameter</var> is invalid, or the implementation doesn&rsquo;t
+support the <var>parameter</var> for the specific file.
+</p></dd>
+</dl>
+</dd></dl>
+
+<p>Here are the symbolic constants that you can use as the <var>parameter</var>
+argument to <code>pathconf</code> and <code>fpathconf</code>.  The values are all
+integer constants.
+</p>
+<dl compact="compact">
+<dt><code>_PC_LINK_MAX</code></dt>
+<dd><p>Inquire about the value of <code>LINK_MAX</code>.
+</p>
+</dd>
+<dt><code>_PC_MAX_CANON</code></dt>
+<dd><p>Inquire about the value of <code>MAX_CANON</code>.
+</p>
+</dd>
+<dt><code>_PC_MAX_INPUT</code></dt>
+<dd><p>Inquire about the value of <code>MAX_INPUT</code>.
+</p>
+</dd>
+<dt><code>_PC_NAME_MAX</code></dt>
+<dd><p>Inquire about the value of <code>NAME_MAX</code>.
+</p>
+</dd>
+<dt><code>_PC_PATH_MAX</code></dt>
+<dd><p>Inquire about the value of <code>PATH_MAX</code>.
+</p>
+</dd>
+<dt><code>_PC_PIPE_BUF</code></dt>
+<dd><p>Inquire about the value of <code>PIPE_BUF</code>.
+</p>
+</dd>
+<dt><code>_PC_CHOWN_RESTRICTED</code></dt>
+<dd><p>Inquire about the value of <code>_POSIX_CHOWN_RESTRICTED</code>.
+</p>
+</dd>
+<dt><code>_PC_NO_TRUNC</code></dt>
+<dd><p>Inquire about the value of <code>_POSIX_NO_TRUNC</code>.
+</p>
+</dd>
+<dt><code>_PC_VDISABLE</code></dt>
+<dd><p>Inquire about the value of <code>_POSIX_VDISABLE</code>.
+</p>
+</dd>
+<dt><code>_PC_SYNC_IO</code></dt>
+<dd><p>Inquire about the value of <code>_POSIX_SYNC_IO</code>.
+</p>
+</dd>
+<dt><code>_PC_ASYNC_IO</code></dt>
+<dd><p>Inquire about the value of <code>_POSIX_ASYNC_IO</code>.
+</p>
+</dd>
+<dt><code>_PC_PRIO_IO</code></dt>
+<dd><p>Inquire about the value of <code>_POSIX_PRIO_IO</code>.
+</p>
+</dd>
+<dt><code>_PC_FILESIZEBITS</code></dt>
+<dd><p>Inquire about the availability of large files on the filesystem.
+</p>
+</dd>
+<dt><code>_PC_REC_INCR_XFER_SIZE</code></dt>
+<dd><p>Inquire about the value of <code>POSIX_REC_INCR_XFER_SIZE</code>.
+</p>
+</dd>
+<dt><code>_PC_REC_MAX_XFER_SIZE</code></dt>
+<dd><p>Inquire about the value of <code>POSIX_REC_MAX_XFER_SIZE</code>.
+</p>
+</dd>
+<dt><code>_PC_REC_MIN_XFER_SIZE</code></dt>
+<dd><p>Inquire about the value of <code>POSIX_REC_MIN_XFER_SIZE</code>.
+</p>
+</dd>
+<dt><code>_PC_REC_XFER_ALIGN</code></dt>
+<dd><p>Inquire about the value of <code>POSIX_REC_XFER_ALIGN</code>.
+</p></dd>
+</dl>
+
+<p><strong>Portability Note:</strong> On some systems, the GNU C Library does not
+enforce <code>_PC_NAME_MAX</code> or <code>_PC_PATH_MAX</code> limits.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Utility-Limits.html#Utility-Limits" accesskey="n" rel="next">Utility Limits</a>, Previous: <a href="File-Minimums.html#File-Minimums" accesskey="p" rel="prev">File Minimums</a>, Up: <a href="System-Configuration.html#System-Configuration" accesskey="u" rel="up">System Configuration</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

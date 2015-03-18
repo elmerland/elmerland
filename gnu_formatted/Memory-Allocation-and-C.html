@@ -1,0 +1,98 @@
+<a name="Memory-Allocation-and-C"></a>
+<div class="header">
+<p>
+Next: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="n" rel="next">Unconstrained Allocation</a>, Up: <a href="Memory-Allocation.html#Memory-Allocation" accesskey="u" rel="up">Memory Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Memory-Allocation-in-C-Programs"></a>
+<h4 class="subsection">3.2.1 Memory Allocation in C Programs</h4>
+
+<p>The C language supports two kinds of memory allocation through the
+variables in C programs:
+</p>
+<ul>
+<li> <em>Static allocation</em> is what happens when you declare a static or
+global variable.  Each static or global variable defines one block of
+space, of a fixed size.  The space is allocated once, when your program
+is started (part of the exec operation), and is never freed.
+<a name="index-static-memory-allocation"></a>
+<a name="index-static-storage-class"></a>
+
+</li><li> <em>Automatic allocation</em> happens when you declare an automatic
+variable, such as a function argument or a local variable.  The space
+for an automatic variable is allocated when the compound statement
+containing the declaration is entered, and is freed when that
+compound statement is exited.
+<a name="index-automatic-memory-allocation"></a>
+<a name="index-automatic-storage-class"></a>
+
+<p>In GNU C, the size of the automatic storage can be an expression
+that varies.  In other C implementations, it must be a constant.
+</p></li></ul>
+
+<p>A third important kind of memory allocation, <em>dynamic allocation</em>,
+is not supported by C variables but is available via GNU C Library
+functions.
+<a name="index-dynamic-memory-allocation"></a>
+</p>
+<a name="Dynamic-Memory-Allocation"></a>
+<h4 class="subsubsection">3.2.1.1 Dynamic Memory Allocation</h4>
+<a name="index-dynamic-memory-allocation-1"></a>
+
+<p><em>Dynamic memory allocation</em> is a technique in which programs
+determine as they are running where to store some information.  You need
+dynamic allocation when the amount of memory you need, or how long you
+continue to need it, depends on factors that are not known before the
+program runs.
+</p>
+<p>For example, you may need a block to store a line read from an input
+file; since there is no limit to how long a line can be, you must
+allocate the memory dynamically and make it dynamically larger as you
+read more of the line.
+</p>
+<p>Or, you may need a block for each record or each definition in the input
+data; since you can&rsquo;t know in advance how many there will be, you must
+allocate a new block for each record or definition as you read it.
+</p>
+<p>When you use dynamic allocation, the allocation of a block of memory is
+an action that the program requests explicitly.  You call a function or
+macro when you want to allocate space, and specify the size with an
+argument.  If you want to free the space, you do so by calling another
+function or macro.  You can do these things whenever you want, as often
+as you want.
+</p>
+<p>Dynamic allocation is not supported by C variables; there is no storage
+class &ldquo;dynamic&rdquo;, and there can never be a C variable whose value is
+stored in dynamically allocated space.  The only way to get dynamically
+allocated memory is via a system call (which is generally via a GNU C Library
+function call), and the only way to refer to dynamically
+allocated space is through a pointer.  Because it is less convenient,
+and because the actual process of dynamic allocation requires more
+computation time, programmers generally use dynamic allocation only when
+neither static nor automatic allocation will serve.
+</p>
+<p>For example, if you want to allocate dynamically some space to hold a
+<code>struct foobar</code>, you cannot declare a variable of type <code>struct
+foobar</code> whose contents are the dynamically allocated space.  But you can
+declare a variable of pointer type <code>struct foobar *</code> and assign it the
+address of the space.  Then you can use the operators &lsquo;<samp>*</samp>&rsquo; and
+&lsquo;<samp>-&gt;</samp>&rsquo; on this pointer variable to refer to the contents of the space:
+</p>
+<div class="smallexample">
+<pre class="smallexample">{
+  struct foobar *ptr
+     = (struct foobar *) malloc (sizeof (struct foobar));
+  ptr-&gt;name = x;
+  ptr-&gt;next = current_foobar;
+  current_foobar = ptr;
+}
+</pre></div>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="n" rel="next">Unconstrained Allocation</a>, Up: <a href="Memory-Allocation.html#Memory-Allocation" accesskey="u" rel="up">Memory Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

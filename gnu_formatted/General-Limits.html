@@ -1,0 +1,115 @@
+<a name="General-Limits"></a>
+<div class="header">
+<p>
+Next: <a href="System-Options.html#System-Options" accesskey="n" rel="next">System Options</a>, Up: <a href="System-Configuration.html#System-Configuration" accesskey="u" rel="up">System Configuration</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="General-Capacity-Limits"></a>
+<h3 class="section">32.1 General Capacity Limits</h3>
+<a name="index-POSIX-capacity-limits"></a>
+<a name="index-limits_002c-POSIX"></a>
+<a name="index-capacity-limits_002c-POSIX"></a>
+
+<p>The POSIX.1 and POSIX.2 standards specify a number of parameters that
+describe capacity limitations of the system.  These limits can be fixed
+constants for a given operating system, or they can vary from machine to
+machine.  For example, some limit values may be configurable by the
+system administrator, either at run time or by rebuilding the kernel,
+and this should not require recompiling application programs.
+</p>
+<a name="index-limits_002eh-2"></a>
+<p>Each of the following limit parameters has a macro that is defined in
+<samp>limits.h</samp> only if the system has a fixed, uniform limit for the
+parameter in question.  If the system allows different file systems or
+files to have different limits, then the macro is undefined; use
+<code>sysconf</code> to find out the limit that applies at a particular time
+on a particular machine.  See <a href="Sysconf.html#Sysconf">Sysconf</a>.
+</p>
+<p>Each of these parameters also has another macro, with a name starting
+with &lsquo;<samp>_POSIX</samp>&rsquo;, which gives the lowest value that the limit is
+allowed to have on <em>any</em> POSIX system.  See <a href="Minimums.html#Minimums">Minimums</a>.
+</p>
+<a name="index-limits_002c-program-argument-size"></a>
+<dl>
+<dt><a name="index-ARG_005fMAX"></a>Macro: <em>int</em> <strong>ARG_MAX</strong></dt>
+<dd><p>If defined, the unvarying maximum combined length of the <var>argv</var> and
+<var>environ</var> arguments that can be passed to the <code>exec</code> functions.
+</p></dd></dl>
+
+<a name="index-limits_002c-number-of-processes"></a>
+<dl>
+<dt><a name="index-CHILD_005fMAX"></a>Macro: <em>int</em> <strong>CHILD_MAX</strong></dt>
+<dd><p>If defined, the unvarying maximum number of processes that can exist
+with the same real user ID at any one time.  In BSD and GNU, this is
+controlled by the <code>RLIMIT_NPROC</code> resource limit; see <a href="Limits-on-Resources.html#Limits-on-Resources">Limits on Resources</a>.
+</p></dd></dl>
+
+<a name="index-limits_002c-number-of-open-files"></a>
+<dl>
+<dt><a name="index-OPEN_005fMAX"></a>Macro: <em>int</em> <strong>OPEN_MAX</strong></dt>
+<dd><p>If defined, the unvarying maximum number of files that a single process
+can have open simultaneously.  In BSD and GNU, this is controlled
+by the <code>RLIMIT_NOFILE</code> resource limit; see <a href="Limits-on-Resources.html#Limits-on-Resources">Limits on Resources</a>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-STREAM_005fMAX"></a>Macro: <em>int</em> <strong>STREAM_MAX</strong></dt>
+<dd><p>If defined, the unvarying maximum number of streams that a single
+process can have open simultaneously.  See <a href="Opening-Streams.html#Opening-Streams">Opening Streams</a>.
+</p></dd></dl>
+
+<a name="index-limits_002c-time-zone-name-length"></a>
+<dl>
+<dt><a name="index-TZNAME_005fMAX"></a>Macro: <em>int</em> <strong>TZNAME_MAX</strong></dt>
+<dd><p>If defined, the unvarying maximum length of a time zone name.
+See <a href="Time-Zone-Functions.html#Time-Zone-Functions">Time Zone Functions</a>.
+</p></dd></dl>
+
+<p>These limit macros are always defined in <samp>limits.h</samp>.
+</p>
+<a name="index-limits_002c-number-of-supplementary-group-IDs"></a>
+<dl>
+<dt><a name="index-NGROUPS_005fMAX"></a>Macro: <em>int</em> <strong>NGROUPS_MAX</strong></dt>
+<dd><p>The maximum number of supplementary group IDs that one process can have.
+</p>
+<p>The value of this macro is actually a lower bound for the maximum.  That
+is, you can count on being able to have that many supplementary group
+IDs, but a particular machine might let you have even more.  You can use
+<code>sysconf</code> to see whether a particular machine will let you have
+more (see <a href="Sysconf.html#Sysconf">Sysconf</a>).
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-SSIZE_005fMAX"></a>Macro: <em>ssize_t</em> <strong>SSIZE_MAX</strong></dt>
+<dd><p>The largest value that can fit in an object of type <code>ssize_t</code>.
+Effectively, this is the limit on the number of bytes that can be read
+or written in a single operation.
+</p>
+<p>This macro is defined in all POSIX systems because this limit is never
+configurable.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-RE_005fDUP_005fMAX"></a>Macro: <em>int</em> <strong>RE_DUP_MAX</strong></dt>
+<dd><p>The largest number of repetitions you are guaranteed is allowed in the
+construct &lsquo;<samp>\{<var>min</var>,<var>max</var>\}</samp>&rsquo; in a regular expression.
+</p>
+<p>The value of this macro is actually a lower bound for the maximum.  That
+is, you can count on being able to have that many repetitions, but a
+particular machine might let you have even more.  You can use
+<code>sysconf</code> to see whether a particular machine will let you have
+more (see <a href="Sysconf.html#Sysconf">Sysconf</a>).  And even the value that <code>sysconf</code> tells
+you is just a lower bound&mdash;larger values might work.
+</p>
+<p>This macro is defined in all POSIX.2 systems, because POSIX.2 says it
+should always be defined even if there is no specific imposed limit.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="System-Options.html#System-Options" accesskey="n" rel="next">System Options</a>, Up: <a href="System-Configuration.html#System-Configuration" accesskey="u" rel="up">System Configuration</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

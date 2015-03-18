@@ -1,0 +1,26 @@
+<a name="Charset-Function-Overview"></a>
+<div class="header">
+<p>
+Next: <a href="Restartable-multibyte-conversion.html#Restartable-multibyte-conversion" accesskey="n" rel="next">Restartable multibyte conversion</a>, Previous: <a href="Extended-Char-Intro.html#Extended-Char-Intro" accesskey="p" rel="prev">Extended Char Intro</a>, Up: <a href="Character-Set-Handling.html#Character-Set-Handling" accesskey="u" rel="up">Character Set Handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Overview-about-Character-Handling-Functions"></a>
+<h3 class="section">6.2 Overview about Character Handling Functions</h3>
+
+<p>A Unix C&nbsp;library<!-- /@w --> contains three different sets of functions in two
+families to handle character set conversion.  One of the function families
+(the most commonly used) is specified in the ISO&nbsp;C90<!-- /@w --> standard and,
+therefore, is portable even beyond the Unix world.  Unfortunately this
+family is the least useful one.  These functions should be avoided
+whenever possible, especially when developing libraries (as opposed to
+applications).
+</p>
+<p>The second family of functions got introduced in the early Unix standards
+(XPG2) and is still part of the latest and greatest Unix standard:
+Unix&nbsp;98<!-- /@w -->.  It is also the most powerful and useful set of functions.
+But we will start with the functions defined in Amendment&nbsp;1<!-- /@w --> to
+ISO&nbsp;C90<!-- /@w -->.
+</p>
+
+
+

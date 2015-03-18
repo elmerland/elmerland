@@ -1,0 +1,54 @@
+<a name="Argp-Help-Filter-Keys"></a>
+<div class="header">
+<p>
+Up: <a href="Argp-Help-Filtering.html#Argp-Help-Filtering" accesskey="u" rel="up">Argp Help Filtering</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Special-Keys-for-Argp-Help-Filter-Functions"></a>
+<h4 class="subsubsection">25.3.8.1 Special Keys for Argp Help Filter Functions</h4>
+
+<p>The following special values may be passed to an argp help filter
+function as the first argument in addition to key values for user
+options.  They specify which help text the <var>text</var> argument contains:
+</p>
+<dl compact="compact">
+<dt><code>ARGP_KEY_HELP_PRE_DOC</code>
+<a name="index-ARGP_005fKEY_005fHELP_005fPRE_005fDOC"></a>
+</dt>
+<dd><p>The help text preceding options.
+</p>
+</dd>
+<dt><code>ARGP_KEY_HELP_POST_DOC</code>
+<a name="index-ARGP_005fKEY_005fHELP_005fPOST_005fDOC"></a>
+</dt>
+<dd><p>The help text following options.
+</p>
+</dd>
+<dt><code>ARGP_KEY_HELP_HEADER</code>
+<a name="index-ARGP_005fKEY_005fHELP_005fHEADER"></a>
+</dt>
+<dd><p>The option header string.
+</p>
+</dd>
+<dt><code>ARGP_KEY_HELP_EXTRA</code>
+<a name="index-ARGP_005fKEY_005fHELP_005fEXTRA"></a>
+</dt>
+<dd><p>This is used after all other documentation; <var>text</var> is zero for this key.
+</p>
+</dd>
+<dt><code>ARGP_KEY_HELP_DUP_ARGS_NOTE</code>
+<a name="index-ARGP_005fKEY_005fHELP_005fDUP_005fARGS_005fNOTE"></a>
+</dt>
+<dd><p>The explanatory note printed when duplicate option arguments have been suppressed.
+</p>
+</dd>
+<dt><code>ARGP_KEY_HELP_ARGS_DOC</code>
+<a name="index-ARGP_005fKEY_005fHELP_005fARGS_005fDOC"></a>
+</dt>
+<dd><p>The argument doc string; formally the <code>args_doc</code> field from the argp parser.  See <a href="Argp-Parsers.html#Argp-Parsers">Argp Parsers</a>.
+</p></dd>
+</dl>
+
+
+
+

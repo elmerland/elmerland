@@ -1,0 +1,87 @@
+<a name="General-Numeric"></a>
+<div class="header">
+<p>
+Next: <a href="Currency-Symbol.html#Currency-Symbol" accesskey="n" rel="next">Currency Symbol</a>, Up: <a href="The-Lame-Way-to-Locale-Data.html#The-Lame-Way-to-Locale-Data" accesskey="u" rel="up">The Lame Way to Locale Data</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Generic-Numeric-Formatting-Parameters"></a>
+<h4 class="subsubsection">7.7.1.1 Generic Numeric Formatting Parameters</h4>
+
+<p>These are the standard members of <code>struct lconv</code>; there may be
+others.
+</p>
+<dl compact="compact">
+<dt><code>char *decimal_point</code></dt>
+<dt><code>char *mon_decimal_point</code></dt>
+<dd><p>These are the decimal-point separators used in formatting non-monetary
+and monetary quantities, respectively.  In the &lsquo;<samp>C</samp>&rsquo; locale, the
+value of <code>decimal_point</code> is <code>&quot;.&quot;</code>, and the value of
+<code>mon_decimal_point</code> is <code>&quot;&quot;</code>.
+<a name="index-decimal_002dpoint-separator"></a>
+</p>
+</dd>
+<dt><code>char *thousands_sep</code></dt>
+<dt><code>char *mon_thousands_sep</code></dt>
+<dd><p>These are the separators used to delimit groups of digits to the left of
+the decimal point in formatting non-monetary and monetary quantities,
+respectively.  In the &lsquo;<samp>C</samp>&rsquo; locale, both members have a value of
+<code>&quot;&quot;</code> (the empty string).
+</p>
+</dd>
+<dt><code>char *grouping</code></dt>
+<dt><code>char *mon_grouping</code></dt>
+<dd><p>These are strings that specify how to group the digits to the left of
+the decimal point.  <code>grouping</code> applies to non-monetary quantities
+and <code>mon_grouping</code> applies to monetary quantities.  Use either
+<code>thousands_sep</code> or <code>mon_thousands_sep</code> to separate the digit
+groups.
+<a name="index-grouping-of-digits"></a>
+</p>
+<p>Each member of these strings is to be interpreted as an integer value of
+type <code>char</code>.  Successive numbers (from left to right) give the
+sizes of successive groups (from right to left, starting at the decimal
+point.)  The last member is either <code>0</code>, in which case the previous
+member is used over and over again for all the remaining groups, or
+<code>CHAR_MAX</code>, in which case there is no more grouping&mdash;or, put
+another way, any remaining digits form one large group without
+separators.
+</p>
+<p>For example, if <code>grouping</code> is <code>&quot;\04\03\02&quot;</code>, the correct
+grouping for the number <code>123456787654321</code> is &lsquo;<samp>12</samp>&rsquo;, &lsquo;<samp>34</samp>&rsquo;,
+&lsquo;<samp>56</samp>&rsquo;, &lsquo;<samp>78</samp>&rsquo;, &lsquo;<samp>765</samp>&rsquo;, &lsquo;<samp>4321</samp>&rsquo;.  This uses a group of 4
+digits at the end, preceded by a group of 3 digits, preceded by groups
+of 2 digits (as many as needed).  With a separator of &lsquo;<samp>,</samp>&rsquo;, the
+number would be printed as &lsquo;<samp>12,34,56,78,765,4321</samp>&rsquo;.
+</p>
+<p>A value of <code>&quot;\03&quot;</code> indicates repeated groups of three digits, as
+normally used in the U.S.
+</p>
+<p>In the standard &lsquo;<samp>C</samp>&rsquo; locale, both <code>grouping</code> and
+<code>mon_grouping</code> have a value of <code>&quot;&quot;</code>.  This value specifies no
+grouping at all.
+</p>
+</dd>
+<dt><code>char int_frac_digits</code></dt>
+<dt><code>char frac_digits</code></dt>
+<dd><p>These are small integers indicating how many fractional digits (to the
+right of the decimal point) should be displayed in a monetary value in
+international and local formats, respectively.  (Most often, both
+members have the same value.)
+</p>
+<p>In the standard &lsquo;<samp>C</samp>&rsquo; locale, both of these members have the value
+<code>CHAR_MAX</code>, meaning &ldquo;unspecified&rdquo;.  The ISO standard doesn&rsquo;t say
+what to do when you find this value; we recommend printing no
+fractional digits.  (This locale also specifies the empty string for
+<code>mon_decimal_point</code>, so printing any fractional digits would be
+confusing!)
+</p></dd>
+</dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Currency-Symbol.html#Currency-Symbol" accesskey="n" rel="next">Currency Symbol</a>, Up: <a href="The-Lame-Way-to-Locale-Data.html#The-Lame-Way-to-Locale-Data" accesskey="u" rel="up">The Lame Way to Locale Data</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

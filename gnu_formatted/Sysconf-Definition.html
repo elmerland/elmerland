@@ -1,0 +1,38 @@
+<a name="Sysconf-Definition"></a>
+<div class="header">
+<p>
+Next: <a href="Constants-for-Sysconf.html#Constants-for-Sysconf" accesskey="n" rel="next">Constants for Sysconf</a>, Up: <a href="Sysconf.html#Sysconf" accesskey="u" rel="up">Sysconf</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Definition-of-sysconf"></a>
+<h4 class="subsection">32.4.1 Definition of <code>sysconf</code></h4>
+
+<dl>
+<dt><a name="index-sysconf-4"></a>Function: <em>long int</em> <strong>sysconf</strong> <em>(int <var>parameter</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe env
+| AS-Unsafe lock heap
+| AC-Unsafe lock mem fd
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function is used to inquire about runtime system parameters.  The
+<var>parameter</var> argument should be one of the &lsquo;<samp>_SC_</samp>&rsquo; symbols listed
+below.
+</p>
+<p>The normal return value from <code>sysconf</code> is the value you requested.
+A value of <code>-1</code> is returned both if the implementation does not
+impose a limit, and in case of an error.
+</p>
+<p>The following <code>errno</code> error conditions are defined for this function:
+</p>
+<dl compact="compact">
+<dt><code>EINVAL</code></dt>
+<dd><p>The value of the <var>parameter</var> is invalid.
+</p></dd>
+</dl>
+</dd></dl>
+
+
+
+

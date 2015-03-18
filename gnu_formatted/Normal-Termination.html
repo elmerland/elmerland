@@ -1,0 +1,50 @@
+<a name="Normal-Termination"></a>
+<div class="header">
+<p>
+Next: <a href="Exit-Status.html#Exit-Status" accesskey="n" rel="next">Exit Status</a>, Up: <a href="Program-Termination.html#Program-Termination" accesskey="u" rel="up">Program Termination</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Normal-Termination-1"></a>
+<h4 class="subsection">25.7.1 Normal Termination</h4>
+
+<p>A process terminates normally when its program signals it is done by
+calling <code>exit</code>.  Returning from <code>main</code> is equivalent to
+calling <code>exit</code>, and the value that <code>main</code> returns is used as
+the argument to <code>exit</code>.
+</p>
+<dl>
+<dt><a name="index-exit"></a>Function: <em>void</em> <strong>exit</strong> <em>(int <var>status</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe race:exit
+| AS-Unsafe corrupt
+| AC-Unsafe corrupt lock
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>exit</code> function tells the system that the program is done, which
+causes it to terminate the process.
+</p>
+<p><var>status</var> is the program&rsquo;s exit status, which becomes part of the
+process&rsquo; termination status.  This function does not return.
+</p></dd></dl>
+
+<p>Normal termination causes the following actions:
+</p>
+<ol>
+<li> Functions that were registered with the <code>atexit</code> or <code>on_exit</code>
+functions are called in the reverse order of their registration.  This
+mechanism allows your application to specify its own &ldquo;cleanup&rdquo; actions
+to be performed at program termination.  Typically, this is used to do
+things like saving program state information in a file, or unlocking
+locks in shared data bases.
+
+</li><li> All open streams are closed, writing out any buffered output data.  See
+<a href="Closing-Streams.html#Closing-Streams">Closing Streams</a>.  In addition, temporary files opened
+with the <code>tmpfile</code> function are removed; see <a href="Temporary-Files.html#Temporary-Files">Temporary Files</a>.
+
+</li><li> <code>_exit</code> is called, terminating the program.  See <a href="Termination-Internals.html#Termination-Internals">Termination Internals</a>.
+</li></ol>
+
+
+
+

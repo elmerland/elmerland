@@ -1,0 +1,35 @@
+<a name="Submitting-Syslog-Messages"></a>
+<div class="header">
+<p>
+Previous: <a href="Overview-of-Syslog.html#Overview-of-Syslog" accesskey="p" rel="prev">Overview of Syslog</a>, Up: <a href="Syslog.html#Syslog" accesskey="u" rel="up">Syslog</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Submitting-Syslog-Messages-1"></a>
+<h3 class="section">18.2 Submitting Syslog Messages</h3>
+
+<p>The GNU C Library provides functions to submit messages to the Syslog
+facility:
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="openlog.html#openlog" accesskey="1">openlog</a>:</td><td align="left" valign="top">Open connection to Syslog
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="syslog_003b-vsyslog.html#syslog_003b-vsyslog" accesskey="2">syslog; vsyslog</a>:</td><td align="left" valign="top">Submit message to Syslog
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="closelog.html#closelog" accesskey="3">closelog</a>:</td><td align="left" valign="top">Close connection to Syslog
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="setlogmask.html#setlogmask" accesskey="4">setlogmask</a>:</td><td align="left" valign="top">Cause certain messages to be ignored
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Syslog-Example.html#Syslog-Example" accesskey="5">Syslog Example</a>:</td><td align="left" valign="top">Example of all of the above
+</td></tr>
+</table>
+
+<p>These functions only work to submit messages to the Syslog facility on
+the same system.  To submit a message to the Syslog facility on another
+system, use the socket I/O functions to write a UDP datagram to the
+<code>syslog</code> UDP port on that system.  See <a href="Sockets.html#Sockets">Sockets</a>.
+</p>
+
+
+
+
+

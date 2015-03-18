@@ -1,0 +1,124 @@
+<a name="Example-of-Getopt"></a>
+<div class="header">
+<p>
+Next: <a href="Getopt-Long-Options.html#Getopt-Long-Options" accesskey="n" rel="next">Getopt Long Options</a>, Previous: <a href="Using-Getopt.html#Using-Getopt" accesskey="p" rel="prev">Using Getopt</a>, Up: <a href="Getopt.html#Getopt" accesskey="u" rel="up">Getopt</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Example-of-Parsing-Arguments-with-getopt"></a>
+<h4 class="subsection">25.2.2 Example of Parsing Arguments with <code>getopt</code></h4>
+
+<p>Here is an example showing how <code>getopt</code> is typically used.  The
+key points to notice are:
+</p>
+<ul>
+<li> Normally, <code>getopt</code> is called in a loop.  When <code>getopt</code> returns
+<code>-1</code>, indicating no more options are present, the loop terminates.
+
+</li><li> A <code>switch</code> statement is used to dispatch on the return value from
+<code>getopt</code>.  In typical use, each case just sets a variable that
+is used later in the program.
+
+</li><li> A second loop is used to process the remaining non-option arguments.
+</li></ul>
+
+<div class="smallexample">
+<pre class="smallexample">
+</pre><pre class="smallexample">#include &lt;ctype.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+
+int
+main (int argc, char **argv)
+{
+  int aflag = 0;
+  int bflag = 0;
+  char *cvalue = NULL;
+  int index;
+  int c;
+
+  opterr = 0;
+</pre><pre class="smallexample">
+</pre><pre class="smallexample">  while ((c = getopt (argc, argv, &quot;abc:&quot;)) != -1)
+    switch (c)
+      {
+      case 'a':
+        aflag = 1;
+        break;
+      case 'b':
+        bflag = 1;
+        break;
+      case 'c':
+        cvalue = optarg;
+        break;
+      case '?':
+        if (optopt == 'c')
+          fprintf (stderr, &quot;Option -%c requires an argument.\n&quot;, optopt);
+        else if (isprint (optopt))
+          fprintf (stderr, &quot;Unknown option `-%c'.\n&quot;, optopt);
+        else
+          fprintf (stderr,
+                   &quot;Unknown option character `\\x%x'.\n&quot;,
+                   optopt);
+        return 1;
+      default:
+        abort ();
+      }
+</pre><pre class="smallexample">
+</pre><pre class="smallexample">  printf (&quot;aflag = %d, bflag = %d, cvalue = %s\n&quot;,
+          aflag, bflag, cvalue);
+
+  for (index = optind; index &lt; argc; index++)
+    printf (&quot;Non-option argument %s\n&quot;, argv[index]);
+  return 0;
+}
+</pre></div>
+
+<p>Here are some examples showing what this program prints with different
+combinations of arguments:
+</p>
+<div class="smallexample">
+<pre class="smallexample">% testopt
+aflag = 0, bflag = 0, cvalue = (null)
+
+% testopt -a -b
+aflag = 1, bflag = 1, cvalue = (null)
+
+% testopt -ab
+aflag = 1, bflag = 1, cvalue = (null)
+
+% testopt -c foo
+aflag = 0, bflag = 0, cvalue = foo
+
+% testopt -cfoo
+aflag = 0, bflag = 0, cvalue = foo
+
+% testopt arg1
+aflag = 0, bflag = 0, cvalue = (null)
+Non-option argument arg1
+
+% testopt -a arg1
+aflag = 1, bflag = 0, cvalue = (null)
+Non-option argument arg1
+
+% testopt -c foo arg1
+aflag = 0, bflag = 0, cvalue = foo
+Non-option argument arg1
+
+% testopt -a -- -b
+aflag = 1, bflag = 0, cvalue = (null)
+Non-option argument -b
+
+% testopt -a -
+aflag = 1, bflag = 0, cvalue = (null)
+Non-option argument -
+</pre></div>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Getopt-Long-Options.html#Getopt-Long-Options" accesskey="n" rel="next">Getopt Long Options</a>, Previous: <a href="Using-Getopt.html#Using-Getopt" accesskey="p" rel="prev">Using Getopt</a>, Up: <a href="Getopt.html#Getopt" accesskey="u" rel="up">Getopt</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

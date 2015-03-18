@@ -1,0 +1,149 @@
+<a name="PowerPC"></a>
+<div class="header">
+<p>
+Up: <a href="Platform.html#Platform" accesskey="u" rel="up">Platform</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="PowerPC_002dspecific-Facilities"></a>
+<h3 class="appendixsec">E.1 PowerPC-specific Facilities</h3>
+
+<p>Facilities specific to PowerPC that are not specific to a particular
+operating system are declared in <samp>sys/platform/ppc.h</samp>.
+</p>
+<dl>
+<dt><a name="index-_005f_005fppc_005fget_005ftimebase"></a>Function: <em>uint64_t</em> <strong>__ppc_get_timebase</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>Read the current value of the Time Base Register.
+</p>
+<p>The <em>Time Base Register</em> is a 64-bit register that stores a monotonically
+incremented value updated at a system-dependent frequency that may be
+different from the processor frequency.  More information is available in
+<cite>Power ISA 2.06b - Book II - Section 5.2</cite>.
+</p>
+<p><code>__ppc_get_timebase</code> uses the processor&rsquo;s time base facility directly
+without requiring assistance from the operating system, so it is very
+efficient.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_005f_005fppc_005fget_005ftimebase_005ffreq"></a>Function: <em>uint64_t</em> <strong>__ppc_get_timebase_freq</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe init
+| AS-Unsafe corrupt:init
+| AC-Unsafe corrupt:init
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>Read the current frequency at which the Time Base Register is updated.
+</p>
+<p>This frequency is not related to the processor clock or the bus clock.
+It is also possible that this frequency is not constant.  More information is
+available in <cite>Power ISA 2.06b - Book II - Section 5.2</cite>.
+</p></dd></dl>
+
+<p>The following functions provide hints about the usage of resources that are
+shared with other processors.  They can be used, for example, if a program
+waiting on a lock intends to divert the shared resources to be used by other
+processors.  More information is available in <cite>Power ISA 2.06b - Book II -
+Section 3.2</cite>.
+</p>
+<dl>
+<dt><a name="index-_005f_005fppc_005fyield"></a>Function: <em>void</em> <strong>__ppc_yield</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>Provide a hint that performance will probably be improved if shared resources
+dedicated to the executing processor are released for use by other processors.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_005f_005fppc_005fmdoio"></a>Function: <em>void</em> <strong>__ppc_mdoio</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>Provide a hint that performance will probably be improved if shared resources
+dedicated to the executing processor are released until all outstanding storage
+accesses to caching-inhibited storage have been completed.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_005f_005fppc_005fmdoom"></a>Function: <em>void</em> <strong>__ppc_mdoom</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>Provide a hint that performance will probably be improved if shared resources
+dedicated to the executing processor are released until all outstanding storage
+accesses to cacheable storage for which the data is not in the cache have been
+completed.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_005f_005fppc_005fset_005fppr_005fmed"></a>Function: <em>void</em> <strong>__ppc_set_ppr_med</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>Set the Program Priority Register to medium value (default).
+</p>
+<p>The <em>Program Priority Register</em> (PPR) is a 64-bit register that controls
+the program&rsquo;s priority.  By adjusting the PPR value the programmer may
+improve system throughput by causing the system resources to be used
+more efficiently, especially in contention situations.
+The three unprivileged states available are covered by the functions
+<code>__ppc_set_ppr_med</code> (medium &ndash; default), <code>__ppc_set_ppc_low</code> (low)
+and <code>__ppc_set_ppc_med_low</code> (medium low).  More information
+available in <cite>Power ISA 2.06b - Book II - Section 3.1</cite>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_005f_005fppc_005fset_005fppr_005flow"></a>Function: <em>void</em> <strong>__ppc_set_ppr_low</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>Set the Program Priority Register to low value.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_005f_005fppc_005fset_005fppr_005fmed_005flow"></a>Function: <em>void</em> <strong>__ppc_set_ppr_med_low</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>Set the Program Priority Register to medium low value.
+</p></dd></dl>
+<hr>
+<div class="header">
+<p>
+Up: <a href="Platform.html#Platform" accesskey="u" rel="up">Platform</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

@@ -1,0 +1,43 @@
+<a name="The-Uniforum-approach"></a>
+<div class="header">
+<p>
+Previous: <a href="Message-catalogs-a-la-X_002fOpen.html#Message-catalogs-a-la-X_002fOpen" accesskey="p" rel="prev">Message catalogs a la X/Open</a>, Up: <a href="Message-Translation.html#Message-Translation" accesskey="u" rel="up">Message Translation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="The-Uniforum-approach-to-Message-Translation"></a>
+<h3 class="section">8.2 The Uniforum approach to Message Translation</h3>
+
+<p>Sun Microsystems tried to standardize a different approach to message
+translation in the Uniforum group.  There never was a real standard
+defined but still the interface was used in Sun&rsquo;s operating systems.
+Since this approach fits better in the development process of free
+software it is also used throughout the GNU project and the GNU
+<samp>gettext</samp> package provides support for this outside the GNU C Library.
+</p>
+<p>The code of the <samp>libintl</samp> from GNU <samp>gettext</samp> is the same as
+the code in the GNU C Library.  So the documentation in the GNU
+<samp>gettext</samp> manual is also valid for the functionality here.  The
+following text will describe the library functions in detail.  But the
+numerous helper programs are not described in this manual.  Instead
+people should read the GNU <samp>gettext</samp> manual
+(see <a href="http://www.gnu.org/software/gettext/manual/html_node/index.html#Top">GNU gettext utilities</a> in <cite>Native Language Support Library and Tools</cite>).
+We will only give a short overview.
+</p>
+<p>Though the <code>catgets</code> functions are available by default on more
+systems the <code>gettext</code> interface is at least as portable as the
+former.  The GNU <samp>gettext</samp> package can be used wherever the
+functions are not available.
+</p>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Message-catalogs-with-gettext.html#Message-catalogs-with-gettext" accesskey="1">Message catalogs with gettext</a>:</td><td align="left" valign="top">The <code>gettext</code> family of functions.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Helper-programs-for-gettext.html#Helper-programs-for-gettext" accesskey="2">Helper programs for gettext</a>:</td><td align="left" valign="top">Programs to handle message catalogs
+                                    for <code>gettext</code>.
+</td></tr>
+</table>
+
+
+
+
+

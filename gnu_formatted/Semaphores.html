@@ -1,0 +1,181 @@
+<a name="Semaphores"></a>
+<div class="header">
+<p>
+Up: <a href="Inter_002dProcess-Communication.html#Inter_002dProcess-Communication" accesskey="u" rel="up">Inter-Process Communication</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Semaphores-1"></a>
+<h3 class="section">27.1 Semaphores</h3>
+
+<p>The GNU C Library implements the semaphore APIs as defined in POSIX and
+System V.  Semaphores can be used by multiple processes to coordinate shared
+resources.  The following is a complete list of the semaphore functions provided
+by the GNU C Library.
+</p>
+
+<a name="System-V-Semaphores"></a>
+<h4 class="subsection">27.1.1 System V Semaphores</h4>
+<dl>
+<dt><a name="index-semctl"></a>Function: <em>int</em> <strong>semctl</strong> <em>(int <var>semid</var>, int <var>semnum</var>, int <var>cmd</var>);</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Unsafe corrupt/linux
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+</dd></dl>
+
+<dl>
+<dt><a name="index-semget"></a>Function: <em>int</em> <strong>semget</strong> <em>(key_t <var>key</var>, int <var>nsems</var>, int <var>semflg</var>);</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+</dd></dl>
+
+<dl>
+<dt><a name="index-semop"></a>Function: <em>int</em> <strong>semop</strong> <em>(int <var>semid</var>, struct sembuf *<var>sops</var>, size_t <var>nsops</var>);</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+</dd></dl>
+
+<dl>
+<dt><a name="index-semtimedop"></a>Function: <em>int</em> <strong>semtimedop</strong> <em>(int <var>semid</var>, struct sembuf *<var>sops</var>, size_t <var>nsops</var>, const struct timespec *<var>timeout</var>);</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+</dd></dl>
+
+<a name="POSIX-Semaphores"></a>
+<h4 class="subsection">27.1.2 POSIX Semaphores</h4>
+
+<dl>
+<dt><a name="index-sem_005finit"></a>Function: <em>int</em> <strong>sem_init</strong> <em>(sem_t *<var>sem</var>, int <var>pshared</var>, unsigned int <var>value</var>);</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Unsafe corrupt
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+</dd></dl>
+
+<dl>
+<dt><a name="index-sem_005fdestroy"></a>Function: <em>int</em> <strong>sem_destroy</strong> <em>(sem_t *<var>sem</var>);</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+</dd></dl>
+
+<dl>
+<dt><a name="index-_002asem_005fopen"></a>Function: <em>sem_t</em> <strong>*sem_open</strong> <em>(const char *<var>name</var>, int <var>oflag</var>, ...);</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe init
+| AC-Unsafe init
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+</dd></dl>
+
+<dl>
+<dt><a name="index-sem_005fclose"></a>Function: <em>int</em> <strong>sem_close</strong> <em>(sem_t *<var>sem</var>);</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock
+| AC-Unsafe lock
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+</dd></dl>
+
+<dl>
+<dt><a name="index-sem_005funlink"></a>Function: <em>int</em> <strong>sem_unlink</strong> <em>(const char *<var>name</var>);</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe init
+| AC-Unsafe corrupt
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+</dd></dl>
+
+<dl>
+<dt><a name="index-sem_005fwait"></a>Function: <em>int</em> <strong>sem_wait</strong> <em>(sem_t *<var>sem</var>);</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Unsafe corrupt
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+</dd></dl>
+
+<dl>
+<dt><a name="index-sem_005ftimedwait"></a>Function: <em>int</em> <strong>sem_timedwait</strong> <em>(sem_t *<var>sem</var>, const struct timespec *<var>abstime</var>);</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Unsafe corrupt
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+</dd></dl>
+
+<dl>
+<dt><a name="index-sem_005ftrywait"></a>Function: <em>int</em> <strong>sem_trywait</strong> <em>(sem_t *<var>sem</var>);</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+</dd></dl>
+
+<dl>
+<dt><a name="index-sem_005fpost"></a>Function: <em>int</em> <strong>sem_post</strong> <em>(sem_t *<var>sem</var>);</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+</dd></dl>
+
+<dl>
+<dt><a name="index-sem_005fgetvalue"></a>Function: <em>int</em> <strong>sem_getvalue</strong> <em>(sem_t *<var>sem</var>, int *<var>sval</var>);</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+</dd></dl>
+<hr>
+<div class="header">
+<p>
+Up: <a href="Inter_002dProcess-Communication.html#Inter_002dProcess-Communication" accesskey="u" rel="up">Inter-Process Communication</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

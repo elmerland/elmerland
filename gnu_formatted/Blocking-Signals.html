@@ -1,0 +1,53 @@
+<a name="Blocking-Signals"></a>
+<div class="header">
+<p>
+Next: <a href="Waiting-for-a-Signal.html#Waiting-for-a-Signal" accesskey="n" rel="next">Waiting for a Signal</a>, Previous: <a href="Generating-Signals.html#Generating-Signals" accesskey="p" rel="prev">Generating Signals</a>, Up: <a href="Signal-Handling.html#Signal-Handling" accesskey="u" rel="up">Signal Handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Blocking-Signals-1"></a>
+<h3 class="section">24.7 Blocking Signals</h3>
+<a name="index-blocking-signals"></a>
+
+<p>Blocking a signal means telling the operating system to hold it and
+deliver it later.  Generally, a program does not block signals
+indefinitely&mdash;it might as well ignore them by setting their actions to
+<code>SIG_IGN</code>.  But it is useful to block signals briefly, to prevent
+them from interrupting sensitive operations.  For instance:
+</p>
+<ul>
+<li> You can use the <code>sigprocmask</code> function to block signals while you
+modify global variables that are also modified by the handlers for these
+signals.
+
+</li><li> You can set <code>sa_mask</code> in your <code>sigaction</code> call to block
+certain signals while a particular signal handler runs.  This way, the
+signal handler can run without being interrupted itself by signals.
+</li></ul>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Why-Block.html#Why-Block" accesskey="1">Why Block</a>:</td><td align="left" valign="top">The purpose of blocking signals.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Signal-Sets.html#Signal-Sets" accesskey="2">Signal Sets</a>:</td><td align="left" valign="top">How to specify which signals to
+                                         block.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Process-Signal-Mask.html#Process-Signal-Mask" accesskey="3">Process Signal Mask</a>:</td><td align="left" valign="top">Blocking delivery of signals to your
+				         process during normal execution.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Testing-for-Delivery.html#Testing-for-Delivery" accesskey="4">Testing for Delivery</a>:</td><td align="left" valign="top">Blocking to Test for Delivery of
+                                         a Signal.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Blocking-for-Handler.html#Blocking-for-Handler" accesskey="5">Blocking for Handler</a>:</td><td align="left" valign="top">Blocking additional signals while a
+				         handler is being run.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Checking-for-Pending-Signals.html#Checking-for-Pending-Signals" accesskey="6">Checking for Pending Signals</a>:</td><td align="left" valign="top">Checking for Pending Signals
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Remembering-a-Signal.html#Remembering-a-Signal" accesskey="7">Remembering a Signal</a>:</td><td align="left" valign="top">How you can get almost the same
+                                         effect as blocking a signal, by
+                                         handling it and setting a flag
+                                         to be tested later.
+</td></tr>
+</table>
+
+
+
+

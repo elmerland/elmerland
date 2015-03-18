@@ -1,0 +1,45 @@
+<a name="Low_002dLevel-Terminal-Interface"></a>
+<div class="header">
+<p>
+Next: <a href="Syslog.html#Syslog" accesskey="n" rel="next">Syslog</a>, Previous: <a href="Sockets.html#Sockets" accesskey="p" rel="prev">Sockets</a>, Up: <a href="index.html#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Low_002dLevel-Terminal-Interface-1"></a>
+<h2 class="chapter">17 Low-Level Terminal Interface</h2>
+
+<p>This chapter describes functions that are specific to terminal devices.
+You can use these functions to do things like turn off input echoing;
+set serial line characteristics such as line speed and flow control; and
+change which characters are used for end-of-file, command-line editing,
+sending signals, and similar control functions.
+</p>
+<p>Most of the functions in this chapter operate on file descriptors.
+See <a href="Low_002dLevel-I_002fO.html#Low_002dLevel-I_002fO">Low-Level I/O</a>, for more information about what a file
+descriptor is and how to open a file descriptor for a terminal device.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Is-It-a-Terminal.html#Is-It-a-Terminal" accesskey="1">Is It a Terminal</a>:</td><td align="left" valign="top">How to determine if a file is a terminal
+			         device, and what its name is.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="I_002fO-Queues.html#I_002fO-Queues" accesskey="2">I/O Queues</a>:</td><td align="left" valign="top">About flow control and typeahead.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Canonical-or-Not.html#Canonical-or-Not" accesskey="3">Canonical or Not</a>:</td><td align="left" valign="top">Two basic styles of input processing.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Terminal-Modes.html#Terminal-Modes" accesskey="4">Terminal Modes</a>:</td><td align="left" valign="top">How to examine and modify flags controlling
+			         details of terminal I/O: echoing,
+                                 signals, editing.  Posix.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="BSD-Terminal-Modes.html#BSD-Terminal-Modes" accesskey="5">BSD Terminal Modes</a>:</td><td align="left" valign="top">BSD compatible terminal mode setting
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Line-Control.html#Line-Control" accesskey="6">Line Control</a>:</td><td align="left" valign="top">Sending break sequences, clearing
+                                 terminal buffers &hellip;
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Noncanon-Example.html#Noncanon-Example" accesskey="7">Noncanon Example</a>:</td><td align="left" valign="top">How to read single characters without echo.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Pseudo_002dTerminals.html#Pseudo_002dTerminals" accesskey="8">Pseudo-Terminals</a>:</td><td align="left" valign="top">How to open a pseudo-terminal.
+</td></tr>
+</table>
+
+
+
+

@@ -1,0 +1,32 @@
+<a name="Extending-NSS"></a>
+<div class="header">
+<p>
+Previous: <a href="NSS-Module-Internals.html#NSS-Module-Internals" accesskey="p" rel="prev">NSS Module Internals</a>, Up: <a href="Name-Service-Switch.html#Name-Service-Switch" accesskey="u" rel="up">Name Service Switch</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Extending-NSS-1"></a>
+<h3 class="section">29.4 Extending NSS</h3>
+
+<p>One of the advantages of NSS mentioned above is that it can be extended
+quite easily.  There are two ways in which the extension can happen:
+adding another database or adding another service.  The former is
+normally done only by the C library developers.  It is
+here only important to remember that adding another database is
+independent from adding another service because a service need not
+support all databases or lookup functions.
+</p>
+<p>A designer/implementor of a new service is therefore free to choose the
+databases s/he is interested in and leave the rest for later (or
+completely aside).
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Adding-another-Service-to-NSS.html#Adding-another-Service-to-NSS" accesskey="1">Adding another Service to NSS</a>:</td><td align="left" valign="top">What is to do to add a new service.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="NSS-Module-Function-Internals.html#NSS-Module-Function-Internals" accesskey="2">NSS Module Function Internals</a>:</td><td align="left" valign="top">Guidelines for writing new NSS
+                                        service functions.
+</td></tr>
+</table>
+
+
+
+

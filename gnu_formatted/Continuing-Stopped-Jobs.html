@@ -1,0 +1,57 @@
+<a name="Continuing-Stopped-Jobs"></a>
+<div class="header">
+<p>
+Next: <a href="Missing-Pieces.html#Missing-Pieces" accesskey="n" rel="next">Missing Pieces</a>, Previous: <a href="Stopped-and-Terminated-Jobs.html#Stopped-and-Terminated-Jobs" accesskey="p" rel="prev">Stopped and Terminated Jobs</a>, Up: <a href="Implementing-a-Shell.html#Implementing-a-Shell" accesskey="u" rel="up">Implementing a Shell</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Continuing-Stopped-Jobs-1"></a>
+<h4 class="subsection">28.6.6 Continuing Stopped Jobs</h4>
+
+<a name="index-stopped-jobs_002c-continuing"></a>
+<p>The shell can continue a stopped job by sending a <code>SIGCONT</code> signal
+to its process group.  If the job is being continued in the foreground,
+the shell should first invoke <code>tcsetpgrp</code> to give the job access to
+the terminal, and restore the saved terminal settings.  After continuing
+a job in the foreground, the shell should wait for the job to stop or
+complete, as if the job had just been launched in the foreground.
+</p>
+<p>The sample shell program handles both newly created and continued jobs
+with the same pair of functions, <code><span class="nolinebreak">put_job_in_foreground</span></code><!-- /@w --> and
+<code><span class="nolinebreak">put_job_in_background</span></code><!-- /@w -->.  The definitions of these functions
+were given in <a href="Foreground-and-Background.html#Foreground-and-Background">Foreground and Background</a>.  When continuing a
+stopped job, a nonzero value is passed as the <var>cont</var> argument to
+ensure that the <code>SIGCONT</code> signal is sent and the terminal modes
+reset, as appropriate.
+</p>
+<p>This leaves only a function for updating the shell&rsquo;s internal bookkeeping
+about the job being continued:
+</p>
+<div class="smallexample">
+<pre class="smallexample">/* <span class="roman">Mark a stopped job J as being running again.</span>  */
+
+void
+mark_job_as_running (job *j)
+{
+  Process *p;
+
+  for (p = j-&gt;first_process; p; p = p-&gt;next)
+    p-&gt;stopped = 0;
+  j-&gt;notified = 0;
+}
+</pre><pre class="smallexample">
+</pre><pre class="smallexample">/* <span class="roman">Continue the job J.</span>  */
+
+void
+continue_job (job *j, int foreground)
+{
+  mark_job_as_running (j);
+  if (foreground)
+    put_job_in_foreground (j, 1);
+  else
+    put_job_in_background (j, 1);
+}
+</pre></div>
+
+
+
+

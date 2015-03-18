@@ -1,0 +1,39 @@
+<a name="Flags-for-POSIX-Regexps"></a>
+<div class="header">
+<p>
+Next: <a href="Matching-POSIX-Regexps.html#Matching-POSIX-Regexps" accesskey="n" rel="next">Matching POSIX Regexps</a>, Previous: <a href="POSIX-Regexp-Compilation.html#POSIX-Regexp-Compilation" accesskey="p" rel="prev">POSIX Regexp Compilation</a>, Up: <a href="Regular-Expressions.html#Regular-Expressions" accesskey="u" rel="up">Regular Expressions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Flags-for-POSIX-Regular-Expressions"></a>
+<h4 class="subsection">10.3.2 Flags for POSIX Regular Expressions</h4>
+
+<p>These are the bit flags that you can use in the <var>cflags</var> operand when
+compiling a regular expression with <code>regcomp</code>.
+</p>
+<dl compact="compact">
+<dt><code>REG_EXTENDED</code></dt>
+<dd><p>Treat the pattern as an extended regular expression, rather than as a
+basic regular expression.
+</p>
+</dd>
+<dt><code>REG_ICASE</code></dt>
+<dd><p>Ignore case when matching letters.
+</p>
+</dd>
+<dt><code>REG_NOSUB</code></dt>
+<dd><p>Don&rsquo;t bother storing the contents of the <var>matches-ptr</var> array.
+</p>
+</dd>
+<dt><code>REG_NEWLINE</code></dt>
+<dd><p>Treat a newline in <var>string</var> as dividing <var>string</var> into multiple
+lines, so that &lsquo;<samp>$</samp>&rsquo; can match before the newline and &lsquo;<samp>^</samp>&rsquo; can
+match after.  Also, don&rsquo;t permit &lsquo;<samp>.</samp>&rsquo; to match a newline, and don&rsquo;t
+permit &lsquo;<samp>[^&hellip;]</samp>&rsquo; to match a newline.
+</p>
+<p>Otherwise, newline acts like any other ordinary character.
+</p></dd>
+</dl>
+
+
+
+

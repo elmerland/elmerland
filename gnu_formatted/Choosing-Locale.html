@@ -1,0 +1,41 @@
+<a name="Choosing-Locale"></a>
+<div class="header">
+<p>
+Next: <a href="Locale-Categories.html#Locale-Categories" accesskey="n" rel="next">Locale Categories</a>, Previous: <a href="Effects-of-Locale.html#Effects-of-Locale" accesskey="p" rel="prev">Effects of Locale</a>, Up: <a href="Locales.html#Locales" accesskey="u" rel="up">Locales</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Choosing-a-Locale"></a>
+<h3 class="section">7.2 Choosing a Locale</h3>
+
+<p>The simplest way for the user to choose a locale is to set the
+environment variable <code>LANG</code>.  This specifies a single locale to use
+for all purposes.  For example, a user could specify a hypothetical
+locale named &lsquo;<samp>espana-castellano</samp>&rsquo; to use the standard conventions of
+most of Spain.
+</p>
+<p>The set of locales supported depends on the operating system you are
+using, and so do their names, except that the standard locale called
+&lsquo;<samp>C</samp>&rsquo; or &lsquo;<samp>POSIX</samp>&rsquo; always exist.  See <a href="Locale-Names.html#Locale-Names">Locale Names</a>.
+</p>
+<p>In order to force the system to always use the default locale, the
+user can set the <code>LC_ALL</code> environment variable to &lsquo;<samp>C</samp>&rsquo;.
+</p>
+<a name="index-combining-locales"></a>
+<p>A user also has the option of specifying different locales for
+different purposes&mdash;in effect, choosing a mixture of multiple
+locales.  See <a href="Locale-Categories.html#Locale-Categories">Locale Categories</a>.
+</p>
+<p>For example, the user might specify the locale &lsquo;<samp>espana-castellano</samp>&rsquo;
+for most purposes, but specify the locale &lsquo;<samp>usa-english</samp>&rsquo; for
+currency formatting.  This might make sense if the user is a
+Spanish-speaking American, working in Spanish, but representing monetary
+amounts in US dollars.
+</p>
+<p>Note that both locales &lsquo;<samp>espana-castellano</samp>&rsquo; and &lsquo;<samp>usa-english</samp>&rsquo;,
+like all locales, would include conventions for all of the purposes to
+which locales apply.  However, the user can choose to use each locale
+for a particular subset of those purposes.
+</p>
+
+
+

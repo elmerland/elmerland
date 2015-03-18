@@ -1,0 +1,81 @@
+<a name="Adding-Platform_002dspecific"></a>
+<div class="header">
+<p>
+Up: <a href="Source-Layout.html#Source-Layout" accesskey="u" rel="up">Source Layout</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Platform_002dspecific-types_002c-macros-and-functions"></a>
+<h4 class="appendixsubsec">D.1.1 Platform-specific types, macros and functions</h4>
+
+<p>It&rsquo;s sometimes necessary to provide nonstandard, platform-specific
+features to developers.  The C library is traditionally the
+lowest library layer, so it makes sense for it to provide these
+low-level features.  However, including these features in the C
+library may be a disadvantage if another package provides them
+as well as there will be two conflicting versions of them.  Also,
+the features won&rsquo;t be available to projects that do not use
+the GNU C Library but use other GNU tools, like GCC.
+</p>
+<p>The current guidelines are:
+</p><ul>
+<li> If the header file provides features that only make sense on a particular
+machine architecture and have nothing to do with an operating system, then
+the features should ultimately be provided as GCC built-in functions.  Until
+then, the GNU C Library may provide them in the header file.  When the GCC built-in
+functions become available, those provided in the header file should be made
+conditionally available prior to the GCC version in which the built-in
+function was made available.
+
+</li><li> If the header file provides features that are specific to an operating system,
+both GCC and the GNU C Library could provide it, but the GNU C Library is preferred
+as it already has a lot of information about the operating system.
+
+</li><li> If the header file provides features that are specific to an operating system
+but used by the GNU C Library, then the GNU C Library should provide them.
+</li></ul>
+
+<p>The general solution for providing low-level features is to export them as
+follows:
+</p>
+<ul>
+<li> A nonstandard, low-level header file that defines macros and inline
+functions should be called <samp>sys/platform/<var>name</var>.h</samp>.
+
+</li><li> Each header file&rsquo;s name should include the platform name, to avoid
+users thinking there is anything in common between different the
+header files for different platforms.  For example, a
+<samp>sys/platform/<var>arch</var>.h</samp> name such as
+<samp>sys/platform/ppc.h</samp> is better than <samp>sys/platform.h</samp>.
+
+</li><li> A platform-specific header file provided by the GNU C Library should coordinate
+with GCC such that compiler built-in versions of the functions and macros are
+preferred if available.  This means that user programs will only ever need to
+include <samp>sys/platform/<var>arch</var>.h</samp>, keeping the same names of types,
+macros, and functions for convenience and portability.
+
+</li><li> Each included symbol must have the prefix <code>__<var>arch</var>_</code>, such as
+<code>__ppc_get_timebase</code>.
+</li></ul>
+
+
+<p>The easiest way to provide a header file is to add it to the
+<code>sysdep_headers</code> variable.  For example, the combination of
+Linux-specific header files on PowerPC could be provided like this:
+</p>
+<div class="smallexample">
+<pre class="smallexample">sysdep_headers += sys/platform/ppc.h
+</pre></div>
+
+<p>Then ensure that you have added a <samp>sys/platform/ppc.h</samp>
+header file in the machine-specific directory, e.g.,
+<samp>sysdeps/powerpc/sys/platform/ppc.h</samp>.
+</p>
+
+<hr>
+<div class="header">
+<p>
+Up: <a href="Source-Layout.html#Source-Layout" accesskey="u" rel="up">Source Layout</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

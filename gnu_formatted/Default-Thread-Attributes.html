@@ -1,0 +1,53 @@
+<a name="Default-Thread-Attributes"></a>
+<div class="header">
+<p>
+Up: <a href="Non_002dPOSIX-Extensions.html#Non_002dPOSIX-Extensions" accesskey="u" rel="up">Non-POSIX Extensions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Setting-Process_002dwide-defaults-for-thread-attributes"></a>
+<h4 class="subsection">35.2.1 Setting Process-wide defaults for thread attributes</h4>
+
+<p>The GNU C Library provides non-standard API functions to set and get the default
+attributes used in the creation of threads in a process.
+</p>
+<dl>
+<dt><a name="index-pthread_005fgetattr_005fdefault_005fnp"></a>Function: <em>int</em> <strong>pthread_getattr_default_np</strong> <em>(pthread_attr_t *<var>attr</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock
+| AC-Unsafe lock
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>Get the default attribute values and set <var>attr</var> to match.  This
+function returns <em>0</em> on success and a non-zero error code on
+failure.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-pthread_005fsetattr_005fdefault_005fnp"></a>Function: <em>int</em> <strong>pthread_setattr_default_np</strong> <em>(pthread_attr_t *<var>attr</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe heap lock
+| AC-Unsafe lock mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>Set the default attribute values to match the values in <var>attr</var>.  The
+function returns <em>0</em> on success and a non-zero error code on failure.
+The following error codes are defined for this function:
+</p>
+<dl compact="compact">
+<dt><code>EINVAL</code></dt>
+<dd><p>At least one of the values in <var>attr</var> does not qualify as valid for the
+attributes or the stack address is set in the attribute.
+</p></dd>
+<dt><code>ENOMEM</code></dt>
+<dd><p>The system does not have sufficient memory.
+</p></dd>
+</dl>
+</dd></dl>
+
+
+
+

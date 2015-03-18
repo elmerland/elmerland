@@ -1,0 +1,47 @@
+<a name="Unreading-Idea"></a>
+<div class="header">
+<p>
+Next: <a href="How-Unread.html#How-Unread" accesskey="n" rel="next">How Unread</a>, Up: <a href="Unreading.html#Unreading" accesskey="u" rel="up">Unreading</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="What-Unreading-Means"></a>
+<h4 class="subsection">12.10.1 What Unreading Means</h4>
+
+<p>Here is a pictorial explanation of unreading.  Suppose you have a
+stream reading a file that contains just six characters, the letters
+&lsquo;<samp>foobar</samp>&rsquo;.  Suppose you have read three characters so far.  The
+situation looks like this:
+</p>
+<div class="smallexample">
+<pre class="smallexample">f  o  o  b  a  r
+	 ^
+</pre></div>
+
+<p>so the next input character will be &lsquo;<samp>b</samp>&rsquo;.
+</p>
+<p>If instead of reading &lsquo;<samp>b</samp>&rsquo; you unread the letter &lsquo;<samp>o</samp>&rsquo;, you get a
+situation like this:
+</p>
+<div class="smallexample">
+<pre class="smallexample">f  o  o  b  a  r
+	 |
+      o--
+      ^
+</pre></div>
+
+<p>so that the next input characters will be &lsquo;<samp>o</samp>&rsquo; and &lsquo;<samp>b</samp>&rsquo;.
+</p>
+<p>If you unread &lsquo;<samp>9</samp>&rsquo; instead of &lsquo;<samp>o</samp>&rsquo;, you get this situation:
+</p>
+<div class="smallexample">
+<pre class="smallexample">f  o  o  b  a  r
+	 |
+      9--
+      ^
+</pre></div>
+
+<p>so that the next input characters will be &lsquo;<samp>9</samp>&rsquo; and &lsquo;<samp>b</samp>&rsquo;.
+</p>
+
+
+

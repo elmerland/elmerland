@@ -1,0 +1,95 @@
+<a name="Streams-and-Cookies"></a>
+<div class="header">
+<p>
+Next: <a href="Hook-Functions.html#Hook-Functions" accesskey="n" rel="next">Hook Functions</a>, Up: <a href="Custom-Streams.html#Custom-Streams" accesskey="u" rel="up">Custom Streams</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Custom-Streams-and-Cookies"></a>
+<h4 class="subsubsection">12.21.2.1 Custom Streams and Cookies</h4>
+<a name="index-cookie_002c-for-custom-stream"></a>
+
+<p>Inside every custom stream is a special object called the <em>cookie</em>.
+This is an object supplied by you which records where to fetch or store
+the data read or written.  It is up to you to define a data type to use
+for the cookie.  The stream functions in the library never refer
+directly to its contents, and they don&rsquo;t even know what the type is;
+they record its address with type <code>void *</code>.
+</p>
+<p>To implement a custom stream, you must specify <em>how</em> to fetch or
+store the data in the specified place.  You do this by defining
+<em>hook functions</em> to read, write, change &ldquo;file position&rdquo;, and close
+the stream.  All four of these functions will be passed the stream&rsquo;s
+cookie so they can tell where to fetch or store the data.  The library
+functions don&rsquo;t know what&rsquo;s inside the cookie, but your functions will
+know.
+</p>
+<p>When you create a custom stream, you must specify the cookie pointer,
+and also the four hook functions stored in a structure of type
+<code>cookie_io_functions_t</code>.
+</p>
+<p>These facilities are declared in <samp>stdio.h</samp>.
+<a name="index-stdio_002eh-14"></a>
+</p>
+<dl>
+<dt><a name="index-cookie_005fio_005ffunctions_005ft"></a>Data Type: <strong>cookie_io_functions_t</strong></dt>
+<dd><p>This is a structure type that holds the functions that define the
+communications protocol between the stream and its cookie.  It has
+the following members:
+</p>
+<dl compact="compact">
+<dt><code>cookie_read_function_t *read</code></dt>
+<dd><p>This is the function that reads data from the cookie.  If the value is a
+null pointer instead of a function, then read operations on this stream
+always return <code>EOF</code>.
+</p>
+</dd>
+<dt><code>cookie_write_function_t *write</code></dt>
+<dd><p>This is the function that writes data to the cookie.  If the value is a
+null pointer instead of a function, then data written to the stream is
+discarded.
+</p>
+</dd>
+<dt><code>cookie_seek_function_t *seek</code></dt>
+<dd><p>This is the function that performs the equivalent of file positioning on
+the cookie.  If the value is a null pointer instead of a function, calls
+to <code>fseek</code> or <code>fseeko</code> on this stream can only seek to
+locations within the buffer; any attempt to seek outside the buffer will
+return an <code>ESPIPE</code> error.
+</p>
+</dd>
+<dt><code>cookie_close_function_t *close</code></dt>
+<dd><p>This function performs any appropriate cleanup on the cookie when
+closing the stream.  If the value is a null pointer instead of a
+function, nothing special is done to close the cookie when the stream is
+closed.
+</p></dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><a name="index-fopencookie"></a>Function: <em>FILE *</em> <strong>fopencookie</strong> <em>(void *<var>cookie</var>, const char *<var>opentype</var>, cookie_io_functions_t <var>io-functions</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe heap lock
+| AC-Unsafe mem lock
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function actually creates the stream for communicating with the
+<var>cookie</var> using the functions in the <var>io-functions</var> argument.
+The <var>opentype</var> argument is interpreted as for <code>fopen</code>;
+see <a href="Opening-Streams.html#Opening-Streams">Opening Streams</a>.  (But note that the &ldquo;truncate on
+open&rdquo; option is ignored.)  The new stream is fully buffered.
+</p>
+<p>The <code>fopencookie</code> function returns the newly created stream, or a null
+pointer in case of an error.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Hook-Functions.html#Hook-Functions" accesskey="n" rel="next">Hook Functions</a>, Up: <a href="Custom-Streams.html#Custom-Streams" accesskey="u" rel="up">Custom Streams</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

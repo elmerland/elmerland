@@ -1,0 +1,97 @@
+<a name="Locale-Names"></a>
+<div class="header">
+<p>
+Next: <a href="Locale-Information.html#Locale-Information" accesskey="n" rel="next">Locale Information</a>, Previous: <a href="Standard-Locales.html#Standard-Locales" accesskey="p" rel="prev">Standard Locales</a>, Up: <a href="Locales.html#Locales" accesskey="u" rel="up">Locales</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Locale-Names-1"></a>
+<h3 class="section">7.6 Locale Names</h3>
+
+<p>The following command prints a list of locales supported by the
+system:
+</p>
+<a name="index-locale-1"></a>
+<div class="smallexample">
+<pre class="smallexample">  locale -a
+</pre></div>
+
+<p><strong>Portability Note:</strong> With the notable exception of the standard
+locale names &lsquo;<samp>C</samp>&rsquo; and &lsquo;<samp>POSIX</samp>&rsquo;, locale names are
+system-specific.
+</p>
+<p>Most locale names follow XPG syntax and consist of up to four parts:
+</p>
+<div class="smallexample">
+<pre class="smallexample"><var>language</var>[_<var>territory</var>[.<var>codeset</var>]][@<var>modifier</var>]
+</pre></div>
+
+<p>Beside the first part, all of them are allowed to be missing.  If the
+full specified locale is not found, less specific ones are looked for.
+The various parts will be stripped off, in the following order:
+</p>
+<ol>
+<li> codeset
+</li><li> normalized codeset
+</li><li> territory
+</li><li> modifier
+</li></ol>
+
+<p>For example, the locale name &lsquo;<samp>de_AT.iso885915@euro</samp>&rsquo; denotes a
+German-language locale for use in Austria, using the ISO-8859-15
+(Latin-9) character set, and with the Euro as the currency symbol.
+</p>
+<p>In addition to locale names which follow XPG syntax, systems may
+provide aliases such as &lsquo;<samp>german</samp>&rsquo;.  Both categories of names must
+not contain the slash character &lsquo;<samp>/</samp>&rsquo;.
+</p>
+<p>If the locale name starts with a slash &lsquo;<samp>/</samp>&rsquo;, it is treated as a
+path relative to the configured locale directories; see <code>LOCPATH</code>
+below.  The specified path must not contain a component &lsquo;<samp>..</samp>&rsquo;, or
+the name is invalid, and <code>setlocale</code> will fail.
+</p>
+<p><strong>Portability Note:</strong> POSIX suggests that if a locale name starts
+with a slash &lsquo;<samp>/</samp>&rsquo;, it is resolved as an absolute path.  However,
+the GNU C Library treats it as a relative path under the directories listed
+in <code>LOCPATH</code> (or the default locale directory if <code>LOCPATH</code>
+is unset).
+</p>
+<p>Locale names which are longer than an implementation-defined limit are
+invalid and cause <code>setlocale</code> to fail.
+</p>
+<p>As a special case, locale names used with <code>LC_ALL</code> can combine
+several locales, reflecting different locale settings for different
+categories.  For example, you might want to use a U.S. locale with ISO
+A4 paper format, so you set <code>LANG</code> to &lsquo;<samp>en_US.UTF-8</samp>&rsquo;, and
+<code>LC_PAPER</code> to &lsquo;<samp>de_DE.UTF-8</samp>&rsquo;.  In this case, the
+<code>LC_ALL</code>-style combined locale name is
+</p>
+<div class="smallexample">
+<pre class="smallexample">LC_CTYPE=en_US.UTF-8;LC_TIME=en_US.UTF-8;LC_PAPER=de_DE.UTF-8;&hellip;
+</pre></div>
+
+<p>followed by other category settings not shown here.
+</p>
+<a name="index-LOCPATH"></a>
+<p>The path used for finding locale data can be set using the
+<code>LOCPATH</code> environment variable.  This variable lists the
+directories in which to search for locale definitions, separated by a
+colon &lsquo;<samp>:</samp>&rsquo;.
+</p>
+<p>The default path for finding locale data is system specific.  A typical
+value for the <code>LOCPATH</code> default is:
+</p>
+<div class="smallexample">
+<pre class="smallexample">/usr/share/locale
+</pre></div>
+
+<p>The value of <code>LOCPATH</code> is ignored by privileged programs for
+security reasons, and only the default directory is used.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Locale-Information.html#Locale-Information" accesskey="n" rel="next">Locale Information</a>, Previous: <a href="Standard-Locales.html#Standard-Locales" accesskey="p" rel="prev">Standard Locales</a>, Up: <a href="Locales.html#Locales" accesskey="u" rel="up">Locales</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

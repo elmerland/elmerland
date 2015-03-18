@@ -1,0 +1,86 @@
+<a name="Changing-Block-Size"></a>
+<div class="header">
+<p>
+Next: <a href="Allocating-Cleared-Space.html#Allocating-Cleared-Space" accesskey="n" rel="next">Allocating Cleared Space</a>, Previous: <a href="Freeing-after-Malloc.html#Freeing-after-Malloc" accesskey="p" rel="prev">Freeing after Malloc</a>, Up: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="u" rel="up">Unconstrained Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Changing-the-Size-of-a-Block"></a>
+<h4 class="subsubsection">3.2.2.4 Changing the Size of a Block</h4>
+<a name="index-changing-the-size-of-a-block-_0028malloc_0029"></a>
+
+<p>Often you do not know for certain how big a block you will ultimately need
+at the time you must begin to use the block.  For example, the block might
+be a buffer that you use to hold a line being read from a file; no matter
+how long you make the buffer initially, you may encounter a line that is
+longer.
+</p>
+<p>You can make the block longer by calling <code>realloc</code>.  This function
+is declared in <samp>stdlib.h</samp>.
+<a name="index-stdlib_002eh-2"></a>
+</p>
+<dl>
+<dt><a name="index-realloc"></a>Function: <em>void *</em> <strong>realloc</strong> <em>(void *<var>ptr</var>, size_t <var>newsize</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock
+| AC-Unsafe lock fd mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+
+
+<p>The <code>realloc</code> function changes the size of the block whose address is
+<var>ptr</var> to be <var>newsize</var>.
+</p>
+<p>Since the space after the end of the block may be in use, <code>realloc</code>
+may find it necessary to copy the block to a new address where more free
+space is available.  The value of <code>realloc</code> is the new address of the
+block.  If the block needs to be moved, <code>realloc</code> copies the old
+contents.
+</p>
+<p>If you pass a null pointer for <var>ptr</var>, <code>realloc</code> behaves just
+like &lsquo;<samp>malloc (<var>newsize</var>)</samp>&rsquo;.  This can be convenient, but beware
+that older implementations (before ISO&nbsp;C<!-- /@w -->) may not support this
+behavior, and will probably crash when <code>realloc</code> is passed a null
+pointer.
+</p></dd></dl>
+
+<p>Like <code>malloc</code>, <code>realloc</code> may return a null pointer if no
+memory space is available to make the block bigger.  When this happens,
+the original block is untouched; it has not been modified or relocated.
+</p>
+<p>In most cases it makes no difference what happens to the original block
+when <code>realloc</code> fails, because the application program cannot continue
+when it is out of memory, and the only thing to do is to give a fatal error
+message.  Often it is convenient to write and use a subroutine,
+conventionally called <code>xrealloc</code>, that takes care of the error message
+as <code>xmalloc</code> does for <code>malloc</code>:
+</p>
+<div class="smallexample">
+<pre class="smallexample">void *
+xrealloc (void *ptr, size_t size)
+{
+  void *value = realloc (ptr, size);
+  if (value == 0)
+    fatal (&quot;Virtual memory exhausted&quot;);
+  return value;
+}
+</pre></div>
+
+<p>You can also use <code>realloc</code> to make a block smaller.  The reason you
+would do this is to avoid tying up a lot of memory space when only a little
+is needed.
+In several allocation implementations, making a block smaller sometimes
+necessitates copying it, so it can fail if no other space is available.
+</p>
+<p>If the new size you specify is the same as the old size, <code>realloc</code>
+is guaranteed to change nothing and return the same address that you gave.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Allocating-Cleared-Space.html#Allocating-Cleared-Space" accesskey="n" rel="next">Allocating Cleared Space</a>, Previous: <a href="Freeing-after-Malloc.html#Freeing-after-Malloc" accesskey="p" rel="prev">Freeing after Malloc</a>, Up: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="u" rel="up">Unconstrained Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

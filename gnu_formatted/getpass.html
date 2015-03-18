@@ -1,0 +1,84 @@
+<a name="getpass"></a>
+<div class="header">
+<p>
+Next: <a href="crypt.html#crypt" accesskey="n" rel="next">crypt</a>, Previous: <a href="Legal-Problems.html#Legal-Problems" accesskey="p" rel="prev">Legal Problems</a>, Up: <a href="Cryptographic-Functions.html#Cryptographic-Functions" accesskey="u" rel="up">Cryptographic Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Reading-Passwords"></a>
+<h3 class="section">33.2 Reading Passwords</h3>
+
+<p>When reading in a password, it is desirable to avoid displaying it on
+the screen, to help keep it secret.  The following function handles this
+in a convenient way.
+</p>
+<dl>
+<dt><a name="index-getpass"></a>Function: <em>char *</em> <strong>getpass</strong> <em>(const char *<var>prompt</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe term
+| AS-Unsafe heap lock corrupt
+| AC-Unsafe term lock corrupt
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+
+<p><code>getpass</code> outputs <var>prompt</var>, then reads a string in from the
+terminal without echoing it.  It tries to connect to the real terminal,
+<samp>/dev/tty</samp>, if possible, to encourage users not to put plaintext
+passwords in files; otherwise, it uses <code>stdin</code> and <code>stderr</code>.
+<code>getpass</code> also disables the INTR, QUIT, and SUSP characters on the
+terminal using the <code>ISIG</code> terminal attribute (see <a href="Local-Modes.html#Local-Modes">Local Modes</a>).
+The terminal is flushed before and after <code>getpass</code>, so that
+characters of a mistyped password are not accidentally visible.
+</p>
+<p>In other C libraries, <code>getpass</code> may only return the first
+<code>PASS_MAX</code> bytes of a password.  The GNU C Library has no limit, so
+<code>PASS_MAX</code> is undefined.
+</p>
+<p>The prototype for this function is in <samp>unistd.h</samp>.  <code>PASS_MAX</code>
+would be defined in <samp>limits.h</samp>.
+</p></dd></dl>
+
+<p>This precise set of operations may not suit all possible situations.  In
+this case, it is recommended that users write their own <code>getpass</code>
+substitute.  For instance, a very simple substitute is as follows:
+</p>
+<div class="smallexample">
+<pre class="smallexample">
+#include &lt;termios.h&gt;
+#include &lt;stdio.h&gt;
+
+ssize_t
+my_getpass (char **lineptr, size_t *n, FILE *stream)
+{
+  struct termios old, new;
+  int nread;
+
+  /* <span class="roman">Turn echoing off and fail if we can&rsquo;t.</span> */
+  if (tcgetattr (fileno (stream), &amp;old) != 0)
+    return -1;
+  new = old;
+  new.c_lflag &amp;= ~ECHO;
+  if (tcsetattr (fileno (stream), TCSAFLUSH, &amp;new) != 0)
+    return -1;
+
+  /* <span class="roman">Read the password.</span> */
+  nread = getline (lineptr, n, stream);
+
+  /* <span class="roman">Restore terminal.</span> */
+  (void) tcsetattr (fileno (stream), TCSAFLUSH, &amp;old);
+
+  return nread;
+}
+</pre></div>
+
+<p>The substitute takes the same parameters as <code>getline</code>
+(see <a href="Line-Input.html#Line-Input">Line Input</a>); the user must print any prompt desired.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="crypt.html#crypt" accesskey="n" rel="next">crypt</a>, Previous: <a href="Legal-Problems.html#Legal-Problems" accesskey="p" rel="prev">Legal Problems</a>, Up: <a href="Cryptographic-Functions.html#Cryptographic-Functions" accesskey="u" rel="up">Cryptographic Functions</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

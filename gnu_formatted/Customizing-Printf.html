@@ -1,0 +1,59 @@
+<a name="Customizing-Printf"></a>
+<div class="header">
+<p>
+Next: <a href="Formatted-Input.html#Formatted-Input" accesskey="n" rel="next">Formatted Input</a>, Previous: <a href="Formatted-Output.html#Formatted-Output" accesskey="p" rel="prev">Formatted Output</a>, Up: <a href="I_002fO-on-Streams.html#I_002fO-on-Streams" accesskey="u" rel="up">I/O on Streams</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Customizing-printf"></a>
+<h3 class="section">12.13 Customizing <code>printf</code></h3>
+<a name="index-customizing-printf"></a>
+<a name="index-defining-new-printf-conversions"></a>
+<a name="index-extending-printf"></a>
+
+<p>The GNU C Library lets you define your own custom conversion specifiers
+for <code>printf</code> template strings, to teach <code>printf</code> clever ways
+to print the important data structures of your program.
+</p>
+<p>The way you do this is by registering the conversion with the function
+<code>register_printf_function</code>; see <a href="Registering-New-Conversions.html#Registering-New-Conversions">Registering New Conversions</a>.
+One of the arguments you pass to this function is a pointer to a handler
+function that produces the actual output; see <a href="Defining-the-Output-Handler.html#Defining-the-Output-Handler">Defining the Output Handler</a>, for information on how to write this function.
+</p>
+<p>You can also install a function that just returns information about the
+number and type of arguments expected by the conversion specifier.
+See <a href="Parsing-a-Template-String.html#Parsing-a-Template-String">Parsing a Template String</a>, for information about this.
+</p>
+<p>The facilities of this section are declared in the header file
+<samp>printf.h</samp>.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Registering-New-Conversions.html#Registering-New-Conversions" accesskey="1">Registering New Conversions</a>:</td><td align="left" valign="top">Using <code>register_printf_function</code>
+					 to register a new output conversion.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Conversion-Specifier-Options.html#Conversion-Specifier-Options" accesskey="2">Conversion Specifier Options</a>:</td><td align="left" valign="top">The handler must be able to get
+					 the options specified in the
+					 template when it is called.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Defining-the-Output-Handler.html#Defining-the-Output-Handler" accesskey="3">Defining the Output Handler</a>:</td><td align="left" valign="top">Defining the handler and arginfo
+					 functions that are passed as arguments
+					 to <code>register_printf_function</code>.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Printf-Extension-Example.html#Printf-Extension-Example" accesskey="4">Printf Extension Example</a>:</td><td align="left" valign="top">How to define a <code>printf</code>
+					 handler function.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Predefined-Printf-Handlers.html#Predefined-Printf-Handlers" accesskey="5">Predefined Printf Handlers</a>:</td><td align="left" valign="top">Predefined <code>printf</code> handlers.
+</td></tr>
+</table>
+
+<p><strong>Portability Note:</strong> The ability to extend the syntax of
+<code>printf</code> template strings is a GNU extension.  ISO standard C has
+nothing similar.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Formatted-Input.html#Formatted-Input" accesskey="n" rel="next">Formatted Input</a>, Previous: <a href="Formatted-Output.html#Formatted-Output" accesskey="p" rel="prev">Formatted Output</a>, Up: <a href="I_002fO-on-Streams.html#I_002fO-on-Streams" accesskey="u" rel="up">I/O on Streams</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

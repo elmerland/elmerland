@@ -1,0 +1,117 @@
+<a name="Process-Completion-Status"></a>
+<div class="header">
+<p>
+Next: <a href="BSD-Wait-Functions.html#BSD-Wait-Functions" accesskey="n" rel="next">BSD Wait Functions</a>, Previous: <a href="Process-Completion.html#Process-Completion" accesskey="p" rel="prev">Process Completion</a>, Up: <a href="Processes.html#Processes" accesskey="u" rel="up">Processes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Process-Completion-Status-1"></a>
+<h3 class="section">26.7 Process Completion Status</h3>
+
+<p>If the exit status value (see <a href="Program-Termination.html#Program-Termination">Program Termination</a>) of the child
+process is zero, then the status value reported by <code>waitpid</code> or
+<code>wait</code> is also zero.  You can test for other kinds of information
+encoded in the returned status value using the following macros.
+These macros are defined in the header file <samp>sys/wait.h</samp>.
+<a name="index-sys_002fwait_002eh-1"></a>
+</p>
+<dl>
+<dt><a name="index-WIFEXITED"></a>Macro: <em>int</em> <strong>WIFEXITED</strong> <em>(int <var>status</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This macro returns a nonzero value if the child process terminated
+normally with <code>exit</code> or <code>_exit</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-WEXITSTATUS"></a>Macro: <em>int</em> <strong>WEXITSTATUS</strong> <em>(int <var>status</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>If <code>WIFEXITED</code> is true of <var>status</var>, this macro returns the
+low-order 8 bits of the exit status value from the child process.
+See <a href="Exit-Status.html#Exit-Status">Exit Status</a>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-WIFSIGNALED"></a>Macro: <em>int</em> <strong>WIFSIGNALED</strong> <em>(int <var>status</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This macro returns a nonzero value if the child process terminated
+because it received a signal that was not handled.
+See <a href="Signal-Handling.html#Signal-Handling">Signal Handling</a>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-WTERMSIG"></a>Macro: <em>int</em> <strong>WTERMSIG</strong> <em>(int <var>status</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>If <code>WIFSIGNALED</code> is true of <var>status</var>, this macro returns the
+signal number of the signal that terminated the child process.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-WCOREDUMP"></a>Macro: <em>int</em> <strong>WCOREDUMP</strong> <em>(int <var>status</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This macro returns a nonzero value if the child process terminated
+and produced a core dump.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-WIFSTOPPED"></a>Macro: <em>int</em> <strong>WIFSTOPPED</strong> <em>(int <var>status</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This macro returns a nonzero value if the child process is stopped.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-WSTOPSIG"></a>Macro: <em>int</em> <strong>WSTOPSIG</strong> <em>(int <var>status</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>If <code>WIFSTOPPED</code> is true of <var>status</var>, this macro returns the
+signal number of the signal that caused the child process to stop.
+</p></dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="BSD-Wait-Functions.html#BSD-Wait-Functions" accesskey="n" rel="next">BSD Wait Functions</a>, Previous: <a href="Process-Completion.html#Process-Completion" accesskey="p" rel="prev">Process Completion</a>, Up: <a href="Processes.html#Processes" accesskey="u" rel="up">Processes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

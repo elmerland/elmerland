@@ -1,0 +1,37 @@
+<a name="Socket-Data-Options"></a>
+<div class="header">
+<p>
+Previous: <a href="Receiving-Data.html#Receiving-Data" accesskey="p" rel="prev">Receiving Data</a>, Up: <a href="Transferring-Data.html#Transferring-Data" accesskey="u" rel="up">Transferring Data</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Socket-Data-Options-1"></a>
+<h4 class="subsubsection">16.9.5.3 Socket Data Options</h4>
+
+<a name="index-sys_002fsocket_002eh-11"></a>
+<p>The <var>flags</var> argument to <code>send</code> and <code>recv</code> is a bit
+mask.  You can bitwise-OR the values of the following macros together
+to obtain a value for this argument.  All are defined in the header
+file <samp>sys/socket.h</samp>.
+</p>
+<dl>
+<dt><a name="index-MSG_005fOOB"></a>Macro: <em>int</em> <strong>MSG_OOB</strong></dt>
+<dd><p>Send or receive out-of-band data.  See <a href="Out_002dof_002dBand-Data.html#Out_002dof_002dBand-Data">Out-of-Band Data</a>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-MSG_005fPEEK"></a>Macro: <em>int</em> <strong>MSG_PEEK</strong></dt>
+<dd><p>Look at the data but don&rsquo;t remove it from the input queue.  This is
+only meaningful with input functions such as <code>recv</code>, not with
+<code>send</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-MSG_005fDONTROUTE"></a>Macro: <em>int</em> <strong>MSG_DONTROUTE</strong></dt>
+<dd><p>Don&rsquo;t include routing information in the message.  This is only
+meaningful with output operations, and is usually only of interest for
+diagnostic or routing programs.  We don&rsquo;t try to explain it here.
+</p></dd></dl>
+
+
+
+

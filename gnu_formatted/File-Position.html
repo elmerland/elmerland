@@ -1,0 +1,60 @@
+<a name="File-Position"></a>
+<div class="header">
+<p>
+Previous: <a href="Streams-and-File-Descriptors.html#Streams-and-File-Descriptors" accesskey="p" rel="prev">Streams and File Descriptors</a>, Up: <a href="I_002fO-Concepts.html#I_002fO-Concepts" accesskey="u" rel="up">I/O Concepts</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="File-Position-1"></a>
+<h4 class="subsection">11.1.2 File Position</h4>
+
+<p>One of the attributes of an open file is its <em>file position</em> that
+keeps track of where in the file the next character is to be read or
+written.  On GNU systems, and all POSIX.1 systems, the file position
+is simply an integer representing the number of bytes from the beginning
+of the file.
+</p>
+<p>The file position is normally set to the beginning of the file when it
+is opened, and each time a character is read or written, the file
+position is incremented.  In other words, access to the file is normally
+<em>sequential</em>.
+<a name="index-file-position"></a>
+<a name="index-sequential_002daccess-files"></a>
+</p>
+<p>Ordinary files permit read or write operations at any position within
+the file.  Some other kinds of files may also permit this.  Files which
+do permit this are sometimes referred to as <em>random-access</em> files.
+You can change the file position using the <code>fseek</code> function on a
+stream (see <a href="File-Positioning.html#File-Positioning">File Positioning</a>) or the <code>lseek</code> function on a file
+descriptor (see <a href="I_002fO-Primitives.html#I_002fO-Primitives">I/O Primitives</a>).  If you try to change the file
+position on a file that doesn&rsquo;t support random access, you get the
+<code>ESPIPE</code> error.
+<a name="index-random_002daccess-files"></a>
+</p>
+<p>Streams and descriptors that are opened for <em>append access</em> are
+treated specially for output: output to such files is <em>always</em>
+appended sequentially to the <em>end</em> of the file, regardless of the
+file position.  However, the file position is still used to control where in
+the file reading is done.
+<a name="index-append_002daccess-files"></a>
+</p>
+<p>If you think about it, you&rsquo;ll realize that several programs can read a
+given file at the same time.  In order for each program to be able to
+read the file at its own pace, each program must have its own file
+pointer, which is not affected by anything the other programs do.
+</p>
+<p>In fact, each opening of a file creates a separate file position.
+Thus, if you open a file twice even in the same program, you get two
+streams or descriptors with independent file positions.
+</p>
+<p>By contrast, if you open a descriptor and then duplicate it to get
+another descriptor, these two descriptors share the same file position:
+changing the file position of one descriptor will affect the other.
+</p>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Streams-and-File-Descriptors.html#Streams-and-File-Descriptors" accesskey="p" rel="prev">Streams and File Descriptors</a>, Up: <a href="I_002fO-Concepts.html#I_002fO-Concepts" accesskey="u" rel="up">I/O Concepts</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

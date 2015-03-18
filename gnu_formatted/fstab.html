@@ -1,0 +1,216 @@
+<a name="fstab"></a>
+<div class="header">
+<p>
+Next: <a href="mtab.html#mtab" accesskey="n" rel="next">mtab</a>, Up: <a href="Mount-Information.html#Mount-Information" accesskey="u" rel="up">Mount Information</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="The-fstab-file"></a>
+<h4 class="subsubsection">31.3.1.1 The <samp>fstab</samp> file</h4>
+
+<p>The internal representation for entries of the file is <code>struct&nbsp;fstab</code><!-- /@w -->, defined in <samp>fstab.h</samp>.
+</p>
+<dl>
+<dt><a name="index-struct-fstab"></a>Data Type: <strong>struct fstab</strong></dt>
+<dd><p>This structure is used with the <code>getfsent</code>, <code>getfsspec</code>, and
+<code>getfsfile</code> functions.
+</p>
+<dl compact="compact">
+<dt><code>char *fs_spec</code></dt>
+<dd><p>This element describes the device from which the filesystem is mounted.
+Normally this is the name of a special device, such as a hard disk
+partition, but it could also be a more or less generic string.  For
+<em>NFS</em> it would be a hostname and directory name combination.
+</p>
+<p>Even though the element is not declared <code>const</code> it shouldn&rsquo;t be
+modified.  The missing <code>const</code> has historic reasons, since this
+function predates ISO&nbsp;C<!-- /@w -->.  The same is true for the other string
+elements of this structure.
+</p>
+</dd>
+<dt><code>char *fs_file</code></dt>
+<dd><p>This describes the mount point on the local system.  I.e., accessing any
+file in this filesystem has implicitly or explicitly this string as a
+prefix.
+</p>
+</dd>
+<dt><code>char *fs_vfstype</code></dt>
+<dd><p>This is the type of the filesystem.  Depending on what the underlying
+kernel understands it can be any string.
+</p>
+</dd>
+<dt><code>char *fs_mntops</code></dt>
+<dd><p>This is a string containing options passed to the kernel with the
+<code>mount</code> call.  Again, this can be almost anything.  There can be
+more than one option, separated from the others by a comma.  Each option
+consists of a name and an optional value part, introduced by an <code>=</code>
+character.
+</p>
+<p>If the value of this element must be processed it should ideally be done
+using the <code>getsubopt</code> function; see <a href="Suboptions.html#Suboptions">Suboptions</a>.
+</p>
+</dd>
+<dt><code>const char *fs_type</code></dt>
+<dd><p>This name is poorly chosen.  This element points to a string (possibly
+in the <code>fs_mntops</code> string) which describes the modes with which the
+filesystem is mounted.  <samp>fstab</samp> defines five macros to describe the
+possible values:
+</p>
+<dl compact="compact">
+<dt><code>FSTAB_RW</code>
+<a name="index-FSTAB_005fRW"></a>
+</dt>
+<dd><p>The filesystems gets mounted with read and write enabled.
+</p></dd>
+<dt><code>FSTAB_RQ</code>
+<a name="index-FSTAB_005fRQ"></a>
+</dt>
+<dd><p>The filesystems gets mounted with read and write enabled.  Write access
+is restricted by quotas.
+</p></dd>
+<dt><code>FSTAB_RO</code>
+<a name="index-FSTAB_005fRO"></a>
+</dt>
+<dd><p>The filesystem gets mounted read-only.
+</p></dd>
+<dt><code>FSTAB_SW</code>
+<a name="index-FSTAB_005fSW"></a>
+</dt>
+<dd><p>This is not a real filesystem, it is a swap device.
+</p></dd>
+<dt><code>FSTAB_XX</code>
+<a name="index-FSTAB_005fXX"></a>
+</dt>
+<dd><p>This entry from the <samp>fstab</samp> file is totally ignored.
+</p></dd>
+</dl>
+
+<p>Testing for equality with these value must happen using <code>strcmp</code>
+since these are all strings.  Comparing the pointer will probably always
+fail.
+</p>
+</dd>
+<dt><code>int fs_freq</code></dt>
+<dd><p>This element describes the dump frequency in days.
+</p>
+</dd>
+<dt><code>int fs_passno</code></dt>
+<dd><p>This element describes the pass number on parallel dumps.  It is closely
+related to the <code>dump</code> utility used on Unix systems.
+</p></dd>
+</dl>
+</dd></dl>
+
+
+<p>To read the entire content of the of the <samp>fstab</samp> file the GNU C Library
+contains a set of three functions which are designed in the usual way.
+</p>
+<dl>
+<dt><a name="index-setfsent"></a>Function: <em>int</em> <strong>setfsent</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe race:fsent
+| AS-Unsafe heap corrupt lock
+| AC-Unsafe corrupt lock mem fd
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function makes sure that the internal read pointer for the
+<samp>fstab</samp> file is at the beginning of the file.  This is done by
+either opening the file or resetting the read pointer.
+</p>
+<p>Since the file handle is internal to the libc this function is not
+thread-safe.
+</p>
+<p>This function returns a non-zero value if the operation was successful
+and the <code>getfs*</code> functions can be used to read the entries of the
+file.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-endfsent"></a>Function: <em>void</em> <strong>endfsent</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe race:fsent
+| AS-Unsafe heap corrupt lock
+| AC-Unsafe corrupt lock mem fd
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function makes sure that all resources acquired by a prior call to
+<code>setfsent</code> (explicitly or implicitly by calling <code>getfsent</code>) are
+freed.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-getfsent"></a>Function: <em>struct fstab *</em> <strong>getfsent</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe race:fsent locale
+| AS-Unsafe corrupt heap lock
+| AC-Unsafe corrupt lock mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function returns the next entry of the <samp>fstab</samp> file.  If this
+is the first call to any of the functions handling <samp>fstab</samp> since
+program start or the last call of <code>endfsent</code>, the file will be
+opened.
+</p>
+<p>The function returns a pointer to a variable of type <code>struct
+fstab</code>.  This variable is shared by all threads and therefore this
+function is not thread-safe.  If an error occurred <code>getfsent</code>
+returns a <code>NULL</code> pointer.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-getfsspec"></a>Function: <em>struct fstab *</em> <strong>getfsspec</strong> <em>(const char *<var>name</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe race:fsent locale
+| AS-Unsafe corrupt heap lock
+| AC-Unsafe corrupt lock mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function returns the next entry of the <samp>fstab</samp> file which has
+a string equal to <var>name</var> pointed to by the <code>fs_spec</code> element.
+Since there is normally exactly one entry for each special device it
+makes no sense to call this function more than once for the same
+argument.  If this is the first call to any of the functions handling
+<samp>fstab</samp> since program start or the last call of <code>endfsent</code>,
+the file will be opened.
+</p>
+<p>The function returns a pointer to a variable of type <code>struct
+fstab</code>.  This variable is shared by all threads and therefore this
+function is not thread-safe.  If an error occurred <code>getfsent</code>
+returns a <code>NULL</code> pointer.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-getfsfile"></a>Function: <em>struct fstab *</em> <strong>getfsfile</strong> <em>(const char *<var>name</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe race:fsent locale
+| AS-Unsafe corrupt heap lock
+| AC-Unsafe corrupt lock mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function returns the next entry of the <samp>fstab</samp> file which has
+a string equal to <var>name</var> pointed to by the <code>fs_file</code> element.
+Since there is normally exactly one entry for each mount point it
+makes no sense to call this function more than once for the same
+argument.  If this is the first call to any of the functions handling
+<samp>fstab</samp> since program start or the last call of <code>endfsent</code>,
+the file will be opened.
+</p>
+<p>The function returns a pointer to a variable of type <code>struct
+fstab</code>.  This variable is shared by all threads and therefore this
+function is not thread-safe.  If an error occurred <code>getfsent</code>
+returns a <code>NULL</code> pointer.
+</p></dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="mtab.html#mtab" accesskey="n" rel="next">mtab</a>, Up: <a href="Mount-Information.html#Mount-Information" accesskey="u" rel="up">Mount Information</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

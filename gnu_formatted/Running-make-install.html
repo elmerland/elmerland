@@ -1,0 +1,81 @@
+<a name="Running-make-install"></a>
+<div class="header">
+<p>
+Next: <a href="Tools-for-Compilation.html#Tools-for-Compilation" accesskey="n" rel="next">Tools for Compilation</a>, Previous: <a href="Configuring-and-compiling.html#Configuring-and-compiling" accesskey="p" rel="prev">Configuring and compiling</a>, Up: <a href="Installation.html#Installation" accesskey="u" rel="up">Installation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Installing-the-C-Library"></a>
+<h3 class="appendixsec">C.2 Installing the C Library</h3>
+<a name="index-installing"></a>
+
+<p>To install the library and its header files, and the Info files of the
+manual, type <code>make install</code>.  This will
+build things, if necessary, before installing them; however, you should
+still compile everything first.  If you are installing the GNU C Library as your
+primary C library, we recommend that you shut the system down to
+single-user mode first, and reboot afterward.  This minimizes the risk
+of breaking things when the library changes out from underneath.
+</p>
+<p>&lsquo;<samp>make install</samp>&rsquo; will do the entire job of upgrading from a
+previous installation of the GNU C Library version 2.x.  There may sometimes
+be headers
+left behind from the previous installation, but those are generally
+harmless.  If you want to avoid leaving headers behind you can do
+things in the following order.
+</p>
+<p>You must first build the library (&lsquo;<samp>make</samp>&rsquo;), optionally check it
+(&lsquo;<samp>make check</samp>&rsquo;), switch the include directories and then install
+(&lsquo;<samp>make install</samp>&rsquo;).  The steps must be done in this order.  Not moving
+the directory before install will result in an unusable mixture of header
+files from both libraries, but configuring, building, and checking the
+library requires the ability to compile and run programs against the old
+library.  The new <samp>/usr/include</samp>, after switching the include
+directories and before installing the library should contain the Linux
+headers, but nothing else.  If you do this, you will need to restore
+any headers from libraries other than the GNU C Library yourself after installing the
+library.
+</p>
+<p>You can install the GNU C Library somewhere other than where you configured it to go
+by setting the <code>install_root</code> variable on the command line for
+&lsquo;<samp>make install</samp>&rsquo;.  The value of this variable is prepended to all the
+paths for installation.  This is useful when setting up a chroot
+environment or preparing a binary distribution.  The directory should be
+specified with an absolute file name.
+</p>
+<p>The GNU C Library includes a daemon called <code>nscd</code>, which you
+may or may not want to run.  <code>nscd</code> caches name service lookups; it
+can dramatically improve performance with NIS+, and may help with DNS as
+well.
+</p>
+<p>One auxiliary program, <samp>/usr/libexec/pt_chown</samp>, is installed setuid
+<code>root</code> if the &lsquo;<samp>--enable-pt_chown</samp>&rsquo; configuration option is used.
+This program is invoked by the <code>grantpt</code> function; it sets the
+permissions on a pseudoterminal so it can be used by the calling process.
+If you are using a Linux kernel with the <code>devpts</code> filesystem enabled
+and mounted at <samp>/dev/pts</samp>, you don&rsquo;t need this program.
+</p>
+<p>After installation you might want to configure the timezone and locale
+installation of your system.  The GNU C Library comes with a locale
+database which gets configured with <code>localedef</code>.  For example, to
+set up a German locale with name <code>de_DE</code>, simply issue the command
+&lsquo;<samp>localedef -i de_DE -f ISO-8859-1 de_DE</samp>&rsquo;.  To configure all locales
+that are supported by the GNU C Library, you can issue from your build directory the
+command &lsquo;<samp>make localedata/install-locales</samp>&rsquo;.
+</p>
+<p>To configure the locally used timezone, set the <code>TZ</code> environment
+variable.  The script <code>tzselect</code> helps you to select the right value.
+As an example, for Germany, <code>tzselect</code> would tell you to use
+&lsquo;<samp>TZ='Europe/Berlin'</samp>&rsquo;.  For a system wide installation (the given
+paths are for an installation with &lsquo;<samp>--prefix=/usr</samp>&rsquo;), link the
+timezone file which is in <samp>/usr/share/zoneinfo</samp> to the file
+<samp>/etc/localtime</samp>.  For Germany, you might execute &lsquo;<samp>ln -s
+/usr/share/zoneinfo/Europe/Berlin /etc/localtime</samp>&rsquo;.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Tools-for-Compilation.html#Tools-for-Compilation" accesskey="n" rel="next">Tools for Compilation</a>, Previous: <a href="Configuring-and-compiling.html#Configuring-and-compiling" accesskey="p" rel="prev">Configuring and compiling</a>, Up: <a href="Installation.html#Installation" accesskey="u" rel="up">Installation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

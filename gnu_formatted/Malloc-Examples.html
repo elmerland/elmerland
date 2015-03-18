@@ -1,0 +1,64 @@
+<a name="Malloc-Examples"></a>
+<div class="header">
+<p>
+Next: <a href="Freeing-after-Malloc.html#Freeing-after-Malloc" accesskey="n" rel="next">Freeing after Malloc</a>, Previous: <a href="Basic-Allocation.html#Basic-Allocation" accesskey="p" rel="prev">Basic Allocation</a>, Up: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="u" rel="up">Unconstrained Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Examples-of-malloc"></a>
+<h4 class="subsubsection">3.2.2.2 Examples of <code>malloc</code></h4>
+
+<p>If no more space is available, <code>malloc</code> returns a null pointer.
+You should check the value of <em>every</em> call to <code>malloc</code>.  It is
+useful to write a subroutine that calls <code>malloc</code> and reports an
+error if the value is a null pointer, returning only if the value is
+nonzero.  This function is conventionally called <code>xmalloc</code>.  Here
+it is:
+</p>
+<div class="smallexample">
+<pre class="smallexample">void *
+xmalloc (size_t size)
+{
+  void *value = malloc (size);
+  if (value == 0)
+    fatal (&quot;virtual memory exhausted&quot;);
+  return value;
+}
+</pre></div>
+
+<p>Here is a real example of using <code>malloc</code> (by way of <code>xmalloc</code>).
+The function <code>savestring</code> will copy a sequence of characters into
+a newly allocated null-terminated string:
+</p>
+<div class="smallexample">
+<pre class="smallexample">char *
+savestring (const char *ptr, size_t len)
+{
+  char *value = (char *) xmalloc (len + 1);
+  value[len] = '\0';
+  return (char *) memcpy (value, ptr, len);
+}
+</pre></div>
+
+<p>The block that <code>malloc</code> gives you is guaranteed to be aligned so
+that it can hold any type of data.  On GNU systems, the address is
+always a multiple of eight on 32-bit systems, and a multiple of 16 on
+64-bit systems.  Only rarely is any higher boundary (such as a page
+boundary) necessary; for those cases, use <code>aligned_alloc</code> or
+<code>posix_memalign</code> (see <a href="Aligned-Memory-Blocks.html#Aligned-Memory-Blocks">Aligned Memory Blocks</a>).
+</p>
+<p>Note that the memory located after the end of the block is likely to be
+in use for something else; perhaps a block already allocated by another
+call to <code>malloc</code>.  If you attempt to treat the block as longer than
+you asked for it to be, you are liable to destroy the data that
+<code>malloc</code> uses to keep track of its blocks, or you may destroy the
+contents of another block.  If you have already allocated a block and
+discover you want it to be bigger, use <code>realloc</code> (see <a href="Changing-Block-Size.html#Changing-Block-Size">Changing Block Size</a>).
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Freeing-after-Malloc.html#Freeing-after-Malloc" accesskey="n" rel="next">Freeing after Malloc</a>, Previous: <a href="Basic-Allocation.html#Basic-Allocation" accesskey="p" rel="prev">Basic Allocation</a>, Up: <a href="Unconstrained-Allocation.html#Unconstrained-Allocation" accesskey="u" rel="up">Unconstrained Allocation</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

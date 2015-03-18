@@ -1,0 +1,32 @@
+<a name="Pseudo_002dTerminals"></a>
+<div class="header">
+<p>
+Previous: <a href="Noncanon-Example.html#Noncanon-Example" accesskey="p" rel="prev">Noncanon Example</a>, Up: <a href="Low_002dLevel-Terminal-Interface.html#Low_002dLevel-Terminal-Interface" accesskey="u" rel="up">Low-Level Terminal Interface</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Pseudo_002dTerminals-1"></a>
+<h3 class="section">17.8 Pseudo-Terminals</h3>
+<a name="index-pseudo_002dterminals"></a>
+
+<p>A <em>pseudo-terminal</em> is a special interprocess communication channel
+that acts like a terminal.  One end of the channel is called the
+<em>master</em> side or <em>master pseudo-terminal device</em>, the other side
+is called the <em>slave</em> side.  Data written to the master side is
+received by the slave side as if it was the result of a user typing at
+an ordinary terminal, and data written to the slave side is sent to the
+master side as if it was written on an ordinary terminal.
+</p>
+<p>Pseudo terminals are the way programs like <code>xterm</code> and <code>emacs</code>
+implement their terminal emulation functionality.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Allocation.html#Allocation" accesskey="1">Allocation</a>:</td><td align="left" valign="top">Allocating a pseudo terminal.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Pseudo_002dTerminal-Pairs.html#Pseudo_002dTerminal-Pairs" accesskey="2">Pseudo-Terminal Pairs</a>:</td><td align="left" valign="top">How to open both sides of a
+                            pseudo-terminal in a single operation.
+</td></tr>
+</table>
+
+
+
+

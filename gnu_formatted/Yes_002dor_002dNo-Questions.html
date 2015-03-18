@@ -1,0 +1,90 @@
+<a name="Yes_002dor_002dNo-Questions"></a>
+<div class="header">
+<p>
+Previous: <a href="Formatting-Numbers.html#Formatting-Numbers" accesskey="p" rel="prev">Formatting Numbers</a>, Up: <a href="Locales.html#Locales" accesskey="u" rel="up">Locales</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Yes_002dor_002dNo-Questions-1"></a>
+<h3 class="section">7.9 Yes-or-No Questions</h3>
+
+<p>Some non GUI programs ask a yes-or-no question.  If the messages
+(especially the questions) are translated into foreign languages, be
+sure that you localize the answers too.  It would be very bad habit to
+ask a question in one language and request the answer in another, often
+English.
+</p>
+<p>The GNU C Library contains <code>rpmatch</code> to give applications easy
+access to the corresponding locale definitions.
+</p>
+<dl>
+<dt><a name="index-rpmatch"></a>Function: <em>int</em> <strong>rpmatch</strong> <em>(const char *<var>response</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe locale
+| AS-Unsafe corrupt heap lock dlopen
+| AC-Unsafe corrupt lock mem fd
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The function <code>rpmatch</code> checks the string in <var>response</var> whether
+or not it is a correct yes-or-no answer and if yes, which one.  The
+check uses the <code>YESEXPR</code> and <code>NOEXPR</code> data in the
+<code>LC_MESSAGES</code> category of the currently selected locale.  The
+return value is as follows:
+</p>
+<dl compact="compact">
+<dt><code>1</code></dt>
+<dd><p>The user entered an affirmative answer.
+</p>
+</dd>
+<dt><code>0</code></dt>
+<dd><p>The user entered a negative answer.
+</p>
+</dd>
+<dt><code>-1</code></dt>
+<dd><p>The answer matched neither the <code>YESEXPR</code> nor the <code>NOEXPR</code>
+regular expression.
+</p></dd>
+</dl>
+
+<p>This function is not standardized but available beside in the GNU C Library at
+least also in the IBM AIX library.
+</p></dd></dl>
+
+<p>This function would normally be used like this:
+</p>
+<div class="smallexample">
+<pre class="smallexample">  &hellip;
+  /* <span class="roman">Use a safe default.</span>  */
+  _Bool doit = false;
+
+  fputs (gettext (&quot;Do you really want to do this? &quot;), stdout);
+  fflush (stdout);
+  /* <span class="roman">Prepare the <code>getline</code> call.</span>  */
+  line = NULL;
+  len = 0;
+  while (getline (&amp;line, &amp;len, stdin) &gt;= 0)
+    {
+      /* <span class="roman">Check the response.</span>  */
+      int res = rpmatch (line);
+      if (res &gt;= 0)
+        {
+          /* <span class="roman">We got a definitive answer.</span>  */
+          if (res &gt; 0)
+            doit = true;
+          break;
+        }
+    }
+  /* <span class="roman">Free what <code>getline</code> allocated.</span>  */
+  free (line);
+</pre></div>
+
+<p>Note that the loop continues until a read error is detected or until a
+definitive (positive or negative) answer is read.
+</p><hr>
+<div class="header">
+<p>
+Previous: <a href="Formatting-Numbers.html#Formatting-Numbers" accesskey="p" rel="prev">Formatting Numbers</a>, Up: <a href="Locales.html#Locales" accesskey="u" rel="up">Locales</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

@@ -1,0 +1,57 @@
+<a name="Using-Pause"></a>
+<div class="header">
+<p>
+Next: <a href="Pause-Problems.html#Pause-Problems" accesskey="n" rel="next">Pause Problems</a>, Up: <a href="Waiting-for-a-Signal.html#Waiting-for-a-Signal" accesskey="u" rel="up">Waiting for a Signal</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Using-pause"></a>
+<h4 class="subsection">24.8.1 Using <code>pause</code></h4>
+
+<p>The simple way to wait until a signal arrives is to call <code>pause</code>.
+Please read about its disadvantages, in the following section, before
+you use it.
+</p>
+<dl>
+<dt><a name="index-pause"></a>Function: <em>int</em> <strong>pause</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Unsafe race:sigprocmask/!bsd!linux
+| AS-Unsafe lock/hurd
+| AC-Unsafe lock/hurd
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>The <code>pause</code> function suspends program execution until a signal
+arrives whose action is either to execute a handler function, or to
+terminate the process.
+</p>
+<p>If the signal causes a handler function to be executed, then
+<code>pause</code> returns.  This is considered an unsuccessful return (since
+&ldquo;successful&rdquo; behavior would be to suspend the program forever), so the
+return value is <code>-1</code>.  Even if you specify that other primitives
+should resume when a system handler returns (see <a href="Interrupted-Primitives.html#Interrupted-Primitives">Interrupted Primitives</a>), this has no effect on <code>pause</code>; it always fails when a
+signal is handled.
+</p>
+<p>The following <code>errno</code> error conditions are defined for this function:
+</p>
+<dl compact="compact">
+<dt><code>EINTR</code></dt>
+<dd><p>The function was interrupted by delivery of a signal.
+</p></dd>
+</dl>
+
+<p>If the signal causes program termination, <code>pause</code> doesn&rsquo;t return
+(obviously).
+</p>
+<p>This function is a cancellation point in multithreaded programs.  This
+is a problem if the thread allocates some resources (like memory, file
+descriptors, semaphores or whatever) at the time <code>pause</code> is
+called.  If the thread gets cancelled these resources stay allocated
+until the program ends.  To avoid this calls to <code>pause</code> should be
+protected using cancellation handlers.
+</p>
+<p>The <code>pause</code> function is declared in  <samp>unistd.h</samp>.
+</p></dd></dl>
+
+
+
+

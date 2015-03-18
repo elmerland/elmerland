@@ -1,0 +1,54 @@
+<a name="Special-Characters"></a>
+<div class="header">
+<p>
+Next: <a href="Noncanonical-Input.html#Noncanonical-Input" accesskey="n" rel="next">Noncanonical Input</a>, Previous: <a href="Line-Speed.html#Line-Speed" accesskey="p" rel="prev">Line Speed</a>, Up: <a href="Terminal-Modes.html#Terminal-Modes" accesskey="u" rel="up">Terminal Modes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Special-Characters-1"></a>
+<h4 class="subsection">17.4.9 Special Characters</h4>
+
+<p>In canonical input, the terminal driver recognizes a number of special
+characters which perform various control functions.  These include the
+ERASE character (usually <tt class="key">DEL</tt>) for editing input, and other editing
+characters.  The INTR character (normally <kbd>C-c</kbd>) for sending a
+<code>SIGINT</code> signal, and other signal-raising characters, may be
+available in either canonical or noncanonical input mode.  All these
+characters are described in this section.
+</p>
+<p>The particular characters used are specified in the <code>c_cc</code> member
+of the <code>struct termios</code> structure.  This member is an array; each
+element specifies the character for a particular role.  Each element has
+a symbolic constant that stands for the index of that element&mdash;for
+example, <code>VINTR</code> is the index of the element that specifies the INTR
+character, so storing <code>'='</code> in <code><var>termios</var>.c_cc[VINTR]</code>
+specifies &lsquo;<samp>=</samp>&rsquo; as the INTR character.
+</p>
+<a name="index-_005fPOSIX_005fVDISABLE"></a>
+<p>On some systems, you can disable a particular special character function
+by specifying the value <code>_POSIX_VDISABLE</code> for that role.  This
+value is unequal to any possible character code.  See <a href="Options-for-Files.html#Options-for-Files">Options for Files</a>, for more information about how to tell whether the operating
+system you are using supports <code>_POSIX_VDISABLE</code>.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Editing-Characters.html#Editing-Characters" accesskey="1">Editing Characters</a>:</td><td align="left" valign="top">Special characters that terminate lines and
+                                  delete text, and other editing functions.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Signal-Characters.html#Signal-Characters" accesskey="2">Signal Characters</a>:</td><td align="left" valign="top">Special characters that send or raise signals
+                                  to or for certain classes of processes.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Start_002fStop-Characters.html#Start_002fStop-Characters" accesskey="3">Start/Stop Characters</a>:</td><td align="left" valign="top">Special characters that suspend or resume
+                                  suspended output.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Other-Special.html#Other-Special" accesskey="4">Other Special</a>:</td><td align="left" valign="top">Other special characters for BSD systems:
+				  they can discard output, and print status.
+</td></tr>
+</table>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Noncanonical-Input.html#Noncanonical-Input" accesskey="n" rel="next">Noncanonical Input</a>, Previous: <a href="Line-Speed.html#Line-Speed" accesskey="p" rel="prev">Line Speed</a>, Up: <a href="Terminal-Modes.html#Terminal-Modes" accesskey="u" rel="up">Terminal Modes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

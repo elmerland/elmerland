@@ -1,0 +1,40 @@
+<a name="Helper-programs-for-gettext"></a>
+<div class="header">
+<p>
+Previous: <a href="Message-catalogs-with-gettext.html#Message-catalogs-with-gettext" accesskey="p" rel="prev">Message catalogs with gettext</a>, Up: <a href="The-Uniforum-approach.html#The-Uniforum-approach" accesskey="u" rel="up">The Uniforum approach</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Programs-to-handle-message-catalogs-for-gettext"></a>
+<h4 class="subsection">8.2.2 Programs to handle message catalogs for <code>gettext</code></h4>
+
+<p>The GNU C Library does not contain the source code for the programs to
+handle message catalogs for the <code>gettext</code> functions.  As part of
+the GNU project the GNU gettext package contains everything the
+developer needs.  The functionality provided by the tools in this
+package by far exceeds the abilities of the <code>gencat</code> program
+described above for the <code>catgets</code> functions.
+</p>
+<p>There is a program <code>msgfmt</code> which is the equivalent program to the
+<code>gencat</code> program.  It generates from the human-readable and
+-editable form of the message catalog a binary file which can be used by
+the <code>gettext</code> functions.  But there are several more programs
+available.
+</p>
+<p>The <code>xgettext</code> program can be used to automatically extract the
+translatable messages from a source file.  I.e., the programmer need not
+take care of the translations and the list of messages which have to be
+translated.  S/He will simply wrap the translatable string in calls to
+<code>gettext</code> et.al and the rest will be done by <code>xgettext</code>.  This
+program has a lot of options which help to customize the output or
+help to understand the input better.
+</p>
+<p>Other programs help to manage the development cycle when new messages appear
+in the source files or when a new translation of the messages appears.
+Here it should only be noted that using all the tools in GNU gettext it
+is possible to <em>completely</em> automate the handling of message
+catalogs.  Beside marking the translatable strings in the source code and
+generating the translations the developers do not have anything to do
+themselves.
+</p>
+
+

@@ -1,0 +1,68 @@
+<a name="Other-Special"></a>
+<div class="header">
+<p>
+Previous: <a href="Start_002fStop-Characters.html#Start_002fStop-Characters" accesskey="p" rel="prev">Start/Stop Characters</a>, Up: <a href="Special-Characters.html#Special-Characters" accesskey="u" rel="up">Special Characters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Other-Special-Characters"></a>
+<h4 class="subsubsection">17.4.9.4 Other Special Characters</h4>
+
+<dl>
+<dt><a name="index-VLNEXT"></a>Macro: <em>int</em> <strong>VLNEXT</strong></dt>
+<dd><a name="index-LNEXT-character"></a>
+<p>This is the subscript for the LNEXT character in the special control
+character array.  <code><var>termios</var>.c_cc[VLNEXT]</code> holds the character
+itself.
+</p>
+<p>The LNEXT character is recognized only when <code>IEXTEN</code> is set, but in
+both canonical and noncanonical mode.  It disables any special
+significance of the next character the user types.  Even if the
+character would normally perform some editing function or generate a
+signal, it is read as a plain character.  This is the analogue of the
+<kbd>C-q</kbd> command in Emacs.  &ldquo;LNEXT&rdquo; stands for &ldquo;literal next.&rdquo;
+</p>
+<p>The LNEXT character is usually <kbd>C-v</kbd>.
+</p>
+<p>This character is available on BSD systems and GNU/Linux and GNU/Hurd systems.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-VDISCARD"></a>Macro: <em>int</em> <strong>VDISCARD</strong></dt>
+<dd><a name="index-DISCARD-character"></a>
+<p>This is the subscript for the DISCARD character in the special control
+character array.  <code><var>termios</var>.c_cc[VDISCARD]</code> holds the character
+itself.
+</p>
+<p>The DISCARD character is recognized only when <code>IEXTEN</code> is set, but
+in both canonical and noncanonical mode.  Its effect is to toggle the
+discard-output flag.  When this flag is set, all program output is
+discarded.  Setting the flag also discards all output currently in the
+output buffer.  Typing any other character resets the flag.
+</p>
+<p>This character is available on BSD systems and GNU/Linux and GNU/Hurd systems.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-VSTATUS"></a>Macro: <em>int</em> <strong>VSTATUS</strong></dt>
+<dd><a name="index-STATUS-character"></a>
+<p>This is the subscript for the STATUS character in the special control
+character array.  <code><var>termios</var>.c_cc[VSTATUS]</code> holds the character
+itself.
+</p>
+<p>The STATUS character&rsquo;s effect is to print out a status message about how
+the current process is running.
+</p>
+<p>The STATUS character is recognized only in canonical mode, and only if
+<code>NOKERNINFO</code> is not set.
+</p>
+<p>This character is available only on BSD systems and GNU/Hurd systems.
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Start_002fStop-Characters.html#Start_002fStop-Characters" accesskey="p" rel="prev">Start/Stop Characters</a>, Up: <a href="Special-Characters.html#Special-Characters" accesskey="u" rel="up">Special Characters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

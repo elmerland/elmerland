@@ -1,0 +1,74 @@
+<a name="Dynamic-Output"></a>
+<div class="header">
+<p>
+Next: <a href="Variable-Arguments-Output.html#Variable-Arguments-Output" accesskey="n" rel="next">Variable Arguments Output</a>, Previous: <a href="Formatted-Output-Functions.html#Formatted-Output-Functions" accesskey="p" rel="prev">Formatted Output Functions</a>, Up: <a href="Formatted-Output.html#Formatted-Output" accesskey="u" rel="up">Formatted Output</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Dynamically-Allocating-Formatted-Output"></a>
+<h4 class="subsection">12.12.8 Dynamically Allocating Formatted Output</h4>
+
+<p>The functions in this section do formatted output and place the results
+in dynamically allocated memory.
+</p>
+<dl>
+<dt><a name="index-asprintf"></a>Function: <em>int</em> <strong>asprintf</strong> <em>(char **<var>ptr</var>, const char *<var>template</var>, &hellip;)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe locale
+| AS-Unsafe heap
+| AC-Unsafe mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function is similar to <code>sprintf</code>, except that it dynamically
+allocates a string (as with <code>malloc</code>; see <a href="Unconstrained-Allocation.html#Unconstrained-Allocation">Unconstrained Allocation</a>) to hold the output, instead of putting the output in a
+buffer you allocate in advance.  The <var>ptr</var> argument should be the
+address of a <code>char *</code> object, and a successful call to
+<code>asprintf</code> stores a pointer to the newly allocated string at that
+location.
+</p>
+<p>The return value is the number of characters allocated for the buffer, or
+less than zero if an error occurred.  Usually this means that the buffer
+could not be allocated.
+</p>
+<p>Here is how to use <code>asprintf</code> to get the same result as the
+<code>snprintf</code> example, but more easily:
+</p>
+<div class="smallexample">
+<pre class="smallexample">/* <span class="roman">Construct a message describing the value of a variable</span>
+   <span class="roman">whose name is <var>name</var> and whose value is <var>value</var>.</span> */
+char *
+make_message (char *name, char *value)
+{
+  char *result;
+  if (asprintf (&amp;result, &quot;value of %s is %s&quot;, name, value) &lt; 0)
+    return NULL;
+  return result;
+}
+</pre></div>
+</dd></dl>
+
+<dl>
+<dt><a name="index-obstack_005fprintf"></a>Function: <em>int</em> <strong>obstack_printf</strong> <em>(struct obstack *<var>obstack</var>, const char *<var>template</var>, &hellip;)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe race:obstack locale
+| AS-Unsafe corrupt heap
+| AC-Unsafe corrupt mem
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function is similar to <code>asprintf</code>, except that it uses the
+obstack <var>obstack</var> to allocate the space.  See <a href="Obstacks.html#Obstacks">Obstacks</a>.
+</p>
+<p>The characters are written onto the end of the current object.
+To get at them, you must finish the object with <code>obstack_finish</code>
+(see <a href="Growing-Objects.html#Growing-Objects">Growing Objects</a>).
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Variable-Arguments-Output.html#Variable-Arguments-Output" accesskey="n" rel="next">Variable Arguments Output</a>, Previous: <a href="Formatted-Output-Functions.html#Formatted-Output-Functions" accesskey="p" rel="prev">Formatted Output Functions</a>, Up: <a href="Formatted-Output.html#Formatted-Output" accesskey="u" rel="up">Formatted Output</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

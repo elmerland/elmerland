@@ -1,0 +1,66 @@
+<a name="Signal-Handling"></a>
+<div class="header">
+<p>
+Next: <a href="Program-Basics.html#Program-Basics" accesskey="n" rel="next">Program Basics</a>, Previous: <a href="Non_002dLocal-Exits.html#Non_002dLocal-Exits" accesskey="p" rel="prev">Non-Local Exits</a>, Up: <a href="index.html#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Signal-Handling-1"></a>
+<h2 class="chapter">24 Signal Handling</h2>
+
+<a name="index-signal-1"></a>
+<p>A <em>signal</em> is a software interrupt delivered to a process.  The
+operating system uses signals to report exceptional situations to an
+executing program.  Some signals report errors such as references to
+invalid memory addresses; others report asynchronous events, such as
+disconnection of a phone line.
+</p>
+<p>The GNU C Library defines a variety of signal types, each for a
+particular kind of event.  Some kinds of events make it inadvisable or
+impossible for the program to proceed as usual, and the corresponding
+signals normally abort the program.  Other kinds of signals that report
+harmless events are ignored by default.
+</p>
+<p>If you anticipate an event that causes signals, you can define a handler
+function and tell the operating system to run it when that particular
+type of signal arrives.
+</p>
+<p>Finally, one process can send a signal to another process; this allows a
+parent process to abort a child, or two related processes to communicate
+and synchronize.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Concepts-of-Signals.html#Concepts-of-Signals" accesskey="1">Concepts of Signals</a>:</td><td align="left" valign="top">Introduction to the signal facilities.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Standard-Signals.html#Standard-Signals" accesskey="2">Standard Signals</a>:</td><td align="left" valign="top">Particular kinds of signals with
+                                 standard names and meanings.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Signal-Actions.html#Signal-Actions" accesskey="3">Signal Actions</a>:</td><td align="left" valign="top">Specifying what happens when a
+                                 particular signal is delivered.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Defining-Handlers.html#Defining-Handlers" accesskey="4">Defining Handlers</a>:</td><td align="left" valign="top">How to write a signal handler function.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Interrupted-Primitives.html#Interrupted-Primitives" accesskey="5">Interrupted Primitives</a>:</td><td align="left" valign="top">Signal handlers affect use of <code>open</code>,
+				 <code>read</code>, <code>write</code> and other functions.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Generating-Signals.html#Generating-Signals" accesskey="6">Generating Signals</a>:</td><td align="left" valign="top">How to send a signal to a process.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Blocking-Signals.html#Blocking-Signals" accesskey="7">Blocking Signals</a>:</td><td align="left" valign="top">Making the system hold signals temporarily.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Waiting-for-a-Signal.html#Waiting-for-a-Signal" accesskey="8">Waiting for a Signal</a>:</td><td align="left" valign="top">Suspending your program until a signal
+                                 arrives.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Signal-Stack.html#Signal-Stack" accesskey="9">Signal Stack</a>:</td><td align="left" valign="top">Using a Separate Signal Stack.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="BSD-Signal-Handling.html#BSD-Signal-Handling">BSD Signal Handling</a>:</td><td align="left" valign="top">Additional functions for backward
+			         compatibility with BSD.
+</td></tr>
+</table>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Program-Basics.html#Program-Basics" accesskey="n" rel="next">Program Basics</a>, Previous: <a href="Non_002dLocal-Exits.html#Non_002dLocal-Exits" accesskey="p" rel="prev">Non-Local Exits</a>, Up: <a href="index.html#Top" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

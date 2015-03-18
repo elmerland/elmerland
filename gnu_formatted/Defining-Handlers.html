@@ -1,0 +1,67 @@
+<a name="Defining-Handlers"></a>
+<div class="header">
+<p>
+Next: <a href="Interrupted-Primitives.html#Interrupted-Primitives" accesskey="n" rel="next">Interrupted Primitives</a>, Previous: <a href="Signal-Actions.html#Signal-Actions" accesskey="p" rel="prev">Signal Actions</a>, Up: <a href="Signal-Handling.html#Signal-Handling" accesskey="u" rel="up">Signal Handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Defining-Signal-Handlers"></a>
+<h3 class="section">24.4 Defining Signal Handlers</h3>
+<a name="index-signal-handler-function"></a>
+
+<p>This section describes how to write a signal handler function that can
+be established with the <code>signal</code> or <code>sigaction</code> functions.
+</p>
+<p>A signal handler is just a function that you compile together with the
+rest of the program.  Instead of directly invoking the function, you use
+<code>signal</code> or <code>sigaction</code> to tell the operating system to call
+it when a signal arrives.  This is known as <em>establishing</em> the
+handler.  See <a href="Signal-Actions.html#Signal-Actions">Signal Actions</a>.
+</p>
+<p>There are two basic strategies you can use in signal handler functions:
+</p>
+<ul>
+<li> You can have the handler function note that the signal arrived by
+tweaking some global data structures, and then return normally.
+
+</li><li> You can have the handler function terminate the program or transfer
+control to a point where it can recover from the situation that caused
+the signal.
+</li></ul>
+
+<p>You need to take special care in writing handler functions because they
+can be called asynchronously.  That is, a handler might be called at any
+point in the program, unpredictably.  If two signals arrive during a
+very short interval, one handler can run within another.  This section
+describes what your handler should do, and what you should avoid.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Handler-Returns.html#Handler-Returns" accesskey="1">Handler Returns</a>:</td><td align="left" valign="top">Handlers that return normally, and what
+                                 this means.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Termination-in-Handler.html#Termination-in-Handler" accesskey="2">Termination in Handler</a>:</td><td align="left" valign="top">How handler functions terminate a program.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Longjmp-in-Handler.html#Longjmp-in-Handler" accesskey="3">Longjmp in Handler</a>:</td><td align="left" valign="top">Nonlocal transfer of control out of a
+                                 signal handler.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Signals-in-Handler.html#Signals-in-Handler" accesskey="4">Signals in Handler</a>:</td><td align="left" valign="top">What happens when signals arrive while
+                                 the handler is already occupied.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Merged-Signals.html#Merged-Signals" accesskey="5">Merged Signals</a>:</td><td align="left" valign="top">When a second signal arrives before the
+				 first is handled.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Nonreentrancy.html#Nonreentrancy" accesskey="6">Nonreentrancy</a>:</td><td align="left" valign="top">Do not call any functions unless you know they
+                                 are reentrant with respect to signals.
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Atomic-Data-Access.html#Atomic-Data-Access" accesskey="7">Atomic Data Access</a>:</td><td align="left" valign="top">A single handler can run in the middle of
+                                 reading or writing a single object.
+</td></tr>
+</table>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Interrupted-Primitives.html#Interrupted-Primitives" accesskey="n" rel="next">Interrupted Primitives</a>, Previous: <a href="Signal-Actions.html#Signal-Actions" accesskey="p" rel="prev">Signal Actions</a>, Up: <a href="Signal-Handling.html#Signal-Handling" accesskey="u" rel="up">Signal Handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

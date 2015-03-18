@@ -1,0 +1,32 @@
+<a name="Access-Permission"></a>
+<div class="header">
+<p>
+Next: <a href="Setting-Permissions.html#Setting-Permissions" accesskey="n" rel="next">Setting Permissions</a>, Previous: <a href="Permission-Bits.html#Permission-Bits" accesskey="p" rel="prev">Permission Bits</a>, Up: <a href="File-Attributes.html#File-Attributes" accesskey="u" rel="up">File Attributes</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="How-Your-Access-to-a-File-is-Decided"></a>
+<h4 class="subsection">14.9.6 How Your Access to a File is Decided</h4>
+<a name="index-permission-to-access-a-file"></a>
+<a name="index-access-permission-for-a-file"></a>
+<a name="index-file-access-permission"></a>
+
+<p>Recall that the operating system normally decides access permission for
+a file based on the effective user and group IDs of the process and its
+supplementary group IDs, together with the file&rsquo;s owner, group and
+permission bits.  These concepts are discussed in detail in <a href="Process-Persona.html#Process-Persona">Process Persona</a>.
+</p>
+<p>If the effective user ID of the process matches the owner user ID of the
+file, then permissions for read, write, and execute/search are
+controlled by the corresponding &ldquo;user&rdquo; (or &ldquo;owner&rdquo;) bits.  Likewise,
+if any of the effective group ID or supplementary group IDs of the
+process matches the group owner ID of the file, then permissions are
+controlled by the &ldquo;group&rdquo; bits.  Otherwise, permissions are controlled
+by the &ldquo;other&rdquo; bits.
+</p>
+<p>Privileged users, like &lsquo;<samp>root</samp>&rsquo;, can access any file regardless of
+its permission bits.  As a special case, for a file to be executable
+even by a privileged user, at least one of its execute bits must be set.
+</p>
+
+
+

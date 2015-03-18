@@ -1,0 +1,45 @@
+<a name="closelog"></a>
+<div class="header">
+<p>
+Next: <a href="setlogmask.html#setlogmask" accesskey="n" rel="next">setlogmask</a>, Previous: <a href="syslog_003b-vsyslog.html#syslog_003b-vsyslog" accesskey="p" rel="prev">syslog; vsyslog</a>, Up: <a href="Submitting-Syslog-Messages.html#Submitting-Syslog-Messages" accesskey="u" rel="up">Submitting Syslog Messages</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="closelog-1"></a>
+<h4 class="subsection">18.2.3 closelog</h4>
+
+<p>The symbols referred to in this section are declared in the file
+<samp>syslog.h</samp>.
+</p>
+<dl>
+<dt><a name="index-closelog"></a>Function: <em>void</em> <strong>closelog</strong> <em>(void)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Unsafe lock
+| AC-Unsafe lock fd
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+
+<p><code>closelog</code> closes the current Syslog connection, if there is one.
+This includes closing the <samp>/dev/log</samp> socket, if it is open.
+<code>closelog</code> also sets the identification string for Syslog messages
+back to the default, if <code>openlog</code> was called with a non-NULL argument
+to <var>ident</var>.  The default identification string is the program name
+taken from argv[0].
+</p>
+<p>If you are writing shared library code that uses <code>openlog</code> to
+generate custom syslog output, you should use <code>closelog</code> to drop
+the GNU C Library&rsquo;s internal reference to the <var>ident</var> pointer when you are
+done.  Please read the section on <code>openlog</code> for more information:
+See <a href="openlog.html#openlog">openlog</a>.
+</p>
+<p><code>closelog</code> does not flush any buffers.  You do not have to call
+<code>closelog</code> before re-opening a Syslog connection with <code>openlog</code>.
+Syslog connections are automatically closed on exec or exit.
+</p>
+</dd></dl>
+
+
+
+
+

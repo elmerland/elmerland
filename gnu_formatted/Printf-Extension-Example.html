@@ -1,0 +1,96 @@
+<a name="Printf-Extension-Example"></a>
+<div class="header">
+<p>
+Next: <a href="Predefined-Printf-Handlers.html#Predefined-Printf-Handlers" accesskey="n" rel="next">Predefined Printf Handlers</a>, Previous: <a href="Defining-the-Output-Handler.html#Defining-the-Output-Handler" accesskey="p" rel="prev">Defining the Output Handler</a>, Up: <a href="Customizing-Printf.html#Customizing-Printf" accesskey="u" rel="up">Customizing Printf</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="printf-Extension-Example"></a>
+<h4 class="subsection">12.13.4 <code>printf</code> Extension Example</h4>
+
+<p>Here is an example showing how to define a <code>printf</code> handler function.
+This program defines a data structure called a <code>Widget</code> and
+defines the &lsquo;<samp>%W</samp>&rsquo; conversion to print information about <code>Widget&nbsp;*</code><!-- /@w -->
+arguments, including the pointer value and the name stored in the data
+structure.  The &lsquo;<samp>%W</samp>&rsquo; conversion supports the minimum field width and
+left-justification options, but ignores everything else.
+</p>
+<div class="smallexample">
+<pre class="smallexample">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;printf.h&gt;
+
+</pre><pre class="smallexample">typedef struct
+{
+  char *name;
+}
+Widget;
+</pre><pre class="smallexample">
+int
+print_widget (FILE *stream,
+              const struct printf_info *info,
+              const void *const *args)
+{
+  const Widget *w;
+  char *buffer;
+  int len;
+
+  /* <span class="roman">Format the output into a string.</span> */
+  w = *((const Widget **) (args[0]));
+  len = asprintf (&amp;buffer, &quot;&lt;Widget %p: %s&gt;&quot;, w, w-&gt;name);
+  if (len == -1)
+    return -1;
+
+  /* <span class="roman">Pad to the minimum field width and print to the stream.</span> */
+  len = fprintf (stream, &quot;%*s&quot;,
+                 (info-&gt;left ? -info-&gt;width : info-&gt;width),
+                 buffer);
+
+  /* <span class="roman">Clean up and return.</span> */
+  free (buffer);
+  return len;
+}
+
+
+int
+print_widget_arginfo (const struct printf_info *info, size_t n,
+                      int *argtypes)
+{
+  /* <span class="roman">We always take exactly one argument and this is a pointer to the
+     structure..</span> */
+  if (n &gt; 0)
+    argtypes[0] = PA_POINTER;
+  return 1;
+}
+
+
+int
+main (void)
+{
+  /* <span class="roman">Make a widget to print.</span> */
+  Widget mywidget;
+  mywidget.name = &quot;mywidget&quot;;
+
+  /* <span class="roman">Register the print function for widgets.</span> */
+  register_printf_function ('W', print_widget, print_widget_arginfo);
+
+  /* <span class="roman">Now print the widget.</span> */
+  printf (&quot;|%W|\n&quot;, &amp;mywidget);
+  printf (&quot;|%35W|\n&quot;, &amp;mywidget);
+  printf (&quot;|%-35W|\n&quot;, &amp;mywidget);
+
+  return 0;
+}
+</pre></div>
+
+<p>The output produced by this program looks like:
+</p>
+<div class="smallexample">
+<pre class="smallexample">|&lt;Widget 0xffeffb7c: mywidget&gt;|
+|      &lt;Widget 0xffeffb7c: mywidget&gt;|
+|&lt;Widget 0xffeffb7c: mywidget&gt;      |
+</pre></div>
+
+
+
+

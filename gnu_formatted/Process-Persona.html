@@ -1,0 +1,55 @@
+<a name="Process-Persona"></a>
+<div class="header">
+<p>
+Next: <a href="Why-Change-Persona.html#Why-Change-Persona" accesskey="n" rel="next">Why Change Persona</a>, Previous: <a href="User-and-Group-IDs.html#User-and-Group-IDs" accesskey="p" rel="prev">User and Group IDs</a>, Up: <a href="Users-and-Groups.html#Users-and-Groups" accesskey="u" rel="up">Users and Groups</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="The-Persona-of-a-Process"></a>
+<h3 class="section">30.2 The Persona of a Process</h3>
+<a name="index-persona"></a>
+<a name="index-effective-user-ID"></a>
+<a name="index-effective-group-ID"></a>
+<a name="index-supplementary-group-IDs"></a>
+
+<p>At any time, each process has an <em>effective user ID</em>, a <em>effective
+group ID</em>, and a set of <em>supplementary group IDs</em>.  These IDs
+determine the privileges of the process.  They are collectively
+called the <em>persona</em> of the process, because they determine &ldquo;who it
+is&rdquo; for purposes of access control.
+</p>
+<p>Your login shell starts out with a persona which consists of your user
+ID, your default group ID, and your supplementary group IDs (if you are
+in more than one group).  In normal circumstances, all your other processes
+inherit these values.
+</p>
+<a name="index-real-user-ID"></a>
+<a name="index-real-group-ID"></a>
+<p>A process also has a <em>real user ID</em> which identifies the user who
+created the process, and a <em>real group ID</em> which identifies that
+user&rsquo;s default group.  These values do not play a role in access
+control, so we do not consider them part of the persona.  But they are
+also important.
+</p>
+<p>Both the real and effective user ID can be changed during the lifetime
+of a process.  See <a href="Why-Change-Persona.html#Why-Change-Persona">Why Change Persona</a>.
+</p>
+<p>For details on how a process&rsquo;s effective user ID and group IDs affect
+its permission to access files, see <a href="Access-Permission.html#Access-Permission">Access Permission</a>.
+</p>
+<p>The effective user ID of a process also controls permissions for sending
+signals using the <code>kill</code> function.  See <a href="Signaling-Another-Process.html#Signaling-Another-Process">Signaling Another Process</a>.
+</p>
+<p>Finally, there are many operations which can only be performed by a
+process whose effective user ID is zero.  A process with this user ID is
+a <em>privileged process</em>.  Commonly the user name <code>root</code> is
+associated with user ID 0, but there may be other user names with this
+ID.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Why-Change-Persona.html#Why-Change-Persona" accesskey="n" rel="next">Why Change Persona</a>, Previous: <a href="User-and-Group-IDs.html#User-and-Group-IDs" accesskey="p" rel="prev">User and Group IDs</a>, Up: <a href="Users-and-Groups.html#Users-and-Groups" accesskey="u" rel="up">Users and Groups</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

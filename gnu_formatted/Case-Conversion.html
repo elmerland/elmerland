@@ -1,0 +1,107 @@
+<a name="Case-Conversion"></a>
+<div class="header">
+<p>
+Next: <a href="Classification-of-Wide-Characters.html#Classification-of-Wide-Characters" accesskey="n" rel="next">Classification of Wide Characters</a>, Previous: <a href="Classification-of-Characters.html#Classification-of-Characters" accesskey="p" rel="prev">Classification of Characters</a>, Up: <a href="Character-Handling.html#Character-Handling" accesskey="u" rel="up">Character Handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Case-Conversion-1"></a>
+<h3 class="section">4.2 Case Conversion</h3>
+<a name="index-character-case-conversion"></a>
+<a name="index-case-conversion-of-characters"></a>
+<a name="index-converting-case-of-characters"></a>
+
+<p>This section explains the library functions for performing conversions
+such as case mappings on characters.  For example, <code>toupper</code>
+converts any character to upper case if possible.  If the character
+can&rsquo;t be converted, <code>toupper</code> returns it unchanged.
+</p>
+<p>These functions take one argument of type <code>int</code>, which is the
+character to convert, and return the converted character as an
+<code>int</code>.  If the conversion is not applicable to the argument given,
+the argument is returned unchanged.
+</p>
+<p><strong>Compatibility Note:</strong> In pre-ISO&nbsp;C<!-- /@w --> dialects, instead of
+returning the argument unchanged, these functions may fail when the
+argument is not suitable for the conversion.  Thus for portability, you
+may need to write <code>islower(c) ? toupper(c) : c</code> rather than just
+<code>toupper(c)</code>.
+</p>
+<p>These functions are declared in the header file <samp>ctype.h</samp>.
+<a name="index-ctype_002eh-2"></a>
+</p>
+<dl>
+<dt><a name="index-tolower"></a>Function: <em>int</em> <strong>tolower</strong> <em>(int <var>c</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>If <var>c</var> is an upper-case letter, <code>tolower</code> returns the corresponding
+lower-case letter.  If <var>c</var> is not an upper-case letter,
+<var>c</var> is returned unchanged.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-toupper"></a>Function: <em>int</em> <strong>toupper</strong> <em>(int <var>c</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>If <var>c</var> is a lower-case letter, <code>toupper</code> returns the corresponding
+upper-case letter.  Otherwise <var>c</var> is returned unchanged.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-toascii"></a>Function: <em>int</em> <strong>toascii</strong> <em>(int <var>c</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This function converts <var>c</var> to a 7-bit <code>unsigned char</code> value
+that fits into the US/UK ASCII character set, by clearing the high-order
+bits.  This function is a BSD extension and is also an SVID extension.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_005ftolower"></a>Function: <em>int</em> <strong>_tolower</strong> <em>(int <var>c</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This is identical to <code>tolower</code>, and is provided for compatibility
+with the SVID.  See <a href="SVID.html#SVID">SVID</a>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-_005ftoupper"></a>Function: <em>int</em> <strong>_toupper</strong> <em>(int <var>c</var>)</em></dt>
+<dd><p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+| See <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts">POSIX Safety Concepts</a>.
+</p>
+
+<p>This is identical to <code>toupper</code>, and is provided for compatibility
+with the SVID.
+</p></dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Classification-of-Wide-Characters.html#Classification-of-Wide-Characters" accesskey="n" rel="next">Classification of Wide Characters</a>, Previous: <a href="Classification-of-Characters.html#Classification-of-Characters" accesskey="p" rel="prev">Classification of Characters</a>, Up: <a href="Character-Handling.html#Character-Handling" accesskey="u" rel="up">Character Handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+

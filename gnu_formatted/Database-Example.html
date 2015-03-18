@@ -1,0 +1,86 @@
+<a name="Database-Example"></a>
+<div class="header">
+<p>
+Next: <a href="Netgroup-Database.html#Netgroup-Database" accesskey="n" rel="next">Netgroup Database</a>, Previous: <a href="Group-Database.html#Group-Database" accesskey="p" rel="prev">Group Database</a>, Up: <a href="Users-and-Groups.html#Users-and-Groups" accesskey="u" rel="up">Users and Groups</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Concept-Index.html#Concept-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="User-and-Group-Database-Example"></a>
+<h3 class="section">30.15 User and Group Database Example</h3>
+
+<p>Here is an example program showing the use of the system database inquiry
+functions.  The program prints some information about the user running
+the program.
+</p>
+<div class="smallexample">
+<pre class="smallexample">
+#include &lt;grp.h&gt;
+#include &lt;pwd.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+
+int
+main (void)
+{
+  uid_t me;
+  struct passwd *my_passwd;
+  struct group *my_group;
+  char **members;
+
+  /* <span class="roman">Get information about the user ID.</span> */
+  me = getuid ();
+  my_passwd = getpwuid (me);
+  if (!my_passwd)
+    {
+      printf (&quot;Couldn't find out about user %d.\n&quot;, (int) me);
+      exit (EXIT_FAILURE);
+    }
+
+  /* <span class="roman">Print the information.</span> */
+  printf (&quot;I am %s.\n&quot;, my_passwd-&gt;pw_gecos);
+  printf (&quot;My login name is %s.\n&quot;, my_passwd-&gt;pw_name);
+  printf (&quot;My uid is %d.\n&quot;, (int) (my_passwd-&gt;pw_uid));
+  printf (&quot;My home directory is %s.\n&quot;, my_passwd-&gt;pw_dir);
+  printf (&quot;My default shell is %s.\n&quot;, my_passwd-&gt;pw_shell);
+
+  /* <span class="roman">Get information about the default group ID.</span> */
+  my_group = getgrgid (my_passwd-&gt;pw_gid);
+  if (!my_group)
+    {
+      printf (&quot;Couldn't find out about group %d.\n&quot;,
+              (int) my_passwd-&gt;pw_gid);
+      exit (EXIT_FAILURE);
+    }
+
+  /* <span class="roman">Print the information.</span> */
+  printf (&quot;My default group is %s (%d).\n&quot;,
+          my_group-&gt;gr_name, (int) (my_passwd-&gt;pw_gid));
+  printf (&quot;The members of this group are:\n&quot;);
+  members = my_group-&gt;gr_mem;
+  while (*members)
+    {
+      printf (&quot;  %s\n&quot;, *(members));
+      members++;
+    }
+
+  return EXIT_SUCCESS;
+}
+</pre></div>
+
+<p>Here is some output from this program:
+</p>
+<div class="smallexample">
+<pre class="smallexample">I am Throckmorton Snurd.
+My login name is snurd.
+My uid is 31093.
+My home directory is /home/fsg/snurd.
+My default shell is /bin/sh.
+My default group is guest (12).
+The members of this group are:
+  friedman
+  tami
+</pre></div>
+
+
+
+
