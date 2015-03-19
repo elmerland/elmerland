@@ -1,0 +1,12 @@
+---
+title: "GNU Manual Improved"
+date: 2015-03-18
+categories: experiment gnu
+excerpt: "What's not to love about the GNU C Library manual. Its long, it looks like crap and its older than all of us. This is my attempt to improve it!"
+---
+
+What's not to love about the GNU C Library manual. Its long, it looks like crap and its older than all of us. For some time now I have been wanting to create a new version of the manual with a refreshed look and a new navigation system. Getting anywhere in that manual is a chore, and I always seem to end up with ten tabs open to different sections. So please, check out "my":1 take on the GNU manual and let me know what you think in the comments.
+
+p{font-size: 2em;}. Go Here: "Yet Another GNU Manual":1
+
+[1]/gnu_manual.html
