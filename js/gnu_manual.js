@@ -83,12 +83,53 @@ function setSectionContent(container, item, isSubItem, depth) {
 function setItemContent(container) {
   return function(data, textStatus, jqXHR) {
     $(container).html(data);
+    $(container).find('a').click(handleContentClick);
   }
+}
+
+function handleContentClick(event) {
+  event.preventDefault();
+  var target = $(this).attr('href');
+  var path = [];
+  getItemPath($.gnu_manual.toc, target, path);
+  $('.gnu-manual .section-wrapper').html('');
+  setSectionContent($('.gnu-manual .section-wrapper'), $.gnu_manual.toc[path[0]]);
+  showSection(path);
+  anchor = target.split('#')[1];
+  console.log(anchor);
 }
 
 function subItemClick(event) {
   $(this).children('.fa').toggleClass('fa-caret-right').toggleClass('fa-caret-down');
-  var tmp = $(this).next('.sub-section-content').fadeToggle();
-  console.log($(this).next('.sub-section-content').size());
-  $(tmp).next('.sub-section-wrapper').fadeToggle();
+  var tmp = $(this).next('.sub-section-content').slideToggle();
+  $(tmp).next('.sub-section-wrapper').slideToggle();
 }
+
+function getItemPath(list, target, path) {
+  var foundIt = false;
+  if (!list || list.length === 0) { return foundIt; }
+  $.each(list, function(i, elem) {
+    if (elem.href === target) {
+      path.unshift(i);
+      foundIt = true;
+      return false;
+    } else if (getItemPath(elem.list, target, path)) {
+      path.unshift(i);
+      foundIt = true;
+      return false;
+    }
+  });
+  return foundIt;
+}
+
+function showSection(path) {
+  path.shift();
+  var wrapper = $('.gnu-manual .section-wrapper .sub-section-wrapper');
+  $.each(path, function(i, num) {
+    var item = $(wrapper).children('.sub-section-item').get(num);
+    $(item).trigger('click');
+    wrapper = $(item).next().next();
+  })
+}
+
+
