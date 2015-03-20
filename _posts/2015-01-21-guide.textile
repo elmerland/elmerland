@@ -3,7 +3,7 @@ title: "The Hitchhiker's Guide to an Efficient Workflow"
 date: 2015-01-21
 categories: guide workflow
 gif_path: "/assets/gif/guide"
-excerpt: "Ever feel like your workflow is slooooooow? This is a comprehensive list of all the tools and software I use to make my life easier. Laziness is a great motivator"
+excerpt: "Ever feel like your workflow is slooooooow? This is a comprehensive list of all the tools and software I use to make my life easier. Laziness is a great motivator!"
 ---
 
 First comes learning, then comes coding, and then comes being super frustrated at a slow workflow! We code monkeys usually focus on learning stuff, all day, every day. So much so that we forget about the tools we use to code and how we can improve them. Having an inefficient workflow can seriously slow you down and make iterating on code a pain. This usually means taking a "long ass":1 time to do anything. Over the years I have tried to make my workflow as efficient as possible so that I can focus on doing my thing (the thinking part), and have the computer to do its thing (the repetitive part).
