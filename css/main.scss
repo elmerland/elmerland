@@ -48,6 +48,12 @@ code {
   }
 }
 
+blockquote {
+  font-family: "freight-text-pro",sans-serif;
+  font-style: italic;
+  font-size: 1.1em;
+}
+
 pre {
   font-size: .8em;
 }
@@ -77,6 +83,7 @@ img {
           color: $blue;
           overflow: hidden;
           text-overflow: ellipsis;
+          font-size: 1.75em;
         }
         .post-metadata {
           color: lighten(black, 40%);
