@@ -1,5 +1,6 @@
 ---
 ---
+
 $highlight-color: #5FF3E8;
 $highlight-color: #22F4E5;
 $header-bg-color: #040004;
@@ -10,6 +11,7 @@ $level1-bg-color: #FFFFFF;
 $level2-bg-color: #FFFFFF;
 $level3-bg-color: #FFFFFF;
 $level-font-color: #000000;
+$function-color: #1049CE;
 
 body { background-color: white; }
 
@@ -71,7 +73,11 @@ body { background-color: white; }
     }
   }
   .author {
-    padding-top: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .prefix { font-size: .8em;}
     .fancy {
       font-family: "lust-script",sans-serif;
       font-weight: 300;
@@ -90,8 +96,8 @@ body { background-color: white; }
   .list-level {
     flex-grow: 0;
     flex-shrink: 0;
-    width: 30%;
-    max-width: 20em;
+    width: 25%;
+    max-width: 18em;
     overflow-y: scroll;
     background-color: $list-bg-color;
     color: $list-font-color;
@@ -106,9 +112,14 @@ body { background-color: white; }
         &:hover {
           background-color: darken($list-bg-color, 10%);
         }
+        a, a:link, a:visited, a:hover, a:active {
+          color: white;
+        }
       }
       li.selected {
-        color: $highlight-color;
+        a, a:link, a:visited, a:hover, a:active {
+          color: $highlight-color;
+        }
         &:hover {
           background-color: $list-bg-color;
         }
@@ -137,6 +148,7 @@ body { background-color: white; }
       pre { font-size: 1em; }
       table { table-layout: initial; }
       .section, .subsection, .subsubsection { display: none;}
+      .function-name { color: $function-color; }
     }
     .sub-section-item {
       cursor: pointer;
@@ -155,11 +167,8 @@ body { background-color: white; }
 
     .sub-section-item {
       &.level-1 { background-color: $level1-bg-color; }
-      &.level-1:hover { background-color: darken($level1-bg-color, 20%); }
       &.level-2 { background-color: $level2-bg-color; }
-      &.level-2:hover { background-color: darken($level2-bg-color, 20%); }
       &.level-3 { background-color: $level3-bg-color; }
-      &.level-3:hover { background-color: darken($level3-bg-color, 20%); }
     }
   }
 }

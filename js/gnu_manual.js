@@ -12,7 +12,7 @@ $(document).ready(function() {
 
   // Generate chapter list.
   setup();
-  $('.main-list-item').fitText(2.0, {minFontSize: '14px'});
+  $('.main-list-item').fitText(2.1, {minFontSize: '14px'});
 
   // Add click handler to chanpters.
   $('.main-list-item').click(function(e) {
@@ -48,7 +48,8 @@ function setup() {
   var list = $('.gnu-manual .list-level ul').addClass('main-list');
   $.each($.gnu_manual.toc, function(i, elem) {
     var item = $('<li></li>');
-    item.append(elem.name);
+    var link = $('<a/>').append(elem.name);
+    item.append(link);
     item.addClass('main-list-item');
     item.attr('data-index', i);
     $(list).append(item);
@@ -96,6 +97,15 @@ function setItemContent(container) {
   return function(data, textStatus, jqXHR) {
     $(container).html(data);
     $(container).find('a').click(handleContentClick);
+    // Find and tag function names
+    var terms = $(container).find('dt');
+    $(terms).each(function(i, elem) {
+      elem = $(elem);
+      if (elem.html().toLowerCase().indexOf('function: ') > -1) {
+        elem.addClass('function-name');
+        elem.html(elem.html().replace(/function:\ */i, ''));
+      }
+    });
   }
 }
 
