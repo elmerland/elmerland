@@ -85,6 +85,9 @@
     & > ul {
       margin-bottom: .75em;
     }
+    .gist-meta {
+      padding: 0 .5em !important;
+    }
   }
   .post-footer {
     @include card-layout();
