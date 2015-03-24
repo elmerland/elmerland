@@ -9,6 +9,7 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://elmerland.com" # the base hostname & protocol for your site
 twitter_username: elmerlandaverde
 github_username:  elmerland
+port: 4000
 
 exclude: 
   - assets/source
@@ -18,9 +19,12 @@ exclude:
   - LICENSE
   - README.md
   - "*.git"
+  - ".idea"
   - "*.o"
   - "**/bin/**"
   - "gnu/"
+  - "**/jsx/**"
+  - "**/.module-cache/**"
 
 defaults:
   -
