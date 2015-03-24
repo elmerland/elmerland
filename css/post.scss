@@ -12,7 +12,6 @@
     margin-bottom: 0;
     text-align: center;
     padding-top: 1em;
-    // padding-top: 1.4em;
     color: darken(#0F8FDE, 5%);
     .post-title {
       font-size: 3em;
@@ -53,7 +52,6 @@
     @include card-layout();
     margin-top: 0;
     padding: 1em;
-    // h1 { font-size: 2.25em;}
     h2 { font-size: 1.75em;}
     h3 { font-size: 1.5em;}
     h4 { font-size: 1.25em;}
@@ -76,8 +74,12 @@
         opacity: 0;
         transition: opacity 0.2s ease-in-out;
       }
-      &:hover .post-deep-link {
-        opacity: 1;
+      &:hover {
+        .post-deep-link {
+          color: gray;
+          opacity: 1;
+          &:hover { color: #477DCA; }
+        }
       }
     }
     & > ul {

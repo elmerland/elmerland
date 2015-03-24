@@ -1,0 +1,45 @@
+---
+---
+@import "global_variables";
+@import "layout";
+
+.gist-meta {
+  padding: 0 .5em !important;
+}
+
+.wrapper {
+  padding: 1em 0;
+}
+
+.posts-list {
+  .post-link {
+    color: $dark-gray;
+    display: block;
+    @include card-layout();
+    .post-info {
+      padding: 1em;
+      .post-header {
+        .post-title {
+          color: $blue;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-size: 1.75em;
+        }
+        .post-metadata {
+          color: lighten(black, 40%);
+          font-weight: 300;
+          .post-date {
+            &::after {
+              content: ' | ';
+            }
+          }
+        }
+      }
+    }
+    &:hover {
+      .post-title {
+        text-decoration: underline;
+      }
+    }
+  }
+}

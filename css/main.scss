@@ -1,12 +1,9 @@
 ---
-# Only the main Sass file needs front matter (the dashes are enough)
 ---
+@charset "utf-8";
 @import "bourbon/bourbon";
 @import "base/base";
-@import "layout";
 @import "syntax-highlighting";
-@charset "utf-8";
-@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900|Open+Sans:400,700,300,800);
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -31,10 +28,6 @@ body {
     // font-size: 137.5%;
     font-size: 130%;
   }
-
-  // @media (min-height: 31.25em) and (min-width: 75em) {
-  //   font-size: 140%;
-  // }
 }
 
 code {
@@ -61,45 +54,4 @@ pre {
 img {
   display: block;
   margin: 0 auto;
-}
-
-.gist-meta {
-  padding: 0 .5em !important;
-}
-
-.wrapper {
-  padding: 1em 0;
-}
-
-.posts-list {
-  .post-link {
-    color: $dark-gray;
-    display: block;
-    @include card-layout();
-    .post-info {
-      padding: 1em;
-      .post-header {
-        .post-title {
-          color: $blue;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          font-size: 1.75em;
-        }
-        .post-metadata {
-          color: lighten(black, 40%);
-          font-weight: 300;
-          .post-date {
-            &::after {
-              content: ' | ';
-            }
-          }
-        }
-      }
-    }
-    &:hover {
-      .post-title {
-        text-decoration: underline;
-      }
-    }
-  }
 }
