@@ -5,7 +5,8 @@ var gulp = require('gulp'),
     react = require('gulp-react'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
-    cssmin = require('gulp-minify-css');
+    cssmin = require('gulp-minify-css'),
+    plumber = require('gulp-plumber');
 
 var PORT = 4000;
 var ROOT = '_site/';
@@ -14,8 +15,7 @@ var WATCHED_FILES = [
     "_drafts/**",
     "_includes/**",
     "_layouts/**",
-    "_posts/**",
-    "assets/**"
+    "_posts/**"
 ];
 
 // Run Jekyll Build Asynchronously
@@ -25,7 +25,8 @@ gulp.task('jekyll', function () {
   jekyll.on('exit', function (code) {
     console.log('-- Finished Jekyll Build --')
     gulp.src('_site/**')
-      .pipe(connect.reload());
+      .pipe(connect.reload())
+      .on('error', errorHandler);
   })
 });
 
@@ -39,7 +40,7 @@ gulp.task('webserver', function() {
 
 
 gulp.task('sass', function() {
-  gulp.src('sass/**/*.scss')
+  gulp.src('_assets/sass/**/*.scss')
     .pipe(sass({
       errLogToConsole: true
     }))
@@ -51,16 +52,22 @@ gulp.task('sass', function() {
 });
 
 gulp.task('jsx', function() {
-  gulp.src('jsx/**/*.jsx')
+  gulp.src('_assets/jsx/**/*.jsx')
+    .pipe(plumber())
     .pipe(react())
     .pipe(gulp.dest('assets/js'));
 })
 
 gulp.task('watch', function() {
-  gulp.watch('jsx/**', ['jsx']);
-  gulp.watch('sass/**', ['sass']);
+  gulp.watch('_assets/jsx/**', ['jsx', 'jekyll'])
+  gulp.watch('_assets/sass/**', ['sass', 'jekyll'])
   gulp.watch(WATCHED_FILES, ['jekyll']);
 })
  
 gulp.task('default', ['jsx', 'sass', 'jekyll', 'webserver', 'watch']);
+
+function errorHandler (error) {
+  console.log(error.toString());
+  this.emit('end');
+}
 
