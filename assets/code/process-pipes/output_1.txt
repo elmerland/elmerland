@@ -1,3 +1,0 @@
-Pipe File Descriptors
-  Read end:  3
-  Write end: 4
