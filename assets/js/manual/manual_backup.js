@@ -1,6 +1,9 @@
 
 if (!$.gnu_manual) { $.gnu_manual = {}; }
+
 $.gnu_manual.url_prefix = '/gnu_formatted/';
+
+var manualContent = '.';
 
 $(document).ready(function() {
   // Generate table of contents if not already loaded.
@@ -12,20 +15,23 @@ $(document).ready(function() {
 
   // Generate chapter list.
   setup();
-  $('.main-list-item').fitText(2.1, {minFontSize: '14px'});
 
   // Add click handler to chanpters.
-  $('.main-list-item').click(function(e) {
+  $('.chapter-list-item').click(function(e) {
     var idx = parseInt($(this).attr('data-index'));
-    $('.gnu-manual .section-wrapper').html('');
+    $('.manual .chapter-content').html('');
     setSelectedChapter(idx);
-    setSectionContent($('.gnu-manual .section-wrapper'), $.gnu_manual.toc[idx]);
+    setSectionContent($('.manual .chapter-content'), $.gnu_manual.toc[idx]);
   });
 
   // Set chapter 1 as default chapter.
   setSelectedChapter(0);
-  setSectionContent($('.gnu-manual .section-wrapper'), $.gnu_manual.toc[0]);
+  setSectionContent($('.manual .chapter-content'), $.gnu_manual.toc[0]);
 });
+
+function temp() {
+  console.log("do something");
+}
 
 // Create a TOC object from the actual TOC.
 function extractData(list, content) {
@@ -44,8 +50,8 @@ function extractData(list, content) {
 
 // Generate a list with all the chapters in the TOC.
 function setup() {
-  $('.gnu-manual .list-level').append('<ul></ul>')
-  var list = $('.gnu-manual .list-level ul').addClass('main-list');
+  $('.manual .chapter-list').append('<ul></ul>')
+  var list = $('.manual .chapter-list ul').addClass('main-list');
   $.each($.gnu_manual.toc, function(i, elem) {
     var item = $('<li></li>');
     var link = $('<a/>').append(elem.name);
@@ -57,7 +63,7 @@ function setup() {
 }
 
 function setSelectedChapter(idx) {
-  $($('.main-list-item').removeClass('selected').get(idx)).addClass('selected');
+  $($('.chapter-list-item').removeClass('selected').get(idx)).addClass('selected');
 }
 
 // Sets the content of the given item in the given container.
@@ -115,9 +121,9 @@ function handleContentClick(event) {
   var target = $(this).attr('href');
   var path = [];
   getItemPath($.gnu_manual.toc, target, path);
-  $('.gnu-manual .section-wrapper').html('');
+  $('.manual .chapter-content').html('');
   setSelectedChapter(path[0]);
-  setSectionContent($('.gnu-manual .section-wrapper'), $.gnu_manual.toc[path[0]]);
+  setSectionContent($('.manual .chapter-content'), $.gnu_manual.toc[path[0]]);
   showSection(path);
   anchor = target.split('#')[1];
   console.log(anchor);
@@ -151,7 +157,7 @@ function getItemPath(list, target, path) {
 // Given a path, it makes sure tha apropriate sections are visibile.
 function showSection(path) {
   path.shift();
-  var wrapper = $('.gnu-manual .section-wrapper .sub-section-wrapper');
+  var wrapper = $('.manual .chapter-content .sub-section-wrapper');
   $.each(path, function(i, num) {
     var item = $(wrapper).children('.sub-section-item').get(num);
     $(item).trigger('click');

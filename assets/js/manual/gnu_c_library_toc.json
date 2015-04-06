@@ -1,0 +1,3791 @@
+[
+    {
+        "src": "Introduction.html#Introduction",
+        "title": "1 Introduction",
+        "subsections": [
+            {
+                "src": "Getting-Started.html#Getting-Started",
+                "title": "1.1 Getting Started",
+                "subsections": null
+            },
+            {
+                "src": "Standards-and-Portability.html#Standards-and-Portability",
+                "title": "1.2 Standards and Portability",
+                "subsections": [
+                    {
+                        "src": "ISO-C.html#ISO-C",
+                        "title": "1.2.1 ISO C",
+                        "subsections": null
+                    },
+                    {
+                        "src": "POSIX.html#POSIX",
+                        "title": "1.2.2 POSIX (The Portable Operating System Interface)",
+                        "subsections": [
+                            {
+                                "src": "POSIX-Safety-Concepts.html#POSIX-Safety-Concepts",
+                                "title": "1.2.2.1 POSIX Safety Concepts",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Unsafe-Features.html#Unsafe-Features",
+                                "title": "1.2.2.2 Unsafe Features",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Conditionally-Safe-Features.html#Conditionally-Safe-Features",
+                                "title": "1.2.2.3 Conditionally Safe Features",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Other-Safety-Remarks.html#Other-Safety-Remarks",
+                                "title": "1.2.2.4 Other Safety Remarks",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Berkeley-Unix.html#Berkeley-Unix",
+                        "title": "1.2.3 Berkeley Unix",
+                        "subsections": null
+                    },
+                    {
+                        "src": "SVID.html#SVID",
+                        "title": "1.2.4 SVID (The System V Interface Description)",
+                        "subsections": null
+                    },
+                    {
+                        "src": "XPG.html#XPG",
+                        "title": "1.2.5 XPG (The X/Open Portability Guide)",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Using-the-Library.html#Using-the-Library",
+                "title": "1.3 Using the Library",
+                "subsections": [
+                    {
+                        "src": "Header-Files.html#Header-Files",
+                        "title": "1.3.1 Header Files",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Macro-Definitions.html#Macro-Definitions",
+                        "title": "1.3.2 Macro Definitions of Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Reserved-Names.html#Reserved-Names",
+                        "title": "1.3.3 Reserved Names",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Feature-Test-Macros.html#Feature-Test-Macros",
+                        "title": "1.3.4 Feature Test Macros",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Roadmap-to-the-Manual.html#Roadmap-to-the-Manual",
+                "title": "1.4 Roadmap to the Manual",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Error-Reporting.html#Error-Reporting",
+        "title": "2 Error Reporting",
+        "subsections": [
+            {
+                "src": "Checking-for-Errors.html#Checking-for-Errors",
+                "title": "2.1 Checking for Errors",
+                "subsections": null
+            },
+            {
+                "src": "Error-Codes.html#Error-Codes",
+                "title": "2.2 Error Codes",
+                "subsections": null
+            },
+            {
+                "src": "Error-Messages.html#Error-Messages",
+                "title": "2.3 Error Messages",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Memory.html#Memory",
+        "title": "3 Virtual Memory Allocation And Paging",
+        "subsections": [
+            {
+                "src": "Memory-Concepts.html#Memory-Concepts",
+                "title": "3.1 Process Memory Concepts",
+                "subsections": null
+            },
+            {
+                "src": "Memory-Allocation.html#Memory-Allocation",
+                "title": "3.2 Allocating Storage For Program Data",
+                "subsections": [
+                    {
+                        "src": "Memory-Allocation-and-C.html#Memory-Allocation-and-C",
+                        "title": "3.2.1 Memory Allocation in C Programs",
+                        "subsections": [
+                            {
+                                "src": "Memory-Allocation-and-C.html#Dynamic-Memory-Allocation",
+                                "title": "3.2.1.1 Dynamic Memory Allocation",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Unconstrained-Allocation.html#Unconstrained-Allocation",
+                        "title": "3.2.2 Unconstrained Allocation",
+                        "subsections": [
+                            {
+                                "src": "Basic-Allocation.html#Basic-Allocation",
+                                "title": "3.2.2.1 Basic Memory Allocation",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Malloc-Examples.html#Malloc-Examples",
+                                "title": "3.2.2.2 Examples of <code>malloc</code>",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Freeing-after-Malloc.html#Freeing-after-Malloc",
+                                "title": "3.2.2.3 Freeing Memory Allocated with <code>malloc</code>",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Changing-Block-Size.html#Changing-Block-Size",
+                                "title": "3.2.2.4 Changing the Size of a Block",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Allocating-Cleared-Space.html#Allocating-Cleared-Space",
+                                "title": "3.2.2.5 Allocating Cleared Space",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Efficiency-and-Malloc.html#Efficiency-and-Malloc",
+                                "title": "3.2.2.6 Efficiency Considerations for <code>malloc</code>",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Aligned-Memory-Blocks.html#Aligned-Memory-Blocks",
+                                "title": "3.2.2.7 Allocating Aligned Memory Blocks",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Malloc-Tunable-Parameters.html#Malloc-Tunable-Parameters",
+                                "title": "3.2.2.8 Malloc Tunable Parameters",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Heap-Consistency-Checking.html#Heap-Consistency-Checking",
+                                "title": "3.2.2.9 Heap Consistency Checking",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Hooks-for-Malloc.html#Hooks-for-Malloc",
+                                "title": "3.2.2.10 Memory Allocation Hooks",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Statistics-of-Malloc.html#Statistics-of-Malloc",
+                                "title": "3.2.2.11 Statistics for Memory Allocation with <code>malloc</code>",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Summary-of-Malloc.html#Summary-of-Malloc",
+                                "title": "3.2.2.12 Summary of <code>malloc</code>-Related Functions",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Allocation-Debugging.html#Allocation-Debugging",
+                        "title": "3.2.3 Allocation Debugging",
+                        "subsections": [
+                            {
+                                "src": "Tracing-malloc.html#Tracing-malloc",
+                                "title": "3.2.3.1 How to install the tracing functionality",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Using-the-Memory-Debugger.html#Using-the-Memory-Debugger",
+                                "title": "3.2.3.2 Example program excerpts",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Tips-for-the-Memory-Debugger.html#Tips-for-the-Memory-Debugger",
+                                "title": "3.2.3.3 Some more or less clever ideas",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Interpreting-the-traces.html#Interpreting-the-traces",
+                                "title": "3.2.3.4 Interpreting the traces",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Obstacks.html#Obstacks",
+                        "title": "3.2.4 Obstacks",
+                        "subsections": [
+                            {
+                                "src": "Creating-Obstacks.html#Creating-Obstacks",
+                                "title": "3.2.4.1 Creating Obstacks",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Preparing-for-Obstacks.html#Preparing-for-Obstacks",
+                                "title": "3.2.4.2 Preparing for Using Obstacks",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Allocation-in-an-Obstack.html#Allocation-in-an-Obstack",
+                                "title": "3.2.4.3 Allocation in an Obstack",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Freeing-Obstack-Objects.html#Freeing-Obstack-Objects",
+                                "title": "3.2.4.4 Freeing Objects in an Obstack",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Obstack-Functions.html#Obstack-Functions",
+                                "title": "3.2.4.5 Obstack Functions and Macros",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Growing-Objects.html#Growing-Objects",
+                                "title": "3.2.4.6 Growing Objects",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Extra-Fast-Growing.html#Extra-Fast-Growing",
+                                "title": "3.2.4.7 Extra Fast Growing Objects",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Status-of-an-Obstack.html#Status-of-an-Obstack",
+                                "title": "3.2.4.8 Status of an Obstack",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Obstacks-Data-Alignment.html#Obstacks-Data-Alignment",
+                                "title": "3.2.4.9 Alignment of Data in Obstacks",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Obstack-Chunks.html#Obstack-Chunks",
+                                "title": "3.2.4.10 Obstack Chunks",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Summary-of-Obstacks.html#Summary-of-Obstacks",
+                                "title": "3.2.4.11 Summary of Obstack Functions",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Variable-Size-Automatic.html#Variable-Size-Automatic",
+                        "title": "3.2.5 Automatic Storage with Variable Size",
+                        "subsections": [
+                            {
+                                "src": "Alloca-Example.html#Alloca-Example",
+                                "title": "3.2.5.1 <code>alloca</code> Example",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Advantages-of-Alloca.html#Advantages-of-Alloca",
+                                "title": "3.2.5.2 Advantages of <code>alloca</code>",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Disadvantages-of-Alloca.html#Disadvantages-of-Alloca",
+                                "title": "3.2.5.3 Disadvantages of <code>alloca</code>",
+                                "subsections": null
+                            },
+                            {
+                                "src": "GNU-C-Variable_002dSize-Arrays.html#GNU-C-Variable_002dSize-Arrays",
+                                "title": "3.2.5.4 GNU C Variable-Size Arrays",
+                                "subsections": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "src": "Resizing-the-Data-Segment.html#Resizing-the-Data-Segment",
+                "title": "3.3 Resizing the Data Segment",
+                "subsections": null
+            },
+            {
+                "src": "Locking-Pages.html#Locking-Pages",
+                "title": "3.4 Locking Pages",
+                "subsections": [
+                    {
+                        "src": "Why-Lock-Pages.html#Why-Lock-Pages",
+                        "title": "3.4.1 Why Lock Pages",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Locked-Memory-Details.html#Locked-Memory-Details",
+                        "title": "3.4.2 Locked Memory Details",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Page-Lock-Functions.html#Page-Lock-Functions",
+                        "title": "3.4.3 Functions To Lock And Unlock Pages",
+                        "subsections": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "Character-Handling.html#Character-Handling",
+        "title": "4 Character Handling",
+        "subsections": [
+            {
+                "src": "Classification-of-Characters.html#Classification-of-Characters",
+                "title": "4.1 Classification of Characters",
+                "subsections": null
+            },
+            {
+                "src": "Case-Conversion.html#Case-Conversion",
+                "title": "4.2 Case Conversion",
+                "subsections": null
+            },
+            {
+                "src": "Classification-of-Wide-Characters.html#Classification-of-Wide-Characters",
+                "title": "4.3 Character class determination for wide characters",
+                "subsections": null
+            },
+            {
+                "src": "Using-Wide-Char-Classes.html#Using-Wide-Char-Classes",
+                "title": "4.4 Notes on using the wide character classes",
+                "subsections": null
+            },
+            {
+                "src": "Wide-Character-Case-Conversion.html#Wide-Character-Case-Conversion",
+                "title": "4.5 Mapping of wide characters.",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "String-and-Array-Utilities.html#String-and-Array-Utilities",
+        "title": "5 String and Array Utilities",
+        "subsections": [
+            {
+                "src": "Representation-of-Strings.html#Representation-of-Strings",
+                "title": "5.1 Representation of Strings",
+                "subsections": null
+            },
+            {
+                "src": "String_002fArray-Conventions.html#String_002fArray-Conventions",
+                "title": "5.2 String and Array Conventions",
+                "subsections": null
+            },
+            {
+                "src": "String-Length.html#String-Length",
+                "title": "5.3 String Length",
+                "subsections": null
+            },
+            {
+                "src": "Copying-and-Concatenation.html#Copying-and-Concatenation",
+                "title": "5.4 Copying and Concatenation",
+                "subsections": null
+            },
+            {
+                "src": "String_002fArray-Comparison.html#String_002fArray-Comparison",
+                "title": "5.5 String/Array Comparison",
+                "subsections": null
+            },
+            {
+                "src": "Collation-Functions.html#Collation-Functions",
+                "title": "5.6 Collation Functions",
+                "subsections": null
+            },
+            {
+                "src": "Search-Functions.html#Search-Functions",
+                "title": "5.7 Search Functions",
+                "subsections": [
+                    {
+                        "src": "Search-Functions.html#Compatibility-String-Search-Functions",
+                        "title": "5.7.1 Compatibility String Search Functions",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Finding-Tokens-in-a-String.html#Finding-Tokens-in-a-String",
+                "title": "5.8 Finding Tokens in a String",
+                "subsections": null
+            },
+            {
+                "src": "strfry.html#strfry",
+                "title": "5.9 strfry",
+                "subsections": null
+            },
+            {
+                "src": "Trivial-Encryption.html#Trivial-Encryption",
+                "title": "5.10 Trivial Encryption",
+                "subsections": null
+            },
+            {
+                "src": "Encode-Binary-Data.html#Encode-Binary-Data",
+                "title": "5.11 Encode Binary Data",
+                "subsections": null
+            },
+            {
+                "src": "Argz-and-Envz-Vectors.html#Argz-and-Envz-Vectors",
+                "title": "5.12 Argz and Envz Vectors",
+                "subsections": [
+                    {
+                        "src": "Argz-Functions.html#Argz-Functions",
+                        "title": "5.12.1 Argz Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Envz-Functions.html#Envz-Functions",
+                        "title": "5.12.2 Envz Functions",
+                        "subsections": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "Character-Set-Handling.html#Character-Set-Handling",
+        "title": "6 Character Set Handling",
+        "subsections": [
+            {
+                "src": "Extended-Char-Intro.html#Extended-Char-Intro",
+                "title": "6.1 Introduction to Extended Characters",
+                "subsections": null
+            },
+            {
+                "src": "Charset-Function-Overview.html#Charset-Function-Overview",
+                "title": "6.2 Overview about Character Handling Functions",
+                "subsections": null
+            },
+            {
+                "src": "Restartable-multibyte-conversion.html#Restartable-multibyte-conversion",
+                "title": "6.3 Restartable Multibyte Conversion Functions",
+                "subsections": [
+                    {
+                        "src": "Selecting-the-Conversion.html#Selecting-the-Conversion",
+                        "title": "6.3.1 Selecting the conversion and its properties",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Keeping-the-state.html#Keeping-the-state",
+                        "title": "6.3.2 Representing the state of the conversion",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Converting-a-Character.html#Converting-a-Character",
+                        "title": "6.3.3 Converting Single Characters",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Converting-Strings.html#Converting-Strings",
+                        "title": "6.3.4 Converting Multibyte and Wide Character Strings",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Multibyte-Conversion-Example.html#Multibyte-Conversion-Example",
+                        "title": "6.3.5 A Complete Multibyte Conversion Example",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Non_002dreentrant-Conversion.html#Non_002dreentrant-Conversion",
+                "title": "6.4 Non-reentrant Conversion Function",
+                "subsections": [
+                    {
+                        "src": "Non_002dreentrant-Character-Conversion.html#Non_002dreentrant-Character-Conversion",
+                        "title": "6.4.1 Non-reentrant Conversion of Single Characters",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Non_002dreentrant-String-Conversion.html#Non_002dreentrant-String-Conversion",
+                        "title": "6.4.2 Non-reentrant Conversion of Strings",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Shift-State.html#Shift-State",
+                        "title": "6.4.3 States in Non-reentrant Functions",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Generic-Charset-Conversion.html#Generic-Charset-Conversion",
+                "title": "6.5 Generic Charset Conversion",
+                "subsections": [
+                    {
+                        "src": "Generic-Conversion-Interface.html#Generic-Conversion-Interface",
+                        "title": "6.5.1 Generic Character Set Conversion Interface",
+                        "subsections": null
+                    },
+                    {
+                        "src": "iconv-Examples.html#iconv-Examples",
+                        "title": "6.5.2 A complete <code>iconv</code> example",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Other-iconv-Implementations.html#Other-iconv-Implementations",
+                        "title": "6.5.3 Some Details about other <code>iconv</code> Implementations",
+                        "subsections": null
+                    },
+                    {
+                        "src": "glibc-iconv-Implementation.html#glibc-iconv-Implementation",
+                        "title": "6.5.4 The <code>iconv</code> Implementation in the GNU C Library",
+                        "subsections": [
+                            {
+                                "src": "glibc-iconv-Implementation.html#Format-of-gconv_002dmodules-files",
+                                "title": "6.5.4.1 Format of <samp>gconv-modules</samp> files",
+                                "subsections": null
+                            },
+                            {
+                                "src": "glibc-iconv-Implementation.html#Finding-the-conversion-path-in-iconv",
+                                "title": "6.5.4.2 Finding the conversion path in <code>iconv</code>",
+                                "subsections": null
+                            },
+                            {
+                                "src": "glibc-iconv-Implementation.html#iconv-module-data-structures",
+                                "title": "6.5.4.3 <code>iconv</code> module data structures",
+                                "subsections": null
+                            },
+                            {
+                                "src": "glibc-iconv-Implementation.html#iconv-module-interfaces",
+                                "title": "6.5.4.4 <code>iconv</code> module interfaces",
+                                "subsections": null
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "Locales.html#Locales",
+        "title": "7 Locales and Internationalization",
+        "subsections": [
+            {
+                "src": "Effects-of-Locale.html#Effects-of-Locale",
+                "title": "7.1 What Effects a Locale Has",
+                "subsections": null
+            },
+            {
+                "src": "Choosing-Locale.html#Choosing-Locale",
+                "title": "7.2 Choosing a Locale",
+                "subsections": null
+            },
+            {
+                "src": "Locale-Categories.html#Locale-Categories",
+                "title": "7.3 Locale Categories",
+                "subsections": null
+            },
+            {
+                "src": "Setting-the-Locale.html#Setting-the-Locale",
+                "title": "7.4 How Programs Set the Locale",
+                "subsections": null
+            },
+            {
+                "src": "Standard-Locales.html#Standard-Locales",
+                "title": "7.5 Standard Locales",
+                "subsections": null
+            },
+            {
+                "src": "Locale-Names.html#Locale-Names",
+                "title": "7.6 Locale Names",
+                "subsections": null
+            },
+            {
+                "src": "Locale-Information.html#Locale-Information",
+                "title": "7.7 Accessing Locale Information",
+                "subsections": [
+                    {
+                        "src": "The-Lame-Way-to-Locale-Data.html#The-Lame-Way-to-Locale-Data",
+                        "title": "7.7.1 <code>localeconv</code>: It is portable but …",
+                        "subsections": [
+                            {
+                                "src": "General-Numeric.html#General-Numeric",
+                                "title": "7.7.1.1 Generic Numeric Formatting Parameters",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Currency-Symbol.html#Currency-Symbol",
+                                "title": "7.7.1.2 Printing the Currency Symbol",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Sign-of-Money-Amount.html#Sign-of-Money-Amount",
+                                "title": "7.7.1.3 Printing the Sign of a Monetary Amount",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "The-Elegant-and-Fast-Way.html#The-Elegant-and-Fast-Way",
+                        "title": "7.7.2 Pinpoint Access to Locale Data",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Formatting-Numbers.html#Formatting-Numbers",
+                "title": "7.8 A dedicated function to format numbers",
+                "subsections": null
+            },
+            {
+                "src": "Yes_002dor_002dNo-Questions.html#Yes_002dor_002dNo-Questions",
+                "title": "7.9 Yes-or-No Questions",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Message-Translation.html#Message-Translation",
+        "title": "8 Message Translation",
+        "subsections": [
+            {
+                "src": "Message-catalogs-a-la-X_002fOpen.html#Message-catalogs-a-la-X_002fOpen",
+                "title": "8.1 X/Open Message Catalog Handling",
+                "subsections": [
+                    {
+                        "src": "The-catgets-Functions.html#The-catgets-Functions",
+                        "title": "8.1.1 The <code>catgets</code> function family",
+                        "subsections": null
+                    },
+                    {
+                        "src": "The-message-catalog-files.html#The-message-catalog-files",
+                        "title": "8.1.2 Format of the message catalog files",
+                        "subsections": null
+                    },
+                    {
+                        "src": "The-gencat-program.html#The-gencat-program",
+                        "title": "8.1.3 Generate Message Catalogs files",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Common-Usage.html#Common-Usage",
+                        "title": "8.1.4 How to use the <code>catgets</code> interface",
+                        "subsections": [
+                            {
+                                "src": "Common-Usage.html#Not-using-symbolic-names",
+                                "title": "8.1.4.1 Not using symbolic names",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Common-Usage.html#Using-symbolic-names",
+                                "title": "8.1.4.2 Using symbolic names",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Common-Usage.html#How-does-to-this-allow-to-develop",
+                                "title": "8.1.4.3 How does to this allow to develop",
+                                "subsections": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "src": "The-Uniforum-approach.html#The-Uniforum-approach",
+                "title": "8.2 The Uniforum approach to Message Translation",
+                "subsections": [
+                    {
+                        "src": "Message-catalogs-with-gettext.html#Message-catalogs-with-gettext",
+                        "title": "8.2.1 The <code>gettext</code> family of functions",
+                        "subsections": [
+                            {
+                                "src": "Translation-with-gettext.html#Translation-with-gettext",
+                                "title": "8.2.1.1 What has to be done to translate a message?",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Locating-gettext-catalog.html#Locating-gettext-catalog",
+                                "title": "8.2.1.2 How to determine which catalog to be used",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Advanced-gettext-functions.html#Advanced-gettext-functions",
+                                "title": "8.2.1.3 Additional functions for more complicated situations",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Charset-conversion-in-gettext.html#Charset-conversion-in-gettext",
+                                "title": "8.2.1.4 How to specify the output character set <code>gettext</code> uses",
+                                "subsections": null
+                            },
+                            {
+                                "src": "GUI-program-problems.html#GUI-program-problems",
+                                "title": "8.2.1.5 How to use <code>gettext</code> in GUI programs",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Using-gettextized-software.html#Using-gettextized-software",
+                                "title": "8.2.1.6 User influence on <code>gettext</code>",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Helper-programs-for-gettext.html#Helper-programs-for-gettext",
+                        "title": "8.2.2 Programs to handle message catalogs for <code>gettext</code>",
+                        "subsections": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "Searching-and-Sorting.html#Searching-and-Sorting",
+        "title": "9 Searching and Sorting",
+        "subsections": [
+            {
+                "src": "Comparison-Functions.html#Comparison-Functions",
+                "title": "9.1 Defining the Comparison Function",
+                "subsections": null
+            },
+            {
+                "src": "Array-Search-Function.html#Array-Search-Function",
+                "title": "9.2 Array Search Function",
+                "subsections": null
+            },
+            {
+                "src": "Array-Sort-Function.html#Array-Sort-Function",
+                "title": "9.3 Array Sort Function",
+                "subsections": null
+            },
+            {
+                "src": "Search_002fSort-Example.html#Search_002fSort-Example",
+                "title": "9.4 Searching and Sorting Example",
+                "subsections": null
+            },
+            {
+                "src": "Hash-Search-Function.html#Hash-Search-Function",
+                "title": "9.5 The <code>hsearch</code> function.",
+                "subsections": null
+            },
+            {
+                "src": "Tree-Search-Function.html#Tree-Search-Function",
+                "title": "9.6 The <code>tsearch</code> function.",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Pattern-Matching.html#Pattern-Matching",
+        "title": "10 Pattern Matching",
+        "subsections": [
+            {
+                "src": "Wildcard-Matching.html#Wildcard-Matching",
+                "title": "10.1 Wildcard Matching",
+                "subsections": null
+            },
+            {
+                "src": "Globbing.html#Globbing",
+                "title": "10.2 Globbing",
+                "subsections": [
+                    {
+                        "src": "Calling-Glob.html#Calling-Glob",
+                        "title": "10.2.1 Calling <code>glob</code>",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Flags-for-Globbing.html#Flags-for-Globbing",
+                        "title": "10.2.2 Flags for Globbing",
+                        "subsections": null
+                    },
+                    {
+                        "src": "More-Flags-for-Globbing.html#More-Flags-for-Globbing",
+                        "title": "10.2.3 More Flags for Globbing",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Regular-Expressions.html#Regular-Expressions",
+                "title": "10.3 Regular Expression Matching",
+                "subsections": [
+                    {
+                        "src": "POSIX-Regexp-Compilation.html#POSIX-Regexp-Compilation",
+                        "title": "10.3.1 POSIX Regular Expression Compilation",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Flags-for-POSIX-Regexps.html#Flags-for-POSIX-Regexps",
+                        "title": "10.3.2 Flags for POSIX Regular Expressions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Matching-POSIX-Regexps.html#Matching-POSIX-Regexps",
+                        "title": "10.3.3 Matching a Compiled POSIX Regular Expression",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Regexp-Subexpressions.html#Regexp-Subexpressions",
+                        "title": "10.3.4 Match Results with Subexpressions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Subexpression-Complications.html#Subexpression-Complications",
+                        "title": "10.3.5 Complications in Subexpression Matching",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Regexp-Cleanup.html#Regexp-Cleanup",
+                        "title": "10.3.6 POSIX Regexp Matching Cleanup",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Word-Expansion.html#Word-Expansion",
+                "title": "10.4 Shell-Style Word Expansion",
+                "subsections": [
+                    {
+                        "src": "Expansion-Stages.html#Expansion-Stages",
+                        "title": "10.4.1 The Stages of Word Expansion",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Calling-Wordexp.html#Calling-Wordexp",
+                        "title": "10.4.2 Calling <code>wordexp</code>",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Flags-for-Wordexp.html#Flags-for-Wordexp",
+                        "title": "10.4.3 Flags for Word Expansion",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Wordexp-Example.html#Wordexp-Example",
+                        "title": "10.4.4 <code>wordexp</code> Example",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Tilde-Expansion.html#Tilde-Expansion",
+                        "title": "10.4.5 Details of Tilde Expansion",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Variable-Substitution.html#Variable-Substitution",
+                        "title": "10.4.6 Details of Variable Substitution",
+                        "subsections": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "I_002fO-Overview.html#I_002fO-Overview",
+        "title": "11 Input/Output Overview",
+        "subsections": [
+            {
+                "src": "I_002fO-Concepts.html#I_002fO-Concepts",
+                "title": "11.1 Input/Output Concepts",
+                "subsections": [
+                    {
+                        "src": "Streams-and-File-Descriptors.html#Streams-and-File-Descriptors",
+                        "title": "11.1.1 Streams and File Descriptors",
+                        "subsections": null
+                    },
+                    {
+                        "src": "File-Position.html#File-Position",
+                        "title": "11.1.2 File Position",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "File-Names.html#File-Names",
+                "title": "11.2 File Names",
+                "subsections": [
+                    {
+                        "src": "Directories.html#Directories",
+                        "title": "11.2.1 Directories",
+                        "subsections": null
+                    },
+                    {
+                        "src": "File-Name-Resolution.html#File-Name-Resolution",
+                        "title": "11.2.2 File Name Resolution",
+                        "subsections": null
+                    },
+                    {
+                        "src": "File-Name-Errors.html#File-Name-Errors",
+                        "title": "11.2.3 File Name Errors",
+                        "subsections": null
+                    },
+                    {
+                        "src": "File-Name-Portability.html#File-Name-Portability",
+                        "title": "11.2.4 Portability of File Names",
+                        "subsections": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "I_002fO-on-Streams.html#I_002fO-on-Streams",
+        "title": "12 Input/Output on Streams",
+        "subsections": [
+            {
+                "src": "Streams.html#Streams",
+                "title": "12.1 Streams",
+                "subsections": null
+            },
+            {
+                "src": "Standard-Streams.html#Standard-Streams",
+                "title": "12.2 Standard Streams",
+                "subsections": null
+            },
+            {
+                "src": "Opening-Streams.html#Opening-Streams",
+                "title": "12.3 Opening Streams",
+                "subsections": null
+            },
+            {
+                "src": "Closing-Streams.html#Closing-Streams",
+                "title": "12.4 Closing Streams",
+                "subsections": null
+            },
+            {
+                "src": "Streams-and-Threads.html#Streams-and-Threads",
+                "title": "12.5 Streams and Threads",
+                "subsections": null
+            },
+            {
+                "src": "Streams-and-I18N.html#Streams-and-I18N",
+                "title": "12.6 Streams in Internationalized Applications",
+                "subsections": null
+            },
+            {
+                "src": "Simple-Output.html#Simple-Output",
+                "title": "12.7 Simple Output by Characters or Lines",
+                "subsections": null
+            },
+            {
+                "src": "Character-Input.html#Character-Input",
+                "title": "12.8 Character Input",
+                "subsections": null
+            },
+            {
+                "src": "Line-Input.html#Line-Input",
+                "title": "12.9 Line-Oriented Input",
+                "subsections": null
+            },
+            {
+                "src": "Unreading.html#Unreading",
+                "title": "12.10 Unreading",
+                "subsections": [
+                    {
+                        "src": "Unreading-Idea.html#Unreading-Idea",
+                        "title": "12.10.1 What Unreading Means",
+                        "subsections": null
+                    },
+                    {
+                        "src": "How-Unread.html#How-Unread",
+                        "title": "12.10.2 Using <code>ungetc</code> To Do Unreading",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Block-Input_002fOutput.html#Block-Input_002fOutput",
+                "title": "12.11 Block Input/Output",
+                "subsections": null
+            },
+            {
+                "src": "Formatted-Output.html#Formatted-Output",
+                "title": "12.12 Formatted Output",
+                "subsections": [
+                    {
+                        "src": "Formatted-Output-Basics.html#Formatted-Output-Basics",
+                        "title": "12.12.1 Formatted Output Basics",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Output-Conversion-Syntax.html#Output-Conversion-Syntax",
+                        "title": "12.12.2 Output Conversion Syntax",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Table-of-Output-Conversions.html#Table-of-Output-Conversions",
+                        "title": "12.12.3 Table of Output Conversions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Integer-Conversions.html#Integer-Conversions",
+                        "title": "12.12.4 Integer Conversions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Floating_002dPoint-Conversions.html#Floating_002dPoint-Conversions",
+                        "title": "12.12.5 Floating-Point Conversions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Other-Output-Conversions.html#Other-Output-Conversions",
+                        "title": "12.12.6 Other Output Conversions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Formatted-Output-Functions.html#Formatted-Output-Functions",
+                        "title": "12.12.7 Formatted Output Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Dynamic-Output.html#Dynamic-Output",
+                        "title": "12.12.8 Dynamically Allocating Formatted Output",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Variable-Arguments-Output.html#Variable-Arguments-Output",
+                        "title": "12.12.9 Variable Arguments Output Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Parsing-a-Template-String.html#Parsing-a-Template-String",
+                        "title": "12.12.10 Parsing a Template String",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Example-of-Parsing.html#Example-of-Parsing",
+                        "title": "12.12.11 Example of Parsing a Template String",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Customizing-Printf.html#Customizing-Printf",
+                "title": "12.13 Customizing <code>printf</code>",
+                "subsections": [
+                    {
+                        "src": "Registering-New-Conversions.html#Registering-New-Conversions",
+                        "title": "12.13.1 Registering New Conversions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Conversion-Specifier-Options.html#Conversion-Specifier-Options",
+                        "title": "12.13.2 Conversion Specifier Options",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Defining-the-Output-Handler.html#Defining-the-Output-Handler",
+                        "title": "12.13.3 Defining the Output Handler",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Printf-Extension-Example.html#Printf-Extension-Example",
+                        "title": "12.13.4 <code>printf</code> Extension Example",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Predefined-Printf-Handlers.html#Predefined-Printf-Handlers",
+                        "title": "12.13.5 Predefined <code>printf</code> Handlers",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Formatted-Input.html#Formatted-Input",
+                "title": "12.14 Formatted Input",
+                "subsections": [
+                    {
+                        "src": "Formatted-Input-Basics.html#Formatted-Input-Basics",
+                        "title": "12.14.1 Formatted Input Basics",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Input-Conversion-Syntax.html#Input-Conversion-Syntax",
+                        "title": "12.14.2 Input Conversion Syntax",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Table-of-Input-Conversions.html#Table-of-Input-Conversions",
+                        "title": "12.14.3 Table of Input Conversions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Numeric-Input-Conversions.html#Numeric-Input-Conversions",
+                        "title": "12.14.4 Numeric Input Conversions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "String-Input-Conversions.html#String-Input-Conversions",
+                        "title": "12.14.5 String Input Conversions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Dynamic-String-Input.html#Dynamic-String-Input",
+                        "title": "12.14.6 Dynamically Allocating String Conversions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Other-Input-Conversions.html#Other-Input-Conversions",
+                        "title": "12.14.7 Other Input Conversions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Formatted-Input-Functions.html#Formatted-Input-Functions",
+                        "title": "12.14.8 Formatted Input Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Variable-Arguments-Input.html#Variable-Arguments-Input",
+                        "title": "12.14.9 Variable Arguments Input Functions",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "EOF-and-Errors.html#EOF-and-Errors",
+                "title": "12.15 End-Of-File and Errors",
+                "subsections": null
+            },
+            {
+                "src": "Error-Recovery.html#Error-Recovery",
+                "title": "12.16 Recovering from errors",
+                "subsections": null
+            },
+            {
+                "src": "Binary-Streams.html#Binary-Streams",
+                "title": "12.17 Text and Binary Streams",
+                "subsections": null
+            },
+            {
+                "src": "File-Positioning.html#File-Positioning",
+                "title": "12.18 File Positioning",
+                "subsections": null
+            },
+            {
+                "src": "Portable-Positioning.html#Portable-Positioning",
+                "title": "12.19 Portable File-Position Functions",
+                "subsections": null
+            },
+            {
+                "src": "Stream-Buffering.html#Stream-Buffering",
+                "title": "12.20 Stream Buffering",
+                "subsections": [
+                    {
+                        "src": "Buffering-Concepts.html#Buffering-Concepts",
+                        "title": "12.20.1 Buffering Concepts",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Flushing-Buffers.html#Flushing-Buffers",
+                        "title": "12.20.2 Flushing Buffers",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Controlling-Buffering.html#Controlling-Buffering",
+                        "title": "12.20.3 Controlling Which Kind of Buffering",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Other-Kinds-of-Streams.html#Other-Kinds-of-Streams",
+                "title": "12.21 Other Kinds of Streams",
+                "subsections": [
+                    {
+                        "src": "String-Streams.html#String-Streams",
+                        "title": "12.21.1 String Streams",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Custom-Streams.html#Custom-Streams",
+                        "title": "12.21.2 Programming Your Own Custom Streams",
+                        "subsections": [
+                            {
+                                "src": "Streams-and-Cookies.html#Streams-and-Cookies",
+                                "title": "12.21.2.1 Custom Streams and Cookies",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Hook-Functions.html#Hook-Functions",
+                                "title": "12.21.2.2 Custom Stream Hook Functions",
+                                "subsections": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "src": "Formatted-Messages.html#Formatted-Messages",
+                "title": "12.22 Formatted Messages",
+                "subsections": [
+                    {
+                        "src": "Printing-Formatted-Messages.html#Printing-Formatted-Messages",
+                        "title": "12.22.1 Printing Formatted Messages",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Adding-Severity-Classes.html#Adding-Severity-Classes",
+                        "title": "12.22.2 Adding Severity Classes",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Example.html#Example",
+                        "title": "12.22.3 How to use <code>fmtmsg</code> and <code>addseverity</code>",
+                        "subsections": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "Low_002dLevel-I_002fO.html#Low_002dLevel-I_002fO",
+        "title": "13 Low-Level Input/Output",
+        "subsections": [
+            {
+                "src": "Opening-and-Closing-Files.html#Opening-and-Closing-Files",
+                "title": "13.1 Opening and Closing Files",
+                "subsections": null
+            },
+            {
+                "src": "I_002fO-Primitives.html#I_002fO-Primitives",
+                "title": "13.2 Input and Output Primitives",
+                "subsections": null
+            },
+            {
+                "src": "File-Position-Primitive.html#File-Position-Primitive",
+                "title": "13.3 Setting the File Position of a Descriptor",
+                "subsections": null
+            },
+            {
+                "src": "Descriptors-and-Streams.html#Descriptors-and-Streams",
+                "title": "13.4 Descriptors and Streams",
+                "subsections": null
+            },
+            {
+                "src": "Stream_002fDescriptor-Precautions.html#Stream_002fDescriptor-Precautions",
+                "title": "13.5 Dangers of Mixing Streams and Descriptors",
+                "subsections": [
+                    {
+                        "src": "Linked-Channels.html#Linked-Channels",
+                        "title": "13.5.1 Linked Channels",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Independent-Channels.html#Independent-Channels",
+                        "title": "13.5.2 Independent Channels",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Cleaning-Streams.html#Cleaning-Streams",
+                        "title": "13.5.3 Cleaning Streams",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Scatter_002dGather.html#Scatter_002dGather",
+                "title": "13.6 Fast Scatter-Gather I/O",
+                "subsections": null
+            },
+            {
+                "src": "Memory_002dmapped-I_002fO.html#Memory_002dmapped-I_002fO",
+                "title": "13.7 Memory-mapped I/O",
+                "subsections": null
+            },
+            {
+                "src": "Waiting-for-I_002fO.html#Waiting-for-I_002fO",
+                "title": "13.8 Waiting for Input or Output",
+                "subsections": null
+            },
+            {
+                "src": "Synchronizing-I_002fO.html#Synchronizing-I_002fO",
+                "title": "13.9 Synchronizing I/O operations",
+                "subsections": null
+            },
+            {
+                "src": "Asynchronous-I_002fO.html#Asynchronous-I_002fO",
+                "title": "13.10 Perform I/O Operations in Parallel",
+                "subsections": [
+                    {
+                        "src": "Asynchronous-Reads_002fWrites.html#Asynchronous-Reads_002fWrites",
+                        "title": "13.10.1 Asynchronous Read and Write Operations",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Status-of-AIO-Operations.html#Status-of-AIO-Operations",
+                        "title": "13.10.2 Getting the Status of AIO Operations",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Synchronizing-AIO-Operations.html#Synchronizing-AIO-Operations",
+                        "title": "13.10.3 Getting into a Consistent State",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Cancel-AIO-Operations.html#Cancel-AIO-Operations",
+                        "title": "13.10.4 Cancellation of AIO Operations",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Configuration-of-AIO.html#Configuration-of-AIO",
+                        "title": "13.10.5 How to optimize the AIO implementation",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Control-Operations.html#Control-Operations",
+                "title": "13.11 Control Operations on Files",
+                "subsections": null
+            },
+            {
+                "src": "Duplicating-Descriptors.html#Duplicating-Descriptors",
+                "title": "13.12 Duplicating Descriptors",
+                "subsections": null
+            },
+            {
+                "src": "Descriptor-Flags.html#Descriptor-Flags",
+                "title": "13.13 File Descriptor Flags",
+                "subsections": null
+            },
+            {
+                "src": "File-Status-Flags.html#File-Status-Flags",
+                "title": "13.14 File Status Flags",
+                "subsections": [
+                    {
+                        "src": "Access-Modes.html#Access-Modes",
+                        "title": "13.14.1 File Access Modes",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Open_002dtime-Flags.html#Open_002dtime-Flags",
+                        "title": "13.14.2 Open-time Flags",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Operating-Modes.html#Operating-Modes",
+                        "title": "13.14.3 I/O Operating Modes",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Getting-File-Status-Flags.html#Getting-File-Status-Flags",
+                        "title": "13.14.4 Getting and Setting File Status Flags",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "File-Locks.html#File-Locks",
+                "title": "13.15 File Locks",
+                "subsections": null
+            },
+            {
+                "src": "Open-File-Description-Locks.html#Open-File-Description-Locks",
+                "title": "13.16 Open File Description Locks",
+                "subsections": null
+            },
+            {
+                "src": "Open-File-Description-Locks-Example.html#Open-File-Description-Locks-Example",
+                "title": "13.17 Open File Description Locks Example",
+                "subsections": null
+            },
+            {
+                "src": "Interrupt-Input.html#Interrupt-Input",
+                "title": "13.18 Interrupt-Driven Input",
+                "subsections": null
+            },
+            {
+                "src": "IOCTLs.html#IOCTLs",
+                "title": "13.19 Generic I/O Control operations",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "File-System-Interface.html#File-System-Interface",
+        "title": "14 File System Interface",
+        "subsections": [
+            {
+                "src": "Working-Directory.html#Working-Directory",
+                "title": "14.1 Working Directory",
+                "subsections": null
+            },
+            {
+                "src": "Accessing-Directories.html#Accessing-Directories",
+                "title": "14.2 Accessing Directories",
+                "subsections": [
+                    {
+                        "src": "Directory-Entries.html#Directory-Entries",
+                        "title": "14.2.1 Format of a Directory Entry",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Opening-a-Directory.html#Opening-a-Directory",
+                        "title": "14.2.2 Opening a Directory Stream",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Reading_002fClosing-Directory.html#Reading_002fClosing-Directory",
+                        "title": "14.2.3 Reading and Closing a Directory Stream",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Simple-Directory-Lister.html#Simple-Directory-Lister",
+                        "title": "14.2.4 Simple Program to List a Directory",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Random-Access-Directory.html#Random-Access-Directory",
+                        "title": "14.2.5 Random Access in a Directory Stream",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Scanning-Directory-Content.html#Scanning-Directory-Content",
+                        "title": "14.2.6 Scanning the Content of a Directory",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Simple-Directory-Lister-Mark-II.html#Simple-Directory-Lister-Mark-II",
+                        "title": "14.2.7 Simple Program to List a Directory, Mark II",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Working-with-Directory-Trees.html#Working-with-Directory-Trees",
+                "title": "14.3 Working with Directory Trees",
+                "subsections": null
+            },
+            {
+                "src": "Hard-Links.html#Hard-Links",
+                "title": "14.4 Hard Links",
+                "subsections": null
+            },
+            {
+                "src": "Symbolic-Links.html#Symbolic-Links",
+                "title": "14.5 Symbolic Links",
+                "subsections": null
+            },
+            {
+                "src": "Deleting-Files.html#Deleting-Files",
+                "title": "14.6 Deleting Files",
+                "subsections": null
+            },
+            {
+                "src": "Renaming-Files.html#Renaming-Files",
+                "title": "14.7 Renaming Files",
+                "subsections": null
+            },
+            {
+                "src": "Creating-Directories.html#Creating-Directories",
+                "title": "14.8 Creating Directories",
+                "subsections": null
+            },
+            {
+                "src": "File-Attributes.html#File-Attributes",
+                "title": "14.9 File Attributes",
+                "subsections": [
+                    {
+                        "src": "Attribute-Meanings.html#Attribute-Meanings",
+                        "title": "14.9.1 The meaning of the File Attributes",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Reading-Attributes.html#Reading-Attributes",
+                        "title": "14.9.2 Reading the Attributes of a File",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Testing-File-Type.html#Testing-File-Type",
+                        "title": "14.9.3 Testing the Type of a File",
+                        "subsections": null
+                    },
+                    {
+                        "src": "File-Owner.html#File-Owner",
+                        "title": "14.9.4 File Owner",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Permission-Bits.html#Permission-Bits",
+                        "title": "14.9.5 The Mode Bits for Access Permission",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Access-Permission.html#Access-Permission",
+                        "title": "14.9.6 How Your Access to a File is Decided",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Setting-Permissions.html#Setting-Permissions",
+                        "title": "14.9.7 Assigning File Permissions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Testing-File-Access.html#Testing-File-Access",
+                        "title": "14.9.8 Testing Permission to Access a File",
+                        "subsections": null
+                    },
+                    {
+                        "src": "File-Times.html#File-Times",
+                        "title": "14.9.9 File Times",
+                        "subsections": null
+                    },
+                    {
+                        "src": "File-Size.html#File-Size",
+                        "title": "14.9.10 File Size",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Making-Special-Files.html#Making-Special-Files",
+                "title": "14.10 Making Special Files",
+                "subsections": null
+            },
+            {
+                "src": "Temporary-Files.html#Temporary-Files",
+                "title": "14.11 Temporary Files",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Pipes-and-FIFOs.html#Pipes-and-FIFOs",
+        "title": "15 Pipes and FIFOs",
+        "subsections": [
+            {
+                "src": "Creating-a-Pipe.html#Creating-a-Pipe",
+                "title": "15.1 Creating a Pipe",
+                "subsections": null
+            },
+            {
+                "src": "Pipe-to-a-Subprocess.html#Pipe-to-a-Subprocess",
+                "title": "15.2 Pipe to a Subprocess",
+                "subsections": null
+            },
+            {
+                "src": "FIFO-Special-Files.html#FIFO-Special-Files",
+                "title": "15.3 FIFO Special Files",
+                "subsections": null
+            },
+            {
+                "src": "Pipe-Atomicity.html#Pipe-Atomicity",
+                "title": "15.4 Atomicity of Pipe I/O",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Sockets.html#Sockets",
+        "title": "16 Sockets",
+        "subsections": [
+            {
+                "src": "Socket-Concepts.html#Socket-Concepts",
+                "title": "16.1 Socket Concepts",
+                "subsections": null
+            },
+            {
+                "src": "Communication-Styles.html#Communication-Styles",
+                "title": "16.2 Communication Styles",
+                "subsections": null
+            },
+            {
+                "src": "Socket-Addresses.html#Socket-Addresses",
+                "title": "16.3 Socket Addresses",
+                "subsections": [
+                    {
+                        "src": "Address-Formats.html#Address-Formats",
+                        "title": "16.3.1 Address Formats",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Setting-Address.html#Setting-Address",
+                        "title": "16.3.2 Setting the Address of a Socket",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Reading-Address.html#Reading-Address",
+                        "title": "16.3.3 Reading the Address of a Socket",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Interface-Naming.html#Interface-Naming",
+                "title": "16.4 Interface Naming",
+                "subsections": null
+            },
+            {
+                "src": "Local-Namespace.html#Local-Namespace",
+                "title": "16.5 The Local Namespace",
+                "subsections": [
+                    {
+                        "src": "Local-Namespace-Concepts.html#Local-Namespace-Concepts",
+                        "title": "16.5.1 Local Namespace Concepts",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Local-Namespace-Details.html#Local-Namespace-Details",
+                        "title": "16.5.2 Details of Local Namespace",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Local-Socket-Example.html#Local-Socket-Example",
+                        "title": "16.5.3 Example of Local-Namespace Sockets",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Internet-Namespace.html#Internet-Namespace",
+                "title": "16.6 The Internet Namespace",
+                "subsections": [
+                    {
+                        "src": "Internet-Address-Formats.html#Internet-Address-Formats",
+                        "title": "16.6.1 Internet Socket Address Formats",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Host-Addresses.html#Host-Addresses",
+                        "title": "16.6.2 Host Addresses",
+                        "subsections": [
+                            {
+                                "src": "Abstract-Host-Addresses.html#Abstract-Host-Addresses",
+                                "title": "16.6.2.1 Internet Host Addresses",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Host-Address-Data-Type.html#Host-Address-Data-Type",
+                                "title": "16.6.2.2 Host Address Data Type",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Host-Address-Functions.html#Host-Address-Functions",
+                                "title": "16.6.2.3 Host Address Functions",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Host-Names.html#Host-Names",
+                                "title": "16.6.2.4 Host Names",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Ports.html#Ports",
+                        "title": "16.6.3 Internet Ports",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Services-Database.html#Services-Database",
+                        "title": "16.6.4 The Services Database",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Byte-Order.html#Byte-Order",
+                        "title": "16.6.5 Byte Order Conversion",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Protocols-Database.html#Protocols-Database",
+                        "title": "16.6.6 Protocols Database",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Inet-Example.html#Inet-Example",
+                        "title": "16.6.7 Internet Socket Example",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Misc-Namespaces.html#Misc-Namespaces",
+                "title": "16.7 Other Namespaces",
+                "subsections": null
+            },
+            {
+                "src": "Open_002fClose-Sockets.html#Open_002fClose-Sockets",
+                "title": "16.8 Opening and Closing Sockets",
+                "subsections": [
+                    {
+                        "src": "Creating-a-Socket.html#Creating-a-Socket",
+                        "title": "16.8.1 Creating a Socket",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Closing-a-Socket.html#Closing-a-Socket",
+                        "title": "16.8.2 Closing a Socket",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Socket-Pairs.html#Socket-Pairs",
+                        "title": "16.8.3 Socket Pairs",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Connections.html#Connections",
+                "title": "16.9 Using Sockets with Connections",
+                "subsections": [
+                    {
+                        "src": "Connecting.html#Connecting",
+                        "title": "16.9.1 Making a Connection",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Listening.html#Listening",
+                        "title": "16.9.2 Listening for Connections",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Accepting-Connections.html#Accepting-Connections",
+                        "title": "16.9.3 Accepting Connections",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Who-is-Connected.html#Who-is-Connected",
+                        "title": "16.9.4 Who is Connected to Me?",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Transferring-Data.html#Transferring-Data",
+                        "title": "16.9.5 Transferring Data",
+                        "subsections": [
+                            {
+                                "src": "Sending-Data.html#Sending-Data",
+                                "title": "16.9.5.1 Sending Data",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Receiving-Data.html#Receiving-Data",
+                                "title": "16.9.5.2 Receiving Data",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Socket-Data-Options.html#Socket-Data-Options",
+                                "title": "16.9.5.3 Socket Data Options",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Byte-Stream-Example.html#Byte-Stream-Example",
+                        "title": "16.9.6 Byte Stream Socket Example",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Server-Example.html#Server-Example",
+                        "title": "16.9.7 Byte Stream Connection Server Example",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Out_002dof_002dBand-Data.html#Out_002dof_002dBand-Data",
+                        "title": "16.9.8 Out-of-Band Data",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Datagrams.html#Datagrams",
+                "title": "16.10 Datagram Socket Operations",
+                "subsections": [
+                    {
+                        "src": "Sending-Datagrams.html#Sending-Datagrams",
+                        "title": "16.10.1 Sending Datagrams",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Receiving-Datagrams.html#Receiving-Datagrams",
+                        "title": "16.10.2 Receiving Datagrams",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Datagram-Example.html#Datagram-Example",
+                        "title": "16.10.3 Datagram Socket Example",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Example-Receiver.html#Example-Receiver",
+                        "title": "16.10.4 Example of Reading Datagrams",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Inetd.html#Inetd",
+                "title": "16.11 The <code>inetd</code> Daemon",
+                "subsections": [
+                    {
+                        "src": "Inetd-Servers.html#Inetd-Servers",
+                        "title": "16.11.1 <code>inetd</code> Servers",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Configuring-Inetd.html#Configuring-Inetd",
+                        "title": "16.11.2 Configuring <code>inetd</code>",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Socket-Options.html#Socket-Options",
+                "title": "16.12 Socket Options",
+                "subsections": [
+                    {
+                        "src": "Socket-Option-Functions.html#Socket-Option-Functions",
+                        "title": "16.12.1 Socket Option Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Socket_002dLevel-Options.html#Socket_002dLevel-Options",
+                        "title": "16.12.2 Socket-Level Options",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Networks-Database.html#Networks-Database",
+                "title": "16.13 Networks Database",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Low_002dLevel-Terminal-Interface.html#Low_002dLevel-Terminal-Interface",
+        "title": "17 Low-Level Terminal Interface",
+        "subsections": [
+            {
+                "src": "Is-It-a-Terminal.html#Is-It-a-Terminal",
+                "title": "17.1 Identifying Terminals",
+                "subsections": null
+            },
+            {
+                "src": "I_002fO-Queues.html#I_002fO-Queues",
+                "title": "17.2 I/O Queues",
+                "subsections": null
+            },
+            {
+                "src": "Canonical-or-Not.html#Canonical-or-Not",
+                "title": "17.3 Two Styles of Input: Canonical or Not",
+                "subsections": null
+            },
+            {
+                "src": "Terminal-Modes.html#Terminal-Modes",
+                "title": "17.4 Terminal Modes",
+                "subsections": [
+                    {
+                        "src": "Mode-Data-Types.html#Mode-Data-Types",
+                        "title": "17.4.1 Terminal Mode Data Types",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Mode-Functions.html#Mode-Functions",
+                        "title": "17.4.2 Terminal Mode Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Setting-Modes.html#Setting-Modes",
+                        "title": "17.4.3 Setting Terminal Modes Properly",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Input-Modes.html#Input-Modes",
+                        "title": "17.4.4 Input Modes",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Output-Modes.html#Output-Modes",
+                        "title": "17.4.5 Output Modes",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Control-Modes.html#Control-Modes",
+                        "title": "17.4.6 Control Modes",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Local-Modes.html#Local-Modes",
+                        "title": "17.4.7 Local Modes",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Line-Speed.html#Line-Speed",
+                        "title": "17.4.8 Line Speed",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Special-Characters.html#Special-Characters",
+                        "title": "17.4.9 Special Characters",
+                        "subsections": [
+                            {
+                                "src": "Editing-Characters.html#Editing-Characters",
+                                "title": "17.4.9.1 Characters for Input Editing",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Signal-Characters.html#Signal-Characters",
+                                "title": "17.4.9.2 Characters that Cause Signals",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Start_002fStop-Characters.html#Start_002fStop-Characters",
+                                "title": "17.4.9.3 Special Characters for Flow Control",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Other-Special.html#Other-Special",
+                                "title": "17.4.9.4 Other Special Characters",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Noncanonical-Input.html#Noncanonical-Input",
+                        "title": "17.4.10 Noncanonical Input",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "BSD-Terminal-Modes.html#BSD-Terminal-Modes",
+                "title": "17.5 BSD Terminal Modes",
+                "subsections": null
+            },
+            {
+                "src": "Line-Control.html#Line-Control",
+                "title": "17.6 Line Control Functions",
+                "subsections": null
+            },
+            {
+                "src": "Noncanon-Example.html#Noncanon-Example",
+                "title": "17.7 Noncanonical Mode Example",
+                "subsections": null
+            },
+            {
+                "src": "Pseudo_002dTerminals.html#Pseudo_002dTerminals",
+                "title": "17.8 Pseudo-Terminals",
+                "subsections": [
+                    {
+                        "src": "Allocation.html#Allocation",
+                        "title": "17.8.1 Allocating Pseudo-Terminals",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Pseudo_002dTerminal-Pairs.html#Pseudo_002dTerminal-Pairs",
+                        "title": "17.8.2 Opening a Pseudo-Terminal Pair",
+                        "subsections": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "Syslog.html#Syslog",
+        "title": "18 Syslog",
+        "subsections": [
+            {
+                "src": "Overview-of-Syslog.html#Overview-of-Syslog",
+                "title": "18.1 Overview of Syslog",
+                "subsections": null
+            },
+            {
+                "src": "Submitting-Syslog-Messages.html#Submitting-Syslog-Messages",
+                "title": "18.2 Submitting Syslog Messages",
+                "subsections": [
+                    {
+                        "src": "openlog.html#openlog",
+                        "title": "18.2.1 openlog",
+                        "subsections": null
+                    },
+                    {
+                        "src": "syslog_003b-vsyslog.html#syslog_003b-vsyslog",
+                        "title": "18.2.2 syslog, vsyslog",
+                        "subsections": null
+                    },
+                    {
+                        "src": "closelog.html#closelog",
+                        "title": "18.2.3 closelog",
+                        "subsections": null
+                    },
+                    {
+                        "src": "setlogmask.html#setlogmask",
+                        "title": "18.2.4 setlogmask",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Syslog-Example.html#Syslog-Example",
+                        "title": "18.2.5 Syslog Example",
+                        "subsections": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "Mathematics.html#Mathematics",
+        "title": "19 Mathematics",
+        "subsections": [
+            {
+                "src": "Mathematical-Constants.html#Mathematical-Constants",
+                "title": "19.1 Predefined Mathematical Constants",
+                "subsections": null
+            },
+            {
+                "src": "Trig-Functions.html#Trig-Functions",
+                "title": "19.2 Trigonometric Functions",
+                "subsections": null
+            },
+            {
+                "src": "Inverse-Trig-Functions.html#Inverse-Trig-Functions",
+                "title": "19.3 Inverse Trigonometric Functions",
+                "subsections": null
+            },
+            {
+                "src": "Exponents-and-Logarithms.html#Exponents-and-Logarithms",
+                "title": "19.4 Exponentiation and Logarithms",
+                "subsections": null
+            },
+            {
+                "src": "Hyperbolic-Functions.html#Hyperbolic-Functions",
+                "title": "19.5 Hyperbolic Functions",
+                "subsections": null
+            },
+            {
+                "src": "Special-Functions.html#Special-Functions",
+                "title": "19.6 Special Functions",
+                "subsections": null
+            },
+            {
+                "src": "Errors-in-Math-Functions.html#Errors-in-Math-Functions",
+                "title": "19.7 Known Maximum Errors in Math Functions",
+                "subsections": null
+            },
+            {
+                "src": "Pseudo_002dRandom-Numbers.html#Pseudo_002dRandom-Numbers",
+                "title": "19.8 Pseudo-Random Numbers",
+                "subsections": [
+                    {
+                        "src": "ISO-Random.html#ISO-Random",
+                        "title": "19.8.1 ISO C Random Number Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "BSD-Random.html#BSD-Random",
+                        "title": "19.8.2 BSD Random Number Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "SVID-Random.html#SVID-Random",
+                        "title": "19.8.3 SVID Random Number Function",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "FP-Function-Optimizations.html#FP-Function-Optimizations",
+                "title": "19.9 Is Fast Code or Small Code preferred?",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Arithmetic.html#Arithmetic",
+        "title": "20 Arithmetic Functions",
+        "subsections": [
+            {
+                "src": "Integers.html#Integers",
+                "title": "20.1 Integers",
+                "subsections": null
+            },
+            {
+                "src": "Integer-Division.html#Integer-Division",
+                "title": "20.2 Integer Division",
+                "subsections": null
+            },
+            {
+                "src": "Floating-Point-Numbers.html#Floating-Point-Numbers",
+                "title": "20.3 Floating Point Numbers",
+                "subsections": null
+            },
+            {
+                "src": "Floating-Point-Classes.html#Floating-Point-Classes",
+                "title": "20.4 Floating-Point Number Classification Functions",
+                "subsections": null
+            },
+            {
+                "src": "Floating-Point-Errors.html#Floating-Point-Errors",
+                "title": "20.5 Errors in Floating-Point Calculations",
+                "subsections": [
+                    {
+                        "src": "FP-Exceptions.html#FP-Exceptions",
+                        "title": "20.5.1 FP Exceptions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Infinity-and-NaN.html#Infinity-and-NaN",
+                        "title": "20.5.2 Infinity and NaN",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Status-bit-operations.html#Status-bit-operations",
+                        "title": "20.5.3 Examining the FPU status word",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Math-Error-Reporting.html#Math-Error-Reporting",
+                        "title": "20.5.4 Error Reporting by Mathematical Functions",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Rounding.html#Rounding",
+                "title": "20.6 Rounding Modes",
+                "subsections": null
+            },
+            {
+                "src": "Control-Functions.html#Control-Functions",
+                "title": "20.7 Floating-Point Control Functions",
+                "subsections": null
+            },
+            {
+                "src": "Arithmetic-Functions.html#Arithmetic-Functions",
+                "title": "20.8 Arithmetic Functions",
+                "subsections": [
+                    {
+                        "src": "Absolute-Value.html#Absolute-Value",
+                        "title": "20.8.1 Absolute Value",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Normalization-Functions.html#Normalization-Functions",
+                        "title": "20.8.2 Normalization Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Rounding-Functions.html#Rounding-Functions",
+                        "title": "20.8.3 Rounding Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Remainder-Functions.html#Remainder-Functions",
+                        "title": "20.8.4 Remainder Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "FP-Bit-Twiddling.html#FP-Bit-Twiddling",
+                        "title": "20.8.5 Setting and modifying single bits of FP values",
+                        "subsections": null
+                    },
+                    {
+                        "src": "FP-Comparison-Functions.html#FP-Comparison-Functions",
+                        "title": "20.8.6 Floating-Point Comparison Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Misc-FP-Arithmetic.html#Misc-FP-Arithmetic",
+                        "title": "20.8.7 Miscellaneous FP arithmetic functions",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Complex-Numbers.html#Complex-Numbers",
+                "title": "20.9 Complex Numbers",
+                "subsections": null
+            },
+            {
+                "src": "Operations-on-Complex.html#Operations-on-Complex",
+                "title": "20.10 Projections, Conjugates, and Decomposing of Complex Numbers",
+                "subsections": null
+            },
+            {
+                "src": "Parsing-of-Numbers.html#Parsing-of-Numbers",
+                "title": "20.11 Parsing of Numbers",
+                "subsections": [
+                    {
+                        "src": "Parsing-of-Integers.html#Parsing-of-Integers",
+                        "title": "20.11.1 Parsing of Integers",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Parsing-of-Floats.html#Parsing-of-Floats",
+                        "title": "20.11.2 Parsing of Floats",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "System-V-Number-Conversion.html#System-V-Number-Conversion",
+                "title": "20.12 Old-fashioned System V number-to-string functions",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Date-and-Time.html#Date-and-Time",
+        "title": "21 Date and Time",
+        "subsections": [
+            {
+                "src": "Time-Basics.html#Time-Basics",
+                "title": "21.1 Time Basics",
+                "subsections": null
+            },
+            {
+                "src": "Elapsed-Time.html#Elapsed-Time",
+                "title": "21.2 Elapsed Time",
+                "subsections": null
+            },
+            {
+                "src": "Processor-And-CPU-Time.html#Processor-And-CPU-Time",
+                "title": "21.3 Processor And CPU Time",
+                "subsections": [
+                    {
+                        "src": "CPU-Time.html#CPU-Time",
+                        "title": "21.3.1 CPU Time Inquiry",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Processor-Time.html#Processor-Time",
+                        "title": "21.3.2 Processor Time Inquiry",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Calendar-Time.html#Calendar-Time",
+                "title": "21.4 Calendar Time",
+                "subsections": [
+                    {
+                        "src": "Simple-Calendar-Time.html#Simple-Calendar-Time",
+                        "title": "21.4.1 Simple Calendar Time",
+                        "subsections": null
+                    },
+                    {
+                        "src": "High_002dResolution-Calendar.html#High_002dResolution-Calendar",
+                        "title": "21.4.2 High-Resolution Calendar",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Broken_002ddown-Time.html#Broken_002ddown-Time",
+                        "title": "21.4.3 Broken-down Time",
+                        "subsections": null
+                    },
+                    {
+                        "src": "High-Accuracy-Clock.html#High-Accuracy-Clock",
+                        "title": "21.4.4 High Accuracy Clock",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Formatting-Calendar-Time.html#Formatting-Calendar-Time",
+                        "title": "21.4.5 Formatting Calendar Time",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Parsing-Date-and-Time.html#Parsing-Date-and-Time",
+                        "title": "21.4.6 Convert textual time and date information back",
+                        "subsections": [
+                            {
+                                "src": "Low_002dLevel-Time-String-Parsing.html#Low_002dLevel-Time-String-Parsing",
+                                "title": "21.4.6.1 Interpret string according to given format",
+                                "subsections": null
+                            },
+                            {
+                                "src": "General-Time-String-Parsing.html#General-Time-String-Parsing",
+                                "title": "21.4.6.2 A More User-friendly Way to Parse Times and Dates",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "TZ-Variable.html#TZ-Variable",
+                        "title": "21.4.7 Specifying the Time Zone with <code>TZ</code>",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Time-Zone-Functions.html#Time-Zone-Functions",
+                        "title": "21.4.8 Functions and Variables for Time Zones",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Time-Functions-Example.html#Time-Functions-Example",
+                        "title": "21.4.9 Time Functions Example",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Setting-an-Alarm.html#Setting-an-Alarm",
+                "title": "21.5 Setting an Alarm",
+                "subsections": null
+            },
+            {
+                "src": "Sleeping.html#Sleeping",
+                "title": "21.6 Sleeping",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Resource-Usage-And-Limitation.html#Resource-Usage-And-Limitation",
+        "title": "22 Resource Usage And Limitation",
+        "subsections": [
+            {
+                "src": "Resource-Usage.html#Resource-Usage",
+                "title": "22.1 Resource Usage",
+                "subsections": null
+            },
+            {
+                "src": "Limits-on-Resources.html#Limits-on-Resources",
+                "title": "22.2 Limiting Resource Usage",
+                "subsections": null
+            },
+            {
+                "src": "Priority.html#Priority",
+                "title": "22.3 Process CPU Priority And Scheduling",
+                "subsections": [
+                    {
+                        "src": "Absolute-Priority.html#Absolute-Priority",
+                        "title": "22.3.1 Absolute Priority",
+                        "subsections": [
+                            {
+                                "src": "Absolute-Priority.html#Using-Absolute-Priority",
+                                "title": "22.3.1.1 Using Absolute Priority",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Realtime-Scheduling.html#Realtime-Scheduling",
+                        "title": "22.3.2 Realtime Scheduling",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Basic-Scheduling-Functions.html#Basic-Scheduling-Functions",
+                        "title": "22.3.3 Basic Scheduling Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Traditional-Scheduling.html#Traditional-Scheduling",
+                        "title": "22.3.4 Traditional Scheduling",
+                        "subsections": [
+                            {
+                                "src": "Traditional-Scheduling-Intro.html#Traditional-Scheduling-Intro",
+                                "title": "22.3.4.1 Introduction To Traditional Scheduling",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Traditional-Scheduling-Functions.html#Traditional-Scheduling-Functions",
+                                "title": "22.3.4.2 Functions For Traditional Scheduling",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "CPU-Affinity.html#CPU-Affinity",
+                        "title": "22.3.5 Limiting execution to certain CPUs",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Memory-Resources.html#Memory-Resources",
+                "title": "22.4 Querying memory available resources",
+                "subsections": [
+                    {
+                        "src": "Memory-Subsystem.html#Memory-Subsystem",
+                        "title": "22.4.1 Overview about traditional Unix memory handling",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Query-Memory-Parameters.html#Query-Memory-Parameters",
+                        "title": "22.4.2 How to get information about the memory subsystem?",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Processor-Resources.html#Processor-Resources",
+                "title": "22.5 Learn about the processors available",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Non_002dLocal-Exits.html#Non_002dLocal-Exits",
+        "title": "23 Non-Local Exits",
+        "subsections": [
+            {
+                "src": "Non_002dLocal-Intro.html#Non_002dLocal-Intro",
+                "title": "23.1 Introduction to Non-Local Exits",
+                "subsections": null
+            },
+            {
+                "src": "Non_002dLocal-Details.html#Non_002dLocal-Details",
+                "title": "23.2 Details of Non-Local Exits",
+                "subsections": null
+            },
+            {
+                "src": "Non_002dLocal-Exits-and-Signals.html#Non_002dLocal-Exits-and-Signals",
+                "title": "23.3 Non-Local Exits and Signals",
+                "subsections": null
+            },
+            {
+                "src": "System-V-contexts.html#System-V-contexts",
+                "title": "23.4 Complete Context Control",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Signal-Handling.html#Signal-Handling",
+        "title": "24 Signal Handling",
+        "subsections": [
+            {
+                "src": "Concepts-of-Signals.html#Concepts-of-Signals",
+                "title": "24.1 Basic Concepts of Signals",
+                "subsections": [
+                    {
+                        "src": "Kinds-of-Signals.html#Kinds-of-Signals",
+                        "title": "24.1.1 Some Kinds of Signals",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Signal-Generation.html#Signal-Generation",
+                        "title": "24.1.2 Concepts of Signal Generation",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Delivery-of-Signal.html#Delivery-of-Signal",
+                        "title": "24.1.3 How Signals Are Delivered",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Standard-Signals.html#Standard-Signals",
+                "title": "24.2 Standard Signals",
+                "subsections": [
+                    {
+                        "src": "Program-Error-Signals.html#Program-Error-Signals",
+                        "title": "24.2.1 Program Error Signals",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Termination-Signals.html#Termination-Signals",
+                        "title": "24.2.2 Termination Signals",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Alarm-Signals.html#Alarm-Signals",
+                        "title": "24.2.3 Alarm Signals",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Asynchronous-I_002fO-Signals.html#Asynchronous-I_002fO-Signals",
+                        "title": "24.2.4 Asynchronous I/O Signals",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Job-Control-Signals.html#Job-Control-Signals",
+                        "title": "24.2.5 Job Control Signals",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Operation-Error-Signals.html#Operation-Error-Signals",
+                        "title": "24.2.6 Operation Error Signals",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Miscellaneous-Signals.html#Miscellaneous-Signals",
+                        "title": "24.2.7 Miscellaneous Signals",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Signal-Messages.html#Signal-Messages",
+                        "title": "24.2.8 Signal Messages",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Signal-Actions.html#Signal-Actions",
+                "title": "24.3 Specifying Signal Actions",
+                "subsections": [
+                    {
+                        "src": "Basic-Signal-Handling.html#Basic-Signal-Handling",
+                        "title": "24.3.1 Basic Signal Handling",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Advanced-Signal-Handling.html#Advanced-Signal-Handling",
+                        "title": "24.3.2 Advanced Signal Handling",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Signal-and-Sigaction.html#Signal-and-Sigaction",
+                        "title": "24.3.3 Interaction of <code>signal</code> and <code>sigaction</code>",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Sigaction-Function-Example.html#Sigaction-Function-Example",
+                        "title": "24.3.4 <code>sigaction</code> Function Example",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Flags-for-Sigaction.html#Flags-for-Sigaction",
+                        "title": "24.3.5 Flags for <code>sigaction</code>",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Initial-Signal-Actions.html#Initial-Signal-Actions",
+                        "title": "24.3.6 Initial Signal Actions",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Defining-Handlers.html#Defining-Handlers",
+                "title": "24.4 Defining Signal Handlers",
+                "subsections": [
+                    {
+                        "src": "Handler-Returns.html#Handler-Returns",
+                        "title": "24.4.1 Signal Handlers that Return",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Termination-in-Handler.html#Termination-in-Handler",
+                        "title": "24.4.2 Handlers That Terminate the Process",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Longjmp-in-Handler.html#Longjmp-in-Handler",
+                        "title": "24.4.3 Nonlocal Control Transfer in Handlers",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Signals-in-Handler.html#Signals-in-Handler",
+                        "title": "24.4.4 Signals Arriving While a Handler Runs",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Merged-Signals.html#Merged-Signals",
+                        "title": "24.4.5 Signals Close Together Merge into One",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Nonreentrancy.html#Nonreentrancy",
+                        "title": "24.4.6 Signal Handling and Nonreentrant Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Atomic-Data-Access.html#Atomic-Data-Access",
+                        "title": "24.4.7 Atomic Data Access and Signal Handling",
+                        "subsections": [
+                            {
+                                "src": "Non_002datomic-Example.html#Non_002datomic-Example",
+                                "title": "24.4.7.1 Problems with Non-Atomic Access",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Atomic-Types.html#Atomic-Types",
+                                "title": "24.4.7.2 Atomic Types",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Atomic-Usage.html#Atomic-Usage",
+                                "title": "24.4.7.3 Atomic Usage Patterns",
+                                "subsections": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "src": "Interrupted-Primitives.html#Interrupted-Primitives",
+                "title": "24.5 Primitives Interrupted by Signals",
+                "subsections": null
+            },
+            {
+                "src": "Generating-Signals.html#Generating-Signals",
+                "title": "24.6 Generating Signals",
+                "subsections": [
+                    {
+                        "src": "Signaling-Yourself.html#Signaling-Yourself",
+                        "title": "24.6.1 Signaling Yourself",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Signaling-Another-Process.html#Signaling-Another-Process",
+                        "title": "24.6.2 Signaling Another Process",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Permission-for-kill.html#Permission-for-kill",
+                        "title": "24.6.3 Permission for using <code>kill</code>",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Kill-Example.html#Kill-Example",
+                        "title": "24.6.4 Using <code>kill</code> for Communication",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Blocking-Signals.html#Blocking-Signals",
+                "title": "24.7 Blocking Signals",
+                "subsections": [
+                    {
+                        "src": "Why-Block.html#Why-Block",
+                        "title": "24.7.1 Why Blocking Signals is Useful",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Signal-Sets.html#Signal-Sets",
+                        "title": "24.7.2 Signal Sets",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Process-Signal-Mask.html#Process-Signal-Mask",
+                        "title": "24.7.3 Process Signal Mask",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Testing-for-Delivery.html#Testing-for-Delivery",
+                        "title": "24.7.4 Blocking to Test for Delivery of a Signal",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Blocking-for-Handler.html#Blocking-for-Handler",
+                        "title": "24.7.5 Blocking Signals for a Handler",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Checking-for-Pending-Signals.html#Checking-for-Pending-Signals",
+                        "title": "24.7.6 Checking for Pending Signals",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Remembering-a-Signal.html#Remembering-a-Signal",
+                        "title": "24.7.7 Remembering a Signal to Act On Later",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Waiting-for-a-Signal.html#Waiting-for-a-Signal",
+                "title": "24.8 Waiting for a Signal",
+                "subsections": [
+                    {
+                        "src": "Using-Pause.html#Using-Pause",
+                        "title": "24.8.1 Using <code>pause</code>",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Pause-Problems.html#Pause-Problems",
+                        "title": "24.8.2 Problems with <code>pause</code>",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Sigsuspend.html#Sigsuspend",
+                        "title": "24.8.3 Using <code>sigsuspend</code>",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Signal-Stack.html#Signal-Stack",
+                "title": "24.9 Using a Separate Signal Stack",
+                "subsections": null
+            },
+            {
+                "src": "BSD-Signal-Handling.html#BSD-Signal-Handling",
+                "title": "24.10 BSD Signal Handling",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Program-Basics.html#Program-Basics",
+        "title": "25 The Basic Program/System Interface",
+        "subsections": [
+            {
+                "src": "Program-Arguments.html#Program-Arguments",
+                "title": "25.1 Program Arguments",
+                "subsections": [
+                    {
+                        "src": "Argument-Syntax.html#Argument-Syntax",
+                        "title": "25.1.1 Program Argument Syntax Conventions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Parsing-Program-Arguments.html#Parsing-Program-Arguments",
+                        "title": "25.1.2 Parsing Program Arguments",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Getopt.html#Getopt",
+                "title": "25.2 Parsing program options using <code>getopt</code>",
+                "subsections": [
+                    {
+                        "src": "Using-Getopt.html#Using-Getopt",
+                        "title": "25.2.1 Using the <code>getopt</code> function",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Example-of-Getopt.html#Example-of-Getopt",
+                        "title": "25.2.2 Example of Parsing Arguments with <code>getopt</code>",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Getopt-Long-Options.html#Getopt-Long-Options",
+                        "title": "25.2.3 Parsing Long Options with <code>getopt_long</code>",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Getopt-Long-Option-Example.html#Getopt-Long-Option-Example",
+                        "title": "25.2.4 Example of Parsing Long Options with <code>getopt_long</code>",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Argp.html#Argp",
+                "title": "25.3 Parsing Program Options with Argp",
+                "subsections": [
+                    {
+                        "src": "Argp.html#The-argp_005fparse-Function",
+                        "title": "25.3.1 The <code>argp_parse</code> Function",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Argp-Global-Variables.html#Argp-Global-Variables",
+                        "title": "25.3.2 Argp Global Variables",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Argp-Parsers.html#Argp-Parsers",
+                        "title": "25.3.3 Specifying Argp Parsers",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Argp-Option-Vectors.html#Argp-Option-Vectors",
+                        "title": "25.3.4 Specifying Options in an Argp Parser",
+                        "subsections": [
+                            {
+                                "src": "Argp-Option-Flags.html#Argp-Option-Flags",
+                                "title": "25.3.4.1 Flags for Argp Options",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Argp-Parser-Functions.html#Argp-Parser-Functions",
+                        "title": "25.3.5 Argp Parser Functions",
+                        "subsections": [
+                            {
+                                "src": "Argp-Special-Keys.html#Argp-Special-Keys",
+                                "title": "25.3.5.1 Special Keys for Argp Parser Functions",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Argp-Parsing-State.html#Argp-Parsing-State",
+                                "title": "25.3.5.2 Argp Parsing State",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Argp-Helper-Functions.html#Argp-Helper-Functions",
+                                "title": "25.3.5.3 Functions For Use in Argp Parsers",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Argp-Children.html#Argp-Children",
+                        "title": "25.3.6 Combining Multiple Argp Parsers",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Argp-Flags.html#Argp-Flags",
+                        "title": "25.3.7 Flags for <code>argp_parse</code>",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Argp-Help-Filtering.html#Argp-Help-Filtering",
+                        "title": "25.3.8 Customizing Argp Help Output",
+                        "subsections": [
+                            {
+                                "src": "Argp-Help-Filter-Keys.html#Argp-Help-Filter-Keys",
+                                "title": "25.3.8.1 Special Keys for Argp Help Filter Functions",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Argp-Help.html#Argp-Help",
+                        "title": "25.3.9 The <code>argp_help</code> Function",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Argp-Help-Flags.html#Argp-Help-Flags",
+                        "title": "25.3.10 Flags for the <code>argp_help</code> Function",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Argp-Examples.html#Argp-Examples",
+                        "title": "25.3.11 Argp Examples",
+                        "subsections": [
+                            {
+                                "src": "Argp-Example-1.html#Argp-Example-1",
+                                "title": "25.3.11.1 A Minimal Program Using Argp",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Argp-Example-2.html#Argp-Example-2",
+                                "title": "25.3.11.2 A Program Using Argp with Only Default Options",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Argp-Example-3.html#Argp-Example-3",
+                                "title": "25.3.11.3 A Program Using Argp with User Options",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Argp-Example-4.html#Argp-Example-4",
+                                "title": "25.3.11.4 A Program Using Multiple Combined Argp Parsers",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Argp-User-Customization.html#Argp-User-Customization",
+                        "title": "25.3.12 Argp User Customization",
+                        "subsections": [
+                            {
+                                "src": "Suboptions.html#Suboptions",
+                                "title": "25.3.12.1 Parsing of Suboptions",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Suboptions-Example.html#Suboptions-Example",
+                        "title": "25.3.13 Parsing of Suboptions Example",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Environment-Variables.html#Environment-Variables",
+                "title": "25.4 Environment Variables",
+                "subsections": [
+                    {
+                        "src": "Environment-Access.html#Environment-Access",
+                        "title": "25.4.1 Environment Access",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Standard-Environment.html#Standard-Environment",
+                        "title": "25.4.2 Standard Environment Variables",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Auxiliary-Vector.html#Auxiliary-Vector",
+                "title": "25.5 Auxiliary Vector",
+                "subsections": [
+                    {
+                        "src": "Auxiliary-Vector.html#Definition-of-getauxval",
+                        "title": "25.5.1 Definition of <code>getauxval</code>",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "System-Calls.html#System-Calls",
+                "title": "25.6 System Calls",
+                "subsections": null
+            },
+            {
+                "src": "Program-Termination.html#Program-Termination",
+                "title": "25.7 Program Termination",
+                "subsections": [
+                    {
+                        "src": "Normal-Termination.html#Normal-Termination",
+                        "title": "25.7.1 Normal Termination",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Exit-Status.html#Exit-Status",
+                        "title": "25.7.2 Exit Status",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Cleanups-on-Exit.html#Cleanups-on-Exit",
+                        "title": "25.7.3 Cleanups on Exit",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Aborting-a-Program.html#Aborting-a-Program",
+                        "title": "25.7.4 Aborting a Program",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Termination-Internals.html#Termination-Internals",
+                        "title": "25.7.5 Termination Internals",
+                        "subsections": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "Processes.html#Processes",
+        "title": "26 Processes",
+        "subsections": [
+            {
+                "src": "Running-a-Command.html#Running-a-Command",
+                "title": "26.1 Running a Command",
+                "subsections": null
+            },
+            {
+                "src": "Process-Creation-Concepts.html#Process-Creation-Concepts",
+                "title": "26.2 Process Creation Concepts",
+                "subsections": null
+            },
+            {
+                "src": "Process-Identification.html#Process-Identification",
+                "title": "26.3 Process Identification",
+                "subsections": null
+            },
+            {
+                "src": "Creating-a-Process.html#Creating-a-Process",
+                "title": "26.4 Creating a Process",
+                "subsections": null
+            },
+            {
+                "src": "Executing-a-File.html#Executing-a-File",
+                "title": "26.5 Executing a File",
+                "subsections": null
+            },
+            {
+                "src": "Process-Completion.html#Process-Completion",
+                "title": "26.6 Process Completion",
+                "subsections": null
+            },
+            {
+                "src": "Process-Completion-Status.html#Process-Completion-Status",
+                "title": "26.7 Process Completion Status",
+                "subsections": null
+            },
+            {
+                "src": "BSD-Wait-Functions.html#BSD-Wait-Functions",
+                "title": "26.8 BSD Process Wait Functions",
+                "subsections": null
+            },
+            {
+                "src": "Process-Creation-Example.html#Process-Creation-Example",
+                "title": "26.9 Process Creation Example",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Inter_002dProcess-Communication.html#Inter_002dProcess-Communication",
+        "title": "27 Inter-Process Communication",
+        "subsections": [
+            {
+                "src": "Semaphores.html#Semaphores",
+                "title": "27.1 Semaphores",
+                "subsections": [
+                    {
+                        "src": "Semaphores.html#System-V-Semaphores",
+                        "title": "27.1.1 System V Semaphores",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Semaphores.html#POSIX-Semaphores",
+                        "title": "27.1.2 POSIX Semaphores",
+                        "subsections": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "Job-Control.html#Job-Control",
+        "title": "28 Job Control",
+        "subsections": [
+            {
+                "src": "Concepts-of-Job-Control.html#Concepts-of-Job-Control",
+                "title": "28.1 Concepts of Job Control",
+                "subsections": null
+            },
+            {
+                "src": "Job-Control-is-Optional.html#Job-Control-is-Optional",
+                "title": "28.2 Job Control is Optional",
+                "subsections": null
+            },
+            {
+                "src": "Controlling-Terminal.html#Controlling-Terminal",
+                "title": "28.3 Controlling Terminal of a Process",
+                "subsections": null
+            },
+            {
+                "src": "Access-to-the-Terminal.html#Access-to-the-Terminal",
+                "title": "28.4 Access to the Controlling Terminal",
+                "subsections": null
+            },
+            {
+                "src": "Orphaned-Process-Groups.html#Orphaned-Process-Groups",
+                "title": "28.5 Orphaned Process Groups",
+                "subsections": null
+            },
+            {
+                "src": "Implementing-a-Shell.html#Implementing-a-Shell",
+                "title": "28.6 Implementing a Job Control Shell",
+                "subsections": [
+                    {
+                        "src": "Data-Structures.html#Data-Structures",
+                        "title": "28.6.1 Data Structures for the Shell",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Initializing-the-Shell.html#Initializing-the-Shell",
+                        "title": "28.6.2 Initializing the Shell",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Launching-Jobs.html#Launching-Jobs",
+                        "title": "28.6.3 Launching Jobs",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Foreground-and-Background.html#Foreground-and-Background",
+                        "title": "28.6.4 Foreground and Background",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Stopped-and-Terminated-Jobs.html#Stopped-and-Terminated-Jobs",
+                        "title": "28.6.5 Stopped and Terminated Jobs",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Continuing-Stopped-Jobs.html#Continuing-Stopped-Jobs",
+                        "title": "28.6.6 Continuing Stopped Jobs",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Missing-Pieces.html#Missing-Pieces",
+                        "title": "28.6.7 The Missing Pieces",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Functions-for-Job-Control.html#Functions-for-Job-Control",
+                "title": "28.7 Functions for Job Control",
+                "subsections": [
+                    {
+                        "src": "Identifying-the-Terminal.html#Identifying-the-Terminal",
+                        "title": "28.7.1 Identifying the Controlling Terminal",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Process-Group-Functions.html#Process-Group-Functions",
+                        "title": "28.7.2 Process Group Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Terminal-Access-Functions.html#Terminal-Access-Functions",
+                        "title": "28.7.3 Functions for Controlling Terminal Access",
+                        "subsections": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "Name-Service-Switch.html#Name-Service-Switch",
+        "title": "29 System Databases and Name Service Switch",
+        "subsections": [
+            {
+                "src": "NSS-Basics.html#NSS-Basics",
+                "title": "29.1 NSS Basics",
+                "subsections": null
+            },
+            {
+                "src": "NSS-Configuration-File.html#NSS-Configuration-File",
+                "title": "29.2 The NSS Configuration File",
+                "subsections": [
+                    {
+                        "src": "Services-in-the-NSS-configuration.html#Services-in-the-NSS-configuration",
+                        "title": "29.2.1 Services in the NSS configuration File",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Actions-in-the-NSS-configuration.html#Actions-in-the-NSS-configuration",
+                        "title": "29.2.2 Actions in the NSS configuration",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Notes-on-NSS-Configuration-File.html#Notes-on-NSS-Configuration-File",
+                        "title": "29.2.3 Notes on the NSS Configuration File",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "NSS-Module-Internals.html#NSS-Module-Internals",
+                "title": "29.3 NSS Module Internals",
+                "subsections": [
+                    {
+                        "src": "NSS-Module-Names.html#NSS-Module-Names",
+                        "title": "29.3.1 The Naming Scheme of the NSS Modules",
+                        "subsections": null
+                    },
+                    {
+                        "src": "NSS-Modules-Interface.html#NSS-Modules-Interface",
+                        "title": "29.3.2 The Interface of the Function in NSS Modules",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Extending-NSS.html#Extending-NSS",
+                "title": "29.4 Extending NSS",
+                "subsections": [
+                    {
+                        "src": "Adding-another-Service-to-NSS.html#Adding-another-Service-to-NSS",
+                        "title": "29.4.1 Adding another Service to NSS",
+                        "subsections": null
+                    },
+                    {
+                        "src": "NSS-Module-Function-Internals.html#NSS-Module-Function-Internals",
+                        "title": "29.4.2 Internals of the NSS Module Functions",
+                        "subsections": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "Users-and-Groups.html#Users-and-Groups",
+        "title": "30 Users and Groups",
+        "subsections": [
+            {
+                "src": "User-and-Group-IDs.html#User-and-Group-IDs",
+                "title": "30.1 User and Group IDs",
+                "subsections": null
+            },
+            {
+                "src": "Process-Persona.html#Process-Persona",
+                "title": "30.2 The Persona of a Process",
+                "subsections": null
+            },
+            {
+                "src": "Why-Change-Persona.html#Why-Change-Persona",
+                "title": "30.3 Why Change the Persona of a Process?",
+                "subsections": null
+            },
+            {
+                "src": "How-Change-Persona.html#How-Change-Persona",
+                "title": "30.4 How an Application Can Change Persona",
+                "subsections": null
+            },
+            {
+                "src": "Reading-Persona.html#Reading-Persona",
+                "title": "30.5 Reading the Persona of a Process",
+                "subsections": null
+            },
+            {
+                "src": "Setting-User-ID.html#Setting-User-ID",
+                "title": "30.6 Setting the User ID",
+                "subsections": null
+            },
+            {
+                "src": "Setting-Groups.html#Setting-Groups",
+                "title": "30.7 Setting the Group IDs",
+                "subsections": null
+            },
+            {
+                "src": "Enable_002fDisable-Setuid.html#Enable_002fDisable-Setuid",
+                "title": "30.8 Enabling and Disabling Setuid Access",
+                "subsections": null
+            },
+            {
+                "src": "Setuid-Program-Example.html#Setuid-Program-Example",
+                "title": "30.9 Setuid Program Example",
+                "subsections": null
+            },
+            {
+                "src": "Tips-for-Setuid.html#Tips-for-Setuid",
+                "title": "30.10 Tips for Writing Setuid Programs",
+                "subsections": null
+            },
+            {
+                "src": "Who-Logged-In.html#Who-Logged-In",
+                "title": "30.11 Identifying Who Logged In",
+                "subsections": null
+            },
+            {
+                "src": "User-Accounting-Database.html#User-Accounting-Database",
+                "title": "30.12 The User Accounting Database",
+                "subsections": [
+                    {
+                        "src": "Manipulating-the-Database.html#Manipulating-the-Database",
+                        "title": "30.12.1 Manipulating the User Accounting Database",
+                        "subsections": null
+                    },
+                    {
+                        "src": "XPG-Functions.html#XPG-Functions",
+                        "title": "30.12.2 XPG User Accounting Database Functions",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Logging-In-and-Out.html#Logging-In-and-Out",
+                        "title": "30.12.3 Logging In and Out",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "User-Database.html#User-Database",
+                "title": "30.13 User Database",
+                "subsections": [
+                    {
+                        "src": "User-Data-Structure.html#User-Data-Structure",
+                        "title": "30.13.1 The Data Structure that Describes a User",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Lookup-User.html#Lookup-User",
+                        "title": "30.13.2 Looking Up One User",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Scanning-All-Users.html#Scanning-All-Users",
+                        "title": "30.13.3 Scanning the List of All Users",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Writing-a-User-Entry.html#Writing-a-User-Entry",
+                        "title": "30.13.4 Writing a User Entry",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Group-Database.html#Group-Database",
+                "title": "30.14 Group Database",
+                "subsections": [
+                    {
+                        "src": "Group-Data-Structure.html#Group-Data-Structure",
+                        "title": "30.14.1 The Data Structure for a Group",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Lookup-Group.html#Lookup-Group",
+                        "title": "30.14.2 Looking Up One Group",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Scanning-All-Groups.html#Scanning-All-Groups",
+                        "title": "30.14.3 Scanning the List of All Groups",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Database-Example.html#Database-Example",
+                "title": "30.15 User and Group Database Example",
+                "subsections": null
+            },
+            {
+                "src": "Netgroup-Database.html#Netgroup-Database",
+                "title": "30.16 Netgroup Database",
+                "subsections": [
+                    {
+                        "src": "Netgroup-Data.html#Netgroup-Data",
+                        "title": "30.16.1 Netgroup Data",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Lookup-Netgroup.html#Lookup-Netgroup",
+                        "title": "30.16.2 Looking up one Netgroup",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Netgroup-Membership.html#Netgroup-Membership",
+                        "title": "30.16.3 Testing for Netgroup Membership",
+                        "subsections": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "System-Management.html#System-Management",
+        "title": "31 System Management",
+        "subsections": [
+            {
+                "src": "Host-Identification.html#Host-Identification",
+                "title": "31.1 Host Identification",
+                "subsections": null
+            },
+            {
+                "src": "Platform-Type.html#Platform-Type",
+                "title": "31.2 Platform Type Identification",
+                "subsections": null
+            },
+            {
+                "src": "Filesystem-Handling.html#Filesystem-Handling",
+                "title": "31.3 Controlling and Querying Mounts",
+                "subsections": [
+                    {
+                        "src": "Mount-Information.html#Mount-Information",
+                        "title": "31.3.1 Mount Information",
+                        "subsections": [
+                            {
+                                "src": "fstab.html#fstab",
+                                "title": "31.3.1.1 The <samp>fstab</samp> file",
+                                "subsections": null
+                            },
+                            {
+                                "src": "mtab.html#mtab",
+                                "title": "31.3.1.2 The <samp>mtab</samp> file",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Other-Mount-Information.html#Other-Mount-Information",
+                                "title": "31.3.1.3 Other (Non-libc) Sources of Mount Information",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Mount_002dUnmount_002dRemount.html#Mount_002dUnmount_002dRemount",
+                        "title": "31.3.2 Mount, Unmount, Remount",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "System-Parameters.html#System-Parameters",
+                "title": "31.4 System Parameters",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "System-Configuration.html#System-Configuration",
+        "title": "32 System Configuration Parameters",
+        "subsections": [
+            {
+                "src": "General-Limits.html#General-Limits",
+                "title": "32.1 General Capacity Limits",
+                "subsections": null
+            },
+            {
+                "src": "System-Options.html#System-Options",
+                "title": "32.2 Overall System Options",
+                "subsections": null
+            },
+            {
+                "src": "Version-Supported.html#Version-Supported",
+                "title": "32.3 Which Version of POSIX is Supported",
+                "subsections": null
+            },
+            {
+                "src": "Sysconf.html#Sysconf",
+                "title": "32.4 Using <code>sysconf</code>",
+                "subsections": [
+                    {
+                        "src": "Sysconf-Definition.html#Sysconf-Definition",
+                        "title": "32.4.1 Definition of <code>sysconf</code>",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Constants-for-Sysconf.html#Constants-for-Sysconf",
+                        "title": "32.4.2 Constants for <code>sysconf</code> Parameters",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Examples-of-Sysconf.html#Examples-of-Sysconf",
+                        "title": "32.4.3 Examples of <code>sysconf</code>",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Minimums.html#Minimums",
+                "title": "32.5 Minimum Values for General Capacity Limits",
+                "subsections": null
+            },
+            {
+                "src": "Limits-for-Files.html#Limits-for-Files",
+                "title": "32.6 Limits on File System Capacity",
+                "subsections": null
+            },
+            {
+                "src": "Options-for-Files.html#Options-for-Files",
+                "title": "32.7 Optional Features in File Support",
+                "subsections": null
+            },
+            {
+                "src": "File-Minimums.html#File-Minimums",
+                "title": "32.8 Minimum Values for File System Limits",
+                "subsections": null
+            },
+            {
+                "src": "Pathconf.html#Pathconf",
+                "title": "32.9 Using <code>pathconf</code>",
+                "subsections": null
+            },
+            {
+                "src": "Utility-Limits.html#Utility-Limits",
+                "title": "32.10 Utility Program Capacity Limits",
+                "subsections": null
+            },
+            {
+                "src": "Utility-Minimums.html#Utility-Minimums",
+                "title": "32.11 Minimum Values for Utility Limits",
+                "subsections": null
+            },
+            {
+                "src": "String-Parameters.html#String-Parameters",
+                "title": "32.12 String-Valued Parameters",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Cryptographic-Functions.html#Cryptographic-Functions",
+        "title": "33 DES Encryption and Password Handling",
+        "subsections": [
+            {
+                "src": "Legal-Problems.html#Legal-Problems",
+                "title": "33.1 Legal Problems",
+                "subsections": null
+            },
+            {
+                "src": "getpass.html#getpass",
+                "title": "33.2 Reading Passwords",
+                "subsections": null
+            },
+            {
+                "src": "crypt.html#crypt",
+                "title": "33.3 Encrypting Passwords",
+                "subsections": null
+            },
+            {
+                "src": "DES-Encryption.html#DES-Encryption",
+                "title": "33.4 DES Encryption",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Debugging-Support.html#Debugging-Support",
+        "title": "34 Debugging support",
+        "subsections": [
+            {
+                "src": "Backtraces.html#Backtraces",
+                "title": "34.1 Backtraces",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "POSIX-Threads.html#POSIX-Threads",
+        "title": "35 POSIX Threads",
+        "subsections": [
+            {
+                "src": "Thread_002dspecific-Data.html#Thread_002dspecific-Data",
+                "title": "35.1 Thread-specific Data",
+                "subsections": null
+            },
+            {
+                "src": "Non_002dPOSIX-Extensions.html#Non_002dPOSIX-Extensions",
+                "title": "35.2 Non-POSIX Extensions",
+                "subsections": [
+                    {
+                        "src": "Default-Thread-Attributes.html#Default-Thread-Attributes",
+                        "title": "35.2.1 Setting Process-wide defaults for thread attributes",
+                        "subsections": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "Internal-Probes.html#Internal-Probes",
+        "title": "36 Internal probes",
+        "subsections": [
+            {
+                "src": "Memory-Allocation-Probes.html#Memory-Allocation-Probes",
+                "title": "36.1 Memory Allocation Probes",
+                "subsections": null
+            },
+            {
+                "src": "Mathematical-Function-Probes.html#Mathematical-Function-Probes",
+                "title": "36.2 Mathematical Function Probes",
+                "subsections": null
+            },
+            {
+                "src": "Non_002dlocal-Goto-Probes.html#Non_002dlocal-Goto-Probes",
+                "title": "36.3 Non-local Goto Probes",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Language-Features.html#Language-Features",
+        "title": "Appendix A C Language Facilities in the Library",
+        "subsections": [
+            {
+                "src": "Consistency-Checking.html#Consistency-Checking",
+                "title": "A.1 Explicitly Checking Internal Consistency",
+                "subsections": null
+            },
+            {
+                "src": "Variadic-Functions.html#Variadic-Functions",
+                "title": "A.2 Variadic Functions",
+                "subsections": [
+                    {
+                        "src": "Why-Variadic.html#Why-Variadic",
+                        "title": "A.2.1 Why Variadic Functions are Used",
+                        "subsections": null
+                    },
+                    {
+                        "src": "How-Variadic.html#How-Variadic",
+                        "title": "A.2.2 How Variadic Functions are Defined and Used",
+                        "subsections": [
+                            {
+                                "src": "Variadic-Prototypes.html#Variadic-Prototypes",
+                                "title": "A.2.2.1 Syntax for Variable Arguments",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Receiving-Arguments.html#Receiving-Arguments",
+                                "title": "A.2.2.2 Receiving the Argument Values",
+                                "subsections": null
+                            },
+                            {
+                                "src": "How-Many-Arguments.html#How-Many-Arguments",
+                                "title": "A.2.2.3 How Many Arguments Were Supplied",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Calling-Variadics.html#Calling-Variadics",
+                                "title": "A.2.2.4 Calling Variadic Functions",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Argument-Macros.html#Argument-Macros",
+                                "title": "A.2.2.5 Argument Access Macros",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Variadic-Example.html#Variadic-Example",
+                        "title": "A.2.3 Example of a Variadic Function",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Null-Pointer-Constant.html#Null-Pointer-Constant",
+                "title": "A.3 Null Pointer Constant",
+                "subsections": null
+            },
+            {
+                "src": "Important-Data-Types.html#Important-Data-Types",
+                "title": "A.4 Important Data Types",
+                "subsections": null
+            },
+            {
+                "src": "Data-Type-Measurements.html#Data-Type-Measurements",
+                "title": "A.5 Data Type Measurements",
+                "subsections": [
+                    {
+                        "src": "Width-of-Type.html#Width-of-Type",
+                        "title": "A.5.1 Computing the Width of an Integer Data Type",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Range-of-Type.html#Range-of-Type",
+                        "title": "A.5.2 Range of an Integer Type",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Floating-Type-Macros.html#Floating-Type-Macros",
+                        "title": "A.5.3 Floating Type Macros",
+                        "subsections": [
+                            {
+                                "src": "Floating-Point-Concepts.html#Floating-Point-Concepts",
+                                "title": "A.5.3.1 Floating Point Representation Concepts",
+                                "subsections": null
+                            },
+                            {
+                                "src": "Floating-Point-Parameters.html#Floating-Point-Parameters",
+                                "title": "A.5.3.2 Floating Point Parameters",
+                                "subsections": null
+                            },
+                            {
+                                "src": "IEEE-Floating-Point.html#IEEE-Floating-Point",
+                                "title": "A.5.3.3 IEEE Floating Point",
+                                "subsections": null
+                            }
+                        ]
+                    },
+                    {
+                        "src": "Structure-Measurement.html#Structure-Measurement",
+                        "title": "A.5.4 Structure Field Offset Measurement",
+                        "subsections": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "Library-Summary.html#Library-Summary",
+        "title": "Appendix B Summary of Library Facilities",
+        "subsections": null
+    },
+    {
+        "src": "Installation.html#Installation",
+        "title": "Appendix C Installing the GNU C Library",
+        "subsections": [
+            {
+                "src": "Configuring-and-compiling.html#Configuring-and-compiling",
+                "title": "C.1 Configuring and compiling the GNU C Library",
+                "subsections": null
+            },
+            {
+                "src": "Running-make-install.html#Running-make-install",
+                "title": "C.2 Installing the C Library",
+                "subsections": null
+            },
+            {
+                "src": "Tools-for-Compilation.html#Tools-for-Compilation",
+                "title": "C.3 Recommended Tools for Compilation",
+                "subsections": null
+            },
+            {
+                "src": "Linux.html#Linux",
+                "title": "C.4 Specific advice for GNU/Linux systems",
+                "subsections": null
+            },
+            {
+                "src": "Reporting-Bugs.html#Reporting-Bugs",
+                "title": "C.5 Reporting Bugs",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Maintenance.html#Maintenance",
+        "title": "Appendix D Library Maintenance",
+        "subsections": [
+            {
+                "src": "Source-Layout.html#Source-Layout",
+                "title": "D.1 Adding New Functions",
+                "subsections": [
+                    {
+                        "src": "Adding-Platform_002dspecific.html#Adding-Platform_002dspecific",
+                        "title": "D.1.1 Platform-specific types, macros and functions",
+                        "subsections": null
+                    }
+                ]
+            },
+            {
+                "src": "Porting.html#Porting",
+                "title": "D.2 Porting the GNU C Library",
+                "subsections": [
+                    {
+                        "src": "Hierarchy-Conventions.html#Hierarchy-Conventions",
+                        "title": "D.2.1 Layout of the <samp>sysdeps</samp> Directory Hierarchy",
+                        "subsections": null
+                    },
+                    {
+                        "src": "Porting-to-Unix.html#Porting-to-Unix",
+                        "title": "D.2.2 Porting the GNU C Library to Unix Systems",
+                        "subsections": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "src": "Platform.html#Platform",
+        "title": "Appendix E Platform-specific facilities",
+        "subsections": [
+            {
+                "src": "PowerPC.html#PowerPC",
+                "title": "E.1 PowerPC-specific Facilities",
+                "subsections": null
+            }
+        ]
+    },
+    {
+        "src": "Contributors.html#Contributors",
+        "title": "Appendix F Contributors to the GNU C Library",
+        "subsections": null
+    },
+    {
+        "src": "Free-Manuals.html#Free-Manuals",
+        "title": "Appendix G Free Software Needs Free Documentation",
+        "subsections": null
+    },
+    {
+        "src": "Copying.html#Copying",
+        "title": "Appendix H GNU Lesser General Public License",
+        "subsections": null
+    },
+    {
+        "src": "Documentation-License.html#Documentation-License",
+        "title": "Appendix I GNU Free Documentation License",
+        "subsections": null
+    },
+    {
+        "src": "Concept-Index.html#Concept-Index",
+        "title": "Concept Index",
+        "subsections": null
+    },
+    {
+        "src": "Type-Index.html#Type-Index",
+        "title": "Type Index",
+        "subsections": null
+    },
+    {
+        "src": "Function-Index.html#Function-Index",
+        "title": "Function and Macro Index",
+        "subsections": null
+    },
+    {
+        "src": "Variable-Index.html#Variable-Index",
+        "title": "Variable and Constant Macro Index",
+        "subsections": null
+    },
+    {
+        "src": "File-Index.html#File-Index",
+        "title": "Program and File Index",
+        "subsections": null
+    }
+]
