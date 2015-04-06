@@ -1,0 +1,32 @@
+.wrapper {
+  padding: 1em 0; }
+
+.posts-list .post-link {
+  color: #333;
+  display: block;
+  background: white;
+  margin: .5em auto;
+  border-right: .1em solid #b3b3b3;
+  border-bottom: .1em solid #b3b3b3;
+  width: 95%;
+  max-width: 50em; }
+  @media (min-width: 30em) {
+    .posts-list .post-link {
+      width: 90%; } }
+  @media (min-width: 50em) {
+    .posts-list .post-link {
+      width: 80%; } }
+  .posts-list .post-link .post-info {
+    padding: 1em; }
+    .posts-list .post-link .post-info .post-header .post-title {
+      color: #477DCA;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 1.75em; }
+    .posts-list .post-link .post-info .post-header .post-metadata {
+      color: #666666;
+      font-weight: 300; }
+      .posts-list .post-link .post-info .post-header .post-metadata .post-date::after {
+        content: ' | '; }
+  .posts-list .post-link:hover .post-title {
+    text-decoration: underline; }

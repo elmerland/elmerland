@@ -1,0 +1,15 @@
+.gallery {
+  background: white;
+  margin: .5em auto;
+  border-right: .1em solid #b3b3b3;
+  border-bottom: .1em solid #b3b3b3;
+  width: 95%;
+  max-width: 50em;
+  text-align: center;
+  padding: 2em 0; }
+  @media (min-width: 30em) {
+    .gallery {
+      width: 90%; } }
+  @media (min-width: 50em) {
+    .gallery {
+      width: 80%; } }

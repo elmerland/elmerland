@@ -1,0 +1,109 @@
+
+$highlight: #22F4E5;
+$header-bg: #040004;
+$header-font: white;
+$list-bg: #404749;
+$list-font: white;
+
+body { background-color: white; }
+
+// Header layout
+.manual-header {
+  display: flex;
+  align-items: stretch;
+  .header-item {
+    display: flex;
+    align-items: center;
+  }
+  .author {
+
+  }
+}
+
+// Header styling
+.manual-header {
+  background-color: $header-bg;
+  color: $header-font;
+  .header-item {
+    margin-left: 1em;
+  }
+  .title {
+    padding: 1em 0;
+  }
+  .about, .author {
+    font-size: 1.5em;
+    color: $header-font;
+    padding: 0 1em;
+    border-top: .2em solid transparent;
+    &:hover {
+      border-top: .2em solid $highlight;
+    }
+  }
+  .author {
+    margin-left: 0;
+  }
+}
+
+// Manual layout
+manual {
+  @media (min-width: 40em) {
+    display: flex;
+    toc {
+      flex-grow: 0;
+      flex-shrink: 0;
+      max-width: 15em;
+    }
+    .chapter-wrapper {
+      flex-grow: 1;
+      flex-shrink: 1;
+    }
+  }
+}
+
+// Manual styling
+.section-wrapper {
+  margin-left: 1em;
+  .title {
+    font-size: 1.5em;
+    .symbol {
+      display: inline-block;
+      width: 1em;
+      padding-right: .5em;
+    }
+  }
+}
+
+// Hide extra fluff from original material
+.chapter-wrapper, .section-wrapper {
+  .text {
+    .chapter, .section, .subsection, .subsubsection { display: none; }
+    .header { display: none; }
+    .menu { display: none; }
+    hr { display: none; }
+  }
+}
+
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+// pre.smalldisplay {font-family: inherit; font-size: smaller}
+// pre.smallexample {font-size: smaller}
+// pre.smallformat {font-family: inherit; font-size: smaller}
+// pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
