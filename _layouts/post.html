@@ -2,8 +2,8 @@
 layout: default
 ---
 <div class="post">
-  <link rel="stylesheet" type="text/css" href="/css/blog.css">
-  <link rel="stylesheet" type="text/css" href="/css/post.css">
+  <link rel="stylesheet" type="text/css" href="/assets/css/blog.css">
+  <link rel="stylesheet" type="text/css" href="/assets/css/post.css">
   <header class="post-header">
     <h1 class="post-title"><a href="{{ page.url }}">{{ page.title }}</a></h1>
     <nav class="post-nav">
@@ -51,7 +51,7 @@ layout: default
   <section class="post-comments">{% include disqus.html %}</section>
 
 </div>
-<script src="/js/bookmarkit/jquery.bookmarkit.js"></script>
+<script src="/assets/js/bookmarkit/jquery.bookmarkit.js"></script>
 <script>
   $(document).ready(function() {
     $('.post-content').find('h1, h2, h3, h4, h5, h6').bookmarkit({anchorAttrs: {class: 'post-deep-link'}});
