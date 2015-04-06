@@ -9,22 +9,25 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://elmerland.com" # the base hostname & protocol for your site
 twitter_username: elmerlandaverde
 github_username:  elmerland
-port: 4000
 
-exclude: 
-  - assets/source
-  - Guardfile
+exclude:
+  - "assets/source"
   - Gemfile
   - Gemfile.lock
+  - package.json
   - LICENSE
   - README.md
-  - "*.git"
-  - ".idea"
+  - "*.git/"
+  - ".idea/"
+  - ".sass-cache/"
+  - "node_modules"
   - "*.o"
   - "**/bin/**"
-  - "gnu/"
   - "**/jsx/**"
   - "**/.module-cache/**"
+  - "gnu/"
+  - "sass/"
+  - "jsx/"
 
 defaults:
   -
@@ -41,5 +44,4 @@ defaults:
 markdown: kramdown
 
 gems:
-  - octopress-autoprefixer
   - jekyll-last-modified-at
