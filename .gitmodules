@@ -1,6 +1,6 @@
-[submodule "js/FitText.js"]
-	path = js/FitText.js
-	url = https://github.com/davatron5000/FitText.js.git
-[submodule "js/bookmarkit"]
-	path = js/bookmarkit
+[submodule "assets/js/bookmarkit"]
+	path = assets/js/bookmarkit
 	url = https://github.com/elmerland/bookmarkit.git
+[submodule "assets/js/FitText.js"]
+	path = assets/js/FitText.js
+	url = https://github.com/davatron5000/FitText.js.git
