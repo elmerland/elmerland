@@ -1,4 +1,4 @@
-var tocUrl = '/js/manual/gnu_c_library_toc.json';
+var tocUrl = '/assets/js/manual/gnu_c_library_toc.json';
 
 /**
  * Takes a list of any type (e.g. ul, ol) and generates a table of contents
