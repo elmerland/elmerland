@@ -1,0 +1,11 @@
+Receiving message from child...
+Message:
+total 48
+-rw-r--r--  1 elmer  staff  1067 Aug 20 18:54 Makefile
+drwxr-xr-x  5 elmer  staff   170 Aug 20 18:54 bin
+-rw-------  1 elmer  staff   321 Aug 19 18:08 code_1.c
+-rw-------  1 elmer  staff   780 Aug 20 18:40 code_2.c
+-rw-------  1 elmer  staff   760 Aug 20 18:54 code_3.c
+-rw-r--r--  1 elmer  staff    52 Aug 20 18:55 output_1.txt
+-rw-r--r--  1 elmer  staff    92 Aug 20 18:55 output_2.txt
+-rw-r--r--  1 elmer  staff     0 Aug 20 18:55 output_3.txt
